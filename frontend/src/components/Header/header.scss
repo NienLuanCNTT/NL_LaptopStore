@@ -1,0 +1,31 @@
+.header {
+    @include flex(center, unset);
+
+    background-color: $main-bg;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: $header-height;
+
+    &__nav {
+        @include flex(center, unset);
+
+        &-logo {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 0 8px;
+        }
+
+        &-search {
+            width: 450px;
+            input {
+                width: 80%;
+                margin-left: 40px;
+                padding: 8px 16px;
+                border-radius: 20px;
+            }
+        }
+    }
+}

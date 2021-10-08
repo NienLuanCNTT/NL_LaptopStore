@@ -24,7 +24,7 @@ Slider.propTypes = {
 const sliderItem = props => {
     <div className="slider-item">
         <div className="slider-item__image">
-            <img src={props.img} alt="" />
+            <img src={props.item.img} alt="" />
         </div>
     </div>
 }

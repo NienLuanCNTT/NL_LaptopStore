@@ -1,11 +1,14 @@
 import sliderData from 'assets/fake-data/slider'
 import Slider from 'components/Slider'
-import React from 'react'
+import React, { useState } from 'react'
 
 
 const Home = () => {
+
+    const [data] = useState(sliderData);
+
     return (
-        <Slider data={sliderData} />
+        <Slider data={data} />
     )
 }
 

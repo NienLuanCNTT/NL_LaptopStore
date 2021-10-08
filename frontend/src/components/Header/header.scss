@@ -5,6 +5,7 @@
     position: fixed;
     top: 0;
     left: 0;
+
     width: 100%;
     z-index: 1000;
     height: $header-height;
@@ -16,15 +17,56 @@
             font-size: 20px;
             font-weight: bold;
             padding: 0 8px;
+            border-right: 1px solid #e3e7ef;
+        }
+
+        &-brain {
+            flex: none;
+            padding: 0 8px;
         }
 
         &-search {
             width: 450px;
-            input {
-                width: 80%;
-                margin-left: 40px;
+            position: relative;
+
+            &-input {
+                width: 100%;
+                margin-left: 60px;
                 padding: 8px 16px;
                 border-radius: 20px;
+
+                border: 1px solid #e3e7ef;
+                background-color: #fbfbfb;
+            }
+
+            &-button {
+                top: 3px;
+                position: absolute;
+                right: -55px;
+                background-color: #fbfbfb;
+
+                border: none;
+                border-left: 1px solid $main-color;
+                padding: 6px 4px;
+                border-radius: 4px;
+
+                font-weight: 600;
+            }
+        }
+
+        &-menu-right {
+            @include flex(center, flex-end);
+
+            &-item {
+                padding: 4px 8px;
+                height: 60px;
+                width: 60px;
+                line-height: 58px;
+
+                &-icon {
+                    width: 20px;
+                    height: 20px;
+                }
             }
         }
     }

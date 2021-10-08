@@ -4,6 +4,7 @@
     display: flex;
     align-items: $align-item;
     justify-content: $justify-content;
+    flex: 1;
 }
 
 @mixin mb {

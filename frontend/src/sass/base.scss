@@ -45,7 +45,6 @@ button {
     }
 }
 
-
 @each $color, $val in $colors {
     .color-#{color} {
         color: $val;
@@ -62,29 +61,22 @@ button {
     }
 }
 
-
 @each $val in $numbers {
     .grid-col-md-#{$val} {
-
         @include tab {
-        grid-template-columns: repeat($val, 1fr);
+            grid-template-columns: repeat($val, 1fr);
         }
     }
 }
-
-
 
 @each $val in $numbers {
     .grid-col-#{$val} {
         @include mb {
             grid-template-columns: repeat($val, 1fr);
-            }
+        }
     }
 }
 
-
 .grid {
-    display : grid;
+    display: grid;
 }
-
-

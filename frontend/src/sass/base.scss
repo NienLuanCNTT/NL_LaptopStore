@@ -39,4 +39,52 @@ button {
     @include tab {
         padding: 0 20px;
     }
+
+    @include mb {
+        padding: 0 10px;
+    }
 }
+
+
+@each $color, $val in $colors {
+    .color-#{color} {
+        color: $val;
+    }
+
+    .bg-#{color} {
+        background-color: $val;
+    }
+}
+
+@each $val in $numbers {
+    .grid-col-#{$val} {
+        grid-template-columns: repeat($val, 1fr);
+    }
+}
+
+
+@each $val in $numbers {
+    .grid-col-md-#{$val} {
+
+        @include tab {
+        grid-template-columns: repeat($val, 1fr);
+        }
+    }
+}
+
+
+
+@each $val in $numbers {
+    .grid-col-#{$val} {
+        @include mb {
+            grid-template-columns: repeat($val, 1fr);
+            }
+    }
+}
+
+
+.grid {
+    display : grid;
+}
+
+

@@ -5,7 +5,48 @@ import iconUser from 'assets/svg/icon-user.svg';
 import iconCart from 'assets/svg/icon-cart.svg';
 import iconNotif from 'assets/svg/icon-noti.svg';
 
+
+const brain = [
+    {
+        id: 1,
+        title: "HP",
+        list: [
+            "Palivison",
+            "Elitedesk",
+            "Z Workstation",
+        ]
+    },
+    {
+        id: 2,
+        title: "DELL",
+        list: [
+            "Optiplex",
+            "Precision",
+            "Alienware",
+        ]
+    },
+    {
+        id: 3,
+        title: "Apple",
+        list: [
+            "iMac",
+            "Mac",
+            "Mac Pro",
+        ]
+    },
+    {
+        id: 4,
+        title: "Asus",
+        list: [
+            "Zenbook",
+            "Vivobook",
+            "Pro Art Studio",
+        ]
+    },
+]
+
 function Header() {
+
     return (
         <div className="header">
             <div className="container">
@@ -15,7 +56,22 @@ function Header() {
                             LaptopStore
                         </Link>
                     </div>
-                    <div className="header__nav-brain">Thương Hiệu</div>
+                    <div className="header__nav-brain">
+                        <div className=""> Thương Hiệu</div>
+                        <div>
+                            {
+                                brain.map((brain, index) => {
+                                    <ul key={index}>
+                                        {brain.title}
+
+                                        {brain.list.map((list) => {
+                                            <li>{list}</li>
+                                        })}
+                                    </ul>
+                                })
+                            }
+                        </div>
+                    </div>
                     <div className="header__nav-search">
                         <input
                             type="text"
@@ -38,14 +94,19 @@ function Header() {
                                 />
                             </Link>
                         </div>
+
                         <div className="header__nav-menu-right-item">
                             <Link to="/cart">
+                                <span className="header__nav-menu-right-item-sm">
+                                    0
+                                </span>
                                 <img
                                     className="header__nav-menu-right-item-icon"
                                     src={iconCart} alt="cart"
                                 />
                             </Link>
                         </div>
+
                         <div className="header__nav-menu-right-item">
                             <Link to="/sign-in">
                                 <img

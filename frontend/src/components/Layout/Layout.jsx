@@ -16,8 +16,8 @@ function Layout() {
                         <div className="main">
                             <Routes />
                         </div>
-                        <Footer />
                     </div>
+                    <Footer />
                 </div>
             )} />
         </BrowserRouter>

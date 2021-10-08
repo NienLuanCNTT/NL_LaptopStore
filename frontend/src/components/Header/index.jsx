@@ -14,6 +14,9 @@ const brain = [
             "Palivison",
             "Elitedesk",
             "Z Workstation",
+            "Envy",
+            "Omen",
+            "ZBook",
         ]
     },
     {
@@ -23,6 +26,10 @@ const brain = [
             "Optiplex",
             "Precision",
             "Alienware",
+            "Vostro",
+            "XPS",
+            "G-Gaming Series",
+            "Latitude",
         ]
     },
     {
@@ -43,7 +50,41 @@ const brain = [
             "Pro Art Studio",
         ]
     },
+    {
+        id: 5,
+        title: "Microsoft",
+        list: [
+            "Surface Laptop",
+            "Surface Book",
+            "Surface Pro",
+        ]
+    },
+    {
+        id: 6,
+        title: "Razer",
+        list: [
+            "Blade Stealth",
+            "Blade Pro",
+        ]
+    },
+    {
+        id: 7,
+        title: "Acer",
+        list: [
+            "Nitro",
+            "Swift",
+            "Predator",
+            "Aspire",
+        ]
+    },
+
 ]
+
+// function onMouseOver() {
+//     const listElement = document.getElementById('listid');
+
+//     listElement.setAttribute("style", "display: flex; height:auto");
+// }
 
 function Header() {
 
@@ -57,18 +98,27 @@ function Header() {
                         </Link>
                     </div>
                     <div className="header__nav-brain">
-                        <div className=""> Thương Hiệu</div>
-                        <div>
+                        <div
+                            className="header__nav-brain-title"
+                        // onMouseOver={onMouseOver}
+                        >Thương Hiệu</div>
+                        <div id="listid" className="header__nav-brain-list">
                             {
-                                brain.map((brain, index) => {
-                                    <ul key={index}>
-                                        {brain.title}
+                                brain.map((brain, index) => (
+                                    <ul
+                                        className="header__nav-brain-list-items"
+                                        key={index}
+                                    >
+                                        <h3 className="header__nav-brain-list-items-title">{brain.title}</h3>
 
-                                        {brain.list.map((list) => {
-                                            <li>{list}</li>
-                                        })}
+                                        {brain.list.map((list, index) => (
+                                            <li
+                                                key={index}
+                                                className="header__nav-brain-list-items-item"
+                                            >{list}</li>
+                                        ))}
                                     </ul>
-                                })
+                                ))
                             }
                         </div>
                     </div>

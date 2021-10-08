@@ -1,3 +1,8 @@
+%Hover {
+    cursor: pointer;
+    color: $main-color;
+}
+
 .header {
     @include flex(center, unset);
 
@@ -19,18 +24,66 @@
             font-size: 20px;
             font-weight: bold;
             padding: 0 8px;
-            border-right: 1px solid #e3e7ef;
         }
 
         &-brain {
             flex: none;
             text-align: center;
-            padding: 0 12px;
-            font-weight: 600;
+            border-left: 1px solid #e3e7ef;
+            position: relative;
 
-            &:hover {
-                cursor: pointer;
-                color: $main-color;
+            &-title {
+                padding: 15px 12px;
+                font-weight: 600;
+
+                &:hover {
+                    @extend %Hover;
+                }
+            }
+
+            &-list {
+                display: none;
+                position: absolute;
+                border: 1px solid $main-color;
+
+                width: 600px;
+                background-color: #fbfbfb;
+                box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 14px;
+                overflow: hidden;
+
+                text-align: left;
+                flex-wrap: wrap;
+                border-radius: 4px;
+                height: 0;
+                transition: height 2s ease-in-out;
+
+                &-items {
+                    display: inline-block;
+                    width: 25%;
+                    border-bottom: 1px solid #e3e7ef;
+                    border-right: 1px solid #e3e7ef;
+                    padding: 15px;
+
+                    &-title {
+                        padding-bottom: 6px;
+
+                        &:hover {
+                            @extend %Hover;
+                        }
+                    }
+                    &-item {
+                        padding: 4px 8px;
+                        font-weight: 500;
+
+                        &:hover {
+                            @extend %Hover;
+                        }
+                    }
+                }
+            }
+            &:hover .header__nav-brain-list {
+                display: flex;
+                height: 400px;
             }
         }
 
@@ -49,22 +102,21 @@
             }
 
             &-button {
-                top: 3px;
+                top: 4px;
                 position: absolute;
-                right: 5px;
+                right: 8px;
                 background-color: #fbfbfb;
 
                 border: none;
-                border-left: 1px solid $main-color;
-                padding: 6px 4px;
+                border-left: 1px solid #4267b2;
+                padding: 5px 4px;
                 border-radius: 4px;
-
                 font-weight: 600;
             }
         }
 
         &-menu-right {
-            display: flex;
+            @include flex(center, flex-end);
 
             &-item {
                 position: relative;
@@ -75,7 +127,6 @@
                 &-icon {
                     width: 20px;
                     height: 20px;
-                    line-height: 45px;
                 }
 
                 &:hover {
@@ -97,6 +148,13 @@
                     height: 20px;
                     width: 20px;
                 }
+            }
+        }
+
+        @include mb {
+            &-search,
+            &-brain {
+                display: none;
             }
         }
     }

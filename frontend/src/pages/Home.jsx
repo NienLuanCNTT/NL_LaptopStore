@@ -1,14 +1,15 @@
 import sliderData from 'assets/fake-data/slider'
 import Slider from 'components/Slider'
-import React, { useState } from 'react'
+import React from 'react'
 
+import Helmet from 'components/Helmet'
 
 const Home = () => {
 
-    const [data] = useState(sliderData);
-
     return (
-        <Slider data={data} />
+        <Helmet title="Trang chủ">
+            <Slider data={sliderData} />
+        </Helmet>
     )
 }
 

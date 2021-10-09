@@ -1,5 +1,32 @@
-.slider{
-    height : 500px;
-    background-color : orange;
-    width : 300px;
+.slider {
+    height: 100vh;
+    max-height: 1080px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 50px;
+    margin-top: calc(#{header-height} * -1);
+
+    @include tab {
+        margin-top: calc(#{header-height} * -1);
+    }
+
+    @include mb {
+        margin-top: calc(#{header-height} * -1);
+    }
+
+    // &__item {
+    //     @include flex(center, space-between);
+
+    //     opacity: 0;
+    //     visibility: hidden;
+    //     pointer-events: none;
+    //     position: absolute;
+    //     inset: 0;
+
+    //     &.active {
+    //         opacity: 1;
+    //         visibility: visible;
+    //         pointer-events: visible;
+    //     }
+    // }
 }

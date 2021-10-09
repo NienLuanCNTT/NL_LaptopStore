@@ -52,8 +52,10 @@
     &__content {
         @include flex(normal, left);
 
+        flex-wrap: wrap;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
         &-items {
-            flex: 1;
             width: 25%;
 
             &-title {
@@ -73,6 +75,48 @@
                     color: aqua;
                 }
             }
+        }
+
+        @include mb {
+            &-items {
+                width: 50%;
+            }
+        }
+    }
+
+    &__bottom {
+        padding: 8px 0;
+        text-align: center;
+        background-color: #5275bd;
+
+        &-content {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 10px;
+
+            &-checkedweb {
+                padding: 8px 0;
+
+                img {
+                    width: 200px;
+                }
+            }
+
+            &-info {
+                margin-top: 10px;
+                padding: 4px 8px;
+
+                p {
+                    line-height: 1.5;
+                }
+            }
+        }
+
+        &-coppyright {
+            padding: 8px 0;
+            display: inline-block;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.6);
         }
     }
 

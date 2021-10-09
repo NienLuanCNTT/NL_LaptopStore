@@ -2,10 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from 'assets/logo/logo_footer.png'
+import checkedWeb from 'assets/logo/checked-website.png'
+
 import iconFacebook from 'assets/svg/icon-fb.svg'
 import iconYoutube from 'assets/svg/icon-youtube.svg'
 import iconTwitter from 'assets/svg/icon-twitter.svg'
 import iconInstagram from 'assets/svg/icon-ins.svg'
+
 
 function Footer(props) {
     const media = [
@@ -36,35 +39,36 @@ function Footer(props) {
         {
             title: "Chăm sóc khách hàng",
             list: [
-                "Câu hỏi thường gặp",
-                "Gửi yêu cầu hổ trợ",
-                "Hướng dẫn đặt hàng",
-                "Phương thức vận chuyển",
-                "Hỗ trợ khách hàng: hotro@laptopstore.vn",
+                { name: "Câu hỏi thường gặp" },
+                { name: "Gửi yêu cầu hổ trợ" },
+                { name: "Hướng dẫn đặt hàng" },
+                { name: "Phương thức vận chuyển" },
+                { name: "Hỗ trợ khách hàng: hotro@laptopstore.vn" },
             ]
         },
         {
             title: "Chính sách",
             list: [
-                "Bảo hành",
-                "Vận chuyển",
-                "Thanh toán",
-                "Chính sách đổi trả",
+                { name: "Bảo hành" },
+                { name: "Vận chuyển" },
+                { name: "Thanh toán" },
+                { name: "Chính sách đổi trả" },
             ]
         },
         {
             title: "Về LaptopStore",
             list: [
-                "Giới thiệu về LaptopStore",
-                "Tuyển dụng",
-                "Điều khoản"
+                { name: "Giới thiệu về LaptopStore" },
+                { name: "Tuyển dụng" },
+                { name: "Điều khoản" }
             ]
         },
         {
-            title: "Họp tác cùng LaptopStore",
+            title: "Họp tác cùng LaptopStore"
+            ,
             list: [
-                "Quy chế hoạt động Sàn GDTMĐT",
-                "Bán hàng cùng LaptopStore",
+                { name: "Quy chế hoạt động Sàn GDTMĐT" },
+                { name: "Bán hàng cùng LaptopStore" },
             ]
         },
     ]
@@ -103,7 +107,6 @@ function Footer(props) {
                         </div>
                     </div>
                 </div>
-
                 <div className="footer__content">
                     {
                         contentFooter.map(content => (
@@ -113,9 +116,9 @@ function Footer(props) {
                                 </div>
                                 <div className="footer__content-items-list">
                                     {content.list.map(item => (
-                                        <Link>
+                                        <Link to="/">
                                             <div className="footer__content-items-list-item">
-                                                {item}
+                                                {item.name}
                                             </div>
                                         </Link>
                                     ))}
@@ -124,6 +127,22 @@ function Footer(props) {
                         ))
                     }
                 </div>
+
+            </div>
+            <div className="footer__bottom">
+                <div className="footer__bottom-content">
+                    <div className="footer__bottom-content-checkedweb">
+                        <img src={checkedWeb} alt="checked" />
+                        <p>Công ty TNHH LaptopStore</p>
+                    </div>
+                    <div className="footer__bottom-content-info">
+                        <p>Địa chỉ: Tầng 6,7,8, Tòa nhà trụ sở LaptopStore, Đường 3/2, Quận Nink Kiều, Thành Phố Cần Thơ, Việt Nam. Tổng đài: 1900.60.1234 </p>
+                        <p>Chịu Trách Nhiệm Quản Lý Nội Dung: Trần Thái Minh Trí và Nguyễn Thành Tới</p>
+                    </div>
+                </div>
+                <p className="footer__bottom-coppyright">
+                    © 2021 LaptopStore. Tất cả các quyền được bảo lưu.
+                </p>
             </div>
         </div>
     );

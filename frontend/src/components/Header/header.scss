@@ -24,6 +24,7 @@
             font-size: 20px;
             font-weight: bold;
             padding: 0 8px;
+            width: 144px;
         }
 
         &-brain {
@@ -31,6 +32,7 @@
             text-align: center;
             border-left: 1px solid #e3e7ef;
             position: relative;
+            margin-left: 10px;
 
             &-title {
                 padding: 15px 12px;
@@ -117,6 +119,7 @@
 
         &-menu-right {
             @include flex(center, flex-end);
+            flex: 1;
 
             &-item {
                 position: relative;

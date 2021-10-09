@@ -4,80 +4,79 @@ import { Link } from 'react-router-dom';
 import iconUser from 'assets/svg/icon-user.svg';
 import iconCart from 'assets/svg/icon-cart.svg';
 import iconNotif from 'assets/svg/icon-noti.svg';
-
+import logo from 'assets/logo/logo_header.png'
 
 const brain = [
     {
         id: 1,
         title: "HP",
         list: [
-            "Palivison",
-            "Elitedesk",
-            "Z Workstation",
-            "Envy",
-            "Omen",
-            "ZBook",
+            { name: "Palivison", path: "/hp?subbrand=palivision" },
+            { name: "Elitedesk", path: "/hp?subbrand=elitedesk" },
+            { name: "Z Workstation", path: "/hp?subbrand=z-workstation" },
+            { name: "Envy", path: "/hp?subbrand=envy" },
+            { name: "Omen", path: "/hp?subbrand=omen" },
+            { name: "ZBook", path: "/hp?subbrand=zbook" },
         ]
     },
     {
         id: 2,
         title: "DELL",
         list: [
-            "Optiplex",
-            "Precision",
-            "Alienware",
-            "Vostro",
-            "XPS",
-            "G-Gaming Series",
-            "Latitude",
+            { name: "Optiplex", path: "/dell?subbrand=optiplex" },
+            { name: "Precision", path: "/dell?subbrand=precision" },
+            { name: "Alienware", path: "/dell?subbrand=alienware" },
+            { name: "Vostro", path: "/dell?subbrand=vostro" },
+            { name: "XPS", path: "/dell?subbrand=xps" },
+            { name: "G-Gaming Series", path: "/dell?subbrand=g-gaming-series" },
+            { name: "Latitude", path: "/dell?subbrand=latitude" },
         ]
     },
     {
         id: 3,
         title: "Apple",
         list: [
-            "iMac",
-            "Mac",
-            "Mac Pro",
+            { name: "iMac", path: "/apple?subbrand=imac" },
+            { name: "Mac", path: "/apple?subbrand=mac" },
+            { name: "Mac Pro", path: "/apple?subbrand=mac-pro" },
         ]
     },
     {
         id: 4,
         title: "Asus",
         list: [
-            "Zenbook",
-            "Vivobook",
-            "Pro Art Studio",
+            { name: "Zenbook", path: "/asus?subbrand=zenbook" },
+            { name: "Vivobook", path: "/asus?subbrand=vivobook" },
+            { name: "Pro Art Studio", path: "/asus?subbrand=pro-art-studio" },
         ]
     },
     {
         id: 5,
         title: "Microsoft",
         list: [
-            "Surface Laptop",
-            "Surface Book",
-            "Surface Pro",
+            { name: "Surface Laptop", path: "/microsoft?subbrand=surface-laptop" },
+            { name: "Surface Book", path: "/microsoft?subbrand=surface-book" },
+            { name: "Surface Pro", path: "/microsoft?subbrand=surface-pro" },
         ]
     },
     {
         id: 6,
         title: "Razer",
         list: [
-            "Blade Stealth",
-            "Blade Pro",
+            { name: "Blade Stealth", path: "/razer?subbrand=blade-stealth" },
+            { name: "Blade Pro", path: "/razer?subbrand=blade-pro" },
         ]
     },
     {
         id: 7,
         title: "Acer",
         list: [
-            "Nitro",
-            "Swift",
-            "Predator",
-            "Aspire",
+            { name: "Nitro", path: "/acer?subbrand=nitro" },
+            { name: "Swift", path: "/acer?subbrand=swift" },
+            { name: "Predator", path: "/acer?subbrand=predator" },
+            { name: "Aspire", path: "/acer?subbrand=aspire" },
         ]
     },
-
 ]
 
 // function onMouseOver() {
@@ -94,7 +93,7 @@ function Header() {
                 <div className="header__nav">
                     <div className="header__nav-logo">
                         <Link to="/">
-                            LaptopStore
+                            <img src={logo} className="header__nav-logo" alt="logo" />
                         </Link>
                     </div>
                     <div className="header__nav-brain">
@@ -115,7 +114,11 @@ function Header() {
                                             <li
                                                 key={index}
                                                 className="header__nav-brain-list-items-item"
-                                            >{list}</li>
+                                            >
+                                                <Link to={list.path}>
+                                                    {list.name}
+                                                </Link>
+                                            </li>
                                         ))}
                                     </ul>
                                 ))
@@ -137,7 +140,7 @@ function Header() {
                     </div>
                     <div className="header__nav-menu-right">
                         <div className="header__nav-menu-right-item">
-                            <Link to="/notification">
+                            <Link to="/">
                                 <img
                                     className="header__nav-menu-right-item-icon"
                                     src={iconNotif} alt="notif"

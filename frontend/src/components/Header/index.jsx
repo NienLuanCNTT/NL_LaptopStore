@@ -115,7 +115,7 @@ function Header() {
                                                 key={index}
                                                 className="header__nav-brain-list-items-item"
                                             >
-                                                <Link to={list.path}>
+                                                <Link to="/product">
                                                     {list.name}
                                                 </Link>
                                             </li>

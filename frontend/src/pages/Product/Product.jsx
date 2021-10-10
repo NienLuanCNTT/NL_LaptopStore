@@ -1,6 +1,6 @@
 import React from 'react'
-
 import productImg from 'assets/images/products/4.jpg'
+import 'boxicons'
 
 const Product = () => {
     return (
@@ -10,11 +10,17 @@ const Product = () => {
                     <div className="product__detail-top-name">
                         <p>
                             Laptop Acer Nitro Gaming AN515 57 51G6 i5 11400H/8GB/512GB SSD/RTX 3050 4GB/Win10
+                            <span>(No.00762458)</span>
                         </p>
-                        <span>(No.00762458)</span>
                     </div>
                     <div className="product__detail-top-vote">
-                        <div className="product__detail-top-vote-star">*****</div>
+                        <div className="product__detail-top-vote-star">
+                            <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                            <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                            <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                            <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                            <box-icon type='solid' color='#ECCF0E' name='star-half'></box-icon>
+                        </div>
                         <div className="product__detail-top-vote-number"> 10 đánh giá</div>
                     </div>
                 </div>
@@ -23,13 +29,30 @@ const Product = () => {
                         <div className="product__detail-content-left-img">
                             <img src={productImg} alt="" />
                         </div>
-                        <div className="product__detail-content-left-img">
-                            <p>15.6", 1920 x 1080 Pixel, IPS, 144 Hz, Acer ComfyView LED-backlit</p>
-                            <p>Intel Core i5-11400H</p>
-                            <p>8 GB, DDR4, 3200 MHz</p>
-                            <p>SSD 512 GB</p>
-                            <p>NVIDIA GeForce RTX3050 4GB</p>
-                            <div>Xem thông số kỹ thuật</div>
+                        <div className="product__detail-content-left-config">
+                            <ul>
+                                <li>
+                                    <box-icon name='laptop'></box-icon>
+                                    <p>15.6", 1920 x 1080 Pixel, IPS, 144 Hz, Acer ComfyView LED-backlit</p>
+                                </li>
+                                <li>
+                                    <box-icon type='solid' name='chip'></box-icon>
+                                    <p>Intel Core i5-11400H</p>
+                                </li>
+                                <li>
+                                    <box-icon type='solid' name='microchip'></box-icon>
+                                    <p>8 GB, DDR4, 3200 MHz</p>
+                                </li>
+                                <li>
+                                    <box-icon name='hdd' ></box-icon>
+                                    <p>SSD 512 GB</p>
+                                </li>
+                                <li>
+                                    <box-icon name='barcode-reader'></box-icon>
+                                    <p>NVIDIA GeForce RTX3050 4GB</p>
+                                </li>
+                            </ul>
+                            <button>Xem thông số kỹ thuật</button>
                         </div>
                     </div>
                     <div className="product__detail-content-right">
@@ -68,7 +91,7 @@ const Product = () => {
                 <span>10 bình luận</span>
 
                 <p>bình luận của bạn</p>
-                <area></area>
+                <div>Viết gì đó ở đây...</div>
                 <button>Gửi</button>
             </div>
 

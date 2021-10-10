@@ -109,15 +109,21 @@ function Footer(props) {
                 </div>
                 <div className="footer__content">
                     {
-                        contentFooter.map(content => (
-                            <div className="footer__content-items">
+                        contentFooter.map((content, index) => (
+                            <div
+                                key={index}
+                                className="footer__content-items"
+                            >
                                 <div className="footer__content-items-title">
                                     {content.title}
                                 </div>
                                 <div className="footer__content-items-list">
-                                    {content.list.map(item => (
+                                    {content.list.map((item, index) => (
                                         <Link to="/">
-                                            <div className="footer__content-items-list-item">
+                                            <div
+                                                key={index}
+                                                className="footer__content-items-list-item"
+                                            >
                                                 {item.name}
                                             </div>
                                         </Link>

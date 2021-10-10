@@ -3,7 +3,9 @@
     padding: 40px 10px;
 
     &__detail {
-        margin-bottom: 30px;
+        margin-bottom: 32px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid #e3e7ef;
 
         &-top {
             @include flex(flex-start, space-between);
@@ -23,9 +25,9 @@
                 }
             }
 
-            &-vote {
+            &-ratting {
                 @include flex(center, flex-end);
-                width: 300px;
+                min-width: 320px;
 
                 &-star {
                     padding: 4px 8px;
@@ -49,25 +51,37 @@
                 }
 
                 &-config {
-                    background-color: #ccc;
                     padding: 15px 20px;
                     border-radius: 8px;
                     margin-bottom: 12px;
-                    opacity: 0.8;
+                    color: #495075;
+                    font-size: 14px;
+
+                    background-color: #f8f9fa;
+                    border: solid 1px #e9ecef;
 
                     li {
                         @include flex(flex-start, flex-start);
 
                         p {
                             padding: 2px 4px;
-                            line-height: 1.5;
+                            line-height: 1.7;
                         }
+                    }
+
+                    a {
+                        color: #0168fa;
+                        padding: 2px 4px;
+                    }
+                    a:hover {
+                        color: #0ee9ff;
                     }
                 }
             }
 
             &-right {
                 width: 50%;
+                margin-left: 32px;
 
                 &-price {
                     color: #cb1c22;
@@ -76,7 +90,134 @@
                     margin-bottom: 16px;
                     font-weight: bold;
                 }
+
+                &-uudai {
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    margin-bottom: 12px;
+                    color: #444b52;
+
+                    font-size: 14px;
+                    background-color: #f8f9fa;
+                    border: solid 1px #e9ecef;
+
+                    p {
+                        @include flex(flex-start, flex-start);
+                        line-height: 1.5;
+                    }
+                }
+
+                &-pay,
+                &-paygop {
+                    @include flex(flex-start, space-between);
+
+                    margin-top: 10px;
+                    div {
+                        width: calc((100% / 2) - 3px);
+                        padding: 8px 12px;
+                        border: solid 1px #e0e0e0;
+                        border-radius: 4px;
+                        position: relative;
+                        line-height: 1.5;
+
+                        a {
+                            color: #ee0c13;
+                        }
+
+                        img {
+                            height: 15px;
+                        }
+                    }
+                }
+                .btn-muangay {
+                    margin-top: 10px;
+                    padding: 12px 8px;
+                    width: 100%;
+                    text-align: center;
+
+                    background-color: #ee0c13;
+                    color: #fff;
+                    border-radius: 4px;
+                    font-weight: bold;
+                }
+                &-paygop {
+                    div {
+                        background-color: #4660f9;
+                        color: #fff;
+                        text-align: center;
+
+                        b {
+                            font-size: 20px;
+                        }
+
+                        a {
+                            color: #fff;
+                        }
+                    }
+                }
             }
         }
+    }
+
+    &__tongquan {
+        margin-bottom: 32px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid #e3e7ef;
+        width: 80%;
+        margin: 0 auto;
+
+        p {
+            padding: 20px 0;
+            text-align: justify;
+            line-height: 1.5;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &__box-vote {
+        width: 80%;
+        margin: 32px auto;
+        font-size: 14px;
+
+        margin-bottom: 16px;
+
+        .box-vote-head {
+            @include flex(flex-start, space-between);
+
+            &-left {
+                h1 {
+                    padding-bottom: 32px;
+                }
+
+                .vote {
+                    display: flex;
+
+                    .star-number {
+                        font-size: 30px;
+                        font-weight: bold;
+                    }
+
+                    .star {
+                        padding: 4px 8px;
+                    }
+                }
+            }
+
+            .btn-vote {
+                padding: 12px 32px;
+                background-color: $main-color;
+                border-radius: 20px;
+                color: #fff;
+                font-size: 16px;
+            }
+        }
+    }
+
+    &__comment {
+        width: 80%;
+        margin: 32px auto;
     }
 }

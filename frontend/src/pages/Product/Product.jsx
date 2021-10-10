@@ -1,6 +1,10 @@
 import React from 'react'
-import productImg from 'assets/images/products/4.jpg'
+import productImg from 'assets/images/products/8.jpg'
 import 'boxicons'
+import { Link } from 'react-router-dom'
+
+import VNpay from 'assets/logo/vnpay.png'
+import FEcredit from 'assets/logo/fecredit.png'
 
 const Product = () => {
     return (
@@ -13,15 +17,15 @@ const Product = () => {
                             <span>(No.00762458)</span>
                         </p>
                     </div>
-                    <div className="product__detail-top-vote">
-                        <div className="product__detail-top-vote-star">
+                    <div className="product__detail-top-ratting">
+                        <div className="product__detail-top-ratting-star">
                             <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
                             <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
                             <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
                             <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
                             <box-icon type='solid' color='#ECCF0E' name='star-half'></box-icon>
                         </div>
-                        <div className="product__detail-top-vote-number"> 10 đánh giá</div>
+                        <div className="product__detail-top-ratting-number"> 10 đánh giá</div>
                     </div>
                 </div>
                 <div className="product__detail-content">
@@ -32,39 +36,83 @@ const Product = () => {
                         <div className="product__detail-content-left-config">
                             <ul>
                                 <li>
-                                    <box-icon name='laptop'></box-icon>
+                                    <box-icon name='laptop' color="#b6bfc7"></box-icon>
                                     <p>15.6", 1920 x 1080 Pixel, IPS, 144 Hz, Acer ComfyView LED-backlit</p>
                                 </li>
                                 <li>
-                                    <box-icon type='solid' name='chip'></box-icon>
+                                    <box-icon type='solid' name='chip' color="#b6bfc7"></box-icon>
                                     <p>Intel Core i5-11400H</p>
                                 </li>
                                 <li>
-                                    <box-icon type='solid' name='microchip'></box-icon>
+                                    <box-icon type='solid' name='microchip' color="#b6bfc7"></box-icon>
                                     <p>8 GB, DDR4, 3200 MHz</p>
                                 </li>
                                 <li>
-                                    <box-icon name='hdd' ></box-icon>
+                                    <box-icon name='hdd' color="#b6bfc7"></box-icon>
                                     <p>SSD 512 GB</p>
                                 </li>
                                 <li>
-                                    <box-icon name='barcode-reader'></box-icon>
+                                    <box-icon name='barcode-reader' color="#b6bfc7"></box-icon>
                                     <p>NVIDIA GeForce RTX3050 4GB</p>
                                 </li>
                             </ul>
-                            <button>Xem thông số kỹ thuật</button>
+                            <Link to="/product">Xem chi tiết thông số kỹ thuật</Link>
                         </div>
                     </div>
                     <div className="product__detail-content-right">
                         <div className="product__detail-content-right-price">25.000.000 Đ</div>
                         <div className="product__detail-content-right-uudai">
-                            <p>Tặng PMH 200.000đ mua máy in Brother</p>
-                            <p>Giảm đến 300.000đ khi mua bảo hành (rơi vỡ + vào nước) kèm máyr</p>
-                            <p>Tặng PMH 100.000đ mua Microsoft 365 Personal/Family/Home & Student khi mua Online đến 31/10 </p>
-                            <p>Tặng thêm 1 năm bảo hành chính hãng Acer </p>
+                            <p>
+                                <span><box-icon name='check-circle' type='solid' color='#03fd1e' ></box-icon></span>
+                                Tặng PMH 200.000đ mua máy in Brother
+                            </p>
+                            <p>
+                                <span><box-icon name='check-circle' type='solid' color='#03fd1e' ></box-icon></span>
+                                Giảm đến 300.000đ khi mua bảo hành (rơi vỡ + vào nước) kèm máyr
+                            </p>
+                            <p>
+                                <span><box-icon name='check-circle' type='solid' color='#03fd1e' ></box-icon></span>
+                                Tặng PMH 100.000đ mua Microsoft 365 Personal/Family/Home & Student khi mua Online đến 31/10
+                            </p>
+                            <p>
+                                <span><box-icon name='check-circle' type='solid' color='#03fd1e' ></box-icon></span>
+                                Tặng thêm 1 năm bảo hành chính hãng Acer
+                            </p>
                         </div>
-                        <div className="product__detail-content-right-muangay">Mua ngay</div>
-
+                        <b>Ưu đãi khi thanh toán</b>
+                        <div className="product__detail-content-right-pay">
+                            <div>
+                                <img src={VNpay} alt="" />
+                                <p>Giảm: 300.000đ</p>
+                                <i>sản phẩm từ 2Tr</i>
+                                <p><Link to="/product">Mua ngay</Link></p>
+                            </div>
+                            <div>
+                                <img src={FEcredit} alt="" />
+                                <p>Giảm: 200.000đ</p>
+                                <i>sản phẩm từ 1Tr</i>
+                                <p><Link to="/product">Mua ngay</Link></p>
+                            </div>
+                        </div>
+                        <Link to="/product">
+                            <div className="btn-muangay">
+                                Mua ngay
+                            </div>
+                        </Link>
+                        <div className="product__detail-content-right-paygop">
+                            <div>
+                                <Link to="/product">
+                                    <b>TRẢ GÓP 0%</b>
+                                    <p>Duyệt nhanh qua điện thoại</p>
+                                </Link>
+                            </div>
+                            <div>
+                                <Link to="/product">
+                                    <b>TRẢ GÓP Qua thẻ</b>
+                                    <p>Visa, Master Card, JCB</p>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,11 +129,26 @@ const Product = () => {
                 </p>
                 <img src={productImg} alt="" />
             </div>
-            <div className="product__vote">
-                <h2>Đánh giá của khách hàng</h2>
-                <button>Viết đánh giá</button>
-                <p>* * * * *</p>
+
+            <div className="product__box-vote">
+                <div className="box-vote-head">
+                    <div className="box-vote-head-left">
+                        <h1>Đánh giá của khách hàng</h1>
+                        <div className="vote">
+                            <div className="star-number">4.7</div>
+                            <div className="star">
+                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                <box-icon type='solid' color='#ECCF0E' name='star-half'></box-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <Link to='/product' className="btn-vote">Viết đánh giá</Link>
+                </div>
             </div>
+
             <div className="product__comment">
                 <h3>Bình luận</h3>
                 <span>10 bình luận</span>
@@ -95,7 +158,7 @@ const Product = () => {
                 <button>Gửi</button>
             </div>
 
-        </div>
+        </div >
     )
 }
 

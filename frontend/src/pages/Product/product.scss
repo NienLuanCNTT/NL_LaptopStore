@@ -44,10 +44,17 @@
             @include flex(flex-start, flex-end);
 
             &-left {
+                position: relative;
                 width: 50%;
+                &-img {
+                    padding: 20px 0;
+                    margin: 20px 0 32px;
+                    overflow: hidden;
 
-                img {
-                    width: 100%;
+                    img {
+                        border-radius: 4px;
+                        width: 100%;
+                    }
                 }
 
                 &-config {
@@ -160,8 +167,7 @@
     }
 
     &__tongquan {
-        margin-bottom: 32px;
-        padding-bottom: 32px;
+        padding-bottom: 46px;
         border-bottom: 1px solid #e3e7ef;
         width: 80%;
         margin: 0 auto;
@@ -173,6 +179,7 @@
         }
 
         img {
+            border-radius: 4px;
             width: 100%;
         }
     }
@@ -189,19 +196,20 @@
 
             &-left {
                 h1 {
-                    padding-bottom: 32px;
+                    font-size: 32px;
+                    padding-bottom: 48px;
                 }
+                .vote-tb {
+                    text-align: center;
+                    .vote {
+                        .star-number {
+                            font-size: 38px;
+                            font-weight: bold;
+                        }
 
-                .vote {
-                    display: flex;
-
-                    .star-number {
-                        font-size: 30px;
-                        font-weight: bold;
-                    }
-
-                    .star {
-                        padding: 4px 8px;
+                        .star {
+                            padding: 4px 8px;
+                        }
                     }
                 }
             }
@@ -214,10 +222,89 @@
                 font-size: 16px;
             }
         }
+
+        &-list {
+            margin-top: 20px;
+            line-height: 1.5;
+            .item {
+                @include flex(center, flex-start);
+                margin-bottom: 32px;
+                border-bottom: 1px solid #e3e7ef;
+
+                &-logo {
+                    justify-content: center;
+                    width: 50px;
+                    margin-right: 15px;
+                    opacity: 0.6;
+                }
+                &-detail {
+                    margin-bottom: 10px;
+
+                    .item-name {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
     }
 
     &__comment {
         width: 80%;
         margin: 32px auto;
+
+        &-top {
+            margin-bottom: 32px;
+            &-head {
+                @include flex(flex-end, flex-start);
+                margin-bottom: 20px;
+
+                span {
+                    margin-left: 10px;
+                }
+            }
+            &-write {
+                position: relative;
+                textarea {
+                    background: #f3f5f8;
+                    height: 120px;
+                    padding: 16px;
+                    width: 100%;
+                    border: 1px solid #f3f5f8;
+                    border-radius: 4px;
+                    resize: none;
+                    outline: 1px solid $main-color;
+                }
+
+                button {
+                    position: absolute;
+                    width: 63px;
+                    text-align: center;
+                    height: 36px;
+                    background: $main-color;
+                    border-radius: 56px;
+                    border: 0;
+                    outline: 0;
+                    position: absolute;
+                    bottom: 20px;
+                    right: 16px;
+                    color: #fff;
+                    cursor: pointer;
+                }
+            }
+        }
+        &-list {
+            .comment {
+                @include flex(flex-start, flex-start);
+                margin-bottom: 20px;
+                width: 100%;
+
+                &-detail {
+                    flex: 1;
+                    margin-left: 15px;
+                    padding-bottom: 12px;
+                    border-bottom: 3px solid #e3e7ef;
+                }
+            }
+        }
     }
 }

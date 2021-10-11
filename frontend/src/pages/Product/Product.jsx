@@ -1,8 +1,9 @@
 import React from 'react'
-import productImg from 'assets/images/products/8.jpg'
-import 'boxicons'
 import { Link } from 'react-router-dom'
+import productImg from 'assets/images/products/8.jpg'
+import iconUser from 'assets/svg/icon-user.svg';
 
+import 'boxicons'
 import VNpay from 'assets/logo/vnpay.png'
 import FEcredit from 'assets/logo/fecredit.png'
 
@@ -128,36 +129,100 @@ const Product = () => {
                     chiếc máy trông tựa một con robot chiến đấu mà ta thường thấy trong các bộ phim khoa học – viễn tưởng. Cũng nhờ cách thiết kế và phối màu này mà khác với Nitro, Predator Helios 300 2021 tỏ ra nổi bật dù được đặt ở bất kỳ đâu. Với những game thủ không ngại khoe cá tính, ngoại hình của máy sẽ là yếu tố rất đáng cân nhắc.
                 </p>
                 <img src={productImg} alt="" />
+                <p>Với ngoại hình tạo nên từ hàng loạt đường nét gai góc, hầm hố; Acer Predator Helios 300 2021 sẽ phù hợp với các bạn game thủ cá tính, muốn khẳng định phong cách mọi lúc mọi nơi. Kết hợp với sức mạnh từ vi xử lý Intel 11th Gen cùng card đồ hoạ RTX 3000 đời mới; sản phẩm sẽ là một cỗ máy chiến đấu thực thụ trên mặt trận tác vụ hiệu năng cao.
+                    Thiết kế gai góc, hoàn thiện cứng cáp
+                    Tuy sở hữu form dáng tổng thể khá tương đồng
+                    với Nitro 5 – một dòng máy phổ thông nổi tiếng của Acer,
+                    nhưng Predator Helios 300 2021 không
+                    vì vậy mà trở nên mờ nhạt. Với những đường nét góc cạnh ở khe
+                    tản nhiệt, nắp máy, v.v. được làm nổi nhờ lớp sơn Xanh Biển,
+                    chiếc máy trông tựa một con robot chiến đấu mà ta thường thấy trong các bộ phim khoa học – viễn tưởng. Cũng nhờ cách thiết kế và phối màu này mà khác với Nitro, Predator Helios 300 2021 tỏ ra nổi bật dù được đặt ở bất kỳ đâu. Với những game thủ không ngại khoe cá tính, ngoại hình của máy sẽ là yếu tố rất đáng cân nhắc.
+                </p>
+                <img src={productImg} alt="" />
             </div>
 
             <div className="product__box-vote">
                 <div className="box-vote-head">
                     <div className="box-vote-head-left">
                         <h1>Đánh giá của khách hàng</h1>
-                        <div className="vote">
-                            <div className="star-number">4.7</div>
-                            <div className="star">
+                        <div className="vote-tb">
+                            <p>Đánh giá trung bình</p>
+                            <div className="vote">
+                                <div className="star-number">4.7</div>
+                                <div className="star">
+                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                    <box-icon type='solid' color='#ECCF0E' name='star-half'></box-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <Link to='/product' className="btn-vote">Viết đánh giá</Link>
+                </div>
+                <div className="product__box-vote-list">
+                    <div className="item">
+                        <div className="item-logo">
+                            <img src={iconUser} alt="" />
+                        </div>
+                        <div className="item-detail">
+                            <b className="item-name">Peanut</b>
+                            <div className="item-star-rate">
+                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                            </div>
+                            <p>Máy mượt học online tốt</p>
+                            <i>11/10/2021 14:34</i>
+                        </div>
+                    </div>
+                    <div className="item">
+                        <div className="item-logo">
+                            <img src={iconUser} alt="" />
+                        </div>
+                        <div className="item-detail">
+                            <b className="item-name">Bee Bee</b>
+                            <div className="item-star-rate">
                                 <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
                                 <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
                                 <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
                                 <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
                                 <box-icon type='solid' color='#ECCF0E' name='star-half'></box-icon>
                             </div>
+                            <p>Máy mượt và ổn</p>
+                            <i>11/10/2021 14:34</i>
                         </div>
                     </div>
-                    <Link to='/product' className="btn-vote">Viết đánh giá</Link>
                 </div>
+
             </div>
 
             <div className="product__comment">
-                <h3>Bình luận</h3>
-                <span>10 bình luận</span>
-
-                <p>bình luận của bạn</p>
-                <div>Viết gì đó ở đây...</div>
-                <button>Gửi</button>
+                <div className="product__comment-top">
+                    <div className="product__comment-top-head">
+                        <h1>Bình luận</h1>
+                        <span>1 bình luận</span>
+                    </div>
+                    <div className="product__comment-top-write">
+                        <textarea type="text" placeholder="Viết câu hỏi của bạn" />
+                        <button>Gửi</button>
+                    </div>
+                </div>
+                <div className="product__comment-list">
+                    <div className="comment">
+                        <div className="comment-logo">
+                            <img src={iconUser} alt="" />
+                        </div>
+                        <div className="comment-detail">
+                            <p><b className="item-name">Peanut</b> <i>11/10/2021 14:34</i></p>
+                            <p>Cho em hỏi máy này học SolidWorks với autocad đc ko ạ</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div >
     )
 }

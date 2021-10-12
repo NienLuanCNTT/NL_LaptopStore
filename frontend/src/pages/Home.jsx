@@ -9,7 +9,12 @@ const Home = () => {
     return (
         <div>
             <Helmet title="Trang chủ">
-                <Slider data={sliderData} />
+                <Slider
+                    data={sliderData}
+                    control={true}
+                    auto={true}
+                    timeOut={4000}
+                />
             </Helmet>
         </div>
     )

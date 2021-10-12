@@ -114,7 +114,7 @@
                     }
                 }
 
-                &-pay,
+                &-uudaithanhtoan,
                 &-paygop {
                     @include flex(flex-start, space-between);
 
@@ -136,20 +136,37 @@
                         }
                     }
                 }
-                .btn-muangay {
-                    margin-top: 10px;
-                    padding: 12px 8px;
-                    width: 100%;
-                    text-align: center;
+                &-pay {
+                    @include flex(flex-start, space-between);
+                    .btn-muangay,
+                    .btn-addtocart {
+                        margin-top: 10px;
+                        padding: 12px 8px;
 
-                    background-color: #ee0c13;
-                    color: #fff;
-                    border-radius: 4px;
-                    font-weight: bold;
+                        text-align: center;
+                        color: #fff;
+                        border-radius: 4px;
+                        font-weight: bold;
+                    }
+
+                    .btn-muangay {
+                        flex: 1;
+                        margin-right: 8px;
+                        width: 30%;
+                        background-color: #ee0c13;
+                        color: #fff;
+                    }
+
+                    .btn-addtocart {
+                        flex: 2;
+                        width: 70%;
+                        background-color: $main-color;
+                    }
                 }
+
                 &-paygop {
                     div {
-                        background-color: #4660f9;
+                        background-color: #46a8f9;
                         color: #fff;
                         text-align: center;
 
@@ -197,7 +214,7 @@
             &-left {
                 h1 {
                     font-size: 32px;
-                    padding-bottom: 48px;
+                    padding-bottom: 20px;
                 }
                 .vote-tb {
                     text-align: center;
@@ -306,5 +323,42 @@
                 }
             }
         }
+    }
+
+    .modal__product-config,
+    .modal__product-check {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2000;
+        background-color: rgba(0, 0, 0, 0.7);
+        font-family: Roboto, sans-serif;
+        overflow-x: hidden;
+        overflow-y: auto;
+        color: #464646;
+
+        .modal__wrapper {
+            margin: 100px auto;
+            max-width: 800px;
+            height: 1000px;
+            width: 100%;
+            background-color: #ffffff;
+
+            .modal__box {
+                width: 100%;
+                pointer-events: auto;
+                background-clip: padding-box;
+                border-radius: 4px;
+                font-size: 14px;
+                position: relative;
+            }
+        }
+    }
+
+    .modal__product-check {
+        display: block;
     }
 }

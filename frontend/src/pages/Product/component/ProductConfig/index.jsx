@@ -1,14 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-ProductConfig.propTypes = {
-
-};
+ProductConfig.propTypes = {};
 
 function ProductConfig(props) {
     return (
-        <div>
-
+        <div className="modal__product-config">
+            <div className="modal__wrapper">
+                <div>config</div>
+            </div>
         </div>
     );
 }

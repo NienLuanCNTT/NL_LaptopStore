@@ -9,6 +9,12 @@ import FEcredit from 'assets/logo/fecredit.png'
 import ProductConfig from './component/ProductConfig';
 import ProductCheck from './component/ProductCheck';
 
+
+function ModalOpen() {
+    const ModalCheck = document.querySelector('.modal__product-check');
+    ModalCheck.style.display = 'block';
+}
+
 const Product = () => {
     return (
         <div>
@@ -99,7 +105,12 @@ const Product = () => {
                                 </div>
                             </div>
                             <div className="product__detail-content-right-pay">
-                                <Link to="/product" className="btn-muangay">
+                                <Link
+                                    to="/product"
+                                    id="btn-check"
+                                    onClick={ModalOpen}
+                                    className="btn-muangay"
+                                >
                                     Mua ngay
                                 </Link>
                                 <Link to="/product" className="btn-addtocart">
@@ -203,7 +214,6 @@ const Product = () => {
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div className="product__comment">

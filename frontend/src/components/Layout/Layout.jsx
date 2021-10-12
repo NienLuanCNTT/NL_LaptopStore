@@ -6,6 +6,8 @@ import Footer from 'components/Footer';
 import Routes from 'routes/Routes';
 
 
+
+
 function Layout() {
     return (
         <BrowserRouter>

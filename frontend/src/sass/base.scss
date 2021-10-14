@@ -10,7 +10,7 @@
 }
 
 html {
-    font-size: 15px;
+    font-size: 62.5%;
 }
 
 body {
@@ -71,7 +71,7 @@ button,
 }
 
 @each $val in $numbers {
-    .grid-col-#{$val} {
+    .grid-col-sm-#{$val} {
         @include mb {
             grid-template-columns: repeat($val, 1fr);
         }

@@ -8,8 +8,8 @@ const Grid = props => {
     }
 
     const col = props.col ? `grid-col-${props.col}` : '0';
-    const mdCol = props.mdCol ? `grid-col-${props.mdCol}` : '0';
-    const smCol = props.smCol ? `grid-col-${props.smCol}` : '0';
+    const mdCol = props.mdCol ? `grid-col-md-${props.mdCol}` : '0';
+    const smCol = props.smCol ? `grid-col-sm-${props.smCol}` : '0';
 
 
     return (

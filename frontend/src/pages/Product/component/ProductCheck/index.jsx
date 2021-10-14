@@ -1,9 +1,11 @@
 import productImg1 from 'assets/images/products/2.jpg';
 import productImg2 from 'assets/images/products/3.jpg';
-import React from 'react';
+import ProvinceList from 'components/ProvinceList';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
 
 ProductCheck.propTypes = {};
-
 const productList = [
     {
         name: "Laptop Acer Nitro Gaming AN515 57 51G6 i5 11400H/8GB/512GB SSD/RTX 3050 4GB/Win10",
@@ -26,6 +28,86 @@ function ModalClose() {
 }
 
 function ProductCheck(props) {
+
+    const [city, setCity] = useState([]);
+    const [district, setDistrict] = useState([]);
+    const [commune, setCommune] = useState([]);
+
+    // Set filter when change
+    const [filter, setFilter] = useState({
+        cityCode: null,
+        districtCode: null,
+    });
+
+    // Fetch city on Province page
+    useEffect(() => {
+        const fetchCity = async () => {
+            const City = await axios.get("https://provinces.open-api.vn/api/");
+            const data = City.data || [];
+            const cityOptions = data.map((ct) => ({
+                label: ct.name,
+                value: ct.code,
+            }));
+
+
+            setCity(cityOptions);
+        };
+        fetchCity();
+    }, []);
+
+    // Fetch district when city change
+    useEffect(() => {
+        const fetchDistrict = async () => {
+            if (filter.cityCode === null) return;
+            const District = await axios.get(
+                `https://provinces.open-api.vn/api/p/${filter.cityCode}/?depth=2`
+            );
+
+            const data = District.data.districts || [];
+            const districtOptions = data.map((ct) => ({
+                label: ct.name,
+                value: ct.code,
+            }));
+
+            setDistrict(districtOptions);
+        };
+        fetchDistrict();
+    }, [filter]);
+
+    // Fetch commune when district change
+    useEffect(() => {
+        const fetchCommune = async () => {
+            if (filter.districtCode === null) return;
+            const Commune = await axios.get(
+                `https://provinces.open-api.vn/api/d/${filter.districtCode}/?depth=2`
+            );
+
+            const data = Commune.data.wards || [];
+            const communeOptions = data.map((ct) => ({
+                label: ct.name,
+                value: ct.code,
+            }));
+
+            setCommune(communeOptions);
+        };
+        fetchCommune();
+    }, [filter]);
+
+    const boxHomeAddress = document.querySelector(".card-form-ship-address");
+
+    const shipOption = () => {
+        const shipHomeElement = document.getElementById('shiphome');
+        const shipStoreElement = document.getElementById('shipshop');
+
+        if (shipHomeElement.checked === true) {
+            boxHomeAddress.style.display = "block";
+        }
+
+        if (shipStoreElement.checked === true) {
+            boxHomeAddress.style.display = "none";
+        }
+    }
+
     return (
         <div>
             <div className="modal__product-check">
@@ -63,7 +145,7 @@ function ProductCheck(props) {
                                                 <div className="product-card-quality">
                                                     <div className="product-card-quality-wrap">
                                                         <div className="btn btn-minus">-</div>
-                                                        <input type="text" readonly="" class="cs-input-cart" value={item.quality} />
+                                                        <input type="text" readOnly="" className="cs-input-cart" value={item.quality} />
                                                         <div className="btn btn-plus">+</div>
                                                     </div>
                                                     <div className="btn btn-remove">xóa</div>
@@ -91,7 +173,7 @@ function ProductCheck(props) {
                                     <div className="card-form-block">
                                         <h1>Thông tin khách hàng</h1>
                                         <form action="/" method="post">
-                                            <div className="card-form-genger">
+                                            <div className="card-form-inner">
                                                 <div className="form-box-radio">
                                                     <input type="radio" id="genger0" name="genger" />
                                                     <label htmlFor="genger0">Anh</label>
@@ -113,16 +195,24 @@ function ProductCheck(props) {
                                             <h2>Chọn hình thức giao hàng</h2>
                                             <div className="card-form-ship">
                                                 <div className="form-box-radio">
-                                                    <input type="radio" id="shiphome" name="ship" />
+                                                    <input type="radio" id="shiphome" name="ship" onChange={shipOption} />
                                                     <label htmlFor="shiphome">Giao hàng tận nơi, miễn phí</label>
                                                 </div>
                                                 <div className="form-box-radio">
-                                                    <input type="radio" name="ship" id="shipshop" />
+                                                    <input type="radio" name="ship" id="shipshop" onChange={shipOption} />
                                                     <label htmlFor="shipshop">Nhận tại cửa hàng</label>
                                                 </div>
-                                                <div className="card-form-ship-address">
-
-                                                </div>
+                                            </div>
+                                            <div className="card-form-ship-address">
+                                                <ProvinceList
+                                                    defaultValue="Chon"
+                                                    setValue
+                                                    filter={filter}
+                                                    setFilter={setFilter}
+                                                    city={city}
+                                                    district={district}
+                                                    commune={commune}
+                                                />
                                             </div>
                                         </form>
                                     </div>

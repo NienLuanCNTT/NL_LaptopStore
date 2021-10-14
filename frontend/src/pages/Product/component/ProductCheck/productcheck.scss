@@ -144,7 +144,7 @@
                 padding: 16px 24px;
                 max-width: 490px;
 
-                .card-form-genger,
+                .card-form-inner,
                 .card-form-ship {
                     @include flex(flex-start, flex-start);
                     padding: 16px 0 8px;
@@ -209,6 +209,18 @@
                         margin-right: 10px;
                     }
                 }
+                .card-form-inner {
+                    justify-content: space-between;
+                    .ship-address-city,
+                    .ship-address-district {
+                        width: 210px;
+                        display: inline-block;
+                    }
+                }
+            }
+
+            &-ship-address {
+                display: none;
             }
         }
         .card-checkout {
@@ -236,5 +248,28 @@
                 margin-top: 10px;
             }
         }
+    }
+}
+
+.box__select {
+    label {
+        font-size: 15px;
+    }
+    select {
+        width: 100%;
+        padding: 8px 4px;
+        border: 1px solid #e3e7ef;
+        border-radius: 4px;
+        font-size: 16px;
+        margin: 10px 0;
+
+        option {
+            margin: 10px;
+            padding: 10px;
+        }
+    }
+    select:focus {
+        border: 1px solid $main-color;
+        outline: 1px solid $main-color;
     }
 }

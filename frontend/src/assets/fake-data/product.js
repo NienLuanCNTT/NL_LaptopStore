@@ -25,7 +25,7 @@ const productData = [
         category: 'Apple',
         image: img2,
         price: 29000000,
-        old_price: 30000000,
+
         note: 'Quà tặng kèm',
     },
 
@@ -45,7 +45,7 @@ const productData = [
         category: 'Apple',
         image: img4,
         price: 29000000,
-        old_price: 30000000,
+
         note: 'Quà tặng kèm',
     },
 
@@ -65,7 +65,7 @@ const productData = [
         category: 'Apple',
         image: img6,
         price: 29000000,
-        old_price: 30000000,
+
         note: 'Quà tặng kèm',
     },
 

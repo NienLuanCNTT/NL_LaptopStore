@@ -7,7 +7,7 @@ const ProductCard = props => {
     const product = props.product;
     return (
         <div className="product-card">
-            <Link>
+            <Link to="/">
                 <div className="product-card__image">
                     <img src={product.image} alt="" />
                 </div>

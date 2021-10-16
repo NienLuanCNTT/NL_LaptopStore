@@ -10,12 +10,18 @@ import ProductConfig from './component/ProductConfig';
 import ProductCheck from './component/ProductCheck';
 
 
-function ModalOpen() {
-    const ModalCheck = document.querySelector('.modal__product-check');
-    ModalCheck.style.display = 'block';
-}
-
 const Product = () => {
+
+    function ModalCheckOpen() {
+        const ModalCheck = document.querySelector('.modal__product-check');
+        ModalCheck.style.display = 'block';
+    }
+    function ModalConfigOpen() {
+        const ModalCheck = document.querySelector('.modal__product-config');
+        ModalCheck.style.display = 'block';
+    }
+
+
     return (
         <div>
             <div className="product">
@@ -68,7 +74,7 @@ const Product = () => {
                                         <p>NVIDIA GeForce RTX3050 4GB</p>
                                     </li>
                                 </ul>
-                                <Link to="/product">Xem chi tiết thông số kỹ thuật</Link>
+                                <Link to="/product" onClick={ModalConfigOpen}>Xem chi tiết thông số kỹ thuật</Link>
                             </div>
                         </div>
                         <div className="product__detail-content-right">
@@ -91,7 +97,7 @@ const Product = () => {
                                     Tặng thêm 1 năm bảo hành chính hãng Acer
                                 </p>
                             </div>
-                            <b>Ưu đãi khi thanh toán</b>
+                            <h3>Ưu đãi khi thanh toán</h3>
                             <div className="product__detail-content-right-uudaithanhtoan">
                                 <div>
                                     <img src={VNpay} alt="" />
@@ -108,7 +114,7 @@ const Product = () => {
                                 <Link
                                     to="/product"
                                     id="btn-check"
-                                    onClick={ModalOpen}
+                                    onClick={ModalCheckOpen}
                                     className="btn-muangay"
                                 >
                                     Mua ngay

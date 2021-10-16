@@ -51,16 +51,36 @@
         }
 
         &__price{
-            font-size : 1.5rem;
+            font-size : 1.8rem;
             color: $main-red;
             font-weight: 600;
             margin-bottom: 0.8rem;
+
+            &__text{
+                
+                font-size: 1.4rem;
+                color : #161616;
+                font-weight : 500;
+            }
+
+            &__currency{
+                position : relative;
+                font-size : 2.2rem;
+                top : 0.2rem;
+                
+            }
+
+
         }
 
         &__old-price{
             text-decoration: line-through;
-            font-size : 1.5rem;
+            font-size : 1.4rem;
             margin-bottom: 1rem;
+
+            color : rgba(0,0,0,1);
+
+           
         }
 
         &__note{
@@ -70,7 +90,7 @@
             &__text{
                 position : absolute;
                 font-size : 1.5rem;
-                color : #000000;
+                color : rgba(0,0,0,1);
                 margin-top : 5px;
                 margin-left: 8px;
                 

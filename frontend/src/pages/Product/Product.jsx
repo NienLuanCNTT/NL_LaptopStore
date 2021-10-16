@@ -12,6 +12,7 @@ import ProductCheck from './component/ProductCheck';
 
 const Product = () => {
 
+<<<<<<< HEAD
     function ModalCheckOpen() {
         const ModalCheck = document.querySelector('.modal__product-check');
         ModalCheck.style.display = 'block';
@@ -22,6 +23,8 @@ const Product = () => {
     }
 
 
+=======
+>>>>>>> 4a528091302d429858536f0e5bc2125c27e989c3
     return (
         <div>
             <div className="product">

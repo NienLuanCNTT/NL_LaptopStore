@@ -13,21 +13,25 @@ import iconInstagram from 'assets/svg/icon-ins.svg'
 function Footer(props) {
     const media = [
         {
+            _id: 1,
             name: "youtube",
             icon: iconYoutube,
             link: 'http://www.youtube.com'
         },
         {
+            _id: 2,
             name: "facebook",
             icon: iconFacebook,
             link: 'http://www.facebook.com'
         },
         {
+            _id: 3,
             name: "twitter",
             icon: iconTwitter,
             link: 'http://www.twitter.com'
         },
         {
+            _id: 4,
             name: "instagram",
             icon: iconInstagram,
             link: 'http://www.instagrarm.com'
@@ -37,6 +41,7 @@ function Footer(props) {
 
     const contentFooter = [
         {
+            _id: 1,
             title: "Chăm sóc khách hàng",
             list: [
                 { name: "Câu hỏi thường gặp" },
@@ -47,6 +52,7 @@ function Footer(props) {
             ]
         },
         {
+            _id: 2,
             title: "Chính sách",
             list: [
                 { name: "Bảo hành" },
@@ -56,6 +62,7 @@ function Footer(props) {
             ]
         },
         {
+            _id: 3,
             title: "Về LaptopStore",
             list: [
                 { name: "Giới thiệu về LaptopStore" },
@@ -64,6 +71,7 @@ function Footer(props) {
             ]
         },
         {
+            _id: 4,
             title: "Họp tác cùng LaptopStore"
             ,
             list: [
@@ -91,7 +99,7 @@ function Footer(props) {
                         <div className="footer__top-right-media">
                             {
                                 media.map(media => (
-                                    <span>
+                                    <span key={media._id}>
                                         <a
                                             href={media.link}
                                             target="_blank"
@@ -119,9 +127,9 @@ function Footer(props) {
                                 </div>
                                 <div className="footer__content-items-list">
                                     {content.list.map((item, index) => (
-                                        <Link to="/">
+                                        <Link to="/" key={index}>
                                             <div
-                                                key={index}
+
                                                 className="footer__content-items-list-item"
                                             >
                                                 {item.name}

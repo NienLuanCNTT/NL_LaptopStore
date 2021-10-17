@@ -13,6 +13,7 @@ import productData from 'assets/fake-data/product';
 import numberWithCommas from 'utils/numberWithCommas'
 
 
+<<<<<<< HEAD
 function ModalOpen() {
     const ModalCheck = document.querySelector('.modal__product-check');
     ModalCheck.style.display = 'block';
@@ -23,7 +24,23 @@ const Product = (props) => {
     if (!product) {
         return <div>Product Not Found !</div>
     }
+=======
+const Product = () => {
+>>>>>>> 31c2349d77e4c155fa7acc7d6487a620938393c6
 
+<<<<<<< HEAD
+    function ModalCheckOpen() {
+        const ModalCheck = document.querySelector('.modal__product-check');
+        ModalCheck.style.display = 'block';
+    }
+    function ModalConfigOpen() {
+        const ModalCheck = document.querySelector('.modal__product-config');
+        ModalCheck.style.display = 'block';
+    }
+
+
+=======
+>>>>>>> 4a528091302d429858536f0e5bc2125c27e989c3
     return (
         <div>
             <div className="product">
@@ -76,7 +93,7 @@ const Product = (props) => {
                                         <p>NVIDIA GeForce RTX3050 4GB</p>
                                     </li>
                                 </ul>
-                                <Link to="/product">Xem chi tiết thông số kỹ thuật</Link>
+                                <Link to="/product" onClick={ModalConfigOpen}>Xem chi tiết thông số kỹ thuật</Link>
                             </div>
                         </div>
                         <div className="product__detail-content-right">
@@ -99,7 +116,7 @@ const Product = (props) => {
                                     Tặng thêm 1 năm bảo hành chính hãng Acer
                                 </p>
                             </div>
-                            <b>Ưu đãi khi thanh toán</b>
+                            <h3>Ưu đãi khi thanh toán</h3>
                             <div className="product__detail-content-right-uudaithanhtoan">
                                 <div>
                                     <img src={VNpay} alt="" />
@@ -116,7 +133,7 @@ const Product = (props) => {
                                 <Link
                                     to="/product"
                                     id="btn-check"
-                                    onClick={ModalOpen}
+                                    onClick={ModalCheckOpen}
                                     className="btn-muangay"
                                 >
                                     Mua ngay

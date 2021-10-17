@@ -14,6 +14,9 @@
         font-weight: 600;
         border-bottom: solid 1px #e9ecef;
 
+        p {
+            width: 90%;
+        }
         .modal-close {
             position: absolute;
             right: 15px;
@@ -66,7 +69,10 @@
 
                     &-wrap {
                         @include flex(center, flex-start);
-
+                        .cs-input-cart {
+                            width: 30px;
+                            text-align: center;
+                        }
                         .btn-minus,
                         .btn-plus {
                             padding: 4px 8px;
@@ -209,12 +215,20 @@
                         margin-right: 10px;
                     }
                 }
-                .card-form-inner {
-                    justify-content: space-between;
-                    .ship-address-city,
-                    .ship-address-district {
-                        width: 210px;
-                        display: inline-block;
+                .card-form-ship-address {
+                    .card-form-inner {
+                        justify-content: space-between;
+                        .ship-address-city,
+                        .ship-address-district {
+                            width: 210px;
+                            display: inline-block;
+                        }
+                        @include mb {
+                            .ship-address-district,
+                            .ship-address-city {
+                                width: 100%;
+                            }
+                        }
                     }
                 }
             }
@@ -271,5 +285,18 @@
     select:focus {
         border: 1px solid $main-color;
         outline: 1px solid $main-color;
+    }
+}
+
+@include mb {
+    .card-form-info {
+        flex-direction: column;
+
+        input {
+            width: 100%;
+        }
+    }
+    .card-form-inner {
+        flex-direction: column;
     }
 }

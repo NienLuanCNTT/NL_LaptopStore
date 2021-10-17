@@ -171,7 +171,7 @@
                         text-align: center;
 
                         b {
-                            font-size: 20px;
+                            font-size: 1.5rem;
                         }
 
                         a {
@@ -193,6 +193,7 @@
             padding: 20px 0;
             text-align: justify;
             line-height: 1.5;
+            font-size: 14px;
         }
 
         img {
@@ -232,7 +233,7 @@
             }
 
             .btn-vote {
-                padding: 12px 32px;
+                padding: 12px 20px;
                 background-color: $main-color;
                 border-radius: 20px;
                 color: #fff;
@@ -357,8 +358,28 @@
             }
         }
     }
+}
 
-    .modal__product-check {
-        display: block;
+@include mb {
+    .product {
+        width: 100%;
+        padding: 0;
+
+        &__tongquan,
+        &__comment,
+        &__box-vote {
+            width: 100%;
+        }
+    }
+
+    .product__detail-top,
+    .product__detail-content {
+        flex-direction: column;
+
+        &-left,
+        &-right {
+            width: 100%;
+            margin: 0;
+        }
     }
 }

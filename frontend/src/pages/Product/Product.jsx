@@ -8,23 +8,79 @@ import VNpay from 'assets/logo/vnpay.png'
 import FEcredit from 'assets/logo/fecredit.png'
 import ProductConfig from './component/ProductConfig';
 import ProductCheck from './component/ProductCheck';
+import ProductRating from './component/ProductRating';
 
 import productData from 'assets/fake-data/product';
 import numberWithCommas from 'utils/numberWithCommas'
 
 
+<<<<<<< HEAD
 function ModalOpen() {
     const ModalCheck = document.querySelector('.modal__product-check');
     ModalCheck.style.display = 'block';
 }
 
+=======
+>>>>>>> 8d32840fc3a80e3c0c5bd22d686799bd3ed6c1bb
 const Product = (props) => {
     const product = productData.find((item) => item._id === props.match.params.id);
     if (!product) {
         return <div>Product Not Found !</div>
     }
+<<<<<<< HEAD
     // const Product = () => {
 
+=======
+
+    const userRating = [
+        {
+            _id: 1,
+            name: "Alexander",
+            img: iconUser,
+            rating: 5,
+            note: "Máy mượt học onl tốt",
+            datetime: "11/10/2021 14:34",
+        }, {
+            _id: 2,
+            name: "Jonh Dang",
+            img: iconUser,
+            rating: 4,
+            note: "Máy chạy ổn",
+            datetime: "15/10/2021 09:25",
+        }, {
+            _id: 3,
+            name: "Khoa Pug",
+            img: iconUser,
+            rating: 5,
+            note: "Máy tốt nha",
+            datetime: "14/08/2021 13:44",
+        },
+
+    ]
+
+    const userComments = [
+        {
+            name: "Pham Minh Hiếu",
+            img: iconUser,
+            datetime: "14/08/2021 13:13",
+            comment: "Cho em hỏi máy này học SolidWorks với autocad đc ko ạ?",
+        },
+        {
+            name: "VLinh",
+            img: iconUser,
+            datetime: "30/09/2021 22:27",
+            comment: "Chơi game mượt không?",
+        },
+        {
+            name: "Trong Toàn",
+            img: iconUser,
+            datetime: "14/08/2021 09:25",
+            comment: "Máy này xem phim nét không ạ?",
+        },
+
+    ]
+
+>>>>>>> 8d32840fc3a80e3c0c5bd22d686799bd3ed6c1bb
     function ModalCheckOpen() {
         const ModalCheck = document.querySelector('.modal__product-check');
         ModalCheck.style.display = 'block';
@@ -34,7 +90,10 @@ const Product = (props) => {
         ModalCheck.style.display = 'block';
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8d32840fc3a80e3c0c5bd22d686799bd3ed6c1bb
     return (
         <div>
             <div className="product">
@@ -46,19 +105,17 @@ const Product = (props) => {
                             <p>
                                 {product.name}
                                 <span>(No.00762458)</span>
-                            </p>
-                        </div>
-                        <div className="product__detail-top-ratting">
-                            <div className="product__detail-top-ratting-star">
-                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                <box-icon type='solid' color='#ECCF0E' name='star-half'></box-icon>
+                            </p >
+                        </div >
+                        <a href="#rating">
+                            <div className="product__detail-top-ratting">
+                                <div className="product__detail-top-ratting-star">
+                                    <ProductRating rating={product.rating} numReviews={product.numReviews} />
+                                </div>
+                                <div className="product__detail-top-ratting-number">{product.numReviews} đánh giá</div>
                             </div>
-                            <div className="product__detail-top-ratting-number"> 10 đánh giá</div>
-                        </div>
-                    </div>
+                        </a>
+                    </div >
                     <div className="product__detail-content">
                         <div className="product__detail-content-left">
                             <div className="product__detail-content-left-img">
@@ -87,7 +144,7 @@ const Product = (props) => {
                                         <p>NVIDIA GeForce RTX3050 4GB</p>
                                     </li>
                                 </ul>
-                                <Link to="/product" onClick={ModalConfigOpen}>Xem chi tiết thông số kỹ thuật</Link>
+                                <p className="btn config-detail-modal" onClick={ModalConfigOpen}>Xem chi tiết thông số kỹ thuật</p>
                             </div>
                         </div>
                         <div className="product__detail-content-right">
@@ -99,7 +156,7 @@ const Product = (props) => {
                                 </p>
                                 <p>
                                     <span><box-icon name='check-circle' type='solid' color='#03fd1e' ></box-icon></span>
-                                    Giảm đến 300.000đ khi mua bảo hành (rơi vỡ + vào nước) kèm máyr
+                                    Giảm đến 300.000đ khi mua bảo hành (rơi vỡ + vào nước) kèm máy
                                 </p>
                                 <p>
                                     <span><box-icon name='check-circle' type='solid' color='#03fd1e' ></box-icon></span>
@@ -125,14 +182,14 @@ const Product = (props) => {
                             </div>
                             <div className="product__detail-content-right-pay">
                                 <Link
-                                    to="/product"
+                                    to="/product/1"
                                     id="btn-check"
                                     onClick={ModalCheckOpen}
                                     className="btn-muangay"
                                 >
                                     Mua ngay
                                 </Link>
-                                <Link to="/product" className="btn-addtocart">
+                                <Link to="/product/1" className="btn-addtocart">
                                     Thêm vào giỏ hàng
                                 </Link>
                             </div>
@@ -150,9 +207,9 @@ const Product = (props) => {
                                     </Link>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </div >
+                    </div >
+                </div >
                 <div className="product__tongquan">
                     <h2>Đánh giá chi tiết</h2>
                     <p>Với ngoại hình tạo nên từ hàng loạt đường nét gai góc, hầm hố; Acer Predator Helios 300 2021 sẽ phù hợp với các bạn game thủ cá tính, muốn khẳng định phong cách mọi lúc mọi nơi. Kết hợp với sức mạnh từ vi xử lý Intel 11th Gen cùng card đồ hoạ RTX 3000 đời mới; sản phẩm sẽ là một cỗ máy chiến đấu thực thụ trên mặt trận tác vụ hiệu năng cao.
@@ -175,6 +232,7 @@ const Product = (props) => {
                         chiếc máy trông tựa một con robot chiến đấu mà ta thường thấy trong các bộ phim khoa học – viễn tưởng. Cũng nhờ cách thiết kế và phối màu này mà khác với Nitro, Predator Helios 300 2021 tỏ ra nổi bật dù được đặt ở bất kỳ đâu. Với những game thủ không ngại khoe cá tính, ngoại hình của máy sẽ là yếu tố rất đáng cân nhắc.
                     </p>
                     <img src={productImg} alt="" />
+                    <div id="rating"></div>
                 </div>
 
                 <div className="product__box-vote">
@@ -184,58 +242,35 @@ const Product = (props) => {
                             <div className="vote-tb">
                                 <p>Đánh giá trung bình</p>
                                 <div className="vote">
-                                    <div className="star-number">4.7</div>
-                                    <div className="star">
-                                        <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                        <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                        <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                        <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                        <box-icon type='solid' color='#ECCF0E' name='star-half'></box-icon>
-                                    </div>
+                                    <div className="star-number">{product.rating}</div>
+                                    <ProductRating rating={product.rating} numReviews={product.numReviews} />
                                 </div>
                             </div>
                         </div>
-                        <Link to='/product' className="btn-vote">Viết đánh giá</Link>
+                        <button className="btn btn-vote">Viết đánh giá</button>
                     </div>
                     <div className="product__box-vote-list">
-                        <div className="item">
-                            <div className="item-logo">
-                                <img src={iconUser} alt="" />
-                            </div>
-                            <div className="item-detail">
-                                <b className="item-name">Peanut</b>
-                                <div className="item-star-rate">
-                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
+                        {
+                            userRating.map((item) => (
+                                <div key={item._id} className="item">
+                                    <div className="item-logo">
+                                        <img src={item.img} alt="" />
+                                    </div>
+                                    <div className="item-detail">
+                                        <b className="item-name">{item.name}</b>
+                                        <div className="item-star-rate">
+                                            <ProductRating rating={item.rating} numReviews={product.numReviews} />
+                                        </div>
+                                        <p>{item.note}</p>
+                                        <i>{item.datetime}</i>
+                                    </div>
                                 </div>
-                                <p>Máy mượt học online tốt</p>
-                                <i>11/10/2021 14:34</i>
-                            </div>
-                        </div>
-                        <div className="item">
-                            <div className="item-logo">
-                                <img src={iconUser} alt="" />
-                            </div>
-                            <div className="item-detail">
-                                <b className="item-name">Bee Bee</b>
-                                <div className="item-star-rate">
-                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                    <box-icon type='solid' color='#ECCF0E' name='star'></box-icon>
-                                    <box-icon type='solid' color='#ECCF0E' name='star-half'></box-icon>
-                                </div>
-                                <p>Máy mượt và ổn</p>
-                                <i>11/10/2021 14:34</i>
-                            </div>
-                        </div>
+                            ))
+                        }
                     </div>
                 </div>
 
-                <div className="product__comment">
+                <div id="comment" className="product__comment">
                     <div className="product__comment-top">
                         <div className="product__comment-top-head">
                             <h1>Bình luận</h1>
@@ -247,20 +282,24 @@ const Product = (props) => {
                         </div>
                     </div>
                     <div className="product__comment-list">
-                        <div className="comment">
-                            <div className="comment-logo">
-                                <img src={iconUser} alt="" />
-                            </div>
-                            <div className="comment-detail">
-                                <p><b className="item-name">Peanut</b> <i>11/10/2021 14:34</i></p>
-                                <p>Cho em hỏi máy này học SolidWorks với autocad đc ko ạ</p>
-                            </div>
-                        </div>
+                        {
+                            userComments.map((item, index) => (
+                                <div key={index} className="comment">
+                                    <div className="comment-logo">
+                                        <img src={item.img} alt="" />
+                                    </div>
+                                    <div className="comment-detail">
+                                        <p><b className="item-name">{item.name}</b> <i>{item.datetime}</i></p>
+                                        <p>{item.comment}</p>
+                                    </div>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
             </div >
 
-        </div>
+        </div >
 
     )
 }

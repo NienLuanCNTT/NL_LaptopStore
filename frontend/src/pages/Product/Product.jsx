@@ -9,13 +9,20 @@ import FEcredit from 'assets/logo/fecredit.png'
 import ProductConfig from './component/ProductConfig';
 import ProductCheck from './component/ProductCheck';
 
+import productData from 'assets/fake-data/product';
+import numberWithCommas from 'utils/numberWithCommas'
+
 
 function ModalOpen() {
     const ModalCheck = document.querySelector('.modal__product-check');
     ModalCheck.style.display = 'block';
 }
 
-const Product = () => {
+const Product = (props) => {
+    const product = productData.find((item) => item._id === props.match.params.id);
+    if (!product) {
+        return <div>Product Not Found !</div>
+    }
 
     return (
         <div>
@@ -26,7 +33,7 @@ const Product = () => {
                     <div className="product__detail-top">
                         <div className="product__detail-top-name">
                             <p>
-                                Laptop Acer Nitro Gaming AN515 57 51G6 i5 11400H/8GB/512GB SSD/RTX 3050 4GB/Win10
+                                {product.name}
                                 <span>(No.00762458)</span>
                             </p>
                         </div>
@@ -44,7 +51,7 @@ const Product = () => {
                     <div className="product__detail-content">
                         <div className="product__detail-content-left">
                             <div className="product__detail-content-left-img">
-                                <img src={productImg} alt="" />
+                                <img src={product.image} alt="" />
                             </div>
                             <div className="product__detail-content-left-config">
                                 <ul>
@@ -73,7 +80,7 @@ const Product = () => {
                             </div>
                         </div>
                         <div className="product__detail-content-right">
-                            <div className="product__detail-content-right-price">25.000.000 Đ</div>
+                            <div className="product__detail-content-right-price">{numberWithCommas(product.price)} ₫</div>
                             <div className="product__detail-content-right-uudai">
                                 <p>
                                     <span><box-icon name='check-circle' type='solid' color='#03fd1e' ></box-icon></span>

@@ -9,11 +9,8 @@ const ProductCard = props => {
     const product = props.product;
     return (
         <div className="product-card">
-<<<<<<< HEAD
-            <Link to="/">
-=======
             <Link to={`/product/${product._id}`}>
->>>>>>> 4a528091302d429858536f0e5bc2125c27e989c3
+
                 <div className="product-card__image">
                     <img src={product.image} alt="" />
                 </div>
@@ -22,7 +19,8 @@ const ProductCard = props => {
                         {product.name}
                     </div>
                     <div className="product-card__info__price">
-                        <span className="product-card__info__price__text">Giá từ: </span> {numberWithCommas(product.price)} <span className="product-card__info__price__currency">₫</span>
+                        <span className="product-card__info__price__text">
+                            Giá từ: </span> {numberWithCommas(product.price)} <span className="product-card__info__price__currency">₫</span>
                     </div>
                     {
                         product.old_price ? (

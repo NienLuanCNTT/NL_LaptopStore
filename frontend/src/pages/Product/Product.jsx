@@ -13,7 +13,6 @@ import productData from 'assets/fake-data/product';
 import numberWithCommas from 'utils/numberWithCommas'
 
 
-<<<<<<< HEAD
 function ModalOpen() {
     const ModalCheck = document.querySelector('.modal__product-check');
     ModalCheck.style.display = 'block';
@@ -24,11 +23,8 @@ const Product = (props) => {
     if (!product) {
         return <div>Product Not Found !</div>
     }
-=======
-const Product = () => {
->>>>>>> 31c2349d77e4c155fa7acc7d6487a620938393c6
+    // const Product = () => {
 
-<<<<<<< HEAD
     function ModalCheckOpen() {
         const ModalCheck = document.querySelector('.modal__product-check');
         ModalCheck.style.display = 'block';
@@ -39,8 +35,6 @@ const Product = () => {
     }
 
 
-=======
->>>>>>> 4a528091302d429858536f0e5bc2125c27e989c3
     return (
         <div>
             <div className="product">
@@ -271,4 +265,7 @@ const Product = () => {
     )
 }
 
+
 export default Product
+
+

@@ -9,11 +9,7 @@ const ProductCard = props => {
     const product = props.product;
     return (
         <div className="product-card">
-<<<<<<< HEAD
-            <Link to="/">
-=======
             <Link to={`/product/${product._id}`}>
->>>>>>> 4a528091302d429858536f0e5bc2125c27e989c3
                 <div className="product-card__image">
                     <img src={product.image} alt="" />
                 </div>

@@ -115,7 +115,7 @@ function Header() {
                                                 key={index}
                                                 className="header__nav-brain-list-items-item"
                                             >
-                                                <Link to="/product">
+                                                <Link to="/product/:slug">
                                                     {list.name}
                                                 </Link>
                                             </li>
@@ -135,7 +135,7 @@ function Header() {
                             type="submit"
                             className="header__nav-search-button"
                         >
-                            Search
+                            <box-icon name='search-alt' color='#06a8ef' ></box-icon>
                         </button>
                     </div>
                     <div className="header__nav-menu-right">

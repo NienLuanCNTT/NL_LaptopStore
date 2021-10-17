@@ -75,11 +75,14 @@
                             line-height: 1.7;
                         }
                     }
-
+                    .config-detail-modal {
+                        color: #0168fa;
+                    }
                     a {
                         color: #0168fa;
                         padding: 2px 4px;
                     }
+                    .config-detail-modal:hover,
                     a:hover {
                         color: #0ee9ff;
                     }
@@ -140,11 +143,10 @@
                     @include flex(flex-start, space-between);
                     .btn-muangay,
                     .btn-addtocart {
+                        @include btn;
                         margin-top: 10px;
                         padding: 12px 8px;
 
-                        text-align: center;
-                        color: #fff;
                         border-radius: 4px;
                         font-weight: bold;
                     }
@@ -233,11 +235,9 @@
             }
 
             .btn-vote {
+                @include btn;
                 padding: 12px 20px;
-                background-color: $main-color;
                 border-radius: 20px;
-                color: #fff;
-                font-size: 16px;
             }
         }
 
@@ -313,14 +313,15 @@
         &-list {
             .comment {
                 @include flex(flex-start, flex-start);
-                margin-bottom: 20px;
+                margin-bottom: 32px;
                 width: 100%;
+                font-size: 13px;
 
                 &-detail {
                     flex: 1;
                     margin-left: 15px;
-                    padding-bottom: 12px;
-                    border-bottom: 3px solid #e3e7ef;
+                    padding-bottom: 16px;
+                    border-bottom: 1px solid #e3e7ef;
                 }
             }
         }

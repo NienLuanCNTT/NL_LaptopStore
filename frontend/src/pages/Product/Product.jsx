@@ -10,8 +10,24 @@ import ProductConfig from './component/ProductConfig';
 import ProductCheck from './component/ProductCheck';
 import ProductRating from './component/ProductRating';
 
+import productData from 'assets/fake-data/product';
+import numberWithCommas from 'utils/numberWithCommas'
 
+
+<<<<<<< HEAD
+function ModalOpen() {
+    const ModalCheck = document.querySelector('.modal__product-check');
+    ModalCheck.style.display = 'block';
+}
+
+const Product = (props) => {
+    const product = productData.find((item) => item._id === props.match.params.id);
+    if (!product) {
+        return <div>Product Not Found !</div>
+    }
+=======
 const Product = () => {
+<<<<<<< HEAD
     const product = {
         name: "Laptop Acer Nitro Gaming AN515 57 51G6 i5 11400H/8GB/512GB SSD/RTX 3050 4GB/Win10",
         img: productImg,
@@ -68,6 +84,9 @@ const Product = () => {
         },
 
     ]
+=======
+>>>>>>> 31c2349d77e4c155fa7acc7d6487a620938393c6
+>>>>>>> 74ba6e43fb9ed2b8ba6e122ddffa7633ee48d01c
 
     function ModalCheckOpen() {
         const ModalCheck = document.querySelector('.modal__product-check');
@@ -90,7 +109,11 @@ const Product = () => {
                         <div className="product__detail-top-name">
                             <p>
                                 {product.name}
+<<<<<<< HEAD
                                 <span>({product.no})</span>
+=======
+                                <span>(No.00762458)</span>
+>>>>>>> 74ba6e43fb9ed2b8ba6e122ddffa7633ee48d01c
                             </p>
                         </div>
                         <a href="#rating">
@@ -105,7 +128,7 @@ const Product = () => {
                     <div className="product__detail-content">
                         <div className="product__detail-content-left">
                             <div className="product__detail-content-left-img">
-                                <img src={productImg} alt="" />
+                                <img src={product.image} alt="" />
                             </div>
                             <div className="product__detail-content-left-config">
                                 <ul>
@@ -134,7 +157,11 @@ const Product = () => {
                             </div>
                         </div>
                         <div className="product__detail-content-right">
+<<<<<<< HEAD
                             <div className="product__detail-content-right-price">{product.price} Đ</div>
+=======
+                            <div className="product__detail-content-right-price">{numberWithCommas(product.price)} ₫</div>
+>>>>>>> 74ba6e43fb9ed2b8ba6e122ddffa7633ee48d01c
                             <div className="product__detail-content-right-uudai">
                                 <p>
                                     <span><box-icon name='check-circle' type='solid' color='#03fd1e' ></box-icon></span>

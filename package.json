@@ -1,0 +1,27 @@
+{
+  "name": "laptopstore",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "_comment-start": "load server khi co thay doi",
+    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NienLuanCNTT/NL_LaptopStore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NienLuanCNTT/NL_LaptopStore/issues"
+  },
+  "homepage": "https://github.com/NienLuanCNTT/NL_LaptopStore#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}

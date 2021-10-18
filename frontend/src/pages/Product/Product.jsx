@@ -13,24 +13,11 @@ import ProductRating from './component/ProductRating';
 import productData from 'assets/fake-data/product';
 import numberWithCommas from 'utils/numberWithCommas'
 
-
-<<<<<<< HEAD
-function ModalOpen() {
-    const ModalCheck = document.querySelector('.modal__product-check');
-    ModalCheck.style.display = 'block';
-}
-
-=======
->>>>>>> 8d32840fc3a80e3c0c5bd22d686799bd3ed6c1bb
 const Product = (props) => {
     const product = productData.find((item) => item._id === props.match.params.id);
     if (!product) {
         return <div>Product Not Found !</div>
     }
-<<<<<<< HEAD
-    // const Product = () => {
-
-=======
 
     const userRating = [
         {
@@ -80,7 +67,6 @@ const Product = (props) => {
 
     ]
 
->>>>>>> 8d32840fc3a80e3c0c5bd22d686799bd3ed6c1bb
     function ModalCheckOpen() {
         const ModalCheck = document.querySelector('.modal__product-check');
         ModalCheck.style.display = 'block';
@@ -90,10 +76,7 @@ const Product = (props) => {
         ModalCheck.style.display = 'block';
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 8d32840fc3a80e3c0c5bd22d686799bd3ed6c1bb
     return (
         <div>
             <div className="product">

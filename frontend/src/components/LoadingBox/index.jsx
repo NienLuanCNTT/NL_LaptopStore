@@ -3,8 +3,8 @@ import React from 'react'
 
 const LoadingBox = props => {
     return (
-        <div>
-            <i className="fas fa-spinner"></i> Loading...
+        <div className="loading">
+            <i className="fas fa-spinner fa-spin"></i> Loading...
         </div>
     )
 }

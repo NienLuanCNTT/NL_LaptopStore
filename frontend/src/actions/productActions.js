@@ -23,11 +23,11 @@ export const detailProduct = (productId) => async (dispatch) => {
         type: PRODUCT_DETAIL_REQUEST, payload: productId
     });
     try {
-        // lỗi lấy data ko đc 
+        // Can't get data  
         const { data } = await Axios.get(`/api/products/${productId}`);
         dispatch({ type: PRODUCT_DETAIL_SUCCESS, payload: data });
     } catch (error) {
-        console.log("Khong lay duoc data");
+        console.log("Can't get data !");
         dispatch({
             type: PRODUCT_DETAIL_FAIL,
             payload:

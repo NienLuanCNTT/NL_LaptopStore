@@ -17,7 +17,6 @@ import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
 import { detailProduct } from 'actions/productActions';
 
-<<<<<<< HEAD
 
 function ModalOpen() {
     const ModalCheck = document.querySelector('.modal__product-check');
@@ -35,15 +34,6 @@ const Product = (props) => {
     useEffect(() => {
         dispatch(detailProduct(productId));
     }, [dispatch, productId]);
-
-
-=======
-const Product = (props) => {
-    const product = productData.find((item) => item._id === props.match.params.id);
-    if (!product) {
-        return <div>Product Not Found !</div>
-    }
->>>>>>> 60ce134637bb90b8074f8265213a9d8cc70a50ad
 
     const userRating = [
         {
@@ -324,5 +314,6 @@ const Product = (props) => {
 
 
 export default Product
+
 
 

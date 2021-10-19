@@ -91,7 +91,8 @@
             }
         }
 
-        &-search {
+        &-search,
+        &-search-mobile {
             width: 450px;
             position: relative;
             margin-left: 60px;
@@ -157,10 +158,17 @@
             }
         }
 
+        &-menu-right-mobile {
+            display: none;
+        }
+
         @include mb {
             &-search,
             &-brain {
                 display: none;
+            }
+            &-search-mobile {
+                display: block;
             }
         }
     }

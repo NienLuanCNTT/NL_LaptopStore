@@ -153,7 +153,7 @@ function ProductCheck(props) {
                                     <div className="card-form-block">
                                         <h1>Thông tin khách hàng</h1>
                                         <form action="/" method="post">
-                                            <div className="card-form-inner">
+                                            <div className="card-form-inner-genger">
                                                 <div className="form-box-radio">
                                                     <input type="radio" id="genger0" name="genger" />
                                                     <label htmlFor="genger0">Anh</label>

@@ -1,28 +1,24 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import productImg from 'assets/images/products/8.jpg'
+import { detailProduct } from 'actions/productActions';
+import FEcredit from 'assets/logo/fecredit.png';
+import VNpay from 'assets/logo/vnpay.png';
 import iconUser from 'assets/svg/icon-user.svg';
 
-import 'boxicons'
-import VNpay from 'assets/logo/vnpay.png'
-import FEcredit from 'assets/logo/fecredit.png'
-import ProductConfig from './component/ProductConfig';
+import 'boxicons';
+import LoadingBox from 'components/LoadingBox';
+import MessageBox from 'components/MessageBox';
+import React, { useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import numberWithCommas from 'utils/numberWithCommas';
 import ProductCheck from './component/ProductCheck';
+
+import ProductConfig from './component/ProductConfig';
 import ProductRating from './component/ProductRating';
 
 
-import numberWithCommas from 'utils/numberWithCommas'
-import { useDispatch, useSelector } from 'react-redux';
-import LoadingBox from 'components/LoadingBox';
-import MessageBox from 'components/MessageBox';
-import { detailProduct } from 'actions/productActions';
 
-<<<<<<< HEAD
 
-function ModalOpen() {
-    const ModalCheck = document.querySelector('.modal__product-check');
-    ModalCheck.style.display = 'block';
-}
 
 const Product = (props) => {
     const dispatch = useDispatch();
@@ -37,13 +33,6 @@ const Product = (props) => {
     }, [dispatch, productId]);
 
 
-=======
-const Product = (props) => {
-    const product = productData.find((item) => item._id === props.match.params.id);
-    if (!product) {
-        return <div>Product Not Found !</div>
-    }
->>>>>>> 60ce134637bb90b8074f8265213a9d8cc70a50ad
 
     const userRating = [
         {
@@ -110,7 +99,7 @@ const Product = (props) => {
                     (<MessageBox variant="danger">{error}</MessageBox>) :
                     (
                         <div className="product">
-                            <ProductConfig />
+                            <ProductConfig product={product} />
                             <ProductCheck />
                             <div className="product__detail">
                                 <div className="product__detail-top">
@@ -194,17 +183,16 @@ const Product = (props) => {
                                             </div>
                                         </div>
                                         <div className="product__detail-content-right-pay">
-                                            <Link
-                                                to="/product/1"
+                                            <button
                                                 id="btn-check"
                                                 onClick={ModalCheckOpen}
                                                 className="btn-muangay"
                                             >
                                                 Mua ngay
-                                            </Link>
-                                            <Link to="/product/1" className="btn-addtocart">
+                                            </button>
+                                            <button to="/product/1" className="btn-addtocart">
                                                 Thêm vào giỏ hàng
-                                            </Link>
+                                            </button>
                                         </div>
                                         <div className="product__detail-content-right-paygop">
                                             <div>
@@ -234,7 +222,7 @@ const Product = (props) => {
                                     tản nhiệt, nắp máy, v.v. được làm nổi nhờ lớp sơn Xanh Biển,
                                     chiếc máy trông tựa một con robot chiến đấu mà ta thường thấy trong các bộ phim khoa học – viễn tưởng. Cũng nhờ cách thiết kế và phối màu này mà khác với Nitro, Predator Helios 300 2021 tỏ ra nổi bật dù được đặt ở bất kỳ đâu. Với những game thủ không ngại khoe cá tính, ngoại hình của máy sẽ là yếu tố rất đáng cân nhắc.
                                 </p>
-                                <img src={productImg} alt="" />
+                                <img src={product.image} alt="" />
                                 <p>Với ngoại hình tạo nên từ hàng loạt đường nét gai góc, hầm hố; Acer Predator Helios 300 2021 sẽ phù hợp với các bạn game thủ cá tính, muốn khẳng định phong cách mọi lúc mọi nơi. Kết hợp với sức mạnh từ vi xử lý Intel 11th Gen cùng card đồ hoạ RTX 3000 đời mới; sản phẩm sẽ là một cỗ máy chiến đấu thực thụ trên mặt trận tác vụ hiệu năng cao.
                                     Thiết kế gai góc, hoàn thiện cứng cáp
                                     Tuy sở hữu form dáng tổng thể khá tương đồng
@@ -244,7 +232,7 @@ const Product = (props) => {
                                     tản nhiệt, nắp máy, v.v. được làm nổi nhờ lớp sơn Xanh Biển,
                                     chiếc máy trông tựa một con robot chiến đấu mà ta thường thấy trong các bộ phim khoa học – viễn tưởng. Cũng nhờ cách thiết kế và phối màu này mà khác với Nitro, Predator Helios 300 2021 tỏ ra nổi bật dù được đặt ở bất kỳ đâu. Với những game thủ không ngại khoe cá tính, ngoại hình của máy sẽ là yếu tố rất đáng cân nhắc.
                                 </p>
-                                <img src={productImg} alt="" />
+                                <img src={product.image} alt="" />
                                 <div id="rating"></div>
                             </div>
 

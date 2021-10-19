@@ -50,7 +50,7 @@ const Slider = props => {
         <div className="slider">
             {
                 data.map((item, index) => (
-                    <div className={`slider__item ${index === activeSlide ? 'active' : ''}`} style={{
+                    <div key={index} className={`slider__item ${index === activeSlide ? 'active' : ''}`} style={{
                         backgroundImage: `url("${item.img}")`,
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'contain',  ///cho hình lấy hết khung

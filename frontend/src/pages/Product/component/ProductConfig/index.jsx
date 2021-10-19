@@ -1,5 +1,4 @@
 import React from 'react';
-import productImg1 from 'assets/images/products/8.jpg';
 
 ProductConfig.propTypes = {};
 
@@ -48,6 +47,7 @@ function ProductConfig(props) {
 
     ]
 
+    const { product } = props;
 
     return (
         <div className="modal__product-config">
@@ -55,12 +55,12 @@ function ProductConfig(props) {
                 <div className="modal__box">
                     <div className="modal__card">
                         <div className="card-title">
-                            <p>Laptop Acer Nitro Gaming AN515 57 51G6 i5 11400H/8GB/512GB SSD/RTX 3050 4GB/Win10</p>
+                            <p>{product.name}</p>
                             <span onClick={ModalClose} id="modal__close" className="modal-close">X</span>
                         </div>
                         <div className="card-body">
                             <div className="card-img">
-                                <img src={productImg1} alt="" />
+                                <img src={product.image} alt="" />
                             </div>
                             {
                                 dataConfig.map((item) => (

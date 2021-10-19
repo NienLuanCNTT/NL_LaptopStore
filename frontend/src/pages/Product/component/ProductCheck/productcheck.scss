@@ -114,6 +114,7 @@
                     font-weight: 600;
                     font-size: 16px;
                     padding: 4px 8px;
+                    width: 100px;
                 }
             }
         }
@@ -151,6 +152,7 @@
                 max-width: 490px;
 
                 .card-form-inner,
+                .card-form-inner-genger,
                 .card-form-ship {
                     @include flex(flex-start, flex-start);
                     padding: 16px 0 8px;

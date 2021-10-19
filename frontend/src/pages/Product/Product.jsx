@@ -32,8 +32,11 @@ const Product = (props) => {
         dispatch(detailProduct(productId));
     }, [dispatch, productId]);
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 295b46fde5c62e076a8a6e496b848f768f4dfa6f
     const userRating = [
         {
             _id: 1,
@@ -312,5 +315,6 @@ const Product = (props) => {
 
 
 export default Product
+
 
 

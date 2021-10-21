@@ -55,7 +55,7 @@ const HeaderPCR = () => {
                 </li>
                 <li>
                     <div className="header__nav-menu-right-item">
-                        <div className="account">
+                        <div className="btn account">
                             <i><box-icon name='user-circle' color='#434242' ></box-icon></i>
                         </div>
                         {/* User not Login */}

@@ -1,0 +1,11 @@
+.cart {
+    padding-top: 100px;
+
+    &-items {
+        padding: 12px 16px;
+
+        .cart-item {
+            @include flex(flex-start, flex-start);
+        }
+    }
+}

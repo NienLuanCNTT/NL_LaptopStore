@@ -31,14 +31,8 @@ const HeaderPCR = () => {
                             <box-icon name='cart-alt' color='#434242' ></box-icon>
                         </Link>
                         <div className="dropdown-cart">
-                            {checkList.length === 0 && (
-                                <div className="cart-empty">
-                                    <img src={cartEmty} alt="" />
-                                    <i>Giỏ hàng của bạn hiện chưa có sản phẩm nào</i>
-                                </div>
-                            )}
                             {
-                                checkList.length >= 1 && (
+                                checkList ? (
                                     <div>
                                         <h3>có {checkList.length} sản phẩm trong giỏ hàng</h3>
                                         <HCartList checkList={checkList} />
@@ -48,8 +42,12 @@ const HeaderPCR = () => {
                                             </button>
                                         </p>
                                     </div>
-                                )
-                            }
+                                ) : (
+                                    <div className="cart-empty">
+                                        <img src={cartEmty} alt="" />
+                                        <i>Giỏ hàng của bạn hiện chưa có sản phẩm nào</i>
+                                    </div>
+                                )}
                         </div>
                     </div>
                 </li>

@@ -134,7 +134,7 @@ function Header() {
                             type="submit"
                             className="header__nav-search-button"
                         >
-                            <box-icon name='search-alt' color='#06a8ef' ></box-icon>
+                            <box-icon name='search-alt' animation='tada' color='#06a8ef' ></box-icon>
                         </button>
                     </div>
                     <HeaderPCR />

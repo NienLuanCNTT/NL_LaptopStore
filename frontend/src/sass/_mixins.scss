@@ -8,6 +8,7 @@
 
 @mixin btn {
     background: $main-color;
+    border-radius: 8px;
     border: 0;
     outline: 0;
     color: #fff;

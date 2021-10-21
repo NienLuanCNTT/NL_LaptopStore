@@ -18,12 +18,11 @@
     box-shadow: $box-shadow;
 
     &__nav {
-        @include flex(center, unset);
+        @include flex(center, space-between);
 
         &-logo {
             font-size: 20px;
             font-weight: bold;
-            padding: 0 8px;
             width: 144px;
         }
 
@@ -95,7 +94,8 @@
         &-search-mobile {
             width: 450px;
             position: relative;
-            margin-left: 60px;
+            margin-left: 20px;
+            margin-right: 10px;
 
             &-input {
                 width: 100%;
@@ -112,23 +112,27 @@
             &-button {
                 top: 4px;
                 position: absolute;
-                right: 8px;
+                right: 2px;
                 background-color: #fbfbfb;
 
                 border: none;
                 padding-right: 4px;
-                border-radius: 4px;
+                border-radius: 50%;
             }
         }
 
         &-menu-right {
             @include flex(center, flex-end);
             flex: 1;
+            position: relative;
 
+            li {
+                padding-bottom: 8px;
+            }
             &-item {
                 position: relative;
                 padding: 8px 10px;
-                margin: 0 14px;
+                margin: 0 4px;
                 border-radius: 50%;
 
                 &-icon {
@@ -137,9 +141,7 @@
                 }
 
                 &:hover {
-                    cursor: pointer;
                     background-color: $main-color;
-                    opacity: 0.8;
                 }
 
                 &-sm {
@@ -149,17 +151,128 @@
                     color: #fff;
                     text-align: center;
 
-                    background-color: red;
+                    background-color: #d45c06;
                     border-radius: 50%;
-                    padding: 5px 2px;
-                    height: 20px;
-                    width: 20px;
+                    padding: 6px 0;
+                    height: 22px;
+                    width: 22px;
                 }
+
+                .dropdown-cart,
+                .dropdown-account {
+                    position: absolute;
+                    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+                    border-radius: 4px;
+                    display: none;
+                    top: 50px;
+                    left: -150px;
+                }
+
+                .dropdown-cart {
+                    background-color: #fff;
+                    width: 250px;
+                    border-radius: 4px;
+                    padding: 12px 8px;
+
+                    .cart-empty {
+                        text-align: center;
+                        font-size: 12px;
+                        img {
+                            width: 100%;
+                        }
+                        i {
+                            padding: 8px 12px;
+                            font-weight: 600;
+                            opacity: 0.6;
+                        }
+                    }
+                    .Header__cart-list {
+                        margin: 10px 0;
+                        .header__cart-item {
+                            @include flex(center, flex-start);
+                            margin-bottom: 10px;
+                            line-height: 1.4;
+                            padding: 8px 0;
+                            border-bottom: 1px solid #e3e7ef;
+
+                            .cart-item-img {
+                                img {
+                                    height: 40px;
+                                }
+                            }
+                            .cart-info {
+                                padding-left: 4px;
+                                .cart-product-price {
+                                    color: #cb1c22;
+                                    font-size: 12px;
+                                    font-weight: 600;
+
+                                    span {
+                                        color: #000;
+                                        font-weight: 400;
+                                        font-size: 10px;
+                                    }
+                                }
+                            }
+                            &:hover {
+                                cursor: pointer;
+                                color: $main-color;
+                            }
+                        }
+                    }
+                    .btn-addtocart {
+                        @include btn;
+                        padding: 10px 12px;
+                    }
+                }
+
+                .dropdown-account {
+                    width: 200px;
+
+                    li {
+                        position: relative;
+                        font-size: 14px;
+                        padding: 12px 24px;
+                        border-radius: 4px;
+                        background-color: #fff;
+                        font-weight: 500;
+
+                        p {
+                            i {
+                                width: 30px;
+                            }
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: #eeeeee;
+                        }
+                    }
+                }
+            }
+            li:hover .dropdown-account,
+            li:hover .dropdown-cart {
+                display: block;
             }
         }
 
-        &-menu-right-mobile {
+        &-menu-mobile {
             display: none;
+            align-items: center;
+            justify-content: flex-end;
+
+            .header__nav-search-mobile {
+                width: 35px;
+                margin-left: 5px;
+                transition: all 1s;
+
+                &:hover {
+                    width: 230px;
+                }
+            }
+            .btn-toggle {
+                padding: 4px;
+            }
         }
 
         @include mb {
@@ -167,8 +280,14 @@
             &-brain {
                 display: none;
             }
-            &-search-mobile {
-                display: block;
+            &-menu-right {
+                display: none;
+            }
+            &-logo {
+                width: 100px;
+            }
+            &-menu-mobile {
+                display: flex;
             }
         }
     }

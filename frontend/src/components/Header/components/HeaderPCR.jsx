@@ -32,7 +32,7 @@ const HeaderPCR = () => {
                         </Link>
                         <div className="dropdown-cart">
                             {
-                                checkList ? (
+                                checkList.length >= 1 && (
                                     <div>
                                         <h3>có {checkList.length} sản phẩm trong giỏ hàng</h3>
                                         <HCartList checkList={checkList} />
@@ -42,7 +42,9 @@ const HeaderPCR = () => {
                                             </button>
                                         </p>
                                     </div>
-                                ) : (
+                                )}
+                            {
+                                checkList.length === 0 && (
                                     <div className="cart-empty">
                                         <img src={cartEmty} alt="" />
                                         <i>Giỏ hàng của bạn hiện chưa có sản phẩm nào</i>

@@ -14,10 +14,6 @@ export const listProducts = () => async (dispatch) => {
     }
 }
 
-
-
-
-
 export const detailProduct = (productId) => async (dispatch) => {
     dispatch({
         type: PRODUCT_DETAIL_REQUEST, payload: productId

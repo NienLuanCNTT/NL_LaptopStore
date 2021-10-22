@@ -97,7 +97,6 @@ function ProductCheck(props) {
 
     const handleQuantityChange = (id, quantity) => {
         dispatch(selectQuantity({ id, quantity }));
-        console.log("quantity change");
     };
 
     // handle remove product

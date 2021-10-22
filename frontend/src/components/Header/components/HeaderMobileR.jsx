@@ -13,10 +13,18 @@ const HeaderMobileR = () => {
                     type="submit"
                     className="header__nav-search-button"
                 >
-                    <box-icon name='search-alt' color='#06a8ef' ></box-icon>
+                    <box-icon name='search-alt' color='#06a8ef' />
                 </button>
             </div>
 
+            <div className="header__nav-toggle-mobile">
+                <i className="btn-toggle">
+                    <box-icon name='category' type='solid' color='#676464' />
+                </i>
+                <div className="menu-toggle-mobile">
+
+                </div>
+            </div>
         </div>
     );
 };

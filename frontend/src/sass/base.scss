@@ -33,6 +33,10 @@ button,
     cursor: pointer;
 }
 
+.txt-center {
+    text-align: center;
+}
+
 .container {
     width: 100%;
     max-width: 1300px;
@@ -45,6 +49,39 @@ button,
 
     @include mb {
         padding: 0 10px;
+    }
+}
+
+.modal__product-config,
+.modal__product-check {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2000;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family: Roboto, sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: #464646;
+
+    .modal__wrapper {
+        margin: 100px auto;
+        max-width: 900px;
+        width: 100%;
+        background-color: #ffffff;
+        border-radius: 12px;
+
+        .modal__box {
+            width: 100%;
+            pointer-events: auto;
+            background-clip: padding-box;
+            border-radius: 4px;
+            font-size: 14px;
+            position: relative;
+        }
     }
 }
 

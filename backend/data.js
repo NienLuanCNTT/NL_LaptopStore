@@ -18,7 +18,7 @@ const data = {
 
     product: [
         {
-            _id: '1',
+            // _id: '1',
             name: 'Dell Inspiron 3505',
             category: 'Dell',
             image: '/images/products/1.jpg',
@@ -27,10 +27,11 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.9,
             numReviews: 10,
+            countInStock: 700,
         },
 
         {
-            _id: '2',
+            // _id: '2',
             name: 'Acer Swift 3 13 (Chính hãng - Intel Gen 11)',
             category: 'Acer',
             image: '/images/products/2.jpg',
@@ -39,10 +40,11 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.5,
             numReviews: 10,
+            countInStock: 700,
         },
 
         {
-            _id: '3',
+            // _id: '3',
             name: 'Dell Inspiron 15 5502 (Chính hãng)',
             category: 'dell',
             image: '/images/products/3.jpg',
@@ -51,10 +53,11 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 5,
             numReviews: 10,
+            countInStock: 700,
         },
 
         {
-            _id: '4',
+            // _id: '4',
             name: 'Razer Blade 15 Base',
             category: 'Razer',
             image: '/images/products/4.jpg',
@@ -63,10 +66,11 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.8,
             numReviews: 10,
+            countInStock: 700,
         },
 
         {
-            _id: '5',
+            // _id: '5',
             name: 'Razer Blade 15 Base Edition (Quartz Pink)',
             category: 'Razer',
             image: '/images/products/5.jpg',
@@ -75,10 +79,11 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.5,
             numReviews: 10,
+            countInStock: 700,
         },
 
         {
-            _id: '6',
+            // _id: '6',
             name: 'Acer Nitro 5 15\'\' 2021 (AMD)',
             category: 'Acer',
             image: '/images/products/6.jpg',
@@ -87,10 +92,11 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.6,
             numReviews: 10,
+            countInStock: 700,
         },
 
         {
-            _id: '7',
+            // _id: '7',
             name: 'HP 15-DY2093DX',
             category: 'Apple',
             image: '/images/products/7.jpg',
@@ -99,9 +105,10 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.7,
             numReviews: 10,
+            countInStock: 700,
         },
         {
-            _id: '8',
+            // _id: '8',
             name: 'HP Victus Gaming 16 (Chính hãng)',
             category: 'HP',
             image: '/images/products/8.jpg',
@@ -110,9 +117,10 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.4,
             numReviews: 10,
+            countInStock: 700,
         },
         {
-            _id: '9',
+            // _id: '9',
             name: 'Apple Macbook Pro 16 2019 (Chính hãng)',
             category: 'Apple',
             image: '/images/products/9.jpg',
@@ -121,9 +129,10 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.4,
             numReviews: 10,
+            countInStock: 700,
         },
         {
-            _id: '10',
+            // _id: '10',
             name: 'Apple Macbook Pro 13 2020',
             category: 'Apple',
             image: '/images/products/11.jpg',
@@ -132,9 +141,10 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.4,
             numReviews: 5,
+            countInStock: 700,
         },
         {
-            _id: '11',
+            // _id: '11',
             name: 'Apple Macbook Air (Chính hãng - Apple M1 - Late 2020)',
             category: 'Apple',
             image: '/images/products/12.jpg',
@@ -143,9 +153,10 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 5,
             numReviews: 7,
+            countInStock: 700,
         },
         {
-            _id: '12',
+            // _id: '12',
             name: 'ASUS ROG Strix G15 (G513)',
             category: 'Asus',
             image: '/images/products/14.jpg',
@@ -154,9 +165,10 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.7,
             numReviews: 15,
+            countInStock: 700,
         },
         {
-            _id: '13',
+            // _id: '13',
             name: 'Apple Macbook Air 2020',
             category: 'Apple',
             image: '/images/products/13.jpg',
@@ -165,9 +177,10 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.7,
             numReviews: 15,
+            countInStock: 700,
         },
         {
-            _id: '14',
+            // _id: '14',
             name: 'Asus ROG Zephyrus G14 2021',
             category: 'Asus',
             image: '/images/products/15.jpg',
@@ -176,9 +189,10 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.7,
             numReviews: 15,
+            countInStock: 700,
         },
         {
-            _id: '15',
+            // _id: '15',
             name: 'ASUS ROG Zephyrus Duo 15 SE GX551',
             category: 'Asus',
             image: '/images/products/16.jpg',
@@ -187,9 +201,10 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.7,
             numReviews: 15,
+            countInStock: 700,
         },
         {
-            _id: '16',
+            // _id: '16',
             name: 'ASUS TUF Gaming F15 2021 (Chính hãng)',
             category: 'Asus',
             image: '/images/products/17.jpg',
@@ -198,6 +213,7 @@ const data = {
             note: 'Quà tặng kèm',
             rating: 4.7,
             numReviews: 15,
+            countInStock: 700,
         },
     ],
 }

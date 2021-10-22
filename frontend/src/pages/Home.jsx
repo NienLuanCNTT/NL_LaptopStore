@@ -2,17 +2,20 @@ import sliderData from 'assets/fake-data/slider'
 // import productData from 'assets/fake-data/product'
 import Slider from 'components/Slider'
 import ProductCard from 'components/ProductCard'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Section, { SectionTitle, SectionBody } from 'components/Section'
-import Grid from 'components/Grid'
 import Helmet from 'components/Helmet'
 import LoadingBox from 'components/LoadingBox'
 import MessageBox from 'components/MessageBox'
+import Pagination from 'components/Pagination'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from 'actions/productActions'
 
 const Home = () => {
+
+
 
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.productList);
@@ -20,7 +23,13 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(listProducts());
-    }, [dispatch])
+    }, [dispatch]);
+
+    // pagination
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [postsPerPage] = useState(5);
+    // const paginate = pageNumber => setCurrentPage(pageNumber);
+
 
     return (
         <div>
@@ -44,16 +53,18 @@ const Home = () => {
                                 <SectionTitle>Best Sellers</SectionTitle>
 
                                 <SectionBody>
-                                    <Grid col={4} mdCol={2} smCol={1} gap={20}>
-                                        {
-                                            products.map((product) => (
-                                                <ProductCard
-                                                    key={product._id}
-                                                    product={product}
-                                                />
-                                            ))
-                                        }
-                                    </Grid>
+
+
+                                    <ProductCard
+                                        products={products}
+                                    // currentPage={currentPage}
+                                    // postsPerPage={postsPerPage}
+
+                                    />
+
+                                    {/* <Pagination products={products} paginate={paginate} /> */}
+
+
                                 </SectionBody>
                             </Section>
 

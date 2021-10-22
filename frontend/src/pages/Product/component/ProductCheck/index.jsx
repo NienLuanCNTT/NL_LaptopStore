@@ -36,7 +36,6 @@ function ProductCheck(props) {
                 value: ct.code,
             }));
 
-
             setCity(cityOptions);
         };
         fetchCity();

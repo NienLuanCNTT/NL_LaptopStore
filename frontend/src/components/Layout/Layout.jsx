@@ -4,9 +4,9 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Routes from 'routes/Routes';
+import { ToastContainer } from 'react-toastify';
 
-
-
+import 'react-toastify/dist/ReactToastify.css';
 
 function Layout() {
     return (
@@ -22,6 +22,7 @@ function Layout() {
                     <Footer />
                 </div>
             )} />
+            <ToastContainer style={{ fontSize: 14 }} />
         </BrowserRouter>
     );
 }

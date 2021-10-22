@@ -1,5 +1,7 @@
+import { TOAST_OPTIONS } from 'constants/productConstants';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import numberWithCommas from 'utils/numberWithCommas';
 
 const CartItem = (props) => {
@@ -10,13 +12,16 @@ const CartItem = (props) => {
     } = props;
 
     const handleQuantityChange = (id, quantity) => {
-        if (!onQuantityChange) return;
+        if (quantity === 0) return;
         onQuantityChange(id, quantity);
     }
 
     const handleRemoveProduct = (id) => {
         if (!onRemove) return;
         onRemove(id);
+        toast.warn('Remove product from cart', {
+            ...TOAST_OPTIONS,
+        })
     }
 
     return (

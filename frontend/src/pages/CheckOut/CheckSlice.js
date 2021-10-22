@@ -1,23 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import productImg1 from 'assets/images/products/2.jpg';
-import productImg2 from 'assets/images/products/3.jpg';
+// import productImg1 from 'assets/images/products/2.jpg';
+// import productImg2 from 'assets/images/products/3.jpg';
 
-const checkList = [
-    {
-        _id: 2,
-        name: "Laptop Acer Nitro Gaming AN515 57 51G6 i5 11400H/8GB/512GB SSD/RTX 3050 4GB/Win10",
-        image: productImg1,
-        quantity: 1,
-        price: 25999000,
-    },
-    {
-        _id: 3,
-        name: "Laptop Acer Predator Gaming PH315 54 78W5 i7 11800H/8GB/512GB SSD/RTX 3050Ti 4GB/Win10",
-        image: productImg2,
-        quantity: 2,
-        price: 33999000,
-    }
-]
+const checkList = []
 
 const initialState = {
     checkList: checkList,
@@ -39,6 +24,25 @@ const CheckSlice = createSlice({
             if (index < 0) return;
             state.checkList.splice(index, 1);
         },
+        addToCart: (state, action) => {
+            const { id, product } = action.payload;
+            const index = state.checkList.findIndex((productList) => productList._id === id);
+
+            if (index >= 0) {
+                state.checkList[index].quantity = state.checkList[index].quantity + 1;
+            }
+            if (index < 0) {
+                const newItem = {
+                    _id: product._id,
+                    name: product.name,
+                    image: product.image,
+                    price: product.price,
+                    quantity: 1,
+                }
+                state.checkList.push(newItem);
+            }
+
+        },
     }
 })
 
@@ -46,6 +50,7 @@ const { reducer, actions } = CheckSlice;
 export const {
     selectQuantity,
     removeProduct,
+    addToCart,
 } = actions;
 
 export default reducer;

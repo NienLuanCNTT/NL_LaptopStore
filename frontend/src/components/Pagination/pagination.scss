@@ -1,0 +1,43 @@
+.pagination{
+    @include flex(center,center);
+    margin-bottom: 5rem;
+    margin-top: -5rem;
+    left: 50%;
+    //dịch qua bên trái phân nữa cửa chính nó
+    // transform: translateX(0.5rem);
+    
+    @include tab{
+        bottom: 0px;
+    }
+
+    @include mb{
+        bottom: 0px;
+    }
+    
+
+    // &__item ~ &__item{
+    //     margin-left : 10px;
+    // }
+
+    &__button{
+
+        @include flex(center,center);
+        // font-size: 4rem;
+        // cursor: pointer;
+        margin-left:0.5rem;
+        margin-right: 0.5rem;
+        border: 1px solid #e3e7ef;
+        background-color : #fff;
+        
+         padding: 4px;
+        border-radius : 50%;
+            // &:hover{
+            //     background-color: $main-color;
+            // }
+     
+
+
+    }
+
+   
+}

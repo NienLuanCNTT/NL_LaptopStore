@@ -6,10 +6,13 @@ import iconUser from 'assets/svg/icon-user.svg';
 import 'boxicons';
 import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
+import { TOAST_OPTIONS } from 'constants/productConstants';
+import { addToCart } from 'pages/CheckOut/CheckSlice';
 import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import numberWithCommas from 'utils/numberWithCommas';
 import ProductCheck from './component/ProductCheck';
 
@@ -18,20 +21,24 @@ import ProductRating from './component/ProductRating';
 
 
 
-
-
 const Product = (props) => {
     const dispatch = useDispatch();
     // get id inside URl
-    const productId = props.match.params.id;
+    const { id } = useParams();
     const productDetail = useSelector((state) => state.productDetail);
     console.log(productDetail);
     const { loading, error, product } = productDetail;
 
-    useEffect(() => {
-        dispatch(detailProduct(productId));
-    }, [dispatch, productId]);
+    const handleAddProduct = (id, product) => {
+        dispatch(addToCart({ id, product }));
+        toast.success('Added a product to the cart 👌👌', {
+            ...TOAST_OPTIONS,
+        })
+    }
 
+    useEffect(() => {
+        dispatch(detailProduct(id));
+    }, [dispatch, id]);
 
 
     const userRating = [
@@ -82,9 +89,13 @@ const Product = (props) => {
 
     ]
 
-    function ModalCheckOpen() {
+    const ModalCheckOpen = (id, product) => {
         const ModalCheck = document.querySelector('.modal__product-check');
         ModalCheck.style.display = 'block';
+        dispatch(addToCart({ id, product }));
+        toast.success('Added a product to the cart 👌👌', {
+            ...TOAST_OPTIONS,
+        });
     }
     function ModalConfigOpen() {
         const ModalCheck = document.querySelector('.modal__product-config');
@@ -185,12 +196,16 @@ const Product = (props) => {
                                         <div className="product__detail-content-right-pay">
                                             <button
                                                 id="btn-check"
-                                                onClick={ModalCheckOpen}
+                                                onClick={() => { ModalCheckOpen(product._id, product) }}
                                                 className="btn-muangay"
                                             >
                                                 Mua ngay
                                             </button>
-                                            <button to="/product/1" className="btn-addtocart">
+                                            <button
+                                                to="/product/1"
+                                                className="btn-addtocart"
+                                                onClick={() => { handleAddProduct(product._id, product) }}
+                                            >
                                                 Thêm vào giỏ hàng
                                             </button>
                                         </div>

@@ -1,4 +1,6 @@
+import { TOAST_OPTIONS } from 'constants/productConstants';
 import React from 'react';
+import { toast } from 'react-toastify';
 
 CheckoutItem.propTypes = {};
 
@@ -10,6 +12,7 @@ function CheckoutItem(props) {
     } = props;
 
     const handleQuantityChange = (id, quantity) => {
+        if (quantity === 0) return;
         if (!onQuantityChange) return;
         onQuantityChange(id, quantity);
     }
@@ -17,6 +20,9 @@ function CheckoutItem(props) {
     const handleRemoveProduct = (id) => {
         if (!onProductRemove) return;
         onProductRemove(id);
+        toast.warn('Remove product from cart', {
+            ...TOAST_OPTIONS,
+        })
     }
     const numberFormat = (number) => {
         const numberFormat = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(number);
@@ -43,26 +49,23 @@ function CheckoutItem(props) {
             </div>
             <div className="product-card-quality">
                 <div className="product-card-quality-wrap">
-                    <button
+                    <i
                         className="btn btn-minus"
-                        disabled={product.quantity === 1}
                         onClick={() =>
                             handleQuantityChange(product._id, product.quantity - 1)
                         }>
+
                         -
-                    </button>
+                    </i>
+
                     <div className="cs-input-cart" >{product.quantity}</div>
-                    <button
+                    <i
                         className="btn btn-plus"
-                        disabled={product.quantity}
-                    >
-                        <i
-                            onClick={() =>
-                                handleQuantityChange(product._id, product.quantity + 1)
-                            }>
-                            +
-                        </i>
-                    </button>
+                        onClick={() =>
+                            handleQuantityChange(product._id, product.quantity + 1)
+                        }>
+                        +
+                    </i>
                 </div>
                 <div className="btn btn-remove" onClick={() => handleRemoveProduct(product._id)}>xóa</div>
             </div>

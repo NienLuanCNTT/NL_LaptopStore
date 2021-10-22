@@ -1,8 +1,19 @@
 import express from 'express';
-
+import mongoose from 'mongoose';
 import data from './data.js';
+import userRouter from './routes/userRouter.js';
 // import { dirname } from 'path';
 const app = express();
+
+// connect mongodb database
+mongoose.connect('mongodb://localhost/laptopStore', {
+
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
+    // useCreateIndex: true,
+});
+
+
 import path from 'path';
 const __dirname = path.resolve();
 
@@ -25,8 +36,14 @@ app.get('/api/products', (req, res) => {
     res.send(data.product);
 });
 
+app.use('/api/users', userRouter)
+
 app.get('/', (req, res) => {
     res.send('Server is ready');
+});
+
+app.use((err, req, res, next) => {
+    res.status(500).send({ message: err.message });
 });
 
 const port = process.env.PORT || 5000;

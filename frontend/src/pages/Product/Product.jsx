@@ -18,6 +18,7 @@ import ProductCheck from './component/ProductCheck';
 
 import ProductConfig from './component/ProductConfig';
 import ProductRating from './component/ProductRating';
+import StarRating from './component/ProductRating/StarRating';
 
 
 
@@ -265,6 +266,7 @@ const Product = (props) => {
                                     </div>
                                     <button className="btn btn-vote">Viết đánh giá</button>
                                 </div>
+                                <StarRating />
                                 <div className="product__box-vote-list">
                                     {
                                         userRating.map((item) => (

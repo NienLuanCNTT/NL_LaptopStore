@@ -7,6 +7,9 @@
 @import "../pages/Product/product.scss";
 @import "../pages/Product/component/ProductCheck/productcheck.scss";
 @import "../pages/Product/component/ProductConfig/productconfig.scss";
+@import "../pages/Product/component/ProductRating/StarRating/StarRating.scss";
+
+@import "../custom-field/index.scss";
 
 @import "../components/Footer/footer.scss";
 
@@ -23,8 +26,3 @@
 @import "../components/LoadingBox/loading.scss";
 @import "../components/MessageBox/message.scss";
 @import "../components/Pagination/pagination.scss";
-
-
-
-
-

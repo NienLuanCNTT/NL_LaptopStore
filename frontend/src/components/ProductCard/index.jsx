@@ -23,7 +23,7 @@ const ProductCard = props => {
 
         <Grid col={4} mdCol={2} smCol={1} gap={20}>
             {products.map((product, index) => (
-                <div className="product-card">
+                <div key={index} className="product-card">
                     <Link to={`/product/${product._id}`}>
 
                         <div className="product-card__image">

@@ -4,14 +4,13 @@ import CheckoutList from 'pages/CheckOut/CheckoutList';
 import { removeProduct, selectQuantity } from 'pages/CheckOut/CheckSlice';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import cartEmty from 'assets/images/empty-cart.png';
+import InputField from 'custom-field/InputField';
+import RadioField from 'custom-field/RadioField';
 
 
 ProductCheck.propTypes = {};
 
-function ModalClose() {
-    const ModalCheck = document.querySelector('.modal__product-check');
-    ModalCheck.style.display = 'none';
-}
 
 function ProductCheck(props) {
 
@@ -79,9 +78,14 @@ function ProductCheck(props) {
         fetchCommune();
     }, [filter]);
 
-    const boxHomeAddress = document.querySelector(".card-form-ship-address");
+    function ModalClose() {
+        const ModalCheck = document.querySelector('.modal__product-check');
+        ModalCheck.style.display = 'none';
+    }
+
 
     const shipOption = () => {
+        const boxHomeAddress = document.querySelector(".card-form-ship-address");
         const shipHomeElement = document.getElementById('shiphome');
         const shipStoreElement = document.getElementById('shipshop');
 
@@ -116,91 +120,124 @@ function ProductCheck(props) {
         return numberFormat;
     }
     return (
-        <div>
-            <div className="modal__product-check">
-                <div className="modal__wrapper">
-                    <div className="modal__box">
-                        <div className="modal__card">
-                            <div className="card-title">
-                                Có {checkList.length} sản phẩm trong giỏ hàng
-                                <span onClick={ModalClose} id="modal__close" className="modal-close">X</span>
-                            </div>
-                            <div className="card-body">
-                                <div className="card-product">
-                                    <CheckoutList
-                                        checkList={checkList}
-                                        onQuantityChange={handleQuantityChange}
-                                        onProductRemove={handleRemoveProduct}
-                                    />
-                                </div>
-
-                                <div className="card-center">
-                                    <div className="card-total">
-                                        <div className="cart-total-normal">
-                                            <p>Tạm tính:</p>
-                                            <p>{numberFormat(total)}</p>
-                                        </div>
-                                        <div className="cart-total-price">
-                                            <p>Cần thanh toán: </p>
-                                            <p>{numberFormat(total)}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="card-form">
-                                    <div className="card-form-block">
-                                        <h1>Thông tin khách hàng</h1>
-                                        <form action="/" method="post">
-                                            <div className="card-form-inner-genger">
-                                                <div className="form-box-radio">
-                                                    <input type="radio" id="genger0" name="genger" />
-                                                    <label htmlFor="genger0">Anh</label>
-                                                </div>
-                                                <div className="form-box-radio">
-                                                    <input type="radio" name="genger" id="genger1" />
-                                                    <label htmlFor="genger1">Chị</label>
-                                                </div>
-                                            </div>
-                                            <div className="card-form-center">
-                                                <div className="card-form-info">
-                                                    <input type="text" className="mr-10" placeholder="Nhập Họ và Tên*" />
-                                                    <input type="text" placeholder="Nhập Số điện thoại" />
-                                                </div>
-                                                <div className="card-form-email">
-                                                    <input type="email" placeholder="Nhập Email" />
-                                                </div>
-                                            </div>
-                                            <h2>Chọn hình thức giao hàng</h2>
-                                            <div className="card-form-ship">
-                                                <div className="form-box-radio">
-                                                    <input type="radio" id="shiphome" name="ship" onChange={shipOption} />
-                                                    <label htmlFor="shiphome">Giao hàng tận nơi, miễn phí</label>
-                                                </div>
-                                                <div className="form-box-radio">
-                                                    <input type="radio" name="ship" id="shipshop" onChange={shipOption} />
-                                                    <label htmlFor="shipshop">Nhận tại cửa hàng</label>
-                                                </div>
-                                            </div>
-                                            <div className="card-form-ship-address">
-                                                <ProvinceList
-                                                    defaultValue="Chon"
-                                                    setValue
-                                                    filter={filter}
-                                                    setFilter={setFilter}
-                                                    city={city}
-                                                    district={district}
-                                                    commune={commune}
-                                                />
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div className="card-checkout">
-                                    <button className="btn btn-checkout"> Hoàn tất đặt hàng</button>
-                                    <p>Cảm ơn bạn đã đến với cửa hàng của chúng tôi</p>
-                                </div>
-                            </div>
+        <div className="modal__product-check">
+            <div className="modal__wrapper">
+                <div className="modal__box">
+                    <div className="modal__card">
+                        <div className="card-title">
+                            Có {checkList.length} sản phẩm trong giỏ hàng
+                            <span onClick={ModalClose} id="modal__close" className="modal-close">X</span>
                         </div>
+
+                        {
+                            checkList.length === 0 && (
+                                <div className="txt-center">
+                                    <img src={cartEmty} alt="" />
+                                </div>
+                            )
+                        }{
+                            checkList.length > 0 && (
+                                <div className="card-body">
+                                    <div className="card-product">
+                                        <CheckoutList
+                                            checkList={checkList}
+                                            onQuantityChange={handleQuantityChange}
+                                            onProductRemove={handleRemoveProduct}
+                                        />
+                                    </div>
+
+                                    <div className="card-center">
+                                        <div className="card-total">
+                                            <div className="cart-total-normal">
+                                                <p>Tạm tính:</p>
+                                                <p>{numberFormat(total)}</p>
+                                            </div>
+                                            <div className="cart-total-price">
+                                                <p>Cần thanh toán: </p>
+                                                <p>{numberFormat(total)}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="card-form">
+                                        <div className="card-form-block">
+                                            <h1>Thông tin khách hàng</h1>
+                                            <form action="/" method="post">
+                                                <div className="card-form-inner-genger">
+
+
+                                                    <div className="form-box-radio">
+                                                        <RadioField
+                                                            id="genger0"
+                                                            title="Anh"
+                                                            name="genger"
+                                                            type="radio"
+                                                            onChange={shipOption}
+                                                        />
+                                                    </div>
+                                                    <div className="form-box-radio">
+                                                        <RadioField
+                                                            id="genger1"
+                                                            title="Chị"
+                                                            name="genger"
+                                                            type="radio"
+                                                            onChange={shipOption}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="card-form-center">
+                                                    <div className="card-form-info">
+                                                        <InputField
+                                                            type="text" name="fullname" placeholder="Nhập Họ và Tên*" className="mr-10"
+                                                        />
+                                                        <InputField type="text" name="phone" placeholder="Nhập Số điện thoại"
+                                                        />
+                                                    </div>
+                                                    <InputField type="email" name="email" placeholder="Nhập Email"
+                                                    />
+                                                </div>
+                                                <h2>Chọn hình thức giao hàng</h2>
+                                                <div className="card-form-ship">
+                                                    <div className="form-box-radio">
+                                                        <RadioField
+                                                            id="shiphome"
+                                                            title="Giao hàng tận nơi, miễn phí"
+                                                            name="ship"
+                                                            type="radio"
+                                                            onChange={shipOption}
+                                                        />
+                                                    </div>
+                                                    <div className="form-box-radio">
+                                                        <RadioField
+                                                            id="shipshop"
+                                                            title="Nhận tại cửa hàng"
+                                                            name="ship"
+                                                            type="radio"
+                                                            onChange={shipOption}
+                                                        />
+
+                                                    </div>
+                                                </div>
+                                                <div className="card-form-ship-address">
+                                                    <ProvinceList
+                                                        filter={filter}
+                                                        setFilter={setFilter}
+                                                        city={city}
+                                                        district={district}
+                                                        commune={commune}
+                                                    />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div className="card-checkout">
+                                        <button className="btn btn-checkout"> Hoàn tất đặt hàng</button>
+                                        <p>Cảm ơn bạn đã đến với cửa hàng của chúng tôi</p>
+                                    </div>
+                                </div>
+                            )
+                        }
+
                     </div>
                 </div>
             </div>

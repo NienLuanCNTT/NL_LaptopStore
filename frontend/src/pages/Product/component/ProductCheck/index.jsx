@@ -12,7 +12,7 @@ import RadioField from 'custom-field/RadioField';
 ProductCheck.propTypes = {};
 
 
-function ProductCheck(props) {
+function ProductCheck() {
 
     const [city, setCity] = useState([]);
     const [district, setDistrict] = useState([]);
@@ -83,20 +83,7 @@ function ProductCheck(props) {
         ModalCheck.style.display = 'none';
     }
 
-
-    const shipOption = () => {
-        const boxHomeAddress = document.querySelector(".card-form-ship-address");
-        const shipHomeElement = document.getElementById('shiphome');
-        const shipStoreElement = document.getElementById('shipshop');
-
-        if (shipHomeElement.checked === true) {
-            boxHomeAddress.style.display = "block";
-        }
-
-        if (shipStoreElement.checked === true) {
-            boxHomeAddress.style.display = "none";
-        }
-    }
+    const [shipOptions, setShipOption] = useState(null);
 
     const handleQuantityChange = (id, quantity) => {
         dispatch(selectQuantity({ id, quantity }));
@@ -172,7 +159,6 @@ function ProductCheck(props) {
                                                             title="Anh"
                                                             name="genger"
                                                             type="radio"
-                                                            onChange={shipOption}
                                                         />
                                                     </div>
                                                     <div className="form-box-radio">
@@ -181,7 +167,6 @@ function ProductCheck(props) {
                                                             title="Chị"
                                                             name="genger"
                                                             type="radio"
-                                                            onChange={shipOption}
                                                         />
                                                     </div>
                                                 </div>
@@ -204,7 +189,7 @@ function ProductCheck(props) {
                                                             title="Giao hàng tận nơi, miễn phí"
                                                             name="ship"
                                                             type="radio"
-                                                            onChange={shipOption}
+                                                            onChange={() => setShipOption(true)}
                                                         />
                                                     </div>
                                                     <div className="form-box-radio">
@@ -213,20 +198,23 @@ function ProductCheck(props) {
                                                             title="Nhận tại cửa hàng"
                                                             name="ship"
                                                             type="radio"
-                                                            onChange={shipOption}
+                                                            onChange={() => setShipOption(false)}
                                                         />
 
                                                     </div>
                                                 </div>
-                                                <div className="card-form-ship-address">
-                                                    <ProvinceList
-                                                        filter={filter}
-                                                        setFilter={setFilter}
-                                                        city={city}
-                                                        district={district}
-                                                        commune={commune}
-                                                    />
-                                                </div>
+                                                {shipOptions && (
+                                                    <div className="card-form-ship-address">
+                                                        <ProvinceList
+                                                            filter={filter}
+                                                            setFilter={setFilter}
+                                                            city={city}
+                                                            district={district}
+                                                            commune={commune}
+                                                        />
+                                                    </div>
+                                                )}
+
                                             </form>
                                         </div>
                                     </div>

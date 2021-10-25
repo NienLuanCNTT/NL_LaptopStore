@@ -12,5 +12,4 @@ export const TOAST_OPTIONS = {
     autoClose: 3000,
     hideProgressBar: true,
     transition: Bounce,
-    fontSize: '20px'
 }

@@ -1,12 +1,37 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { addStarRating } from '../StarRatingSlice';
 
-const StarRating = () => {
+const StarRating = (props) => {
+    const dispatch = useDispatch();
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
+    const [isRating, setIsRating] = useState(false);
+    const [cmtRating, setcmtRating] = useState('');
+
+    const handleOnChange = (e) => {
+        e.preventDefault();
+        setcmtRating(e.target.value);
+    }
+
+    const handleAddStarRating = (rating, comment, userProfile) => {
+        setIsRating(true);
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                dispatch(addStarRating({ rating, comment, userProfile }));
+                toast.success("Add a Rating is complete 👌👌");
+
+                resolve(true);
+                setIsRating(false);
+            }, 2000);
+        })
+    }
+
+    const { useprofile } = props;
 
     return (
         <div className="star-rating-box">
-
             <div className="star-rating">
                 {[...Array(5)].map((star, index) => {
                     const ratingValue = index + 1;
@@ -47,9 +72,13 @@ const StarRating = () => {
                     cols="30"
                     rows="10"
                     placeholder="Viết đánh giá của bạn"
+                    onChange={handleOnChange}
                 ></textarea>
-                <button>Gửi đánh giá</button>
+                <button onClick={() => handleAddStarRating(rating, cmtRating, useprofile)}>
+                    {isRating && <i className="fas fa-spinner fa-spin"></i>} Gửi đánh giá
+                </button>
             </div>
+
         </div>
     );
 };

@@ -30,7 +30,7 @@ const Product = (props) => {
     // get id inside URl
     const { id } = useParams();
     const productDetail = useSelector((state) => state.productDetail);
-    console.log(productDetail);
+    // console.log(productDetail);
     const { loading, error, product } = productDetail;
 
     const handleAddProduct = (id, product) => {
@@ -58,22 +58,28 @@ const Product = (props) => {
     }
 
     const [isComment, setIsComment] = useState(false);
-    const [comment, setcomment] = useState('');
+    const [comment, setComment] = useState('');
 
     const handleOnChange = (e) => {
-        setcomment(e.target.value);
+        setComment(e.target.value);
     }
     const handleClickCommet = (comment, userProfile) => {
-        setIsComment(true);
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                dispatch(addComment({ comment, userProfile }))
-                toast.success("Add a commet is complete 👌👌");
+        if (comment === '') {
+            toast.warn("Comment is null 👌👌");
+        } else {
+            setIsComment(true);
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    dispatch(addComment({ comment, userProfile }))
+                    toast.success("Add a commet is complete 👌👌");
 
-                resolve(true);
-                setIsComment(false);
-            }, 1000);
-        })
+                    resolve(true);
+                    setComment('');
+                    setIsComment(false);
+                }, 1000);
+            })
+        }
+
     }
 
     const { starRating } = useSelector((state) => state.starRating);
@@ -254,35 +260,27 @@ const Product = (props) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button className="btn btn-vote">Viết đánh giá</button>
+                                        <button className="btn btn-vote" onClick={handleOpenRating}>Viết đánh giá</button>
                                     </div>
-                                    <div className="product__box-vote-list">
-                                        {
-                                            userRating.map((item) => (
-                                                <button className="btn btn-vote" onClick={handleOpenRating}>Viết đánh giá</button>
                                 </div>
-                                    {rating && <StarRating useprofile={userProfile} />}
-                                    <div className="product__box-vote-list">
-                                        {
-                                            [].concat(starRating)
-                                                .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
-                                                .map((item) => (
-                                                    <div key={item._id} className="item">
-                                                        <div className="item-logo">
-                                                            <img src={item.img} alt="" />
-                                                        </div>
-                                                        <div className="item-detail">
-                                                            <b className="item-name">{item.name}</b>
-                                                            <div className="item-star-rate">
-                                                                <ProductRating rating={item.rating} numReviews={product.numReviews} />
-                                                            </div>
-                                                            <p>{item.note}</p>
-                                                            <i>{item.datetime}</i>
+                                {rating && <StarRating useprofile={userProfile} />}
+                                <div className="product__box-vote-list">
+                                    {
+                                        [].concat(starRating)
+                                            .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
+                                            .map((item) => (
+                                                <div key={item._id} className="item">
+                                                    <div className="item-logo">
+                                                        <img src={item.img} alt="" />
+                                                    </div>
+                                                    <div className="item-detail">
+                                                        <b className="item-name">{item.name}</b>
+                                                        <div className="item-star-rate">
+                                                            <ProductRating rating={item.rating} numReviews={product.numReviews} />
                                                         </div>
                                                     </div>
-                                                ))
-                                        }
-                                    </div>
+                                                </div>
+                                            ))
                                     }
                                 </div>
 
@@ -293,59 +291,36 @@ const Product = (props) => {
                                             <span>1 bình luận</span>
                                         </div>
                                         <div className="product__comment-top-write">
-                                            <textarea type="text" placeholder="Viết câu hỏi của bạn" />
-                                            <button>Gửi</button>
+                                            <textarea type="text" placeholder="Viết câu hỏi của bạn" value={comment} onChange={handleOnChange} />
+                                            <button onClick={() => handleClickCommet(comment, userProfile)}>
+                                                {isComment && <i className="fas fa-spinner fa-spin"></i>} Gửi
+                                            </button>
                                         </div>
                                     </div>
                                     <div className="product__comment-list">
                                         {
-                                            userComments.map((item, index) => (
-                                                <div id="comment" className="product__comment">
-                                                    <div className="product__comment-top">
-                                                        <div className="product__comment-top-head">
-                                                            <h1>Bình luận</h1>
-                                                            <span>1 bình luận</span>
+
+                                            [].concat(userComments)
+                                                .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
+                                                .map((item, index) => (
+                                                    <div key={index} className="comment">
+                                                        <div className="comment-logo">
+                                                            <img src={item.img} alt="" />
                                                         </div>
-                                                        <div className="product__comment-top-write">
-                                                            <textarea type="text" placeholder="Viết câu hỏi của bạn" onChange={handleOnChange} />
-                                                            <button onClick={() => handleClickCommet(comment, userProfile)}>
-                                                                {isComment && <i className="fas fa-spinner fa-spin"></i>} Gửi
-                                                            </button>
+                                                        <div className="comment-detail">
+                                                            <p><b className="item-name">{item.name}</b> <i>{item.datetime}</i></p>
+                                                            <p>{item.comment}</p>
                                                         </div>
                                                     </div>
-                                                    <div className="product__comment-list">
-                                                        {
-
-                                                            [].concat(userComments)
-                                                                .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
-                                                                .map((item, index) => (
-                                                                    <div key={index} className="comment">
-                                                                        <div className="comment-logo">
-                                                                            <img src={item.img} alt="" />
-                                                                        </div>
-                                                                        <div className="comment-detail">
-                                                                            <p><b className="item-name">{item.name}</b> <i>{item.datetime}</i></p>
-                                                                            <p>{item.comment}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                ))
-                                                        }
-                                                    </div>
-                                                </div>
-                            </div >
-
-
-
-                                    )
-                }
-                                    }
+                                                ))
+                                        }
+                                    </div>
                                 </div>
-                            </div>
-                        </div >
-            )
-            }
+                            </div >
+                        )
+                }
 
-        </div >
+            </div >
         </Helmet >
 
     )

@@ -14,18 +14,24 @@ const StarRating = (props) => {
         e.preventDefault();
         setcmtRating(e.target.value);
     }
-
     const handleAddStarRating = (rating, comment, userProfile) => {
-        setIsRating(true);
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                dispatch(addStarRating({ rating, comment, userProfile }));
-                toast.success("Add a Rating is complete 👌👌");
+        if (rating === null || comment === '') {
+            toast.warn("Rating is null 👌👌");
+        }
+        else {
+            setIsRating(true);
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    dispatch(addStarRating({ rating, comment, userProfile }));
+                    toast.success("Add a Rating is complete 👌👌");
 
-                resolve(true);
-                setIsRating(false);
-            }, 2000);
-        })
+                    resolve(true);
+                    setRating(null);
+                    setcmtRating('');
+                    setIsRating(false);
+                }, 2000);
+            })
+        }
     }
 
     const { useprofile } = props;
@@ -44,6 +50,7 @@ const StarRating = (props) => {
                             <input
                                 type="radio"
                                 name="rating"
+                                id="rating"
                                 value={ratingValue}
                             />
                             <i
@@ -69,8 +76,10 @@ const StarRating = (props) => {
             <div className="comment-rating">
                 <textarea
                     name="cmt-rating"
+                    value={cmtRating}
                     cols="30"
                     rows="10"
+                    id="cmt-rating"
                     placeholder="Viết đánh giá của bạn"
                     onChange={handleOnChange}
                 ></textarea>

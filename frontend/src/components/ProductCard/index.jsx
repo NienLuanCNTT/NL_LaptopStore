@@ -24,11 +24,18 @@ const ProductCard = props => {
 
     return (
 
+<<<<<<< HEAD
         <Grid col={col} mdCol={2} smCol={1} gap={20}>
             {
                 products.map((product, index) => (
                     <div className="product-card">
                         <Link to={`/product/${product._id}`}>
+=======
+        <Grid col={4} mdCol={2} smCol={1} gap={20}>
+            {products.map((product, index) => (
+                <div key={index} className="product-card">
+                    <Link to={`/product/${product._id}`}>
+>>>>>>> ecc9285a825b8f16d81e5ec2d99623de5884a835
 
                             <div className="product-card__image">
                                 <img src={product.image} alt="" />

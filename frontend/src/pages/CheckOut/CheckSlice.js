@@ -1,11 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import productImg1 from 'assets/images/products/2.jpg';
-// import productImg2 from 'assets/images/products/3.jpg';
-
-const checkList = []
 
 const initialState = {
-    checkList: checkList,
+    checkList: [],
 };
 
 const CheckSlice = createSlice({

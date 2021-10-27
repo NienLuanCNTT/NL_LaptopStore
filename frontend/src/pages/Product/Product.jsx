@@ -8,7 +8,7 @@ import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
 import { TOAST_OPTIONS } from 'constants/productConstants';
 import { addToCart } from 'pages/CheckOut/CheckSlice';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -18,6 +18,8 @@ import ProductCheck from './component/ProductCheck';
 
 import ProductConfig from './component/ProductConfig';
 import ProductRating from './component/ProductRating';
+import StarRating from './component/ProductRating/StarRating';
+import { addComment } from './component/ProductRating/StarRatingSlice';
 
 import Helmet from 'components/Helmet';
 
@@ -42,54 +44,40 @@ const Product = (props) => {
         dispatch(detailProduct(id));
     }, [dispatch, id]);
 
+    const [rating, setRating] = useState(null);
 
-    const userRating = [
-        {
-            _id: 1,
-            name: "Alexander",
-            img: iconUser,
-            rating: 5,
-            note: "Máy mượt học onl tốt",
-            datetime: "11/10/2021 14:34",
-        }, {
-            _id: 2,
-            name: "Jonh Dang",
-            img: iconUser,
-            rating: 4,
-            note: "Máy chạy ổn",
-            datetime: "15/10/2021 09:25",
-        }, {
-            _id: 3,
-            name: "Khoa Pug",
-            img: iconUser,
-            rating: 5,
-            note: "Máy tốt nha",
-            datetime: "14/08/2021 13:44",
-        },
+    const handleOpenRating = () => {
+        const ratingValue = true;
+        setRating(ratingValue);
+    }
 
-    ]
+    const userProfile = {
+        _id: 5,
+        name: 'Arthor',
+        img: iconUser,
+    }
 
-    const userComments = [
-        {
-            name: "Pham Minh Hiếu",
-            img: iconUser,
-            datetime: "14/08/2021 13:13",
-            comment: "Cho em hỏi máy này học SolidWorks với autocad đc ko ạ?",
-        },
-        {
-            name: "VLinh",
-            img: iconUser,
-            datetime: "30/09/2021 22:27",
-            comment: "Chơi game mượt không?",
-        },
-        {
-            name: "Trong Toàn",
-            img: iconUser,
-            datetime: "14/08/2021 09:25",
-            comment: "Máy này xem phim nét không ạ?",
-        },
+    const [isComment, setIsComment] = useState(false);
+    const [comment, setcomment] = useState('');
 
-    ]
+    const handleOnChange = (e) => {
+        setcomment(e.target.value);
+    }
+    const handleClickCommet = (comment, userProfile) => {
+        setIsComment(true);
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                dispatch(addComment({ comment, userProfile }))
+                toast.success("Add a commet is complete 👌👌");
+
+                resolve(true);
+                setIsComment(false);
+            }, 1000);
+        })
+    }
+
+    const { starRating } = useSelector((state) => state.starRating);
+    const { userComments } = useSelector((state) => state.starRating);
 
     const ModalCheckOpen = (id, product) => {
         const ModalCheck = document.querySelector('.modal__product-check');
@@ -268,9 +256,20 @@ const Product = (props) => {
                                         </div>
                                         <button className="btn btn-vote">Viết đánh giá</button>
                                     </div>
+<<<<<<< HEAD
                                     <div className="product__box-vote-list">
                                         {
                                             userRating.map((item) => (
+=======
+                                    <button className="btn btn-vote" onClick={handleOpenRating}>Viết đánh giá</button>
+                                </div>
+                                {rating && <StarRating useprofile={userProfile} />}
+                                <div className="product__box-vote-list">
+                                    {
+                                        [].concat(starRating)
+                                            .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
+                                            .map((item) => (
+>>>>>>> ecc9285a825b8f16d81e5ec2d99623de5884a835
                                                 <div key={item._id} className="item">
                                                     <div className="item-logo">
                                                         <img src={item.img} alt="" />
@@ -285,10 +284,15 @@ const Product = (props) => {
                                                     </div>
                                                 </div>
                                             ))
+<<<<<<< HEAD
                                         }
                                     </div>
+=======
+                                    }
+>>>>>>> ecc9285a825b8f16d81e5ec2d99623de5884a835
                                 </div>
 
+<<<<<<< HEAD
                                 <div id="comment" className="product__comment">
                                     <div className="product__comment-top">
                                         <div className="product__comment-top-head">
@@ -303,6 +307,27 @@ const Product = (props) => {
                                     <div className="product__comment-list">
                                         {
                                             userComments.map((item, index) => (
+=======
+                            <div id="comment" className="product__comment">
+                                <div className="product__comment-top">
+                                    <div className="product__comment-top-head">
+                                        <h1>Bình luận</h1>
+                                        <span>1 bình luận</span>
+                                    </div>
+                                    <div className="product__comment-top-write">
+                                        <textarea type="text" placeholder="Viết câu hỏi của bạn" onChange={handleOnChange} />
+                                        <button onClick={() => handleClickCommet(comment, userProfile)}>
+                                            {isComment && <i className="fas fa-spinner fa-spin"></i>} Gửi
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="product__comment-list">
+                                    {
+
+                                        [].concat(userComments)
+                                            .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
+                                            .map((item, index) => (
+>>>>>>> ecc9285a825b8f16d81e5ec2d99623de5884a835
                                                 <div key={index} className="comment">
                                                     <div className="comment-logo">
                                                         <img src={item.img} alt="" />
@@ -313,6 +338,7 @@ const Product = (props) => {
                                                     </div>
                                                 </div>
                                             ))
+<<<<<<< HEAD
                                         }
                                     </div>
                                 </div>
@@ -322,6 +348,14 @@ const Product = (props) => {
 
                         )
                 }
+=======
+                                    }
+                                </div>
+                            </div>
+                        </div >
+                    )
+            }
+>>>>>>> ecc9285a825b8f16d81e5ec2d99623de5884a835
 
             </div >
         </Helmet>

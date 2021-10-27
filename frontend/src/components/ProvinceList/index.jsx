@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SelectField from 'custom-field/SelectField';
 
 ProvinceList.propTypes = {
     city: PropTypes.array.isRequired,
@@ -29,66 +30,40 @@ function ProvinceList(props) {
         <div>
             <div className="card-form-inner">
                 <div className="box__select ship-address-city">
-                    <label htmlFor="">Thành Phố</label>
-                    <select
-                        className=""
+                    <SelectField
+                        label
+                        name="Thành Phố" //lable name
                         id="city"
+                        options={city}
+                        defaultOption="--Chọn Thành Phố--"
                         onChange={onCityFilter}
-                    >
-                        <option value="Chọn thành phố">--Chọn Thành Phố--</option>
-                        {
-                            city.map((city) => (
-                                <option
-                                    key={city.value}
-                                    value={city.value}
-                                >
-                                    {city.label}
-                                </option>)
-                            )
-                        }
-                    </select>
+                    />
                 </div>
                 <div className=" box__select ship-address-district">
-                    <label htmlFor="">Quận/Huyện</label>
-                    <select
-                        className=""
+                    <SelectField
+                        label
+                        name="Quận/Huyện" //lable name
                         id="district"
-                        defaultValue=""
                         options={district}
+                        defaultOption="--Chọn Quận/Huyện--"
                         onChange={onDistrictFilter}
-                    ><option value="Chọn thành phố">--Chọn Quận/Huyện--</option>
-                        {
-                            district.map((district) => (
-                                <option
-                                    key={district.value}
-                                    value={district.value}
-                                >
-                                    {district.label}
-                                </option>)
-                            )
-                        }
-                    </select>
+                    />
                 </div>
             </div>
+
+
             <div className="box__select ship-address-commune">
-                <label htmlFor="">Xã/Phường</label>
-                <select
-                    className=""
+                <SelectField
+                    label
+                    name="Xã/Phường"
                     id="commune"
+                    defaultOption="--Chọn Xã/Phường--"
                     options={commune}
-                    defaultValue=""
-                ><option value="Chọn thành phố">--Chọn Xã/Phường-</option>
-                    {
-                        commune.map((commune) => (
-                            <option
-                                key={commune.value}
-                                value={commune.value}
-                            >
-                                {commune.label}
-                            </option>)
-                        )
-                    }
-                </select>
+                />
+            </div>
+
+            <div className="ship-address-specific">
+                <input type="text" placeholder="Nhập địa chỉ cụ thể*" />
             </div>
         </div>
     );

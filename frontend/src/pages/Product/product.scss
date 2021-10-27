@@ -134,7 +134,9 @@
                         a {
                             color: #ee0c13;
                         }
-
+                        p {
+                            font-size: 12px;
+                        }
                         img {
                             height: 15px;
                         }
@@ -295,19 +297,10 @@
                 }
 
                 button {
-                    position: absolute;
-                    width: 63px;
-                    text-align: center;
-                    height: 36px;
-                    background: $main-color;
-                    border-radius: 56px;
-                    border: 0;
-                    outline: 0;
+                    @include btn;
                     position: absolute;
                     bottom: 20px;
                     right: 16px;
-                    color: #fff;
-                    cursor: pointer;
                 }
             }
         }

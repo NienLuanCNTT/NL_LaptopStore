@@ -96,10 +96,12 @@ function Header() {
                         </Link>
                     </div>
                     <div className="header__nav-brain">
-                        <div
-                            className="header__nav-brain-title"
-                        // onMouseOver={onMouseOver}
-                        >Thương Hiệu</div>
+                        <Link to={'/catalog'}>
+                            <div
+                                className="header__nav-brain-title"
+                            // onMouseOver={onMouseOver}
+                            >Thương Hiệu</div>
+                        </Link>
                         <div id="listid" className="header__nav-brain-list">
                             {
                                 brain.map((brain, index) => (
@@ -107,6 +109,7 @@ function Header() {
                                         className="header__nav-brain-list-items"
                                         key={index}
                                     >
+
                                         <h3 className="header__nav-brain-list-items-title">{brain.title}</h3>
 
                                         {brain.list.map((list, index) => (

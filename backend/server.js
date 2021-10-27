@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 // import data from './data.js';
 import userRouter from './routes/userRouter.js';
 import productRouter from './routes/productRouter.js';
+// import categoryRouter from './routes/categoryRouter.js';
+// import priceRouter from './routes/priceRouter.js';
 // import { dirname } from 'path';
 const app = express();
 
@@ -22,23 +24,12 @@ app.use(express.static('backend'));
 app.use('/images', express.static('images'));
 
 
-// app.get('/api/products/:id', (req, res) => {
-//     const product = data.product.find((x) => x._id === req.params.id);
 
-//     if (!product) {
-//         res.status(404).send({ message: 'Product not Found' });
-//     }
-//     else {
-//         res.send(product);
-//     }
-// });
-
-// app.get('/api/products', (req, res) => {
-//     res.send(data.product);
-// });
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+// app.use('/api/category', categoryRouter);
+// app.use('/api/price', priceRouter);
 
 app.get('/', (req, res) => {
     res.send('Server is ready');

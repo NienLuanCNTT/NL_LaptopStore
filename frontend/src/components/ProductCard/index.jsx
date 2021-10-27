@@ -24,45 +24,37 @@ const ProductCard = props => {
 
     return (
 
-<<<<<<< HEAD
-        <Grid col={col} mdCol={2} smCol={1} gap={20}>
-            {
-                products.map((product, index) => (
-                    <div className="product-card">
-                        <Link to={`/product/${product._id}`}>
-=======
         <Grid col={4} mdCol={2} smCol={1} gap={20}>
             {products.map((product, index) => (
                 <div key={index} className="product-card">
                     <Link to={`/product/${product._id}`}>
->>>>>>> ecc9285a825b8f16d81e5ec2d99623de5884a835
 
-                            <div className="product-card__image">
-                                <img src={product.image} alt="" />
+                        <div className="product-card__image">
+                            <img src={product.image} alt="" />
+                        </div>
+                        <div className="product-card__info">
+                            <div className="product-card__info__name">
+                                {product.name}
                             </div>
-                            <div className="product-card__info">
-                                <div className="product-card__info__name">
-                                    {product.name}
-                                </div>
-                                <div className="product-card__info__price">
-                                    <span className="product-card__info__price__text">
-                                        Giá từ: </span> {numberWithCommas(product.price)} <span className="product-card__info__price__currency">₫</span>
-                                </div>
-                                {
-                                    product.old_price ? (
-                                        <div className="product-card__info__old-price">
-                                            {numberWithCommas(product.old_price)} ₫
-                                        </div>
-                                    ) : null
-                                }
-                                <div className="product-card__info__note">
-                                    <box-icon name='gift' color="#d53b2a"></box-icon> <span className="product-card__info__note__text">{product.note}</span>
-                                </div>
+                            <div className="product-card__info__price">
+                                <span className="product-card__info__price__text">
+                                    Giá từ: </span> {numberWithCommas(product.price)} <span className="product-card__info__price__currency">₫</span>
                             </div>
-                        </Link>
-                    </div>
-                )
-                )}
+                            {
+                                product.old_price ? (
+                                    <div className="product-card__info__old-price">
+                                        {numberWithCommas(product.old_price)} ₫
+                                    </div>
+                                ) : null
+                            }
+                            <div className="product-card__info__note">
+                                <box-icon name='gift' color="#d53b2a"></box-icon> <span className="product-card__info__note__text">{product.note}</span>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            )
+            )}
         </Grid >
 
 

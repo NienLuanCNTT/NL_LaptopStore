@@ -57,6 +57,7 @@ const Home = () => {
 
                                     <ProductCard
                                         products={products}
+                                        col={4}
                                     // currentPage={currentPage}
                                     // postsPerPage={postsPerPage}
 

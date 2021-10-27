@@ -1,6 +1,7 @@
 import Home from 'pages/Home';
 import Product from 'pages/Product/Product';
 import Cart from 'pages/Cart/Cart';
+import Catalog from 'pages/Catalog/Catalog';
 import React from 'react';
 
 import { Route, Switch } from 'react-router-dom'
@@ -11,6 +12,7 @@ function Routes() {
             <Route path="/" exact component={Home} />
             <Route path="/cart" component={Cart} />
             <Route path="/product/:id" component={Product} />
+            <Route path="/catalog" component={Catalog} />
         </Switch>
     );
 }

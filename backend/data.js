@@ -46,7 +46,7 @@ const data = {
         {
             // _id: '3',
             name: 'Dell Inspiron 15 5502 (Chính hãng)',
-            category: 'dell',
+            category: 'Dell',
             image: '/images/products/3.jpg',
             price: 24900000,
             old_price: 26900000,
@@ -98,7 +98,7 @@ const data = {
         {
             // _id: '7',
             name: 'HP 15-DY2093DX',
-            category: 'Apple',
+            category: 'HP',
             image: '/images/products/7.jpg',
             price: 16990000,
             old_price: 17990000,
@@ -216,6 +216,9 @@ const data = {
             countInStock: 700,
         },
     ],
+
+
+
 }
 
 export default data;

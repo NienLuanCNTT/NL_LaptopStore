@@ -28,7 +28,7 @@ const Product = (props) => {
     // get id inside URl
     const { id } = useParams();
     const productDetail = useSelector((state) => state.productDetail);
-    console.log(productDetail);
+    // console.log(productDetail);
     const { loading, error, product } = productDetail;
 
     const handleAddProduct = (id, product) => {
@@ -56,22 +56,28 @@ const Product = (props) => {
     }
 
     const [isComment, setIsComment] = useState(false);
-    const [comment, setcomment] = useState('');
+    const [comment, setComment] = useState('');
 
     const handleOnChange = (e) => {
-        setcomment(e.target.value);
+        setComment(e.target.value);
     }
     const handleClickCommet = (comment, userProfile) => {
-        setIsComment(true);
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                dispatch(addComment({ comment, userProfile }))
-                toast.success("Add a commet is complete 👌👌");
+        if (comment === '') {
+            toast.warn("Comment is null 👌👌");
+        } else {
+            setIsComment(true);
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    dispatch(addComment({ comment, userProfile }))
+                    toast.success("Add a commet is complete 👌👌");
 
-                resolve(true);
-                setIsComment(false);
-            }, 1000);
-        })
+                    resolve(true);
+                    setComment('');
+                    setIsComment(false);
+                }, 1000);
+            })
+        }
+
     }
 
     const { starRating } = useSelector((state) => state.starRating);
@@ -284,7 +290,7 @@ const Product = (props) => {
                                         <span>1 bình luận</span>
                                     </div>
                                     <div className="product__comment-top-write">
-                                        <textarea type="text" placeholder="Viết câu hỏi của bạn" onChange={handleOnChange} />
+                                        <textarea type="text" placeholder="Viết câu hỏi của bạn" value={comment} onChange={handleOnChange} />
                                         <button onClick={() => handleClickCommet(comment, userProfile)}>
                                             {isComment && <i className="fas fa-spinner fa-spin"></i>} Gửi
                                         </button>

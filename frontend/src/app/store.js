@@ -7,18 +7,15 @@ import { categoryListReducer } from 'reducers/categoryReducers';
 import { priceListReducer } from 'reducers/priceReducers';
 
 const store = configureStore({
-    reducer: {
-        checkList: CheckSlice,
-        productList: productListReducer,
-        productDetail: productDetailsReducer,
-<<<<<<< HEAD
-        categoryList: categoryListReducer,
-        priceList: priceListReducer,
+        reducer: {
+                checkList: CheckSlice,
+                productList: productListReducer,
+                productDetail: productDetailsReducer,
+                categoryList: categoryListReducer,
+                priceList: priceListReducer,
 
-=======
-        starRating: StarRatingSlice,
->>>>>>> ecc9285a825b8f16d81e5ec2d99623de5884a835
-    },
+                starRating: StarRatingSlice,
+        },
 });
 
 export default store;

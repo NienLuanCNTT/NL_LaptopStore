@@ -256,43 +256,36 @@ const Product = (props) => {
                                         </div>
                                         <button className="btn btn-vote">Viết đánh giá</button>
                                     </div>
-<<<<<<< HEAD
                                     <div className="product__box-vote-list">
                                         {
                                             userRating.map((item) => (
-=======
-                                    <button className="btn btn-vote" onClick={handleOpenRating}>Viết đánh giá</button>
+                                                <button className="btn btn-vote" onClick={handleOpenRating}>Viết đánh giá</button>
                                 </div>
-                                {rating && <StarRating useprofile={userProfile} />}
-                                <div className="product__box-vote-list">
-                                    {
-                                        [].concat(starRating)
-                                            .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
-                                            .map((item) => (
->>>>>>> ecc9285a825b8f16d81e5ec2d99623de5884a835
-                                                <div key={item._id} className="item">
-                                                    <div className="item-logo">
-                                                        <img src={item.img} alt="" />
-                                                    </div>
-                                                    <div className="item-detail">
-                                                        <b className="item-name">{item.name}</b>
-                                                        <div className="item-star-rate">
-                                                            <ProductRating rating={item.rating} numReviews={product.numReviews} />
+                                    {rating && <StarRating useprofile={userProfile} />}
+                                    <div className="product__box-vote-list">
+                                        {
+                                            [].concat(starRating)
+                                                .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
+                                                .map((item) => (
+                                                    <div key={item._id} className="item">
+                                                        <div className="item-logo">
+                                                            <img src={item.img} alt="" />
                                                         </div>
-                                                        <p>{item.note}</p>
-                                                        <i>{item.datetime}</i>
+                                                        <div className="item-detail">
+                                                            <b className="item-name">{item.name}</b>
+                                                            <div className="item-star-rate">
+                                                                <ProductRating rating={item.rating} numReviews={product.numReviews} />
+                                                            </div>
+                                                            <p>{item.note}</p>
+                                                            <i>{item.datetime}</i>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            ))
-<<<<<<< HEAD
+                                                ))
                                         }
                                     </div>
-=======
                                     }
->>>>>>> ecc9285a825b8f16d81e5ec2d99623de5884a835
                                 </div>
 
-<<<<<<< HEAD
                                 <div id="comment" className="product__comment">
                                     <div className="product__comment-top">
                                         <div className="product__comment-top-head">
@@ -307,58 +300,53 @@ const Product = (props) => {
                                     <div className="product__comment-list">
                                         {
                                             userComments.map((item, index) => (
-=======
-                            <div id="comment" className="product__comment">
-                                <div className="product__comment-top">
-                                    <div className="product__comment-top-head">
-                                        <h1>Bình luận</h1>
-                                        <span>1 bình luận</span>
-                                    </div>
-                                    <div className="product__comment-top-write">
-                                        <textarea type="text" placeholder="Viết câu hỏi của bạn" onChange={handleOnChange} />
-                                        <button onClick={() => handleClickCommet(comment, userProfile)}>
-                                            {isComment && <i className="fas fa-spinner fa-spin"></i>} Gửi
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="product__comment-list">
-                                    {
-
-                                        [].concat(userComments)
-                                            .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
-                                            .map((item, index) => (
->>>>>>> ecc9285a825b8f16d81e5ec2d99623de5884a835
-                                                <div key={index} className="comment">
-                                                    <div className="comment-logo">
-                                                        <img src={item.img} alt="" />
+                                                <div id="comment" className="product__comment">
+                                                    <div className="product__comment-top">
+                                                        <div className="product__comment-top-head">
+                                                            <h1>Bình luận</h1>
+                                                            <span>1 bình luận</span>
+                                                        </div>
+                                                        <div className="product__comment-top-write">
+                                                            <textarea type="text" placeholder="Viết câu hỏi của bạn" onChange={handleOnChange} />
+                                                            <button onClick={() => handleClickCommet(comment, userProfile)}>
+                                                                {isComment && <i className="fas fa-spinner fa-spin"></i>} Gửi
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div className="comment-detail">
-                                                        <p><b className="item-name">{item.name}</b> <i>{item.datetime}</i></p>
-                                                        <p>{item.comment}</p>
+                                                    <div className="product__comment-list">
+                                                        {
+
+                                                            [].concat(userComments)
+                                                                .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
+                                                                .map((item, index) => (
+                                                                    <div key={index} className="comment">
+                                                                        <div className="comment-logo">
+                                                                            <img src={item.img} alt="" />
+                                                                        </div>
+                                                                        <div className="comment-detail">
+                                                                            <p><b className="item-name">{item.name}</b> <i>{item.datetime}</i></p>
+                                                                            <p>{item.comment}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                ))
+                                                        }
                                                     </div>
                                                 </div>
-                                            ))
-<<<<<<< HEAD
-                                        }
-                                    </div>
-                                </div>
                             </div >
 
 
 
-                        )
+                                    )
                 }
-=======
                                     }
                                 </div>
                             </div>
                         </div >
-                    )
+            )
             }
->>>>>>> ecc9285a825b8f16d81e5ec2d99623de5884a835
 
-            </div >
-        </Helmet>
+        </div >
+        </Helmet >
 
     )
 }

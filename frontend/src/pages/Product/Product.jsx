@@ -278,8 +278,6 @@ const Product = (props) => {
                                                         <div className="item-star-rate">
                                                             <ProductRating rating={item.rating} numReviews={product.numReviews} />
                                                         </div>
-                                                        <p>{item.note}</p>
-                                                        <i>{item.datetime}</i>
                                                     </div>
                                                 </div>
                                             ))
@@ -323,7 +321,7 @@ const Product = (props) => {
                 }
 
             </div >
-        </Helmet>
+        </Helmet >
 
     )
 }

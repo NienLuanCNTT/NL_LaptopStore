@@ -18,6 +18,7 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/laptopStore', {
 
 
 import path from 'path';
+import orderRouter from './routes/orderRouter.js';
 const __dirname = path.resolve();
 
 app.use(express.static('backend'));
@@ -30,6 +31,7 @@ app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 // app.use('/api/category', categoryRouter);
 // app.use('/api/price', priceRouter);
+app.use('/api/orders', orderRouter);
 
 app.get('/', (req, res) => {
     res.send('Server is ready');

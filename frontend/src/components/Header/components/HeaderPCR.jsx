@@ -61,50 +61,50 @@ const HeaderPCR = () => {
                         {/* User not Login */}
 
                         <ul className="dropdown-account">
-                            <li>
-                                <Link to="/account">
+                            <Link to="/account">
+                                <li>
                                     <p>
                                         <i className="fas fa-sign-in-alt"></i>
                                         Đăng nhập
                                     </p>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/account">
+                                </li>
+                            </Link>
+                            <Link to="/account">
+                                <li>
                                     <p>
                                         <i className="fas fa-user-plus"></i>
                                         Tạo tài khoản
                                     </p>
-                                </Link>
-                            </li>
+                                </li>
+                            </Link>
                         </ul>
 
                         {/* User Logined */}
                         {/* <ul className="dropdown-account">
-                            <li>
-                                <Link to="/account">
+                            <Link to="/account">
+                                <li>
                                     <p>
                                         <i className="fas fa-user-cog"></i>
                                         Tài khoản
                                     </p>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/account">
+                                </li>
+                            </Link>
+                            <Link to="/account">
+                                <li>
                                     <p>
                                         <i clasName="fas fa-history"></i>
                                         Lịch sử mua hàng
                                     </p>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/account">
+                                </li>
+                            </Link>
+                            <Link to="/account">
+                                <li>
                                     <p>
                                         <i className="fas fa-sign-out-alt"></i>
                                         Đăng xuất
                                     </p>
-                                </Link>
-                            </li>
+                                </li>
+                            </Link>
                         </ul> */}
                     </div>
                 </li>

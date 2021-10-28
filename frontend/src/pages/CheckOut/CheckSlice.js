@@ -8,18 +8,6 @@ const CheckSlice = createSlice({
     name: 'checkList',
     initialState,
     reducers: {
-        selectQuantity: (state, action) => {
-            const { id, quantity } = action.payload;
-            const index = state.checkList.findIndex((productList) => productList._id === id);
-            if (index < 0) return;
-            state.checkList[index].quantity = quantity;
-        },
-        removeProduct: (state, action) => {
-            const { id } = action.payload;
-            const index = state.checkList.findIndex((productList) => productList._id === id);
-            if (index < 0) return;
-            state.checkList.splice(index, 1);
-        },
         addToCart: (state, action) => {
             const { id, product } = action.payload;
             const index = state.checkList.findIndex((productList) => productList._id === id);
@@ -39,6 +27,22 @@ const CheckSlice = createSlice({
             }
 
         },
+        selectQuantity: (state, action) => {
+            const { id, quantity } = action.payload;
+            const index = state.checkList.findIndex((productList) => productList._id === id);
+            if (index < 0) return;
+            state.checkList[index].quantity = quantity;
+        },
+        removeProduct: (state, action) => {
+            const { id } = action.payload;
+            const index = state.checkList.findIndex((productList) => productList._id === id);
+            if (index < 0) return;
+            state.checkList.splice(index, 1);
+        },
+        cartEmpty: (state, action) => {
+            return { ...state, checkList: [] };
+        }
+
     }
 })
 
@@ -47,6 +51,7 @@ export const {
     selectQuantity,
     removeProduct,
     addToCart,
+    cartEmpty
 } = actions;
 
 export default reducer;

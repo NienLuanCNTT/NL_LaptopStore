@@ -7,12 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import cartEmty from 'assets/images/empty-cart.png';
 import InputField from 'custom-field/InputField';
 import RadioField from 'custom-field/RadioField';
+import { createCheckOut } from 'actions/orderActions';
+import { ORDER_CREATE_RESET } from 'constants/orderConstants';
+import LoadingBox from 'components/LoadingBox';
+import MessageBox from 'components/MessageBox';
 
 
 ProductCheck.propTypes = {};
 
 
-function ProductCheck() {
+function ProductCheck(props) {
 
     const [city, setCity] = useState([]);
     const [district, setDistrict] = useState([]);
@@ -84,6 +88,9 @@ function ProductCheck() {
     }
 
     const [shipOptions, setShipOption] = useState(null);
+    const { checkList } = useSelector((state) => state.checkList);
+    const orderCreate = useSelector((state) => state.orderCreate);
+    const { loadding, success, error, order } = orderCreate;
 
     const handleQuantityChange = (id, quantity) => {
         dispatch(selectQuantity({ id, quantity }));
@@ -94,7 +101,12 @@ function ProductCheck() {
         dispatch(removeProduct({ id }));
     };
 
-    const { checkList } = useSelector((state) => state.checkList);
+    const handleCheckOut = () => {
+        dispatch(createCheckOut({ ...checkList, orderItems: checkList.checkList }));
+    }
+
+
+
     const total = checkList.reduce(
         (sum, product) =>
             sum +
@@ -105,7 +117,13 @@ function ProductCheck() {
     const numberFormat = (number) => {
         const numberFormat = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(number);
         return numberFormat;
-    }
+    };
+    useEffect(() => {
+        if (success) {
+            props.history.push(`/oder/${order._id}`);
+            dispatch({ type: ORDER_CREATE_RESET });
+        }
+    }, [dispatch, order, props.history, success]);
     return (
         <div className="modal__product-check">
             <div className="modal__wrapper">
@@ -219,8 +237,15 @@ function ProductCheck() {
                                         </div>
                                     </div>
                                     <div className="card-checkout">
-                                        <button className="btn btn-checkout"> Hoàn tất đặt hàng</button>
+                                        <button
+                                            className="btn btn-checkout"
+                                            onClick={handleCheckOut}
+                                        >
+                                            {loadding && <i className="fas fa-spinner fa-spin"></i>}  Hoàn tất đặt hàng
+                                        </button>
                                         <p>Cảm ơn bạn đã đến với cửa hàng của chúng tôi</p>
+                                        {loadding && <LoadingBox />}
+                                        {error && <MessageBox variant="danger">{error}</MessageBox>}
                                     </div>
                                 </div>
                             )

@@ -20,7 +20,11 @@
   "homepage": "https://github.com/NienLuanCNTT/NL_LaptopStore#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+<<<<<<< HEAD
     "cors": "^2.8.5",
+=======
+    "dotenv": "^10.0.0",
+>>>>>>> e4b71e6b852758961236b30261551603c2f6ae80
     "express": "^4.17.1",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",

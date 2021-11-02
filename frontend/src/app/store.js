@@ -10,10 +10,17 @@ import { productDetailsReducer, productListReducer } from 'reducers/productReduc
 import { categoryListReducer } from 'reducers/categoryReducers';
 import { priceListReducer } from 'reducers/priceReducers';
 import { orderCreateReducer } from './../reducers/orderReduces';
+import { userRegisterReducer, userSigninReducer } from "reducers/userReducers";
 
 const persistConfig = {
         key: 'root',
         storage,
+}
+
+const initialState = {
+        userSignin: {
+                userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+        },
 }
 
 const rootReducer = combineReducers({
@@ -24,6 +31,8 @@ const rootReducer = combineReducers({
         priceList: priceListReducer,
         orderCreate: orderCreateReducer,
         starRating: StarRatingSlice,
+        userSignin: userSigninReducer,
+        userRegister: userRegisterReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -31,6 +40,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = configureStore({
         reducer: persistedReducer,
+        initialState,
 });
 
 export const persistor = persistStore(store);

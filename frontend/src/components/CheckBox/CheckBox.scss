@@ -30,8 +30,10 @@
         i{
             //ẩn đi icon
             transform: scale(0);
+            position: relative;
+             top: -0.4rem;
             transition: transform 0.3s ease;
-            font-size : 1.3rem;
+            font-size : 1.4rem;
         }
     }
 

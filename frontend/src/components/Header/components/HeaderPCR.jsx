@@ -4,6 +4,8 @@ import HCartList from './HCartList';
 import { useSelector } from 'react-redux';
 import numberWithCommas from 'utils/numberWithCommas';
 import cartEmty from 'assets/images/empty-cart.png';
+import { useDispatch } from 'react-redux';
+import { signout } from 'actions/userAction';
 
 const HeaderPCR = () => {
     const { checkList } = useSelector((state) => state.checkList);
@@ -14,6 +16,16 @@ const HeaderPCR = () => {
             product.quantity,
         0
     );
+
+
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+
+    const dispatch = useDispatch();
+    const signoutHandler = () => {
+        dispatch(signout());
+    }
+
     return (
         <div >
             <ul className="header__nav-menu-right">
@@ -55,32 +67,78 @@ const HeaderPCR = () => {
                 </li>
                 <li>
                     <div className="header__nav-menu-right-item">
-                        <div className="btn account">
-                            <i><box-icon name='user-circle' color='#434242' ></box-icon></i>
-                        </div>
-                        {/* User not Login */}
 
+                        {
+                            userInfo ?
+                                (
+
+                                    <div>
+                                        <div className="btn account user-name">
+                                            <Link>{userInfo.name}</Link>
+                                        </div>
+
+
+                                        <ul className="dropdown-account">
+                                            <Link to="/account">
+                                                <li>
+                                                    <p>
+                                                        <i className="fas fa-user-cog"></i>
+                                                        Tài khoản
+                                                    </p>
+                                                </li>
+                                            </Link>
+                                            <Link to="/account">
+                                                <li>
+                                                    <p>
+                                                        <i clasName="fas fa-history"></i>
+                                                        Lịch sử mua hàng
+                                                    </p>
+                                                </li>
+                                            </Link>
+                                            <Link to="#signout" onClick={signoutHandler}>
+                                                <li>
+                                                    <p>
+                                                        <i className="fas fa-sign-out-alt"></i>
+                                                        Đăng xuất
+                                                    </p>
+                                                </li>
+                                            </Link>
+                                        </ul>
+                                    </div>
+                                ) :
+                                (<div>
+                                    <div className="btn account">
+                                        <i><box-icon name='user-circle' color='#434242' ></box-icon></i>
+                                    </div>
+
+                                    <ul className="dropdown-account">
+                                        <Link to="/signin">
+                                            <li>
+                                                <p>
+                                                    <i className="fas fa-sign-in-alt"></i>
+                                                    Đăng nhập
+                                                </p>
+                                            </li>
+                                        </Link>
+                                        <Link to="/register">
+                                            <li>
+                                                <p>
+                                                    <i className="fas fa-user-plus"></i>
+                                                    Tạo tài khoản
+                                                </p>
+                                            </li>
+                                        </Link>
+                                    </ul>
+                                </div>
+                                )
+                        }
+
+
+
+
+
+                        {/* User Logined
                         <ul className="dropdown-account">
-                            <Link to="/account">
-                                <li>
-                                    <p>
-                                        <i className="fas fa-sign-in-alt"></i>
-                                        Đăng nhập
-                                    </p>
-                                </li>
-                            </Link>
-                            <Link to="/account">
-                                <li>
-                                    <p>
-                                        <i className="fas fa-user-plus"></i>
-                                        Tạo tài khoản
-                                    </p>
-                                </li>
-                            </Link>
-                        </ul>
-
-                        {/* User Logined */}
-                        {/* <ul className="dropdown-account">
                             <Link to="/account">
                                 <li>
                                     <p>

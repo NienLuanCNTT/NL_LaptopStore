@@ -40,7 +40,7 @@ const CheckSlice = createSlice({
             state.checkList.splice(index, 1);
         },
         cartEmpty: (state, action) => {
-            return { ...state, checkList: [] };
+            return state.checkList = [];
         }
 
     }
@@ -51,7 +51,9 @@ export const {
     selectQuantity,
     removeProduct,
     addToCart,
-    cartEmpty
+    cartEmpty,
+    saveCheckOutInfo,
+    saveShippingAddress
 } = actions;
 
 export default reducer;

@@ -174,14 +174,7 @@
                         background-color: #46a8f9;
                         color: #fff;
                         text-align: center;
-
-                        b {
-                            font-size: 1.5rem;
-                        }
-
-                        a {
-                            color: #fff;
-                        }
+                        font-size: 1.5rem;
                     }
                 }
             }
@@ -262,7 +255,11 @@
                     margin-bottom: 10px;
 
                     .item-name {
-                        font-size: 16px;
+                        font-size: 18px;
+                        i {
+                            margin-left: 8px;
+                            font-size: 12px;
+                        }
                     }
                 }
             }
@@ -276,19 +273,24 @@
         &-top {
             margin-bottom: 32px;
             &-head {
-                @include flex(flex-end, flex-start);
+                @include flex(flex-start, flex-start);
                 margin-bottom: 20px;
 
                 span {
                     margin-left: 10px;
+                    padding: 4px;
+                    border-radius: 4px;
+                    color: #fff;
+                    background-color: #92c100;
                 }
             }
             &-write {
                 position: relative;
                 textarea {
                     background: #f3f5f8;
-                    height: 120px;
+                    height: 80px;
                     padding: 16px;
+                    padding-right: 70px;
                     width: 100%;
                     border: 1px solid #f3f5f8;
                     border-radius: 4px;
@@ -316,6 +318,15 @@
                     margin-left: 15px;
                     padding-bottom: 16px;
                     border-bottom: 1px solid #e3e7ef;
+                    font-size: 16px;
+
+                    .item-name {
+                        padding-bottom: 8px;
+                        i {
+                            margin-left: 8px;
+                            font-size: 12px;
+                        }
+                    }
                 }
             }
         }
@@ -342,6 +353,15 @@
         &-right {
             width: 100%;
             margin: 0;
+        }
+    }
+}
+@include tab {
+    .product__detail-content-right-paygop {
+        flex-direction: column;
+        div {
+            width: 100%;
+            margin-bottom: 5px;
         }
     }
 }

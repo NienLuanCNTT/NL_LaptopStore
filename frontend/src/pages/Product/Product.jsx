@@ -2,26 +2,36 @@ import { detailProduct } from 'actions/productActions';
 import FEcredit from 'assets/logo/fecredit.png';
 import VNpay from 'assets/logo/vnpay.png';
 import iconUser from 'assets/svg/icon-user.svg';
+import axios from 'axios';
 
 import 'boxicons';
+import Helmet from 'components/Helmet';
 import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
+
 import { TOAST_OPTIONS } from 'constants/productConstants';
 import { addToCart } from 'pages/CheckOut/CheckSlice';
 import React, { useEffect, useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 import { toast } from 'react-toastify';
 import numberWithCommas from 'utils/numberWithCommas';
-import ProductCheck from './component/ProductCheck';
-
+import ProductCheck from '../CheckOut';
 import ProductConfig from './component/ProductConfig';
 import ProductRating from './component/ProductRating';
+
 import StarRating from './component/ProductRating/StarRating';
+import StarRatingList from './component/ProductRating/StarRatingList';
 import { addComment } from './component/ProductRating/StarRatingSlice';
 
-import Helmet from 'components/Helmet';
+
+
+
+
+
+
+
 
 
 
@@ -32,6 +42,12 @@ const Product = (props) => {
     const productDetail = useSelector((state) => state.productDetail);
     // console.log(productDetail);
     const { loading, error, product } = productDetail;
+    const [isComment, setIsComment] = useState(false);
+    const [comment, setComment] = useState('');
+    const [rating, setRating] = useState(null);
+
+    const [configModal, setConfigModal] = useState(false);
+    const [checkOutModal, setcheckOutModal] = useState(false);
 
     const handleAddProduct = (id, product) => {
         dispatch(addToCart({ id, product }));
@@ -44,7 +60,6 @@ const Product = (props) => {
         dispatch(detailProduct(id));
     }, [dispatch, id]);
 
-    const [rating, setRating] = useState(null);
 
     const handleOpenRating = () => {
         const ratingValue = true;
@@ -53,51 +68,72 @@ const Product = (props) => {
 
     const userProfile = {
         _id: 5,
-        name: 'Arthor',
+        name: 'Minh Hiếu Nguyễn',
         img: iconUser,
     }
-
-    const [isComment, setIsComment] = useState(false);
-    const [comment, setComment] = useState('');
 
     const handleOnChange = (e) => {
         setComment(e.target.value);
     }
-    const handleClickCommet = (comment, userProfile) => {
+    const handleClickCommet = (productId, comment, userProfile) => {
         if (comment === '') {
             toast.warn("Comment is null 👌👌");
         } else {
             setIsComment(true);
             return new Promise((resolve) => {
                 setTimeout(() => {
-                    dispatch(addComment({ comment, userProfile }))
+                    dispatch(addComment({ productId, comment, userProfile }))
                     toast.success("Add a commet is complete 👌👌");
 
                     resolve(true);
                     setComment('');
                     setIsComment(false);
+                    setFeedback(prev => !prev);
                 }, 1000);
             })
         }
 
     }
 
-    const { starRating } = useSelector((state) => state.starRating);
-    const { userComments } = useSelector((state) => state.starRating);
 
     const ModalCheckOpen = (id, product) => {
-        const ModalCheck = document.querySelector('.modal__product-check');
-        ModalCheck.style.display = 'block';
+        setcheckOutModal(true);
         dispatch(addToCart({ id, product }));
         toast.success('Added a product to the cart 👌👌', {
             ...TOAST_OPTIONS,
         });
     }
-    function ModalConfigOpen() {
-        const ModalCheck = document.querySelector('.modal__product-config');
-        ModalCheck.style.display = 'block';
-    }
 
+    const [starRating, setStarRating] = useState([]);
+    const [userComments, setUserComments] = useState([]);
+
+    const [isFeedback, setFeedback] = useState(false);
+
+
+    useEffect(() => {
+        if (product?._id) {
+            const fetchStarRating = async () => {
+                const rating = await axios.get(`http://localhost:5000/api/rating/${product._id}`);
+                const data = rating.data || [];
+
+                const usercomments = await axios.get(`http://localhost:5000/api/usercmts/${product._id}`);
+                const datacomment = usercomments.data || [];
+
+                setUserComments(datacomment);
+                setStarRating(data);
+            };
+
+            fetchStarRating();
+        }
+    }, [isFeedback, product?._id])
+
+    const ratingSum = starRating.reduce(
+        (avg, rating) =>
+            avg +
+            rating.rating
+        , 0
+    );
+    const ratingAvg = ratingSum / starRating.length;
 
     return (
         <Helmet title="Chi tiết">
@@ -107,8 +143,8 @@ const Product = (props) => {
                         (<MessageBox variant="danger">{error}</MessageBox>) :
                         (
                             <div className="product">
-                                <ProductConfig product={product} />
-                                <ProductCheck />
+                                {configModal && <ProductConfig product={product} setConfigModal={setConfigModal} />}
+                                {checkOutModal && <ProductCheck setcheckOutModal={setcheckOutModal} />}
                                 <div className="product__detail">
                                     <div className="product__detail-top">
                                         <div className="product__detail-top-name">
@@ -120,9 +156,9 @@ const Product = (props) => {
                                         <a href="#rating">
                                             <div className="product__detail-top-ratting">
                                                 <div className="product__detail-top-ratting-star">
-                                                    <ProductRating rating={product.rating} numReviews={product.numReviews} />
+                                                    <ProductRating rating={ratingAvg.toFixed(1)} />
                                                 </div>
-                                                <div className="product__detail-top-ratting-number">{product.numReviews} đánh giá</div>
+                                                <div className="product__detail-top-ratting-number">{starRating.length} đánh giá</div>
                                             </div>
                                         </a>
                                     </div >
@@ -154,7 +190,7 @@ const Product = (props) => {
                                                         <p>NVIDIA GeForce RTX3050 4GB</p>
                                                     </li>
                                                 </ul>
-                                                <p className="btn config-detail-modal" onClick={ModalConfigOpen}>Xem chi tiết thông số kỹ thuật</p>
+                                                <p className="btn config-detail-modal" onClick={() => setConfigModal(true)}>Xem chi tiết thông số kỹ thuật</p>
                                             </div>
                                         </div>
                                         <div className="product__detail-content-right">
@@ -208,16 +244,12 @@ const Product = (props) => {
                                             </div>
                                             <div className="product__detail-content-right-paygop">
                                                 <div>
-                                                    <Link to="/product">
-                                                        <b>TRẢ GÓP 0%</b>
-                                                        <p>Duyệt nhanh qua điện thoại</p>
-                                                    </Link>
+                                                    <b>TRẢ GÓP 0%</b>
+                                                    <p>Duyệt nhanh qua điện thoại</p>
                                                 </div>
                                                 <div>
-                                                    <Link to="/product">
-                                                        <b>TRẢ GÓP Qua thẻ</b>
-                                                        <p>Visa, Master Card, JCB</p>
-                                                    </Link>
+                                                    <b>TRẢ GÓP Qua thẻ</b>
+                                                    <p>Visa, Master Card, JCB</p>
                                                 </div>
                                             </div>
                                         </div >
@@ -255,60 +287,46 @@ const Product = (props) => {
                                             <div className="vote-tb">
                                                 <p>Đánh giá trung bình</p>
                                                 <div className="vote">
-                                                    <div className="star-number">{product.rating}</div>
-                                                    <ProductRating rating={product.rating} numReviews={product.numReviews} />
+                                                    <div className="star-number">{ratingAvg ? ratingAvg.toFixed(1) : 0}</div>
+                                                    <ProductRating rating={ratingAvg} />
                                                 </div>
                                             </div>
                                         </div>
                                         <button className="btn btn-vote" onClick={handleOpenRating}>Viết đánh giá</button>
                                     </div>
-                                </div>
-                                {rating && <StarRating useprofile={userProfile} />}
-                                <div className="product__box-vote-list">
-                                    {
-                                        [].concat(starRating)
-                                            .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
-                                            .map((item) => (
-                                                <div key={item._id} className="item">
-                                                    <div className="item-logo">
-                                                        <img src={item.img} alt="" />
-                                                    </div>
-                                                    <div className="item-detail">
-                                                        <b className="item-name">{item.name}</b>
-                                                        <div className="item-star-rate">
-                                                            <ProductRating rating={item.rating} numReviews={product.numReviews} />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ))
-                                    }
-                                </div>
 
+                                    {rating && <StarRating productId={product._id} setFeedback={setFeedback} useprofile={userProfile} />}
+                                    <div className="product__box-vote-list">
+                                        <StarRatingList starRating={starRating} />
+                                    </div>
+                                </div>
                                 <div id="comment" className="product__comment">
                                     <div className="product__comment-top">
                                         <div className="product__comment-top-head">
                                             <h1>Bình luận</h1>
-                                            <span>1 bình luận</span>
+                                            <span>{userComments.length}</span>
                                         </div>
                                         <div className="product__comment-top-write">
                                             <textarea type="text" placeholder="Viết câu hỏi của bạn" value={comment} onChange={handleOnChange} />
-                                            <button onClick={() => handleClickCommet(comment, userProfile)}>
+                                            <button onClick={() => handleClickCommet(product._id, comment, userProfile)}>
                                                 {isComment && <i className="fas fa-spinner fa-spin"></i>} Gửi
                                             </button>
                                         </div>
                                     </div>
                                     <div className="product__comment-list">
                                         {
-
                                             [].concat(userComments)
                                                 .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
                                                 .map((item, index) => (
                                                     <div key={index} className="comment">
                                                         <div className="comment-logo">
-                                                            <img src={item.img} alt="" />
+                                                            <img src={item.image} alt="" />
                                                         </div>
                                                         <div className="comment-detail">
-                                                            <p><b className="item-name">{item.name}</b> <i>{item.datetime}</i></p>
+                                                            <p className="item-name">
+                                                                <b>{item.userName}</b>
+                                                                <i>{item.datetime}</i>
+                                                            </p>
                                                             <p>{item.comment}</p>
                                                         </div>
                                                     </div>

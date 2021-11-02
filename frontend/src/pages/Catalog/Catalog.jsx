@@ -89,7 +89,7 @@ const Catalog = () => {
                 // console.log(filter.category)
                 temp = temp.filter(e => filter.category.includes(e.category))
             }
-            if (filter.price.length == 2 && filter.price[0] > 0 && filter.price[1] > 1) {
+            if (filter.price.length === 2 && filter.price[0] > 0 && filter.price[1] > 1) {
                 let start = filter.price[0];
                 let end = filter.price[1];
                 console.log(start, end)
@@ -100,7 +100,7 @@ const Catalog = () => {
                 filter.price = []
             }
 
-            if (filter.category.length == 0 && filter.price.length == 0) {
+            if (filter.category.length === 0 && filter.price.length === 0) {
                 temp = products
             }
 

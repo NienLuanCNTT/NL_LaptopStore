@@ -19,19 +19,26 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/laptopStore', {
 
 import path from 'path';
 import orderRouter from './routes/orderRouter.js';
+import starRatingRouter from './routes/starRatingRouter.js';
 const __dirname = path.resolve();
 
+import cors from 'cors';
+import userCommentsRouter from './routes/userCommentsRouter.js';
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('backend'));
 app.use('/images', express.static('images'));
 
-
-
+app.use(cors())
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 // app.use('/api/category', categoryRouter);
 // app.use('/api/price', priceRouter);
 app.use('/api/orders', orderRouter);
+app.use('/api/rating', starRatingRouter);
+app.use('/api/usercmts', userCommentsRouter);
 
 app.get('/', (req, res) => {
     res.send('Server is ready');

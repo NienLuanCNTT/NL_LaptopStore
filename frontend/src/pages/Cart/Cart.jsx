@@ -1,7 +1,7 @@
 import cartEmty from 'assets/images/empty-cart.png';
 import { removeProduct, selectQuantity } from 'pages/CheckOut/CheckSlice';
-import ProductCheck from 'pages/Product/component/ProductCheck';
-import React from 'react';
+import CheckOut from 'pages/CheckOut';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import numberWithCommas from './../../utils/numberWithCommas';
@@ -10,11 +10,6 @@ import CartList from './components/CartList';
 function Cart() {
     const { checkList } = useSelector((state) => state.checkList);
     const dispatch = useDispatch();
-
-    function ModalCheckOpen() {
-        const ModalCheck = document.querySelector('.modal__product-check');
-        ModalCheck.style.display = 'block';
-    }
 
     const handleQuantityChange = (id, quantity) => {
         dispatch(selectQuantity({ id, quantity }));
@@ -31,11 +26,12 @@ function Cart() {
             product.quantity
 
         ), 0)
+    const [checkOutModal, setcheckOutModal] = useState(false);
 
     return (
 
         <div className="cart">
-            <ProductCheck />
+            {checkOutModal && <CheckOut setcheckOutModal={setcheckOutModal} />}
             {
                 checkList.length >= 1 && (
                     <div>
@@ -57,7 +53,7 @@ function Cart() {
                                     <span>{numberWithCommas(total)}₫</span>
                                 </div>
                                 <div className="btn">
-                                    <p className=" btn-checkout" onClick={ModalCheckOpen}>
+                                    <p className=" btn-checkout" onClick={() => setcheckOutModal(true)}>
                                         Tiến hành thành toán
                                     </p>
                                 </div>

@@ -143,7 +143,6 @@
                 max-width: 490px;
 
                 .card-form-inner,
-                .card-form-inner-genger,
                 .card-form-ship {
                     @include flex(flex-start, flex-start);
                     padding: 16px 0 8px;
@@ -155,6 +154,8 @@
                     }
                 }
                 .card-form-center {
+                    margin-top: 24px;
+
                     .mr-10 {
                         margin-right: 10px;
                     }

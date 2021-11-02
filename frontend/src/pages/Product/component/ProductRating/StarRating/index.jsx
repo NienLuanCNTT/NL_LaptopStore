@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { addStarRating } from '../StarRatingSlice';
 
 const StarRating = (props) => {
+    const { useprofile, productId, setFeedback } = props;
     const dispatch = useDispatch();
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
@@ -22,19 +23,19 @@ const StarRating = (props) => {
             setIsRating(true);
             return new Promise((resolve) => {
                 setTimeout(() => {
-                    dispatch(addStarRating({ rating, comment, userProfile }));
+                    dispatch(addStarRating({ productId, rating, comment, userProfile }));
                     toast.success("Add a Rating is complete 👌👌");
 
                     resolve(true);
                     setRating(null);
                     setcmtRating('');
                     setIsRating(false);
+                    setFeedback(prev => !prev);
                 }, 2000);
             })
         }
     }
 
-    const { useprofile } = props;
 
     return (
         <div className="star-rating-box">
@@ -56,7 +57,8 @@ const StarRating = (props) => {
                             <i
                                 className="fas fa-star"
                                 style={style}
-                                onMouseEnter={() => (setRating(ratingValue))}
+                                onClick={() => setRating(ratingValue)}
+                                onMouseEnter={() => (setHover(ratingValue))}
                                 onMouseLeave={() => setHover(null)}
                             ></i>
                         </label>
@@ -64,11 +66,11 @@ const StarRating = (props) => {
                 })}
                 <div className="level-rating">
                     {
-                        rating === 1 ? "Không thích"
-                            : rating === 2 ? "Tạm được"
-                                : rating === 3 ? "Bình thường"
-                                    : rating === 4 ? "Hài lòng"
-                                        : rating === 5 ? "Tuyệt vời"
+                        (hover || rating) === 1 ? "Không thích"
+                            : (hover || rating) === 2 ? "Tạm được"
+                                : (hover || rating) === 3 ? "Bình thường"
+                                    : (hover || rating) === 4 ? "Hài lòng"
+                                        : (hover || rating) === 5 ? "Tuyệt vời"
                                             : ""
                     }
                 </div>
@@ -87,7 +89,6 @@ const StarRating = (props) => {
                     {isRating && <i className="fas fa-spinner fa-spin"></i>} Gửi đánh giá
                 </button>
             </div>
-
         </div>
     );
 };

@@ -6,6 +6,7 @@ InputField.propTypes = {
     label: PropTypes.string,
     type: PropTypes.string,
     placeholder: PropTypes.string,
+    defaultValue: PropTypes.string,
     className: PropTypes.string,
     onChange: PropTypes.func,
 };
@@ -24,18 +25,20 @@ function InputField(props) {
         type,
         placeholder,
         className,
+        defaultValue,
         onChange
     } = props;
 
     return (
         <div>
-            {label && <label htmlFor="">{name}</label>}
+            {label && <label htmlFor={name}>{name}</label>}
             <input
                 type={type}
                 id={name}
                 placeholder={placeholder}
                 className={className}
                 onChange={onChange}
+                defaultValue={defaultValue}
             />
         </div>
     );

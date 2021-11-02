@@ -2,12 +2,6 @@ import React from 'react';
 
 ProductConfig.propTypes = {};
 
-function ModalClose() {
-    const ModalCheck = document.querySelector('.modal__product-config');
-
-    ModalCheck.style.display = 'none';
-}
-
 function ProductConfig(props) {
     const dataConfig = [
         {
@@ -47,7 +41,7 @@ function ProductConfig(props) {
 
     ]
 
-    const { product } = props;
+    const { product, setConfigModal } = props;
 
     return (
         <div className="modal__product-config">
@@ -56,7 +50,7 @@ function ProductConfig(props) {
                     <div className="modal__card">
                         <div className="card-title">
                             <p>{product.name}</p>
-                            <span onClick={ModalClose} id="modal__close" className="modal-close">X</span>
+                            <span onClick={() => setConfigModal(false)} id="modal__close" className="modal-close">X</span>
                         </div>
                         <div className="card-body">
                             <div className="card-img">

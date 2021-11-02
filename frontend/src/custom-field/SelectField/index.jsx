@@ -39,7 +39,11 @@ function SelectField(props) {
                 {options.map((option) => (
                     <option
                         key={option.value}
-                        value={option.value}
+                        value={JSON.stringify(
+                            {
+                                value: option.value,
+                                label: option.label
+                            })}
                     >
                         {option.label}
                     </option>

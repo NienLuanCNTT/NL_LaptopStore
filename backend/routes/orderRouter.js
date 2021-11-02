@@ -5,26 +5,39 @@ import { isAuth } from '../utils.js';
 
 const orderRouter = express.Router();
 
-orderRouter.post(
-    '/seed',
-    isAuth,
+orderRouter.get('/',
     expressAsyncHandler(async (req, res) => {
-        if (req.body.orderItems.length === 0) {
+        const order = new Order;
+        if (order) {
+            res.send(order);
+        }
+        else {
+            res.status(404).send({ message: 'order Not Found' });
+        }
+    })
+);
+
+orderRouter.post(
+    '/',
+    // isAuth,
+    expressAsyncHandler(async (req, res) => {
+        if (!req.body.orderItems) {
             res.status(404).send({ message: "Cart is empty!" });
+            console.log(req.body);
         } else {
+            console.log(req.body);
             const order = new Order({
                 orderItems: req.body.orderItems,
                 shippingAddress: req.body.shippingAddress,
                 itemsPrice: req.body.itemsPrice,
                 totalPrice: req.body.totalPrice,
-                user: req.user._id,
+                user: req.body.user._id,
             });
             const createdOrder = await order.save();
             res
                 .status(201)
                 .send({ message: "new Order Created", order: createdOrder });
         }
-
     }))
 
 export default orderRouter;

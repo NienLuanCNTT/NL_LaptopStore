@@ -17,6 +17,7 @@ const HeaderPCR = () => {
         0
     );
 
+    // window.localStorage.clear();
 
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -65,15 +66,15 @@ const HeaderPCR = () => {
                 </div>
             </li>
             <li>
-                <div className="header__nav-menu-right-item">
+                <div className="header__nav-menu-right-item logged">
 
                     {
                         userInfo ?
                             (
 
                                 <div>
-                                    <div className="btn account user-name">
-                                        <Link>{userInfo.name}</Link>
+                                    <div className="btn account btn-avatar">
+                                        <Link><img className="avatar" src={userInfo.image} alt="" /></Link>
                                     </div>
 
 
@@ -94,7 +95,7 @@ const HeaderPCR = () => {
                                                 </p>
                                             </li>
                                         </Link>
-                                        <Link to="#signout" onClick={signoutHandler}>
+                                        <Link to="/" onClick={signoutHandler}>
                                             <li>
                                                 <p>
                                                     <i className="fas fa-sign-out-alt"></i>

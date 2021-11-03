@@ -132,9 +132,20 @@
             &-item {
                 position: relative;
                 padding: 8px 10px;
-                margin: 0 4px;
+                margin: 0 10px;
                 border-radius: 50%;
-
+                // .btn-avatar{
+                    
+                //     &:hover{
+                //         opacity: 60%;
+                //     }
+                //     .avatar{
+                //         width:25px;
+                //         height: 25px;
+                //         border-radius: 50%;
+                //     }
+                // }
+                
                 cursor: pointer;
                 &-icon {
                     width: 20px;
@@ -143,6 +154,28 @@
 
                 &:hover {
                     background-color: $main-color;
+                }
+
+                &.logged{
+                    // padding: 0;
+                    &:hover{
+                        background-color: transparent ;
+                    }
+
+                    .btn-avatar{
+                    
+                        &:hover{
+                            opacity: 70%;
+                        }
+                        .avatar{
+                            width:30px;
+                            height: 30px;
+                            border-radius: 50%;
+                        }
+                    }
+
+
+
                 }
 
                 &-sm {

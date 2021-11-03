@@ -4,6 +4,7 @@ import { USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_
 export const signin = (email, password) => async (dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
     try {
+
         const { data } = await Axios.post('/api/users/signin', { email, password });
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));
@@ -19,11 +20,11 @@ export const signin = (email, password) => async (dispatch) => {
 };
 
 
-export const register = (name, email, password) => async (dispatch) => {
+export const register = (name, email, password, image) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
 
     try {
-        const { data } = await Axios.post('/api/users/register', { name, email, password });
+        const { data } = await Axios.post('/api/users/register', { name, email, password, image });
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));

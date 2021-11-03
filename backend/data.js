@@ -7,12 +7,14 @@ const data = {
             email: 'admin@gmail.com',
             password: bcrypt.hashSync('1234', 8),
             isAdmin: true,
+            image: '/images/avatars/tri.jpg',
         },
         {
             name: 'tuanhung',
             email: 'tuanhung@gmail.com',
             password: bcrypt.hashSync('1234', 8),
             isAdmin: false,
+            image: '/images/avatars/tri.jpg',
         }
     ],
 

@@ -12,10 +12,12 @@ const Register = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [image, setImage] = useState(null);
 
-    const redirect = props.location.search
-        ? props.location.search.split('=')[1]
-        : '/';
+
+    // const redirect = props.location.search
+    //     ? props.location.search.split('=')[1]
+    //     : '/';
 
     const userRegister = useSelector((state) => state.userRegister);
     const { userInfo, loading, error } = userRegister;
@@ -26,20 +28,36 @@ const Register = (props) => {
         if (password !== confirmPassword) {
             alert('Mật khẩu và Nhập lại mật khẩu không đúng');
         } else {
-            dispatch(register(name, email, password));
+            dispatch(register(name, email, password, image));
+            props.history.push('/');
         }
     };
-    useEffect(() => {
-        if (userInfo) {
-            props.history.push(redirect);
-        }
-    }, [props.history, redirect, userInfo]);
+
+    // const onAvatarChange = (e) => {
+    //     e.preventDefault();
+    //     if (e.target.files && e.target.files[0]) {
+    //         setImage(URL.createObjectURL(e.target.files[0]));
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     if (userInfo) {
+    //         props.history.push(redirect);
+    //     }
+    // }, [props.history, redirect, userInfo]);
 
 
     return (
         <Helmet title="Đăng ký">
             <div className="signin">
                 <form className="form" onSubmit={submitHandler}>
+
+                    <div className="home-back">
+                        <Link to="/">
+                            <i className="fas fa-home home-back__icon"></i>
+                        </Link>
+                    </div>
+
                     <div className="form__item">
                         <h1 className="form__item__title">Đăng Ký</h1>
                     </div>
@@ -68,6 +86,13 @@ const Register = (props) => {
                         <label htmlFor="confirmPassword" className="form__item__label">Nhập lại mật khẩu</label>
                         <input className="form__item__input" type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu" required
                             onChange={e => setConfirmPassword(e.target.value)} />
+                    </div>
+
+                    <div className="form__item">
+                        <label htmlFor="image" className="form__item__label">Ảnh đại diện</label>
+                        <input className="form__item__input" type="file" id="image" required
+                            onChange={e => setImage(URL.createObjectURL(e.target.files[0]))} />
+                        <img className="form__item__image" src={image} alt="" />
                     </div>
 
 

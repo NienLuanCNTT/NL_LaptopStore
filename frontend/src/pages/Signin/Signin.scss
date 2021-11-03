@@ -13,16 +13,32 @@
     padding: 30px;
     box-sizing: border-box;
     border-radius : 10px;
+
+    @include tab{
+        min-width: 280px;
+        min-height:450px;
+    }
+
+    .home-back{
+        &__icon{
+            font-size : 3rem;
+            cursor: pointer;
+            color: #0597a5;
+            &:hover{
+                color: $main-color;
+            }
+        }
+    }
     
 
     &__item{
-        margin-top: 10px;
+        margin-top: 5px;
         
         &__title{
             color : $main-color;
             text-align : center;
-            margin: 40px 0px 30px 0px;
-            font-size : 2.5rem;
+            margin: 30px 0px 30px 0px;
+            font-size : 2.7rem;
         }
 
         &__label{
@@ -41,6 +57,12 @@
             
         }
 
+        &__image{
+            width: 40px;
+            height: 40px;
+            margin-left: 20px;
+        }
+
         &__submit{
             display : flex;
             font-size : 2rem;
@@ -54,19 +76,19 @@
             border: none;
             cursor : pointer;
             transition : all 0.1s ease-in-out;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
            
         }
         &.btn{
-            margin-top:4rem;
+            margin-top:2rem;
         }
 
         &__create-acc{
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             color : #333;
             font-weight : 600;
             &:hover{
-                color : $main-color;
+                color : $main-red;
             }
         }
     }

@@ -15,6 +15,7 @@ import { listProducts } from 'actions/productActions'
 
 const Home = () => {
 
+    // window.localStorage.clear();
 
 
     const dispatch = useDispatch();

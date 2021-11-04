@@ -27,6 +27,7 @@ const Register = (props) => {
             alert('Mật khẩu và Nhập lại mật khẩu không đúng');
         } else {
             dispatch(register(name, email, password));
+            props.history.push('/');
         }
     };
     useEffect(() => {

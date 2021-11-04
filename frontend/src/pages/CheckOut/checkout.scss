@@ -189,6 +189,21 @@
                         }
                     }
                 }
+                .ship-address-specific {
+                    p {
+                        padding: 8px 12px;
+                        line-height: 1.5;
+                        font-size: 15px;
+                        border-radius: 8px;
+                        border: 1px solid $main-color;
+
+                        background-color: #e1e4e6;
+                    }
+                }
+                .form-error {
+                    color: #f5420b;
+                    padding: 2px 4px;
+                }
             }
         }
         .card-checkout {

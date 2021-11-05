@@ -15,9 +15,6 @@ import { listProducts } from 'actions/productActions'
 
 const Home = () => {
 
-    // window.localStorage.clear();
-
-
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.productList);
     const { loading, error, products } = productList;
@@ -27,9 +24,12 @@ const Home = () => {
     }, [dispatch]);
 
     // pagination
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const [postsPerPage] = useState(5);
-    // const paginate = pageNumber => setCurrentPage(pageNumber);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(12);
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
+
 
 
     return (
@@ -51,7 +51,7 @@ const Home = () => {
 
                             {/* best selling section */}
                             <Section>
-                                <SectionTitle>Best Sellers</SectionTitle>
+                                <SectionTitle>Sản Phẩm</SectionTitle>
 
                                 <SectionBody>
 
@@ -59,12 +59,12 @@ const Home = () => {
                                     <ProductCard
                                         products={products}
                                         col={4}
-                                    // currentPage={currentPage}
-                                    // postsPerPage={postsPerPage}
+                                        currentPage={currentPage}
+                                        postsPerPage={postsPerPage}
 
                                     />
 
-                                    {/* <Pagination products={products} paginate={paginate} /> */}
+                                    <Pagination products={products} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} />
 
 
                                 </SectionBody>

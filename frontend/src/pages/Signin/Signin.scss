@@ -3,6 +3,10 @@
     display : flex;
     background : linear-gradient(135deg,#0597a5,$main-color);
     height : 100vh;
+
+    // @include tab{
+    //     height: 100vh;
+    // }
 }
 
 .form{
@@ -14,9 +18,14 @@
     box-sizing: border-box;
     border-radius : 10px;
 
-    @include tab{
-        min-width: 280px;
-        min-height:450px;
+    // @include tab{
+    //     width : 280px;
+    //     height: 300px;
+    // }
+
+    @include mb{
+        height: 100%;
+        width: 100%;
     }
 
     .home-back{

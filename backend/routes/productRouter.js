@@ -12,6 +12,7 @@ productRouter.get('/',
     })
 );
 
+
 productRouter.get('/seed',
     expressAsyncHandler(async (req, res) => {
         //fix E11000 duplicate key error collection
@@ -32,6 +33,8 @@ productRouter.get('/:id',
         }
     })
 );
+
+
 
 
 

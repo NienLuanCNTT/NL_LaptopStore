@@ -1,10 +1,11 @@
 .pagination{
     @include flex(center,center);
-    margin-bottom: 5rem;
-    margin-top: -5rem;
+    // margin-bottom: 5rem;
+    // margin-top: -5rem;
+    margin-top: 40px;
     left: 50%;
     //dịch qua bên trái phân nữa cửa chính nó
-    // transform: translateX(0.5rem);
+    transform: translateX(0.5rem);
     
     @include tab{
         bottom: 0px;
@@ -16,27 +17,34 @@
     
 
     // &__item ~ &__item{
-    //     margin-left : 10px;
+    //     margin-left : 5px;
     // }
 
-    &__button{
+    &__item{
 
-        @include flex(center,center);
-        // font-size: 4rem;
-        // cursor: pointer;
-        margin-left:0.5rem;
-        margin-right: 0.5rem;
-        border: 1px solid #e3e7ef;
+        margin: 0 5px;
+
+    &__btn{
+        font-size : 1.6rem;
         background-color : #fff;
-        
-         padding: 4px;
-        border-radius : 50%;
-            // &:hover{
-            //     background-color: $main-color;
-            // }
+        color: #171c27;
+        width: 40px;
+        height: 40px;
+        outline: none;
+        border-radius: 50%;
+        font-weight : 600;
+        border: 1px solid #e3e7ef;
+
+            &:hover{
+                background-color: $main-color;
+            }
+
+        &.active{
+            background-color : $main-color;
+        }
      
 
-
+            }
     }
 
    

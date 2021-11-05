@@ -8,6 +8,8 @@ import ProductCard from 'components/ProductCard';
 import category from 'assets/fake-data/category';
 import price from 'assets/fake-data/price';
 
+
+
 import CheckBox from 'components/CheckBox';
 
 
@@ -86,7 +88,7 @@ const Catalog = () => {
 
             if (filter.category.length > 0) {
                 //duyệt qua từng phần tử
-                // console.log(filter.category)
+                console.log(filter.category)
                 temp = temp.filter(e => filter.category.includes(e.category))
             }
             if (filter.price.length === 2 && filter.price[0] > 0 && filter.price[1] > 1) {
@@ -104,7 +106,7 @@ const Catalog = () => {
                 temp = products
             }
 
-            // console.log(temp);
+            console.log(temp);
 
             setProductCate(temp);
         },
@@ -121,9 +123,10 @@ const Catalog = () => {
 
 
 
+
+
     return (
         <Helmet title="Sản phẩm">
-            {/* {console.log(filter)} */}
             <div>
                 {
                     loading ? (<LoadingBox></LoadingBox>) : error ?
@@ -176,14 +179,11 @@ const Catalog = () => {
                                         <ProductCard
                                             products={productCate}
                                             col={3}
+                                            currentPage={0}
+                                            postsPerPage={0}
                                         />
                                     }
                                 </div>
-
-
-
-
-
                             </div>
                         )
                 }

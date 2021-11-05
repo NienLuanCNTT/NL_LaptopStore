@@ -3,18 +3,21 @@ import cartEmty from 'assets/images/empty-cart.png';
 import axios from 'axios';
 import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
-
 import { ORDER_CREATE_RESET } from 'constants/orderConstants';
+import { TOAST_OPTIONS } from 'constants/productConstants';
 import InputField from 'custom-field/InputField';
 import RadioField from 'custom-field/RadioField';
 import SelectField from 'custom-field/SelectField';
 import CheckoutList from 'pages/CheckOut/CheckoutList';
-
-import { removeProduct, selectQuantity } from 'pages/CheckOut/CheckSlice';
+import { cartEmpty, removeProduct, selectQuantity } from 'pages/CheckOut/CheckSlice';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
 import numberWithCommas from 'utils/numberWithCommas';
+
+
+
+
 
 
 
@@ -23,13 +26,12 @@ function CheckOut(props) {
 
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
-
+    const [isPending, setIsPending] = useState(false);
 
     const [city, setCity] = useState([]);
     const [district, setDistrict] = useState([]);
     const [commune, setCommune] = useState([]);
     const dispatch = useDispatch();
-    const history = useHistory();
 
 
     // Set filter when change
@@ -90,7 +92,7 @@ function CheckOut(props) {
         fetchCommune();
     }, [filter]);
 
-    const [shipOptions, setShipOption] = useState('');
+
 
     const { checkList } = useSelector((state) => state.checkList);
     const orderCreate = useSelector((state) => state.orderCreate);
@@ -105,6 +107,20 @@ function CheckOut(props) {
         dispatch(removeProduct({ id }));
     };
 
+    const [userOrder, setUserOrder] = useState()
+    useEffect(() => {
+        const fetchUserOrder = async () => {
+            const order = await axios.get(`http://localhost:5000/api/orders/${userInfo?._id}`);
+            const index = Object.keys(order.data).length;
+            if (Object.keys(order.data).length > 0) {
+                const data = order.data[index - 1].shipingAddress || [];
+
+                setUserOrder(data);
+            }
+            return;
+        }
+        fetchUserOrder();
+    }, [userInfo?._id]);
 
     const [shipState, setshipState] = useState({
         fullName: userInfo?.name,
@@ -115,13 +131,15 @@ function CheckOut(props) {
         address: 'Tòa nhà LaptopStore, 30/4',
     })
 
+    const [shipOptions, setShipOption] = useState('store');
+
     const [checkFrom, setCheckFrom] = useState({
-        phonenumber: {
+        fullname: {
             value: '',
             isInputValid: true,
             errorMessage: ''
         },
-        fullname: {
+        phone: {
             value: '',
             isInputValid: true,
             errorMessage: ''
@@ -130,65 +148,80 @@ function CheckOut(props) {
             value: '',
             isInputValid: true,
             errorMessage: ''
-        }
+        },
+        ship: {
+            value: '',
+            isInputValid: true,
+            errorMessage: ''
+        },
+        city: {
+            value: '',
+            isInputValid: true,
+            errorMessage: ''
+        },
+        district: {
+            value: '',
+            isInputValid: true,
+            errorMessage: ''
+        },
+        commune: {
+            value: '',
+            isInputValid: true,
+            errorMessage: ''
+        },
+        address: {
+            value: '',
+            isInputValid: true,
+            errorMessage: ''
+        },
+
+    });
+    const [check, setCheck] = useState({
+        fullname: '' || userInfo?.name,
+        phone: '' || userOrder?.phone,
+        email: '' || userInfo?.email,
+        ship: shipOptions,
+        city: true,
+        district: true,
+        commune: true,
+        address: true,
     });
 
-    const [check, setCheck] = useState({});
     function FormError(props) {
         if (props.isHidden) { return null; }
         return (<div className="form-error">{props.errorMessage}</div>)
     }
 
-
-    const validateInput = (type, checkingText) => {
-        if (type === "phonenumber") {
+    const validateInput = (type, checkingText, id) => {
+        if (type === "phone") {
             const regexp = /^\d{10}$/;
             const checkingResult = regexp.exec(checkingText);
             if (checkingResult !== null) {
+                setshipState({ ...shipState, phone: checkingText })
                 setCheckFrom({
                     ...checkFrom,
-                    phonenumber: {
+                    phone: {
                         isInputValid: true,
                         errorMessage: '',
                     }
                 })
-                setCheck({ ...check, phonenumber: true, });
+                setCheck({ ...check, phone: true, });
             } else {
                 setCheckFrom({
                     ...checkFrom,
-                    phonenumber: {
+                    phone: {
                         isInputValid: false,
                         errorMessage: 'Số điện thoại phải có 10 chữ số.'
                     }
                 })
-                setCheck({ ...check, phonenumber: false });
-            }
-        }
-        if (type === "fullname") {
-            if (checkingText) {
-                setCheckFrom({
-                    ...checkFrom,
-                    fullname: {
-                        isInputValid: true,
-                        errorMessage: '',
-                    }
-                })
-                setCheck({ ...check, fullname: true });
-            } else {
-                setCheckFrom({
-                    ...checkFrom,
-                    fullname: {
-                        isInputValid: false,
-                        errorMessage: 'Tên không để trống, chứa chữ số'
-                    }
-                })
-                setCheck({ ...check, fullname: false });
+                setCheck({ ...check, phone: false });
             }
         }
         if (type === "email") {
-            const regexp = /([a-zA-Z0-9_/./-])+\@gmail.com/g;
+            const regexp = /([a-zA-Z0-9_/./-])+@gmail.com/g;
             const checkingResult = regexp.exec(checkingText);
             if (checkingResult !== null) {
+                setshipState({ ...shipState, email: checkingText })
                 setCheckFrom({
                     ...checkFrom,
                     email: {
@@ -208,46 +241,129 @@ function CheckOut(props) {
                 setCheck({ ...check, email: false });
             }
         }
-    }
-    useEffect(() => {
-        if (userInfo)
-            setCheck({ ...check, fullname: true, email: true });
-        if (shipOptions === 'home' || shipOptions === 'store') {
-            setCheck({ ...check, ship: true })
-        } else {
-            setCheck({ ...check, ship: false })
+        if (type === "checknull") {
+            if (checkingText) {
+                setshipState({ ...shipState, [id]: checkingText })
+                setCheckFrom({
+                    ...checkFrom,
+                    [id]: {
+                        isInputValid: true,
+                        errorMessage: '',
+                    }
+                })
+                setCheck({ ...check, [id]: true });
+            } else {
+                setCheckFrom({
+                    ...checkFrom,
+                    [id]: {
+                        isInputValid: false,
+                        errorMessage: 'Vui lòng điền ở đây'
+                    }
+                })
+                setCheck({ ...check, [id]: false });
+            }
         }
-    }, [userInfo, shipOptions])
-    console.log(check);
+    }
 
-    const handleCheckOut = (e) => {
+    const handleShipStore = () => {
+        setShipOption('store');
+        setCheck({
+            ...check,
+            city: true,
+            district: true,
+            commune: true,
+            address: true,
+        });
+
+        setshipState({
+            ...shipState,
+            city: 'Thành Phố Cần Thơ',
+            district: 'Ninh Kiều',
+            commune: 'Hưng Lợi',
+            address: 'Tòa nhà LaptopStore, 30/4',
+        })
+    }
+
+    const handleShipHome = () => {
+        setShipOption('home');
+        setCheck({
+            ...check,
+            city: '' || userOrder?.city,
+            district: '' || userOrder?.district,
+            commune: '' || userOrder?.commune,
+            address: '' || userOrder?.address,
+        });
+        setshipState({
+            ...shipState,
+            city: '' || userOrder?.city,
+            district: '' || userOrder?.district,
+            commune: '' || userOrder?.commune,
+            address: '' || userOrder?.address,
+        })
+    }
+
+    const handelFormSubmit = (e) => {
         e.preventDefault();
+        if (userInfo) {
 
-        dispatch(createCheckOut({
-            orderItems: checkList,
-            shipingAddress: {
-                fullName: shipState.fullName,
-                phone: shipState.phone,
-                city: shipState.city,
-                district: shipState.district,
-                commune: shipState.commune,
-                address: shipState.address
-            },
-            totalPrice: total,
-            userId: userInfo._id
-        }));
-        // setcheckOutModal(false);
+            let checkKey = 0;
+            for (const [key, value] of Object.entries(check)) {
+                if (!value) {
+                    setCheckFrom({
+                        ...checkFrom,
+                        [key]: {
+                            isInputValid: false,
+                            errorMessage: 'Vui lòng điền ở đây!'
+                        }
+                    });
+                }
+                if (value) {
+                    checkKey += 1;
+                }
+            }
+            if (checkKey === 8) {
+                setIsPending(true);
+                setTimeout(() => {
+                    dispatch(createCheckOut({
+                        orderItems: checkList,
+                        shipingAddress: {
+                            fullName: shipState.fullName,
+                            phone: shipState.phone,
+                            city: shipState.city,
+                            district: shipState.district,
+                            commune: shipState.commune,
+                            address: shipState.address
+                        },
+                        totalPrice: total,
+                        userId: userInfo?._id
+                    }));
+                    toast.success('Đã đặt hàng thành công 👌👌', {
+                        ...TOAST_OPTIONS,
+                    });
+                    setIsPending(false);
+                    setcheckOutModal(false);
+                    dispatch(cartEmpty());
+                }, 2000)
+            }
+        } else {
+            toast.warn('Vui lòng đăng nhập để đặt hàng!!', {
+                ...TOAST_OPTIONS,
+            })
+        }
+
     }
 
     const onCityFilter = ({ target }) => {
         const obj = JSON.parse(target.value);
         setFilter({ ...filter, cityCode: obj.value });
-        setshipState({ ...shipState, city: obj.label });
+        validateInput("checknull", obj.label, "city")
+        // setshipState({ ...shipState, city: obj.label });
     }
     const onDistrictFilter = ({ target }) => {
         const obj = JSON.parse(target.value);
         setFilter({ ...filter, districtCode: obj.value });
-        setshipState({ ...shipState, district: obj.label });
+        validateInput("checknull", obj.label, "district");
+        // setshipState({ ...shipState, district: obj.label });
     }
     const total = checkList.reduce(
         (sum, product) =>
@@ -264,6 +380,7 @@ function CheckOut(props) {
         }
     }, [dispatch, order, props.history, success]);
 
+    console.log(check);
     return (
         <div className="modal__product-check">
             <div className="modal__wrapper">
@@ -303,7 +420,7 @@ function CheckOut(props) {
                                             </div>
                                         </div>
                                     </div>
-                                    <form action="">
+                                    <form className="form" onSubmit={handelFormSubmit}>
                                         <div className="card-form">
                                             <div className="card-form-block">
                                                 <h1>Thông tin khách hàng</h1>
@@ -316,8 +433,7 @@ function CheckOut(props) {
                                                                 placeholder="Nhập Họ và Tên*"
                                                                 defaultValue={'' || userInfo?.name}
                                                                 className="mr-10"
-                                                                // onChange={(e) => setshipState({ ...shipState, fullName: e.target.value })}
-                                                                onChange={(e) => validateInput("fullname", e.target.value)}
+                                                                onChange={(e) => validateInput("checknull", e.target.value, "fullname")}
 
                                                             />
                                                             <FormError
@@ -328,17 +444,15 @@ function CheckOut(props) {
                                                         <div>
                                                             <InputField
                                                                 type="text"
-                                                                name="phonenumber"
+                                                                name="phone"
                                                                 placeholder="Nhập Số điện thoại"
-                                                                // onChange={(e) => setshipState({ ...shipState, phone: e.target.value })}
-                                                                onChange={(e) => validateInput("phonenumber", e.target.value)}
+                                                                onChange={(e) => validateInput("phone", e.target.value)}
                                                             />
                                                             <FormError
-                                                                isHidden={checkFrom.phonenumber.isInputValid}
-                                                                errorMessage={checkFrom.phonenumber.errorMessage}
+                                                                isHidden={checkFrom.phone.isInputValid}
+                                                                errorMessage={checkFrom.phone.errorMessage}
                                                             />
                                                         </div>
-
                                                     </div>
                                                     <div>
                                                         <InputField
@@ -363,7 +477,7 @@ function CheckOut(props) {
                                                             title="Giao hàng tận nơi, miễn phí"
                                                             name="ship"
                                                             type="radio"
-                                                            onChange={() => setShipOption('home')}
+                                                            onChange={handleShipHome}
                                                         />
                                                     </div>
                                                     <div className="form-box-radio">
@@ -372,7 +486,8 @@ function CheckOut(props) {
                                                             title="Nhận tại cửa hàng"
                                                             name="ship"
                                                             type="radio"
-                                                            onChange={() => setShipOption('store')}
+                                                            defaultChecked={true}
+                                                            onChange={handleShipStore}
                                                         />
                                                     </div>
                                                 </div>
@@ -385,8 +500,12 @@ function CheckOut(props) {
                                                                     name="Thành Phố" //lable name
                                                                     id="city"
                                                                     options={city}
-                                                                    defaultOption={userInfo?.city || "--Chọn Thành Phố--"}
+                                                                    defaultOption={userOrder?.city || "--Chọn Thành Phố--"}
                                                                     onChange={onCityFilter}
+                                                                />
+                                                                <FormError
+                                                                    isHidden={checkFrom.city.isInputValid}
+                                                                    errorMessage={checkFrom.city.errorMessage}
                                                                 />
                                                             </div>
                                                             <div className=" box__select ship-address-district">
@@ -395,8 +514,12 @@ function CheckOut(props) {
                                                                     name="Quận/Huyện" //lable name
                                                                     id="district"
                                                                     options={district}
-                                                                    defaultOption={userInfo?.district || "--Chọn Quận/Huyện--"}
+                                                                    defaultOption={userOrder?.district || "--Chọn Quận/Huyện--"}
                                                                     onChange={onDistrictFilter}
+                                                                />
+                                                                <FormError
+                                                                    isHidden={checkFrom.district.isInputValid}
+                                                                    errorMessage={checkFrom.district.errorMessage}
                                                                 />
                                                             </div>
                                                         </div>
@@ -407,9 +530,13 @@ function CheckOut(props) {
                                                                 label
                                                                 name="Xã/Phường"
                                                                 id="commune"
-                                                                defaultOption={userInfo?.commune || "--Chọn Xã/Phường--"}
+                                                                defaultOption={userOrder?.commune || "--Chọn Xã/Phường--"}
                                                                 options={commune}
-                                                                onChange={(e) => setshipState({ ...shipState, commune: JSON.parse(e.target.value).label })}
+                                                                onChange={(e) => validateInput("checknull", JSON.parse(e.target.value).label, "commune")}
+                                                            />
+                                                            <FormError
+                                                                isHidden={checkFrom.commune.isInputValid}
+                                                                errorMessage={checkFrom.commune.errorMessage}
                                                             />
                                                         </div>
 
@@ -418,8 +545,12 @@ function CheckOut(props) {
                                                                 type="text"
                                                                 name="ship-address"
                                                                 placeholder="Nhập địa chỉ cụ thể*"
-                                                                defaultValue={'' || userInfo?.address}
-                                                                onChange={(e) => setshipState({ ...shipState, address: e.target.value })}
+                                                                defaultValue={userOrder?.address || ''}
+                                                                onChange={(e) => validateInput("checknull", e.target.value, "address")}
+                                                            />
+                                                            <FormError
+                                                                isHidden={checkFrom.address.isInputValid}
+                                                                errorMessage={checkFrom.address.errorMessage}
                                                             />
                                                         </div>
                                                     </div>
@@ -438,10 +569,12 @@ function CheckOut(props) {
                                         <div className="card-checkout">
                                             <button
                                                 type="submit"
-                                                className="btn btn-checkout"
-                                            // onClick={handleCheckOut}
                                             >
-                                                {loadding && <i className="fas fa-spinner fa-spin"></i>}  Hoàn tất đặt hàng
+                                                {
+                                                    isPending ?
+                                                        <div className="btn btn-pending"><i className="fas fa-spinner fa-spin"></i> Đang tạo đơn hàng... </div> :
+                                                        <div className="btn btn-checkout">Hoàn tất đặt hàng</div>
+                                                }
                                             </button>
                                             <p>Cảm ơn bạn đã đến với cửa hàng của chúng tôi</p>
                                             {loadding && <LoadingBox />}

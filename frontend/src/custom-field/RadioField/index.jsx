@@ -25,6 +25,7 @@ function RadioField(props) {
         name,
         type,
         className,
+        defaultChecked,
         onChange
     } = props;
 
@@ -36,6 +37,7 @@ function RadioField(props) {
                 type={type}
                 className={className}
                 onChange={onChange}
+                defaultChecked={defaultChecked}
             />
             <label htmlFor={id}>{title}</label>
         </>

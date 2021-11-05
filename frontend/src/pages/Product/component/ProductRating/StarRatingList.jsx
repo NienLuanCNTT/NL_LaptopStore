@@ -1,4 +1,3 @@
-import iconUser from 'assets/svg/icon-user.svg';
 import React from 'react';
 import ProductRating from './index';
 
@@ -12,7 +11,7 @@ const StarRatingList = (props) => {
                     .map((item, index) => (
                         <div key={index} className="item">
                             <div className="item-logo">
-                                <img src={iconUser} alt="" />
+                                <img src={item.image} alt="" />
                             </div>
                             <div className="item-detail">
                                 <p className="item-name">

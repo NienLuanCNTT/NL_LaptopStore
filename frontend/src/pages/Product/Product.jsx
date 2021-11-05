@@ -1,29 +1,28 @@
 import { detailProduct } from 'actions/productActions';
 import FEcredit from 'assets/logo/fecredit.png';
 import VNpay from 'assets/logo/vnpay.png';
-import iconUser from 'assets/svg/icon-user.svg';
 import axios from 'axios';
-
 import 'boxicons';
 import Helmet from 'components/Helmet';
 import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
-
 import { TOAST_OPTIONS } from 'constants/productConstants';
 import { addToCart } from 'pages/CheckOut/CheckSlice';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
 import { toast } from 'react-toastify';
 import numberWithCommas from 'utils/numberWithCommas';
 import ProductCheck from '../CheckOut';
 import ProductConfig from './component/ProductConfig';
 import ProductRating from './component/ProductRating';
-
 import StarRating from './component/ProductRating/StarRating';
 import StarRatingList from './component/ProductRating/StarRatingList';
 import { addComment } from './component/ProductRating/StarRatingSlice';
+
+
+
+
 
 
 
@@ -51,9 +50,9 @@ const Product = (props) => {
 
     const handleAddProduct = (id, product) => {
         dispatch(addToCart({ id, product }));
-        toast.success('Added a product to the cart 👌👌', {
+        toast.success('Đã thêm sản phẩm vào giỏ hàng', {
             ...TOAST_OPTIONS,
-        })
+        });
     }
 
     useEffect(() => {
@@ -66,32 +65,37 @@ const Product = (props) => {
         setRating(ratingValue);
     }
 
-    const userProfile = {
-        _id: 5,
-        name: 'Minh Hiếu Nguyễn',
-        img: iconUser,
-    }
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+
 
     const handleOnChange = (e) => {
         setComment(e.target.value);
     }
-    const handleClickCommet = (productId, comment, userProfile) => {
-        if (comment === '') {
-            toast.warn("Comment is null 👌👌");
-        } else {
-            setIsComment(true);
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    dispatch(addComment({ productId, comment, userProfile }))
-                    toast.success("Add a commet is complete 👌👌");
+    const handleClickCommet = (productId, comment, userInfo) => {
+        if (userInfo) {
+            if (comment === '') {
+                toast.warn("Comment is null 👌👌");
+            } else {
+                setIsComment(true);
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        dispatch(addComment({ productId, comment, userInfo }))
+                        toast.success("Đã thêm bình luận");
 
-                    resolve(true);
-                    setComment('');
-                    setIsComment(false);
-                    setFeedback(prev => !prev);
-                }, 1000);
+                        resolve(true);
+                        setComment('');
+                        setIsComment(false);
+                        setFeedback(prev => !prev);
+                    }, 1000);
+                })
+            }
+        } else {
+            toast.warn('Vui lòng đăng nhập để đặt câu hỏi!!', {
+                ...TOAST_OPTIONS,
             })
         }
+
 
     }
 
@@ -99,7 +103,7 @@ const Product = (props) => {
     const ModalCheckOpen = (id, product) => {
         setcheckOutModal(true);
         dispatch(addToCart({ id, product }));
-        toast.success('Added a product to the cart 👌👌', {
+        toast.success('Đã thêm sản phẩm vào giỏ hàng ✅', {
             ...TOAST_OPTIONS,
         });
     }
@@ -108,7 +112,6 @@ const Product = (props) => {
     const [userComments, setUserComments] = useState([]);
 
     const [isFeedback, setFeedback] = useState(false);
-
 
     useEffect(() => {
         if (product?._id) {
@@ -125,7 +128,7 @@ const Product = (props) => {
 
             fetchStarRating();
         }
-    }, [isFeedback, product?._id])
+    }, [product?._id, isFeedback])
 
     const ratingSum = starRating.reduce(
         (avg, rating) =>
@@ -295,7 +298,7 @@ const Product = (props) => {
                                         <button className="btn btn-vote" onClick={handleOpenRating}>Viết đánh giá</button>
                                     </div>
 
-                                    {rating && <StarRating productId={product._id} setFeedback={setFeedback} useprofile={userProfile} />}
+                                    {rating && <StarRating productId={product._id} setFeedback={setFeedback} userInfo={userInfo} />}
                                     <div className="product__box-vote-list">
                                         <StarRatingList starRating={starRating} />
                                     </div>
@@ -308,7 +311,7 @@ const Product = (props) => {
                                         </div>
                                         <div className="product__comment-top-write">
                                             <textarea type="text" placeholder="Viết câu hỏi của bạn" value={comment} onChange={handleOnChange} />
-                                            <button onClick={() => handleClickCommet(product._id, comment, userProfile)}>
+                                            <button onClick={() => handleClickCommet(product._id, comment, userInfo)}>
                                                 {isComment && <i className="fas fa-spinner fa-spin"></i>} Gửi
                                             </button>
                                         </div>

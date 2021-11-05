@@ -249,7 +249,10 @@
                     justify-content: center;
                     width: 50px;
                     margin-right: 15px;
-                    opacity: 0.6;
+                    img {
+                        border-radius: 50%;
+                        width: 100%;
+                    }
                 }
                 &-detail {
                     margin-bottom: 10px;
@@ -326,6 +329,13 @@
                             margin-left: 8px;
                             font-size: 12px;
                         }
+                    }
+                }
+                .comment-logo {
+                    width: 50px;
+                    img {
+                        border-radius: 50%;
+                        width: 100%;
                     }
                 }
             }

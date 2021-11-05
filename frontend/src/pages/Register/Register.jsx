@@ -28,11 +28,7 @@ const Register = (props) => {
         if (password !== confirmPassword) {
             alert('Mật khẩu và Nhập lại mật khẩu không đúng');
         } else {
-<<<<<<< HEAD
-            dispatch(register(name, email, password));
-=======
             dispatch(register(name, email, password, image));
->>>>>>> 964c9a0859fc4c1c9ed39a429d591cf926b8669b
             props.history.push('/');
         }
     };

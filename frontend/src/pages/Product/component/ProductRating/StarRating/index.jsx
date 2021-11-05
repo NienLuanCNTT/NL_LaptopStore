@@ -1,10 +1,11 @@
+import { TOAST_OPTIONS } from 'constants/productConstants';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { addStarRating } from '../StarRatingSlice';
 
 const StarRating = (props) => {
-    const { useprofile, productId, setFeedback } = props;
+    const { userInfo, productId, setFeedback } = props;
     const dispatch = useDispatch();
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
@@ -15,25 +16,32 @@ const StarRating = (props) => {
         e.preventDefault();
         setcmtRating(e.target.value);
     }
-    const handleAddStarRating = (rating, comment, userProfile) => {
-        if (rating === null || comment === '') {
-            toast.warn("Rating is null 👌👌");
-        }
-        else {
-            setIsRating(true);
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    dispatch(addStarRating({ productId, rating, comment, userProfile }));
-                    toast.success("Add a Rating is complete 👌👌");
+    const handleAddStarRating = (rating, comment, userInfo) => {
+        if (userInfo) {
+            if (rating === null || comment === '') {
+                toast.warn("Đánh giá còn thiếu 🛑");
+            }
+            else {
+                setIsRating(true);
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        dispatch(addStarRating({ productId, rating, comment, userInfo }));
+                        toast.success("Đã thêm đánh giá thành công ✅");
 
-                    resolve(true);
-                    setRating(null);
-                    setcmtRating('');
-                    setIsRating(false);
-                    setFeedback(prev => !prev);
-                }, 2000);
+                        resolve(true);
+                        setRating(null);
+                        setcmtRating('');
+                        setIsRating(false);
+                        setFeedback(prev => !prev);
+                    }, 2000);
+                })
+            }
+        } else {
+            toast.warn('Vui lòng đăng nhập để đánh giá!!', {
+                ...TOAST_OPTIONS,
             })
         }
+
     }
 
 
@@ -85,7 +93,7 @@ const StarRating = (props) => {
                     placeholder="Viết đánh giá của bạn"
                     onChange={handleOnChange}
                 ></textarea>
-                <button onClick={() => handleAddStarRating(rating, cmtRating, useprofile)}>
+                <button onClick={() => handleAddStarRating(rating, cmtRating, userInfo)}>
                     {isRating && <i className="fas fa-spinner fa-spin"></i>} Gửi đánh giá
                 </button>
             </div>

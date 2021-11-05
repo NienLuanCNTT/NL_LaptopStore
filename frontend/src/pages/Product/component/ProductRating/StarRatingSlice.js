@@ -1,4 +1,3 @@
-import iconUser from 'assets/svg/icon-user.svg';
 import axios from 'axios';
 const { createSlice } = require("@reduxjs/toolkit");
 
@@ -9,32 +8,32 @@ const StarRatingSlice = createSlice({
     initialState,
     reducers: {
         addStarRating: (state, action) => {
-            const { productId, rating, comment, userProfile } = action.payload;
+            const { productId, rating, comment, userInfo } = action.payload;
             const today = new Date();
             const newStarRating = {
                 productId,
-                userName: userProfile.name,
-                image: iconUser || userProfile.img,
+                userName: userInfo.name,
+                image: userInfo.image,
                 rating,
                 note: comment,
                 datetime:
                     today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()
                     + ' ' + today.getHours() + ':' + today.getMinutes(),
             }
-            axios.post('http://localhost:5000/api/rating', newStarRating);
+            axios.post('/api/rating', newStarRating);
         },
         addComment: (state, action) => {
-            const { productId, comment, userProfile } = action.payload;
+            const { productId, comment, userInfo } = action.payload;
             const today = new Date();
             const newUserComment = {
                 productId,
-                userName: userProfile.name,
-                image: iconUser || userProfile.img,
+                userName: userInfo.name,
+                image: userInfo.image,
                 datetime: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()
                     + ' ' + today.getHours() + ':' + today.getMinutes(),
                 comment,
             }
-            axios.post('http://localhost:5000/api/usercmts', newUserComment);
+            axios.post('/api/usercmts', newUserComment);
         }
     }
 })

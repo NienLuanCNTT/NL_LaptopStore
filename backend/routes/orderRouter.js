@@ -4,9 +4,9 @@ import Order from './../models/oderModel.js';
 
 const orderRouter = express.Router();
 
-orderRouter.get('/',
+orderRouter.get('/:id',
     expressAsyncHandler(async (req, res) => {
-        const order = new Order;
+        const order = await Order.find({ "userId": req.params.id });
         if (order) {
             res.send(order);
         }

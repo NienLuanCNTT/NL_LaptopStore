@@ -74,7 +74,7 @@ const HeaderPCR = () => {
 
                                 <div>
                                     <div className="btn account btn-avatar">
-                                        <Link><img className="avatar" src={userInfo.image} alt="" /></Link>
+                                        <Link to="/account"><img className="avatar" src={userInfo.image} alt="" /></Link>
                                     </div>
 
 
@@ -90,7 +90,7 @@ const HeaderPCR = () => {
                                         <Link to="/account">
                                             <li>
                                                 <p>
-                                                    <i clasName="fas fa-history"></i>
+                                                    <i className="fas fa-history"></i>
                                                     Lịch sử mua hàng
                                                 </p>
                                             </li>

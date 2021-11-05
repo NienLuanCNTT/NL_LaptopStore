@@ -19,7 +19,7 @@ const CartItem = (props) => {
     const handleRemoveProduct = (id) => {
         if (!onRemove) return;
         onRemove(id);
-        toast.warn('Remove product from cart', {
+        toast.warn('Đã xóa sản phẩm !!', {
             ...TOAST_OPTIONS,
         })
     }

@@ -9,7 +9,7 @@ const orderSchma = new mongoose.Schema({
     }],
     shipingAddress: {
         fullName: { type: String, required: true },
-        phone: { type: Number, required: true },
+        phone: { type: String, required: true },
         city: { type: String, required: true },
         district: { type: String, required: true },
         commune: { type: String, required: true },

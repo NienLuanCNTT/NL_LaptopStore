@@ -201,8 +201,12 @@
                     }
                 }
                 .form-error {
-                    color: #f5420b;
-                    padding: 2px 4px;
+                    color: #000;
+                    padding: 3px;
+                    margin-bottom: 10px;
+                    border-radius: 8px;
+                    text-align: center;
+                    background-color: rgba(255, 0, 0, 0.5);
                 }
             }
         }
@@ -210,6 +214,7 @@
             margin: 30px auto;
             text-align: center;
 
+            .btn-pending,
             .btn-checkout {
                 background-color: #f5420b;
                 color: #fff;
@@ -226,7 +231,9 @@
                     opacity: 0.7;
                 }
             }
-
+            .btn-pending {
+                background-color: #f5e50b;
+            }
             p {
                 margin-top: 10px;
             }

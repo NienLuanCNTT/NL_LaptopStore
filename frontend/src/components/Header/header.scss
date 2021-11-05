@@ -135,7 +135,7 @@
                 margin: 0 10px;
                 border-radius: 50%;
                 // .btn-avatar{
-                    
+
                 //     &:hover{
                 //         opacity: 60%;
                 //     }
@@ -145,7 +145,7 @@
                 //         border-radius: 50%;
                 //     }
                 // }
-                
+
                 cursor: pointer;
                 &-icon {
                     width: 20px;
@@ -156,26 +156,22 @@
                     background-color: $main-color;
                 }
 
-                &.logged{
+                &.logged {
                     // padding: 0;
-                    &:hover{
-                        background-color: transparent ;
+                    &:hover {
+                        background-color: transparent;
                     }
 
-                    .btn-avatar{
-                    
-                        &:hover{
+                    .btn-avatar {
+                        &:hover {
                             opacity: 70%;
                         }
-                        .avatar{
-                            width:30px;
+                        .avatar {
+                            width: 30px;
                             height: 30px;
                             border-radius: 50%;
                         }
                     }
-
-
-
                 }
 
                 &-sm {
@@ -192,7 +188,7 @@
                     width: 22px;
                 }
 
-                .user-name{
+                .user-name {
                     font-size: 1.6rem;
                 }
 
@@ -208,7 +204,7 @@
 
                 .dropdown-cart {
                     background-color: #fff;
-                    width: 250px;
+                    width: 300px;
                     border-radius: 4px;
                     padding: 12px 8px;
 
@@ -226,6 +222,9 @@
                     }
                     .Header__cart-list {
                         margin: 10px 0;
+                        max-height: 350px;
+                        overflow: scroll;
+
                         .header__cart-item {
                             @include flex(center, flex-start);
                             margin-bottom: 10px;

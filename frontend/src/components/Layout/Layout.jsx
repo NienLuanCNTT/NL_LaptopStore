@@ -29,7 +29,7 @@ function Layout() {
                 )} />
             </Switch>
 
-            <ToastContainer style={{ fontSize: 14 }} />
+            <ToastContainer style={{ fontSize: 15 }} />
         </BrowserRouter>
 
     );

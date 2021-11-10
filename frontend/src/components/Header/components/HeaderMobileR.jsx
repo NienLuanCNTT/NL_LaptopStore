@@ -52,7 +52,7 @@ const HeaderMobileR = (props) => {
                                 <ul className="account-dropdown">
                                     <li>
                                         <Link to="/account">
-                                            <i class="fas fa-user-circle"></i> Tài khoản
+                                            <i className="fas fa-user-circle"></i> Tài khoản
                                         </Link>
                                     </li>
                                     <li>

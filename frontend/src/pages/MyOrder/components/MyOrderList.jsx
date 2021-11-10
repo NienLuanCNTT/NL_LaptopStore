@@ -3,18 +3,29 @@ import { Link } from 'react-router-dom';
 import numberWithCommas from './../../../utils/numberWithCommas';
 
 const MyOrderList = (props) => {
-    const { orders } = props;
+    const { orders, currentTab } = props;
 
     return (
         <div>
             {
                 orders ? [].concat(orders)
                     .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
+                    .filter(order => currentTab === "all" ? true : order.status === currentTab)
                     .map((order, index) => (
                         <div key={index} className="my-order-list-item">
+                            <div className="item-tag"
+                                style={{
+                                    color:
+                                        order.status === "receved" ? "green" :
+                                            order.status === "cancle" ? "#d40a25" :
+                                                "#ffc318"
+                                }}
+                            >
+                                <i className="fas fa-tag"></i>
+                            </div>
                             <div className="item-top">
                                 <div className="item-top-left">
-                                    <i class="far fa-clock"></i>
+                                    <i className="far fa-clock"></i>
                                     <i> Ngày đặt hàng: {order.dateTime}</i>
                                 </div>
                                 <div className="item-top-status_right">

@@ -54,12 +54,24 @@
             }
         }
         .my-order-list {
+            padding: 12px 24px;
+
             .my-order-list-item {
+                position: relative;
                 padding: 12px 24px;
                 margin: 20px 0 32px;
+
+                border-top: 1px solid #e3e7ef;
                 border-bottom: 1px solid #e3e7ef;
                 box-shadow: $box-shadow;
                 border-radius: 8px;
+
+                .item-tag {
+                    position: absolute;
+                    top: 0;
+                    left: 4px;
+                    font-size: 26px;
+                }
 
                 .item-top {
                     @include flex(center, space-between);

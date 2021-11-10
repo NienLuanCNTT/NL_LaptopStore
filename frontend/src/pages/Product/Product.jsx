@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import numberWithCommas from 'utils/numberWithCommas';
 import ProductCheck from '../CheckOut';
+import CommentsList from './component/ProductComments';
 import ProductConfig from './component/ProductConfig';
 import ProductRating from './component/ProductRating';
 import StarRating from './component/ProductRating/StarRating';
@@ -98,14 +99,17 @@ const Product = (props) => {
 
 
     }
-
+    const [loadingcheckbox, setLoadingcheckbox] = useState(true);
 
     const ModalCheckOpen = (id, product) => {
         setcheckOutModal(true);
         dispatch(addToCart({ id, product }));
-        toast.success('Đã thêm sản phẩm vào giỏ hàng ✅', {
-            ...TOAST_OPTIONS,
-        });
+        setTimeout(() => {
+            setLoadingcheckbox(false);
+            toast.success('Đã thêm sản phẩm vào giỏ hàng', {
+                ...TOAST_OPTIONS,
+            });
+        }, 1000);
     }
 
     const [starRating, setStarRating] = useState([]);
@@ -147,7 +151,7 @@ const Product = (props) => {
                         (
                             <div className="product">
                                 {configModal && <ProductConfig product={product} setConfigModal={setConfigModal} />}
-                                {checkOutModal && <ProductCheck setcheckOutModal={setcheckOutModal} />}
+                                {checkOutModal && <ProductCheck setcheckOutModal={setcheckOutModal} loadingcheckbox={loadingcheckbox} setLoadingcheckbox={setLoadingcheckbox} />}
                                 <div className="product__detail">
                                     <div className="product__detail-top">
                                         <div className="product__detail-top-name">
@@ -161,7 +165,10 @@ const Product = (props) => {
                                                 <div className="product__detail-top-ratting-star">
                                                     <ProductRating rating={ratingAvg.toFixed(1)} />
                                                 </div>
-                                                <div className="product__detail-top-ratting-number">{starRating.length} đánh giá</div>
+                                                <div className="product__detail-top-ratting-number">
+                                                    <i>{starRating.length} đánh giá</i> <br />
+                                                    <i>{userComments.length} bình luận </i>
+                                                </div>
                                             </div>
                                         </a>
                                     </div >
@@ -286,7 +293,10 @@ const Product = (props) => {
                                 <div className="product__box-vote">
                                     <div className="box-vote-head">
                                         <div className="box-vote-head-left">
-                                            <h1>Đánh giá của khách hàng</h1>
+                                            <div className="vote-title">
+                                                <h1>Đánh giá của khách hàng</h1>
+                                                <span className="numbers">{starRating.length}</span>
+                                            </div>
                                             <div className="vote-tb">
                                                 <p>Đánh giá trung bình</p>
                                                 <div className="vote">
@@ -307,7 +317,7 @@ const Product = (props) => {
                                     <div className="product__comment-top">
                                         <div className="product__comment-top-head">
                                             <h1>Bình luận</h1>
-                                            <span>{userComments.length}</span>
+                                            <span className="numbers">{userComments.length}</span>
                                         </div>
                                         <div className="product__comment-top-write">
                                             <textarea type="text" placeholder="Viết câu hỏi của bạn" value={comment} onChange={handleOnChange} />
@@ -316,26 +326,7 @@ const Product = (props) => {
                                             </button>
                                         </div>
                                     </div>
-                                    <div className="product__comment-list">
-                                        {
-                                            [].concat(userComments)
-                                                .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
-                                                .map((item, index) => (
-                                                    <div key={index} className="comment">
-                                                        <div className="comment-logo">
-                                                            <img src={item.image} alt="" />
-                                                        </div>
-                                                        <div className="comment-detail">
-                                                            <p className="item-name">
-                                                                <b>{item.userName}</b>
-                                                                <i>{item.datetime}</i>
-                                                            </p>
-                                                            <p>{item.comment}</p>
-                                                        </div>
-                                                    </div>
-                                                ))
-                                        }
-                                    </div>
+                                    <CommentsList userComments={userComments} />
                                 </div>
                             </div >
                         )

@@ -74,6 +74,7 @@
                             text-align: center;
                         }
                         .btn-minus,
+                        .btn-minus-active,
                         .btn-plus {
                             padding: 4px 8px;
                             align-items: center;
@@ -87,8 +88,12 @@
 
                             &:hover {
                                 color: #32373d;
-                                background: #f8f9fa;
+                                background-color: rgb(233, 233, 233);
                             }
+                        }
+                        .btn-minus-active {
+                            background-color: rgb(233, 233, 233);
+                            cursor: default;
                         }
                     }
                     .btn-remove {

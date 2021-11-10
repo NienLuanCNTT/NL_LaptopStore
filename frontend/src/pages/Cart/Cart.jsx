@@ -27,11 +27,17 @@ function Cart() {
 
         ), 0)
     const [checkOutModal, setcheckOutModal] = useState(false);
-
+    const [loadingcheckbox, setLoadingcheckbox] = useState(true);
+    const handleCheckout = () => {
+        setcheckOutModal(true);
+        setTimeout(() => {
+            setLoadingcheckbox(false);
+        }, 2000);
+    }
     return (
 
         <div className="cart">
-            {checkOutModal && <CheckOut setcheckOutModal={setcheckOutModal} />}
+            {checkOutModal && <CheckOut setcheckOutModal={setcheckOutModal} loadingcheckbox={loadingcheckbox} setLoadingcheckbox={setLoadingcheckbox} />}
             {
                 checkList.length >= 1 && (
                     <div>
@@ -53,7 +59,7 @@ function Cart() {
                                     <span>{numberWithCommas(total)}₫</span>
                                 </div>
                                 <div className="btn">
-                                    <p className=" btn-checkout" onClick={() => setcheckOutModal(true)}>
+                                    <p className=" btn-checkout" onClick={handleCheckout}>
                                         Tiến hành thành toán
                                     </p>
                                 </div>

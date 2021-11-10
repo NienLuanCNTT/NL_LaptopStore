@@ -21,14 +21,14 @@ orderRouter.post(
     expressAsyncHandler(async (req, res) => {
         if (!req.body.orderItems) {
             res.status(404).send({ message: "Cart is empty!" });
-            console.log(req.body);
         }
         else {
-            console.log(req.body);
             const order = new Order({
                 orderItems: req.body.orderItems,
                 shipingAddress: req.body.shipingAddress,
                 totalPrice: req.body.totalPrice,
+                status: req.body.status,
+                dateTime: req.body.dateTime,
                 userId: req.body.userId,
             });
             order.save();

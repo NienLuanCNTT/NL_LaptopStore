@@ -50,7 +50,7 @@ function CheckoutItem(props) {
             <div className="product-card-quality">
                 <div className="product-card-quality-wrap">
                     <i
-                        className="btn btn-minus"
+                        className={product.quantity === 1 ? "btn-minus-active" : "btn btn-minus"}
                         onClick={() =>
                             handleQuantityChange(product._id, product.quantity - 1)
                         }>

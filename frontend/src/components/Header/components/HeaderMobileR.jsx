@@ -1,8 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const HeaderMobileR = () => {
+const HeaderMobileR = (props) => {
+    const {
+        userInfo,
+        checkList,
+        signoutHandler,
+    } = props;
 
     function handleOnClickToggle() {
         const menuToggle = document.querySelector('.menu-toggle-mobile');
@@ -13,8 +17,6 @@ const HeaderMobileR = () => {
             menuToggle.style.transform = 'translateX(200px)';
         }
     }
-
-    const { checkList } = useSelector((state) => state.checkList);
 
     return (
         <div className="header__nav-menu-mobile">
@@ -40,15 +42,39 @@ const HeaderMobileR = () => {
                     <box-icon name='category' type='solid' color='#676464' />
                 </i>
                 <div className="menu-toggle-mobile">
-                    <div>
-                        <Link to="/account">
-                            <p>
-                                <box-icon name='user-circle' color='#434242' ></box-icon>
-                                <span>Đăng Nhập</span>
-                            </p>
-                        </Link >
-                    </div>
-                    <div>
+                    {
+                        userInfo ?
+                            <div className="user-info-mobile">
+                                <p>
+                                    <box-icon name='user-circle' color='#434242' ></box-icon>
+                                    <span>{userInfo.name}</span>
+                                </p>
+                                <ul className="account-dropdown">
+                                    <li>
+                                        <Link to="/account">
+                                            <i class="fas fa-user-circle"></i> Tài khoản
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/myorder">
+                                            <i className="fas fa-history"></i> Lịch sử mua hàng
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/" onClick={signoutHandler}>
+                                            <i className="fas fa-sign-out-alt"></i> Đăng xuất
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div> :
+                            <Link to="/signin">
+                                <p>
+                                    <box-icon name='user-circle' color='#434242' ></box-icon>
+                                    <span>Đăng Nhập</span>
+                                </p>
+                            </Link >
+                    }
+                    <div className="menu-toggle-mobile-cart">
                         <Link to="/cart">
                             <p>
                                 <span className="cart-toggle-sm">{checkList.length}</span>

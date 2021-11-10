@@ -1,31 +1,19 @@
+import cartEmty from 'assets/images/empty-cart.png';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import HCartList from './HCartList';
-import { useSelector } from 'react-redux';
 import numberWithCommas from 'utils/numberWithCommas';
-import cartEmty from 'assets/images/empty-cart.png';
-import { useDispatch } from 'react-redux';
-import { signout } from 'actions/userAction';
+import HCartList from './HCartList';
 
-const HeaderPCR = () => {
-    const { checkList } = useSelector((state) => state.checkList);
-    const total = checkList.reduce(
-        (sum, product) =>
-            sum +
-            product.price *
-            product.quantity,
-        0
-    );
+const HeaderPCR = (props) => {
+    const {
+        userInfo,
+        checkList,
+        total,
+        signoutHandler,
+
+    } = props;
 
     // window.localStorage.clear();
-
-    const userSignin = useSelector((state) => state.userSignin);
-    const { userInfo } = userSignin;
-
-    const dispatch = useDispatch();
-    const signoutHandler = () => {
-        dispatch(signout());
-    }
 
     return (
         <ul className="header__nav-menu-right">
@@ -87,7 +75,7 @@ const HeaderPCR = () => {
                                                 </p>
                                             </li>
                                         </Link>
-                                        <Link to="/account">
+                                        <Link to="/myorder">
                                             <li>
                                                 <p>
                                                     <i className="fas fa-history"></i>
@@ -133,37 +121,6 @@ const HeaderPCR = () => {
                             )
                     }
 
-
-
-
-
-                    {/* User Logined
-                        <ul className="dropdown-account">
-                            <Link to="/account">
-                                <li>
-                                    <p>
-                                        <i className="fas fa-user-cog"></i>
-                                        Tài khoản
-                                    </p>
-                                </li>
-                            </Link>
-                            <Link to="/account">
-                                <li>
-                                    <p>
-                                        <i clasName="fas fa-history"></i>
-                                        Lịch sử mua hàng
-                                    </p>
-                                </li>
-                            </Link>
-                            <Link to="/account">
-                                <li>
-                                    <p>
-                                        <i className="fas fa-sign-out-alt"></i>
-                                        Đăng xuất
-                                    </p>
-                                </li>
-                            </Link>
-                        </ul> */}
                 </div>
             </li>
         </ul>

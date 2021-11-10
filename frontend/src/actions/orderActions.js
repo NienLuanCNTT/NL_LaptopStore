@@ -5,12 +5,11 @@ import { ORDER_CREATE_FAIL, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS } from "c
 export const createCheckOut = (order) => async (dispatch, getState) => {
     dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
     try {
-        // const { userSignin: { userInfo } } = getState();
+        const { userSignin: { userInfo } } = getState();
         const { data } = await axios.post('http://localhost:5000/api/orders', order
             , {
                 headers: {
-                    Authorization: `Bearer `,
-                    // Authorization: `Bearer ${userInfo.token}`,
+                    Authorization: `Bearer ${userInfo.token}`,
                 }
             }
         )
@@ -24,14 +23,3 @@ export const createCheckOut = (order) => async (dispatch, getState) => {
         })
     }
 }
-
-/*
- dispatch(createCheckOut({
-            ShippingAddress: {
-                city: '',
-                district: '',
-                commune: '',
-                address: ''
-            }
-        }));
-*/

@@ -221,9 +221,10 @@
                         }
                     }
                     .Header__cart-list {
-                        margin: 10px 0;
-                        max-height: 350px;
-                        overflow: scroll;
+                        margin: 10px 0 20px;
+                        max-height: 250px;
+                        overflow-y: scroll;
+                        border-radius: 8px;
 
                         .header__cart-item {
                             @include flex(center, flex-start);
@@ -256,7 +257,11 @@
                                 color: $main-color;
                             }
                         }
+                        &.example::-webkit-scrollbar {
+                            display: none;
+                        }
                     }
+
                     .btn-addtocart {
                         @include btn;
                         padding: 10px 12px;
@@ -323,6 +328,28 @@
                     transform: translateX(200px);
                     transition: transform 0.5s;
 
+                    .user-info-mobile {
+                        position: relative;
+
+                        .account-dropdown {
+                            display: none;
+                            background: #efefef;
+                            margin-left: 15px;
+                            border-radius: 6px 0 0 0;
+                            transition: height 2s;
+
+                            li {
+                                border-bottom: 1px solid #ccc;
+                                padding: 8px;
+                            }
+                        }
+                        &:hover .account-dropdown {
+                            display: block;
+                        }
+                    }
+                    &-cart {
+                        position: relative;
+                    }
                     p {
                         display: flex;
                         padding: 10px;
@@ -351,7 +378,7 @@
                 }
                 .cart-toggle-sm {
                     right: 150px;
-                    top: 40px;
+                    top: 0;
                 }
             }
         }

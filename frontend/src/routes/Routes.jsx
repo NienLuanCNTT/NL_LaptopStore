@@ -6,6 +6,7 @@ import Catalog from 'pages/Catalog/Catalog';
 import React from 'react';
 
 import { Route, Switch } from 'react-router-dom'
+import MyOrder from 'pages/MyOrder';
 
 function Routes() {
     return (
@@ -14,6 +15,7 @@ function Routes() {
             <Route path="/cart" component={Cart} />
             <Route path="/product/:id" component={Product} />
             <Route path="/catalog" component={Catalog} />
+            <Route path="/myorder" component={MyOrder} />
             {/* <Route path="/signin" component={Signin} /> */}
         </Switch>
     );

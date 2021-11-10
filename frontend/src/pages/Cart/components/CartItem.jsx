@@ -37,7 +37,7 @@ const CartItem = (props) => {
                     {product.name}
                 </Link>
                 <div className="cart-item-quantity">
-                    <div className="btn btn-minus"
+                    <div className={product.quantity === 1 ? "btn-minus-active" : "btn btn-minus"}
                         disabled={product.quantity === 1}
                         onClick={() => handleQuantityChange(product._id, product.quantity - 1)}
                     >-</div>

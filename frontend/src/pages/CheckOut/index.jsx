@@ -20,9 +20,8 @@ import numberWithCommas from 'utils/numberWithCommas';
 
 
 
-
-function CheckOut(props) {
-    const { setcheckOutModal } = props;
+const CheckOut = (props) => {
+    const { setcheckOutModal, loadingcheckbox, setLoadingcheckbox } = props;
 
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -301,7 +300,7 @@ function CheckOut(props) {
             address: '' || userOrder?.address,
         })
     }
-
+    const today = new Date();
     const handelFormSubmit = (e) => {
         e.preventDefault();
         if (userInfo) {
@@ -335,7 +334,10 @@ function CheckOut(props) {
                             address: shipState.address
                         },
                         totalPrice: total,
-                        userId: userInfo?._id
+                        status: 'pending',
+                        userId: userInfo?._id,
+                        dateTime: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()
+                            + ' ' + today.getHours() + ':' + today.getMinutes(),
                     }));
                     toast.success('Đã đặt hàng thành công 👌👌', {
                         ...TOAST_OPTIONS,
@@ -380,212 +382,218 @@ function CheckOut(props) {
         }
     }, [dispatch, order, props.history, success]);
 
-    console.log(check);
+    const handleCloseModal = () => {
+        setLoadingcheckbox(true);
+        setcheckOutModal(false)
+    }
+
     return (
         <div className="modal__product-check">
             <div className="modal__wrapper">
                 <div className="modal__box">
-                    <div className="modal__card">
-                        <div className="card-title">
-                            Có {checkList.length} sản phẩm trong giỏ hàng
-                            <span onClick={() => setcheckOutModal(false)} id="modal__close" className="modal-close">X</span>
-                        </div>
+                    {loadingcheckbox ? <LoadingBox /> :
+                        <div className="modal__card">
+                            <div className="card-title">
+                                Có {checkList.length} sản phẩm trong giỏ hàng
+                                <span onClick={handleCloseModal} id="modal__close" className="modal-close">X</span>
+                            </div>
 
-                        {
-                            checkList.length === 0 && (
-                                <div className="txt-center">
-                                    <img src={cartEmty} alt="" />
-                                </div>
-                            )
-                        }{
-                            checkList.length > 0 && (
-                                <div className="card-body">
-                                    <div className="card-product">
-                                        <CheckoutList
-                                            checkList={checkList}
-                                            onQuantityChange={handleQuantityChange}
-                                            onProductRemove={handleRemoveProduct}
-                                        />
+                            {
+                                checkList.length === 0 && (
+                                    <div className="txt-center">
+                                        <img src={cartEmty} alt="" />
                                     </div>
+                                )
+                            }{
+                                checkList.length > 0 && (
+                                    <div className="card-body">
+                                        <div className="card-product">
+                                            <CheckoutList
+                                                checkList={checkList}
+                                                onQuantityChange={handleQuantityChange}
+                                                onProductRemove={handleRemoveProduct}
+                                            />
+                                        </div>
 
-                                    <div className="card-center">
-                                        <div className="card-total">
-                                            <div className="cart-total-normal">
-                                                <p>Tạm tính:</p>
-                                                <p>{numberWithCommas(total)}</p>
-                                            </div>
-                                            <div className="cart-total-price">
-                                                <p>Cần thanh toán: </p>
-                                                <p>{numberWithCommas(total)}</p>
+                                        <div className="card-center">
+                                            <div className="card-total">
+                                                <div className="cart-total-normal">
+                                                    <p>Tạm tính:</p>
+                                                    <p>{numberWithCommas(total)} ₫</p>
+                                                </div>
+                                                <div className="cart-total-price">
+                                                    <p>Cần thanh toán: </p>
+                                                    <p>{numberWithCommas(total)} ₫</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <form className="form" onSubmit={handelFormSubmit}>
-                                        <div className="card-form">
-                                            <div className="card-form-block">
-                                                <h1>Thông tin khách hàng</h1>
-                                                <div className="card-form-center">
-                                                    <div className="card-form-info">
-                                                        <div>
-                                                            <InputField
-                                                                type="text"
-                                                                name="fullname"
-                                                                placeholder="Nhập Họ và Tên*"
-                                                                defaultValue={'' || userInfo?.name}
-                                                                className="mr-10"
-                                                                onChange={(e) => validateInput("checknull", e.target.value, "fullname")}
+                                        <form className="form" onSubmit={handelFormSubmit}>
+                                            <div className="card-form">
+                                                <div className="card-form-block">
+                                                    <h1>Thông tin khách hàng</h1>
+                                                    <div className="card-form-center">
+                                                        <div className="card-form-info">
+                                                            <div>
+                                                                <InputField
+                                                                    type="text"
+                                                                    name="fullname"
+                                                                    placeholder="Nhập Họ và Tên*"
+                                                                    defaultValue={'' || userInfo?.name}
+                                                                    className="mr-10"
+                                                                    onChange={(e) => validateInput("checknull", e.target.value, "fullname")}
 
-                                                            />
-                                                            <FormError
-                                                                isHidden={checkFrom.fullname.isInputValid}
-                                                                errorMessage={checkFrom.fullname.errorMessage}
-                                                            />
-                                                        </div>
-                                                        <div>
-                                                            <InputField
-                                                                type="text"
-                                                                name="phone"
-                                                                placeholder="Nhập Số điện thoại"
-                                                                onChange={(e) => validateInput("phone", e.target.value)}
-                                                            />
-                                                            <FormError
-                                                                isHidden={checkFrom.phone.isInputValid}
-                                                                errorMessage={checkFrom.phone.errorMessage}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <InputField
-                                                            type="email"
-                                                            name="email"
-                                                            placeholder="Nhập Email"
-                                                            defaultValue={'' || userInfo?.email}
-                                                            onChange={(e) => validateInput("email", e.target.value)}
-                                                        />
-                                                        <FormError
-                                                            isHidden={checkFrom.email.isInputValid}
-                                                            errorMessage={checkFrom.email.errorMessage}
-                                                        />
-                                                    </div>
-
-                                                </div>
-                                                <h2>Chọn hình thức giao hàng</h2>
-                                                <div className="card-form-ship">
-                                                    <div className="form-box-radio">
-                                                        <RadioField
-                                                            id="shiphome"
-                                                            title="Giao hàng tận nơi, miễn phí"
-                                                            name="ship"
-                                                            type="radio"
-                                                            onChange={handleShipHome}
-                                                        />
-                                                    </div>
-                                                    <div className="form-box-radio">
-                                                        <RadioField
-                                                            id="shipshop"
-                                                            title="Nhận tại cửa hàng"
-                                                            name="ship"
-                                                            type="radio"
-                                                            defaultChecked={true}
-                                                            onChange={handleShipStore}
-                                                        />
-                                                    </div>
-                                                </div>
-                                                {shipOptions === 'home' && (
-                                                    <div className="card-form-ship-address">
-                                                        <div className="card-form-inner">
-                                                            <div className="box__select ship-address-city">
-                                                                <SelectField
-                                                                    label
-                                                                    name="Thành Phố" //lable name
-                                                                    id="city"
-                                                                    options={city}
-                                                                    defaultOption={userOrder?.city || "--Chọn Thành Phố--"}
-                                                                    onChange={onCityFilter}
                                                                 />
                                                                 <FormError
-                                                                    isHidden={checkFrom.city.isInputValid}
-                                                                    errorMessage={checkFrom.city.errorMessage}
+                                                                    isHidden={checkFrom.fullname.isInputValid}
+                                                                    errorMessage={checkFrom.fullname.errorMessage}
                                                                 />
                                                             </div>
-                                                            <div className=" box__select ship-address-district">
-                                                                <SelectField
-                                                                    label
-                                                                    name="Quận/Huyện" //lable name
-                                                                    id="district"
-                                                                    options={district}
-                                                                    defaultOption={userOrder?.district || "--Chọn Quận/Huyện--"}
-                                                                    onChange={onDistrictFilter}
+                                                            <div>
+                                                                <InputField
+                                                                    type="text"
+                                                                    name="phone"
+                                                                    placeholder="Nhập Số điện thoại"
+                                                                    onChange={(e) => validateInput("phone", e.target.value)}
                                                                 />
                                                                 <FormError
-                                                                    isHidden={checkFrom.district.isInputValid}
-                                                                    errorMessage={checkFrom.district.errorMessage}
+                                                                    isHidden={checkFrom.phone.isInputValid}
+                                                                    errorMessage={checkFrom.phone.errorMessage}
                                                                 />
                                                             </div>
                                                         </div>
-
-
-                                                        <div className="box__select ship-address-commune">
-                                                            <SelectField
-                                                                label
-                                                                name="Xã/Phường"
-                                                                id="commune"
-                                                                defaultOption={userOrder?.commune || "--Chọn Xã/Phường--"}
-                                                                options={commune}
-                                                                onChange={(e) => validateInput("checknull", JSON.parse(e.target.value).label, "commune")}
+                                                        <div>
+                                                            <InputField
+                                                                type="email"
+                                                                name="email"
+                                                                placeholder="Nhập Email"
+                                                                defaultValue={'' || userInfo?.email}
+                                                                onChange={(e) => validateInput("email", e.target.value)}
                                                             />
                                                             <FormError
-                                                                isHidden={checkFrom.commune.isInputValid}
-                                                                errorMessage={checkFrom.commune.errorMessage}
+                                                                isHidden={checkFrom.email.isInputValid}
+                                                                errorMessage={checkFrom.email.errorMessage}
                                                             />
                                                         </div>
 
+                                                    </div>
+                                                    <h2>Chọn hình thức giao hàng</h2>
+                                                    <div className="card-form-ship">
+                                                        <div className="form-box-radio">
+                                                            <RadioField
+                                                                id="shiphome"
+                                                                title="Giao hàng tận nơi, miễn phí"
+                                                                name="ship"
+                                                                type="radio"
+                                                                onChange={handleShipHome}
+                                                            />
+                                                        </div>
+                                                        <div className="form-box-radio">
+                                                            <RadioField
+                                                                id="shipshop"
+                                                                title="Nhận tại cửa hàng"
+                                                                name="ship"
+                                                                type="radio"
+                                                                defaultChecked={true}
+                                                                onChange={handleShipStore}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    {shipOptions === 'home' && (
+                                                        <div className="card-form-ship-address">
+                                                            <div className="card-form-inner">
+                                                                <div className="box__select ship-address-city">
+                                                                    <SelectField
+                                                                        label
+                                                                        name="Thành Phố" //lable name
+                                                                        id="city"
+                                                                        options={city}
+                                                                        defaultOption={userOrder?.city || "--Chọn Thành Phố--"}
+                                                                        onChange={onCityFilter}
+                                                                    />
+                                                                    <FormError
+                                                                        isHidden={checkFrom.city.isInputValid}
+                                                                        errorMessage={checkFrom.city.errorMessage}
+                                                                    />
+                                                                </div>
+                                                                <div className=" box__select ship-address-district">
+                                                                    <SelectField
+                                                                        label
+                                                                        name="Quận/Huyện" //lable name
+                                                                        id="district"
+                                                                        options={district}
+                                                                        defaultOption={userOrder?.district || "--Chọn Quận/Huyện--"}
+                                                                        onChange={onDistrictFilter}
+                                                                    />
+                                                                    <FormError
+                                                                        isHidden={checkFrom.district.isInputValid}
+                                                                        errorMessage={checkFrom.district.errorMessage}
+                                                                    />
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div className="box__select ship-address-commune">
+                                                                <SelectField
+                                                                    label
+                                                                    name="Xã/Phường"
+                                                                    id="commune"
+                                                                    defaultOption={userOrder?.commune || "--Chọn Xã/Phường--"}
+                                                                    options={commune}
+                                                                    onChange={(e) => validateInput("checknull", JSON.parse(e.target.value).label, "commune")}
+                                                                />
+                                                                <FormError
+                                                                    isHidden={checkFrom.commune.isInputValid}
+                                                                    errorMessage={checkFrom.commune.errorMessage}
+                                                                />
+                                                            </div>
+
+                                                            <div className="ship-address-specific">
+                                                                <InputField
+                                                                    type="text"
+                                                                    name="ship-address"
+                                                                    placeholder="Nhập địa chỉ cụ thể*"
+                                                                    defaultValue={userOrder?.address || ''}
+                                                                    onChange={(e) => validateInput("checknull", e.target.value, "address")}
+                                                                />
+                                                                <FormError
+                                                                    isHidden={checkFrom.address.isInputValid}
+                                                                    errorMessage={checkFrom.address.errorMessage}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                    {shipOptions === 'store' &&
                                                         <div className="ship-address-specific">
-                                                            <InputField
-                                                                type="text"
-                                                                name="ship-address"
-                                                                placeholder="Nhập địa chỉ cụ thể*"
-                                                                defaultValue={userOrder?.address || ''}
-                                                                onChange={(e) => validateInput("checknull", e.target.value, "address")}
-                                                            />
-                                                            <FormError
-                                                                isHidden={checkFrom.address.isInputValid}
-                                                                errorMessage={checkFrom.address.errorMessage}
-                                                            />
+                                                            <p>
+                                                                <b>Địa chỉ cửa hàng: </b>
+                                                                <i> Tòa nhà LaptopStore, 30/4, Hưng Lợi, Ninh Kiều, TP. Cần Thơ</i>
+                                                            </p>
                                                         </div>
-                                                    </div>
-                                                )}
-                                                {shipOptions === 'store' &&
-                                                    <div className="ship-address-specific">
-                                                        <p>
-                                                            <b>Địa chỉ cửa hàng: </b>
-                                                            <i> Tòa nhà LaptopStore, 30/4, Hưng Lợi, Ninh Kiều, TP. Cần Thơ</i>
-                                                        </p>
-                                                    </div>
-                                                }
+                                                    }
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="card-checkout">
-                                            <button
-                                                type="submit"
-                                            >
-                                                {
-                                                    isPending ?
-                                                        <div className="btn btn-pending"><i className="fas fa-spinner fa-spin"></i> Đang tạo đơn hàng... </div> :
-                                                        <div className="btn btn-checkout">Hoàn tất đặt hàng</div>
-                                                }
-                                            </button>
-                                            <p>Cảm ơn bạn đã đến với cửa hàng của chúng tôi</p>
-                                            {loadding && <LoadingBox />}
-                                            {error && <MessageBox variant="danger">{error}</MessageBox>}
-                                        </div>
-                                    </form>
-                                </div>
-                            )
-                        }
+                                            <div className="card-checkout">
+                                                <button
+                                                    type="submit"
+                                                >
+                                                    {
+                                                        isPending ?
+                                                            <div className="btn btn-pending"><i className="fas fa-spinner fa-spin"></i> Đang tạo đơn hàng... </div> :
+                                                            <div className="btn btn-checkout">Hoàn tất đặt hàng</div>
+                                                    }
+                                                </button>
+                                                <p>Cảm ơn bạn đã đến với cửa hàng của chúng tôi</p>
+                                                {loadding && <LoadingBox />}
+                                                {error && <MessageBox variant="danger">{error}</MessageBox>}
+                                            </div>
+                                        </form>
+                                    </div>
+                                )
+                            }
 
-                    </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

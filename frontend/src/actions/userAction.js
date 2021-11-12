@@ -22,9 +22,13 @@ export const signin = (email, password) => async (dispatch) => {
 
 export const register = (name, email, password, image) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
-
+    const fd = new FormData();
+    fd.append('name', name);
+    fd.append('email', email);
+    fd.append('password', password);
+    fd.append('image', image, image.name);
     try {
-        const { data } = await Axios.post('/api/users/register', { name, email, password, image });
+        const { data } = await Axios.post('/api/users/register', fd);
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
         localStorage.setItem('userInfo', JSON.stringify(data));

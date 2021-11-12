@@ -1,5 +1,4 @@
 import cartEmty from 'assets/images/empty-cart.png';
-import React from 'react';
 import { Link } from 'react-router-dom';
 import numberWithCommas from 'utils/numberWithCommas';
 import HCartList from './HCartList';
@@ -13,7 +12,10 @@ const HeaderPCR = (props) => {
 
     } = props;
 
-    // window.localStorage.clear();
+
+
+
+
 
     return (
         <ul className="header__nav-menu-right">
@@ -62,7 +64,7 @@ const HeaderPCR = (props) => {
 
                                 <div>
                                     <div className="btn account btn-avatar">
-                                        <Link to="/account"><img className="avatar" src={userInfo.image} alt="" /></Link>
+                                        <Link to="/account"><img className="avatar" src={userInfo.image.split('\\').join('/')} alt="" /></Link>
                                     </div>
 
 

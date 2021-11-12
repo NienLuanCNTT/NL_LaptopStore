@@ -35,6 +35,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('backend'));
 app.use('/images', express.static('images'));
 
+// image user
+app.use('/users', express.static('users'));
+//
+
 app.use(cors())
 
 app.use('/api/users', userRouter);

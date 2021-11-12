@@ -5,6 +5,40 @@ import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import { generateToken } from '../utils.js';
 
+/// lay image
+import multer from 'multer';
+// vào images
+// const upload = multer({ dest: 'backend/images/users/' });
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '/images/users/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    //reject a file
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+}
+
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter,
+});
+
+///
 const userRouter = express.Router();
 
 userRouter.get('/seed', expressAsyncHandler(async (req, res) => {
@@ -34,14 +68,17 @@ userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
 );
 
 
-userRouter.post('/register', expressAsyncHandler(async (req, res) => {
+userRouter.post('/register', upload.single('image'), expressAsyncHandler(async (req, res) => {
+
+    console.log('cho nay o register');
     const user = new User({
         name: req.body.name,
         email: req.body.email,
-        image: req.body.image,
+        image: req.file.path,
         password: bcrypt.hashSync(req.body.password, 8),
     });
     const createdUser = await user.save();
+
     res.send({
         _id: createdUser._id,
         name: createdUser.name,

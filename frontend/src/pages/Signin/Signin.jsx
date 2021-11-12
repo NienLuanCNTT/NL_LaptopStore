@@ -60,12 +60,10 @@ const Signin = (props) => {
                     </div>
 
                     <div className="form__item btn">
-                        {/* <label htmlFor=""></label> */}
                         <button type="submit" className="form__item__submit">Đăng nhập</button>
                     </div>
 
                     <div className="form__item">
-                        <label htmlFor=""></label>
                         <div className="form__item__create-acc">
                             <Link to="/register">Tạo tài khoản</Link>
                         </div>

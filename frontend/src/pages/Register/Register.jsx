@@ -28,17 +28,16 @@ const Register = (props) => {
         if (password !== confirmPassword) {
             alert('Mật khẩu và Nhập lại mật khẩu không đúng');
         } else {
+            // console.log('image register: ', image);
             dispatch(register(name, email, password, image));
             props.history.push('/');
         }
     };
 
-    // const onAvatarChange = (e) => {
-    //     e.preventDefault();
-    //     if (e.target.files && e.target.files[0]) {
-    //         setImage(URL.createObjectURL(e.target.files[0]));
-    //     }
-    // };
+    const onAvatarChange = (e) => {
+        e.preventDefault();
+        setImage(e.target.files[0]);
+    };
 
     // useEffect(() => {
     //     if (userInfo) {
@@ -91,7 +90,7 @@ const Register = (props) => {
                     <div className="form__item">
                         <label htmlFor="image" className="form__item__label">Ảnh đại diện</label>
                         <input className="form__item__input" type="file" id="image" required
-                            onChange={e => setImage(URL.createObjectURL(e.target.files[0]))} />
+                            onChange={e => onAvatarChange(e)} />
                         <img className="form__item__image" src={image} alt="" />
                     </div>
 

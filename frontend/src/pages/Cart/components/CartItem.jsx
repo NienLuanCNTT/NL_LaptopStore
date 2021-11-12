@@ -36,6 +36,7 @@ const CartItem = (props) => {
                 >
                     {product.name}
                 </Link>
+                <p>Số lượng: </p>
                 <div className="cart-item-quantity">
                     <div className={product.quantity === 1 ? "btn-minus-active" : "btn btn-minus"}
                         disabled={product.quantity === 1}

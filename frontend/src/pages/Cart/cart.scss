@@ -35,6 +35,7 @@
                     &-name {
                         font-size: 18px;
                         font-weight: 600;
+                        margin-bottom: 10px;
                     }
                     p {
                         font-size: 14px;
@@ -55,7 +56,7 @@
                 &-quantity {
                     display: flex;
                     align-items: center;
-                    margin: 10px 0;
+                    margin: 0 0 10px;
 
                     p {
                         text-align: center;

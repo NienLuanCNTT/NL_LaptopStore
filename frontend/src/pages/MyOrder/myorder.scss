@@ -26,7 +26,10 @@
                     position: relative;
                     display: inline-block;
                     font-size: 1.6rem;
+                    border-radius: 8px;
+                    border: 1px solid $main-color;
 
+                    box-shadow: none;
                     margin: 10px 0 0 10px;
                     color: $main-color;
                     padding: 12px 16px;
@@ -35,21 +38,25 @@
                     &-number {
                         position: absolute;
                         right: 0;
-                        top: -2px;
-                        padding: 2px 4px;
+                        top: -8px;
+                        padding: 2px 6px;
                         color: #fff;
 
                         border-radius: 50%;
-                        background-color: $main-color;
+                        background-color: #e23719;
                     }
 
                     &:hover {
                         cursor: pointer;
                         color: #0b29bb;
                     }
-                }
-                .active {
-                    color: #0b29bb;
+
+                    &.active {
+                        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+                        border: 2px solid #0b29bb;
+                        color: #0b29bb;
+                        border-bottom: none;
+                    }
                 }
             }
         }
@@ -80,6 +87,11 @@
 
                     &-left {
                         font-size: 14px;
+                        line-height: 1.5;
+                    }
+                    &-status_right {
+                        min-width: 125px;
+                        text-align: right;
                     }
                 }
                 .item-content-items {
@@ -127,6 +139,35 @@
                     text-align: right;
                 }
             }
+            .item-order-empty {
+                position: relative;
+                text-align: center;
+
+                img {
+                    width: 300px;
+                    margin: 0 auto;
+                }
+
+                p {
+                    width: 100%;
+                    position: absolute;
+                    top: 80%;
+                    font-size: 32px;
+
+                    color: rgba(0, 0, 0, 0.3);
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+@include mb {
+    .my-order-content {
+        margin: 0;
+        width: 100%;
+        .my-order-list {
+            padding: 12px 0;
         }
     }
 }
@@ -142,6 +183,7 @@
 
     border-radius: 8px;
 }
+
 .item-pending {
     background: #ffc318;
 }
@@ -153,4 +195,8 @@
 }
 .item-cancle {
     background: #d40a25;
+
+    &:hover {
+        opacity: 0.7;
+    }
 }

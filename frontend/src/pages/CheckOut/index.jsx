@@ -2,7 +2,6 @@ import { createCheckOut } from 'actions/orderActions';
 import cartEmty from 'assets/images/empty-cart.png';
 import axios from 'axios';
 import LoadingBox from 'components/LoadingBox';
-import MessageBox from 'components/MessageBox';
 import { ORDER_CREATE_RESET } from 'constants/orderConstants';
 import { TOAST_OPTIONS } from 'constants/productConstants';
 import InputField from 'custom-field/InputField';
@@ -95,7 +94,7 @@ const CheckOut = (props) => {
 
     const { checkList } = useSelector((state) => state.checkList);
     const orderCreate = useSelector((state) => state.orderCreate);
-    const { loadding, success, error, order } = orderCreate;
+    const { loadding, success, order } = orderCreate;
 
     const handleQuantityChange = (id, quantity) => {
         dispatch(selectQuantity({ id, quantity }));
@@ -123,7 +122,7 @@ const CheckOut = (props) => {
 
     const [shipState, setshipState] = useState({
         fullName: userInfo?.name,
-        phone: '',
+        phone: '' || userOrder?.phone,
         city: 'Thành Phố Cần Thơ',
         district: 'Ninh Kiều',
         commune: 'Hưng Lợi',
@@ -195,7 +194,7 @@ const CheckOut = (props) => {
         if (type === "phone") {
             const regexp = /^\d{10}$/;
             const checkingResult = regexp.exec(checkingText);
-            if (checkingResult !== null) {
+            if (checkingResult) {
                 setshipState({ ...shipState, phone: checkingText })
                 setCheckFrom({
                     ...checkFrom,
@@ -210,7 +209,7 @@ const CheckOut = (props) => {
                     ...checkFrom,
                     phone: {
                         isInputValid: false,
-                        errorMessage: 'Số điện thoại phải có 10 chữ số.'
+                        errorMessage: 'SĐT gồm 10 chữ số.'
                     }
                 })
                 setCheck({ ...check, phone: false });
@@ -219,7 +218,7 @@ const CheckOut = (props) => {
         if (type === "email") {
             const regexp = /([a-zA-Z0-9_/./-])+@gmail.com/g;
             const checkingResult = regexp.exec(checkingText);
-            if (checkingResult !== null) {
+            if (checkingResult) {
                 setshipState({ ...shipState, email: checkingText })
                 setCheckFrom({
                     ...checkFrom,
@@ -301,6 +300,8 @@ const CheckOut = (props) => {
         })
     }
     const today = new Date();
+    const dateTime = `0${today.getDate()}`.slice(-2) + '/' + `0${today.getMonth() + 1}`.slice(-2) + '/' + today.getFullYear()
+        + ' ' + `0${today.getHours()}`.slice(-2) + ':' + `0${today.getMinutes()}`.slice(-2);
     const handelFormSubmit = (e) => {
         e.preventDefault();
         if (userInfo) {
@@ -336,9 +337,9 @@ const CheckOut = (props) => {
                         totalPrice: total,
                         status: 'pending',
                         userId: userInfo?._id,
-                        dateTime: today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()
-                            + ' ' + today.getHours() + ':' + today.getMinutes(),
+                        dateTime: dateTime,
                     }));
+
                     toast.success('Đã đặt hàng thành công 👌👌', {
                         ...TOAST_OPTIONS,
                     });
@@ -453,7 +454,8 @@ const CheckOut = (props) => {
                                                                     type="text"
                                                                     name="phone"
                                                                     placeholder="Nhập Số điện thoại"
-                                                                    onChange={(e) => validateInput("phone", e.target.value)}
+                                                                    defaultValue={'' || userOrder?.phone}
+                                                                    onChange={(e) => validateInput("phone", e.target.value, "phone")}
                                                                 />
                                                                 <FormError
                                                                     isHidden={checkFrom.phone.isInputValid}
@@ -585,7 +587,6 @@ const CheckOut = (props) => {
                                                 </button>
                                                 <p>Cảm ơn bạn đã đến với cửa hàng của chúng tôi</p>
                                                 {loadding && <LoadingBox />}
-                                                {error && <MessageBox variant="danger">{error}</MessageBox>}
                                             </div>
                                         </form>
                                     </div>

@@ -15,3 +15,19 @@ export const generateToken = (user) => {
         }
     );
 };
+
+// export const isAuth = (req, res, next) => {
+//     const authorization = req.headers.authorization;
+//     if (authorization) {
+//         const token = authorization.split("")[1];
+//         jwt.verify(token, precess.env.JWT_SECRET || 'somethingsecret',
+//             (err, decoded) => {
+//                 if (err) {
+//                     req.status(401).send({ message: "Invalid token" })
+//                 } else {
+//                     req.user = decoded
+//                 }
+//             }
+//         );
+//     }
+// };

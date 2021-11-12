@@ -7,6 +7,7 @@ const orderRouter = express.Router();
 orderRouter.get('/:id',
     expressAsyncHandler(async (req, res) => {
         const order = await Order.find({ "userId": req.params.id });
+
         if (order) {
             res.send(order);
         }
@@ -33,6 +34,15 @@ orderRouter.post(
             });
             order.save();
         }
-    }))
+    }));
+
+orderRouter.post(
+    '/cancle',
+    expressAsyncHandler(async (req, res) => {
+        await Order.updateOne({ _id: req.body.id },
+            { $set: { status: req.body.status } });
+
+    })
+);
 
 export default orderRouter;

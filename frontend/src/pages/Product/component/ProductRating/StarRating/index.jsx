@@ -41,9 +41,7 @@ const StarRating = (props) => {
                 ...TOAST_OPTIONS,
             })
         }
-
     }
-
 
     return (
         <div className="star-rating-box">

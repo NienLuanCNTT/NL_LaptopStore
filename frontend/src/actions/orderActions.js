@@ -23,3 +23,18 @@ export const createCheckOut = (order) => async (dispatch, getState) => {
         })
     }
 }
+
+export const cancleOrder = (order) => async (dispatch, getState) => {
+    try {
+        const { data } = await axios.post('/api/orders/cancle', order)
+        dispatch({ payload: data.order });
+
+    } catch (error) {
+        dispatch({
+            type: ORDER_CREATE_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+}

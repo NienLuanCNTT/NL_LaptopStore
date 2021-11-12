@@ -13,7 +13,7 @@ import multer from 'multer';
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '/images/users/');
+        cb(null, './backend/images/users/');
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
@@ -70,11 +70,10 @@ userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
 
 userRouter.post('/register', upload.single('image'), expressAsyncHandler(async (req, res) => {
 
-    console.log('cho nay o register');
     const user = new User({
         name: req.body.name,
         email: req.body.email,
-        image: req.file.path,
+        image: req.file.path.slice(7),
         password: bcrypt.hashSync(req.body.password, 8),
     });
     const createdUser = await user.save();

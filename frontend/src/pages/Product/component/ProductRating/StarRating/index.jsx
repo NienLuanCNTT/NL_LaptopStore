@@ -26,13 +26,13 @@ const StarRating = (props) => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
                         dispatch(addStarRating({ productId, rating, comment, userInfo }));
-                        toast.success("Đã thêm đánh giá thành công ✅");
+                        toast.success("Đã thêm đánh giá thành công");
 
                         resolve(true);
+                        setFeedback(prev => !prev);
                         setRating(null);
                         setcmtRating('');
                         setIsRating(false);
-                        setFeedback(prev => !prev);
                     }, 2000);
                 })
             }

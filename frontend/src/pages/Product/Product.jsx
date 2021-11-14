@@ -84,10 +84,10 @@ const Product = (props) => {
                         dispatch(addComment({ productId, comment, userInfo }))
                         toast.success("Đã thêm bình luận");
 
+                        setFeedback(prev => !prev);
                         resolve(true);
                         setComment('');
                         setIsComment(false);
-                        setFeedback(prev => !prev);
                     }, 1000);
                 })
             }
@@ -118,21 +118,20 @@ const Product = (props) => {
     const [isFeedback, setFeedback] = useState(false);
 
     useEffect(() => {
-        if (product?._id) {
-            const fetchStarRating = async () => {
-                const rating = await axios.get(`http://localhost:5000/api/rating/${product._id}`);
-                const data = rating.data || [];
+        const fetchStarRating = async () => {
+            const rating = await axios.get(`http://localhost:5000/api/rating/${product?._id}`);
+            const data = rating.data || [];
 
-                const usercomments = await axios.get(`http://localhost:5000/api/usercmts/${product._id}`);
-                const datacomment = usercomments.data || [];
+            const usercomments = await axios.get(`http://localhost:5000/api/usercmts/${product?._id}`);
+            const datacomment = usercomments.data || [];
 
-                setUserComments(datacomment);
-                setStarRating(data);
-            };
+            setFeedback(false);
+            setUserComments(datacomment);
+            setStarRating(data);
+        };
 
-            fetchStarRating();
-        }
-    }, [product?._id, isFeedback])
+        fetchStarRating();
+    }, [isFeedback, product?._id])
 
     const ratingSum = starRating.reduce(
         (avg, rating) =>

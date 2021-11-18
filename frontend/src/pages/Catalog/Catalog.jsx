@@ -106,7 +106,7 @@ const Catalog = () => {
                 temp = products
             }
 
-            console.log(temp);
+
 
             setProductCate(temp);
         },

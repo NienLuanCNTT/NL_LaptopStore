@@ -89,4 +89,57 @@ userRouter.post('/register', upload.single('image'), expressAsyncHandler(async (
 })
 );
 
+
+userRouter.get('/:id',
+    expressAsyncHandler(async (req, res) => {
+        const user = await User.findById(req.params.id);
+        if (user) {
+            res.send(user);
+        }
+        else {
+            res.status(404).send({ message: 'User Not Found' });
+        }
+    })
+);
+
+userRouter.put('/profile', expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.body.userId);
+
+    // console.log('Ley tu user action: ', req.body.currentPassword);
+    // console.log('Mat khau moi: ', req.body.newPassword);
+    // console.log('Hien tai trong user: ', user.password);
+
+    if (user && bcrypt.compareSync(req.body.currentPassword, user.password)) {
+
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        user.phone = req.body.phone || user.phone;
+        if (req.body.newPassword) {
+            user.password = bcrypt.hashSync(req.body.newPassword, 8);
+            // console.log('doi mat khau thanh: ', user.password);
+        }
+        else {
+            // console.log('khong doi mat khau');
+        }
+        const updatedUser = await user.save();
+        console.log('updated: ', updatedUser);
+        res.send({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            phone: updatedUser.phone,
+            idAdmin: updatedUser.isAdmin,
+            image: updatedUser.image,
+            password: updatedUser.password,
+            token: generateToken(updatedUser),
+        })
+    }
+    else {
+        res.status(401).send({ message: 'Nhập mật khẩu không chính xác !' });
+    }
+}));
+
+
+
+
 export default userRouter;

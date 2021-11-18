@@ -40,7 +40,7 @@ const Product = (props) => {
     // get id inside URl
     const { id } = useParams();
     const productDetail = useSelector((state) => state.productDetail);
-    // console.log(productDetail);
+    console.log(productDetail);
     const { loading, error, product } = productDetail;
     const [isComment, setIsComment] = useState(false);
     const [comment, setComment] = useState('');

@@ -28,7 +28,6 @@ const Register = (props) => {
         if (password !== confirmPassword) {
             alert('Mật khẩu và Nhập lại mật khẩu không đúng');
         } else {
-            // console.log('image register: ', image);
             dispatch(register(name, email, password, image));
             props.history.push('/');
         }
@@ -91,7 +90,7 @@ const Register = (props) => {
                         <label htmlFor="image" className="form__item__label">Ảnh đại diện</label>
                         <input className="form__item__input" type="file" id="image" required
                             onChange={e => onAvatarChange(e)} />
-                        <img className="form__item__image" src={image} alt="" />
+
                     </div>
 
 

@@ -17,6 +17,8 @@ const HeaderPCR = (props) => {
 
 
 
+
+
     return (
         <ul className="header__nav-menu-right">
             <li>
@@ -64,12 +66,15 @@ const HeaderPCR = (props) => {
 
                                 <div>
                                     <div className="btn account btn-avatar">
-                                        <Link to="/account"><img className="avatar" src={userInfo.image.split('\\').join('/')} alt="" /></Link>
+                                        <Link to="/account">
+                                            <img className="avatar" src={userInfo.isAdmin ? userInfo.image : userInfo.image.split('\\').join('/')} alt="" />
+
+                                        </Link>
                                     </div>
 
 
                                     <ul className="dropdown-account">
-                                        <Link to="/account">
+                                        <Link to="/userinfo">
                                             <li>
                                                 <p>
                                                     <i className="fas fa-user-cog"></i>

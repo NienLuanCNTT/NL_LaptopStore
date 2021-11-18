@@ -10,7 +10,7 @@ import { productDetailsReducer, productListReducer } from 'reducers/productReduc
 import { categoryListReducer } from 'reducers/categoryReducers';
 import { priceListReducer } from 'reducers/priceReducers';
 import { orderCreateReducer } from './../reducers/orderReduces';
-import { userRegisterReducer, userSigninReducer } from "reducers/userReducers";
+import { userDetailsReducer, userRegisterReducer, userSigninReducer, userUpdateReducer } from "reducers/userReducers";
 
 const persistConfig = {
         key: 'root',
@@ -33,6 +33,8 @@ const rootReducer = combineReducers({
         starRating: StarRatingSlice,
         userSignin: userSigninReducer,
         userRegister: userRegisterReducer,
+        userDetails: userDetailsReducer,
+        userUpdate: userUpdateReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

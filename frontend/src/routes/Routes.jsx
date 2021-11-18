@@ -7,6 +7,7 @@ import React from 'react';
 
 import { Route, Switch } from 'react-router-dom'
 import MyOrder from 'pages/MyOrder';
+import UserInfo from 'pages/UserInfo/UserInfo';
 
 function Routes() {
     return (
@@ -16,6 +17,7 @@ function Routes() {
             <Route path="/product/:id" component={Product} />
             <Route path="/catalog" component={Catalog} />
             <Route path="/myorder" component={MyOrder} />
+            <Route path="/userinfo" component={UserInfo} />
             {/* <Route path="/signin" component={Signin} /> */}
         </Switch>
     );

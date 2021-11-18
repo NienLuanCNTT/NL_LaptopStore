@@ -106,23 +106,11 @@ const CheckOut = (props) => {
     };
 
     const [userOrder, setUserOrder] = useState()
-    useEffect(() => {
-        const fetchUserOrder = async () => {
-            const order = await axios.get(`http://localhost:5000/api/orders/${userInfo?._id}`);
-            const index = Object.keys(order.data).length;
-            if (Object.keys(order.data).length > 0) {
-                const data = order.data[index - 1].shipingAddress || [];
 
-                setUserOrder(data);
-            }
-            return;
-        }
-        fetchUserOrder();
-    }, [userInfo?._id]);
 
     const [shipState, setshipState] = useState({
         fullName: userInfo?.name,
-        phone: '' || userOrder?.phone,
+        phone: userOrder?.phone,
         city: 'Thành Phố Cần Thơ',
         district: 'Ninh Kiều',
         commune: 'Hưng Lợi',
@@ -176,7 +164,7 @@ const CheckOut = (props) => {
     });
     const [check, setCheck] = useState({
         fullname: '' || userInfo?.name,
-        phone: '' || userOrder?.phone,
+        phone: '',
         email: '' || userInfo?.email,
         ship: shipOptions,
         city: true,
@@ -184,6 +172,27 @@ const CheckOut = (props) => {
         commune: true,
         address: true,
     });
+
+    useEffect(() => {
+        const fetchUserOrder = async () => {
+            const order = await axios.get(`http://localhost:5000/api/orders/${userInfo?._id}`);
+            const index = order.data.length;
+            if (index > 0) {
+                const data = order.data[index - 1].shipingAddress || [];
+
+                setCheck({
+                    ...check,
+                    phone: data.phone,
+                })
+                setUserOrder(data);
+            }
+
+            return;
+        }
+        fetchUserOrder();
+    }, [userInfo?._id, check]);
+
+
 
     function FormError(props) {
         if (props.isHidden) { return null; }
@@ -194,7 +203,7 @@ const CheckOut = (props) => {
         if (type === "phone") {
             const regexp = /^\d{10}$/;
             const checkingResult = regexp.exec(checkingText);
-            if (checkingResult) {
+            if (checkingText || checkingResult) {
                 setshipState({ ...shipState, phone: checkingText })
                 setCheckFrom({
                     ...checkFrom,
@@ -307,6 +316,7 @@ const CheckOut = (props) => {
         if (userInfo) {
 
             let checkKey = 0;
+
             for (const [key, value] of Object.entries(check)) {
                 if (!value) {
                     setCheckFrom({
@@ -469,7 +479,7 @@ const CheckOut = (props) => {
                                                                 name="email"
                                                                 placeholder="Nhập Email"
                                                                 defaultValue={'' || userInfo?.email}
-                                                                onChange={(e) => validateInput("email", e.target.value)}
+                                                                onChange={(e) => validateInput("email", e.target.value, "email")}
                                                             />
                                                             <FormError
                                                                 isHidden={checkFrom.email.isInputValid}

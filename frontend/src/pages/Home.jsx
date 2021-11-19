@@ -45,11 +45,6 @@ const Home = () => {
                                 auto={true}
                                 timeOut={4000}
                             />
-                            {/* brand section */}
-
-                            {/* end brand section */}
-
-                            {/* best selling section */}
                             <Section>
                                 <SectionTitle>Sản Phẩm</SectionTitle>
 
@@ -70,7 +65,7 @@ const Home = () => {
                                 </SectionBody>
                             </Section>
 
-                            {/* end best selling section */}
+
                         </Helmet>
                     )
             }

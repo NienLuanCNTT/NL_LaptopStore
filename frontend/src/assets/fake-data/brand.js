@@ -14,7 +14,7 @@ const brand = [
     },
     {
         id: 2,
-        title: "DELL",
+        title: "Dell",
         list: [
             { name: "Optiplex", path: "/dell?subbrand=optiplex" },
             { name: "Precision", path: "/dell?subbrand=precision" },

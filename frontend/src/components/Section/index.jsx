@@ -1,8 +1,9 @@
 import React from 'react'
 
 const Section = (props) => {
+    const myRef = props.myRef;
     return (
-        <div className="section">
+        <div className="section" ref={myRef}>
             {props.children}
         </div>
     )

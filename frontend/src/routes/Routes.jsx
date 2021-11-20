@@ -15,10 +15,9 @@ function Routes() {
             <Route path="/" exact component={Home} />
             <Route path="/cart" component={Cart} />
             <Route path="/product/:id" component={Product} />
-            <Route path="/catalog" component={Catalog} />
             <Route path="/myorder" component={MyOrder} />
             <Route path="/userinfo" component={UserInfo} />
-            {/* <Route path="/signin" component={Signin} /> */}
+            <Route path="/catalog" component={Catalog} />
         </Switch>
     );
 }

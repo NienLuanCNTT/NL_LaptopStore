@@ -8,6 +8,8 @@ import ProductCard from 'components/ProductCard';
 import category from 'assets/fake-data/category';
 import price from 'assets/fake-data/price';
 
+import { useHistory } from 'react-router-dom';
+
 
 
 import CheckBox from 'components/CheckBox';
@@ -16,21 +18,14 @@ import CheckBox from 'components/CheckBox';
 
 
 
-const Catalog = () => {
+const Catalog = (props) => {
 
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.productList);
     const { loading, error, products } = productList;
-
-
-
-
     useEffect(() => {
         dispatch(listProducts());
     }, [dispatch]);
-
-
-
 
     const initFilter = {
         category: [],
@@ -44,10 +39,6 @@ const Catalog = () => {
     useEffect(() => {
         setProductCate(products);
     }, [products]);
-
-
-
-
 
     const [filter, setFilter] = useState(initFilter);
 
@@ -116,6 +107,15 @@ const Catalog = () => {
     useEffect(() => {
         updateProducts()
     }, [updateProducts])
+
+
+    //
+
+    // const { location: { state } } = useHistory();
+    // console.log('brand: ', state.brand);
+
+
+
 
 
 

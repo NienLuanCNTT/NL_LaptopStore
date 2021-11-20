@@ -10,6 +10,7 @@ const Slider = props => {
     const data = props.data
     const control = props.control;
 
+
     const timeOut = props.timeOut ? props.timeOut : 3000
 
 

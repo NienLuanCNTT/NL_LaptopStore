@@ -2,7 +2,7 @@ import sliderData from 'assets/fake-data/slider'
 // import productData from 'assets/fake-data/product'
 import Slider from 'components/Slider'
 import ProductCard from 'components/ProductCard'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import Section, { SectionTitle, SectionBody } from 'components/Section'
 import Helmet from 'components/Helmet'
@@ -28,6 +28,21 @@ const Home = () => {
     const [postsPerPage] = useState(12);
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
+    // const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    // useEffect(() => {
+    //     scrollToTop();
+    // }, [currentPage]);
+
+    const productSection = useRef(null);
+    const executiveScroll = () => productSection.current.scrollIntoView({ behavior: 'smooth' });
+    // const executiveScroll = () => window.scrollTo({ top: productSection.current.offsetTop, behavior: 'smooth' });
+    useEffect(() => {
+        executiveScroll();
+    }, [currentPage]);
+
+
+
+
 
 
 
@@ -44,11 +59,13 @@ const Home = () => {
                                 control={true}
                                 auto={true}
                                 timeOut={4000}
+
                             />
-                            <Section>
+                            <Section myRef={productSection}>
                                 <SectionTitle>Sản Phẩm</SectionTitle>
 
                                 <SectionBody>
+
 
 
                                     <ProductCard
@@ -56,8 +73,8 @@ const Home = () => {
                                         col={4}
                                         currentPage={currentPage}
                                         postsPerPage={postsPerPage}
-
                                     />
+
 
                                     <Pagination products={products} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} />
 

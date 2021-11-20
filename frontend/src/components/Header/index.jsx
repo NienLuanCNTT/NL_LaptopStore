@@ -58,7 +58,7 @@ function Header() {
 
 
 
-    console.log(products);
+
 
     const signoutHandler = () => {
         dispatch(signout());
@@ -86,9 +86,9 @@ function Header() {
                                         className="header__nav-brain-list-items"
                                         key={index}
                                     >
-
-                                        <h3 className="header__nav-brain-list-items-title">{brain.title}</h3>
-
+                                        <Link to={{ pathname: `/catalog/${brain.title}`, state: { brand: brain.title } }}>
+                                            <h3 className="header__nav-brain-list-items-title">{brain.title}</h3>
+                                        </Link>
                                         {brain.list.map((list, index) => (
                                             <li
                                                 key={index}

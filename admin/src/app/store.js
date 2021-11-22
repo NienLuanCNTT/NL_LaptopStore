@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import CheckSlice from "pages/CheckOut/CheckSlice";
-import StarRatingSlice from "pages/Product/component/ProductRating/StarRatingSlice";
+
 
 import { persistStore, persistReducer } from 'redux-persist';
 import { combineReducers } from "redux";
@@ -22,11 +21,9 @@ const initialState = {
 }
 
 const rootReducer = combineReducers({
-        checkList: CheckSlice,
         productList: productListReducer,
         productDetail: productDetailsReducer,
         orderCreate: orderCreateReducer,
-        starRating: StarRatingSlice,
         userSignin: userSigninReducer,
         userRegister: userRegisterReducer,
         userDetails: userDetailsReducer,

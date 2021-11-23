@@ -5,43 +5,47 @@ const FeaturedInfo = () => {
         <div className="featured">
 
             <div className="featured__item">
-                <span className="featured__item-title">
-                    Revenue
-                </span>
+                <div className="featured__item-icon">
+                    <i className="fas fa-shopping-bag"></i>
+                </div>
+
                 <div className="featured__item-content">
+                    <span className="featured__item-content-title">
+                        Total Sales
+                    </span>
                     <span className="featured__item-content-money">$2,415</span>
-                    <span className="featured__item-content-moneyrate">
-                        -11.4<i class="fas fa-arrow-down"></i>
-                    </span>
                 </div>
-                <div className="featured__item-sub">Compared to last month</div>
             </div>
 
             <div className="featured__item">
-                <span className="featured__item-title">
-                    Sales
-                </span>
-                <div className="featured__item-content">
-                    <span className="featured__item-content-money">$4,415</span>
-                    <span className="featured__item-content-moneyrate">
-                        -1.4<i class="fas fa-arrow-down"></i>
-                    </span>
+                <div className="featured__item-icon">
+                    <i class="fas fa-dollar-sign"></i>
                 </div>
-                <div className="featured__item-sub">Compared to last month</div>
+
+                <div className="featured__item-content">
+                    <span className="featured__item-content-title">
+                        Total Income
+                    </span>
+                    <span className="featured__item-content-money">$3,415</span>
+                </div>
             </div>
 
             <div className="featured__item">
-                <span className="featured__item-title">
-                    Cost
-                </span>
-                <div className="featured__item-content">
-                    <span className="featured__item-content-money">$2,225</span>
-                    <span className="featured__item-content-moneyrate">
-                        +2.4<i class="fas fa-arrow-up negative"></i>
-                    </span>
+                <div className="featured__item-icon">
+                    <i class="fas fa-shopping-basket"></i>
                 </div>
-                <div className="featured__item-sub">Compared to last month</div>
+
+                <div className="featured__item-content">
+                    <span className="featured__item-content-title">
+                        Total Orders
+                    </span>
+                    <span className="featured__item-content-money">$1,715</span>
+                </div>
             </div>
+
+
+
+
 
         </div>
     )

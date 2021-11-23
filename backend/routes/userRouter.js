@@ -48,6 +48,15 @@ userRouter.get('/seed', expressAsyncHandler(async (req, res) => {
 })
 );
 
+userRouter.get('/',
+    expressAsyncHandler(async (req, res) => {
+        const users = await User.find({});    //get all products
+        res.send(users);
+    })
+);
+
+
+
 userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
@@ -122,7 +131,7 @@ userRouter.put('/profile', expressAsyncHandler(async (req, res) => {
             // console.log('khong doi mat khau');
         }
         const updatedUser = await user.save();
-        console.log('updated: ', updatedUser);
+        // console.log('updated: ', updatedUser);
         res.send({
             _id: updatedUser._id,
             name: updatedUser.name,

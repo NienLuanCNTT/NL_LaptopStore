@@ -1,0 +1,64 @@
+.userlist{
+    flex: 4;
+
+    &__main{
+        height: 100%;
+    }
+
+    .columnUser{
+
+        display: flex;
+        align-items: center;
+
+
+        &__img{
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        span{
+            font-size: 1.6rem;
+        }
+    }
+
+
+    .behavior{
+
+        display : flex;
+        align-items: center;
+
+        &__edit{
+            border: none;
+            padding: 5px 10px;
+            background-color: #55d195;
+            font-size: 1.6rem;
+            border-radius : 10px;
+            margin-right: 20px;
+            color: white ;
+            cursor: pointer;
+
+        }
+
+        &__delete{
+            border: none;
+            cursor:pointer;
+            background-color: #fff;
+            i{
+                border: none;
+                font-size: 1.7rem;
+                color: rgb(230, 92, 92);
+                // background-color: #fff;
+                // padding: 5px 10px;
+            }
+            
+        }
+    }
+
+
+
+   
+}
+

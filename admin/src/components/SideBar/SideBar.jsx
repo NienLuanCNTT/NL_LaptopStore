@@ -13,6 +13,22 @@ const SideBar = () => {
                         </li>
 
                         <li className="menuList__item">
+
+                            <i className="fas fa-user menuList__item-icon"></i>
+                            <span className="menuList__item-name">Users</span>
+                        </li>
+
+                        <li className="menuList__item">
+                            <i className="fas fa-store menuList__item-icon"></i>
+                            <span className="menuList__item-name">Products</span>
+                        </li>
+
+                        <li className="menuList__item">
+                            <i className="fas fa-shopping-cart menuList__item-icon"></i>
+                            <span className="menuList__item-name">Orders</span>
+                        </li>
+
+                        <li className="menuList__item">
                             <i className="far fa-chart-bar menuList__item-icon"></i>
                             <span className="menuList__item-name">Analytics</span>
                         </li>
@@ -23,27 +39,6 @@ const SideBar = () => {
                         </li>
                     </ul>
                 </div>
-
-                <div className="sidebar__wrapper__menu">
-                    <div className="menuTitle">Quick Menu</div>
-                    <ul className="menuList">
-                        <li className="menuList__item">
-                            <i className="far fa-user menuList__item-icon"></i>
-                            <span className="menuList__item-name">Users</span>
-                        </li>
-
-                        <li className="menuList__item">
-                            <i className="fas fa-store menuList__item-icon"></i>
-                            <span className="menuList__item-name">Products</span>
-                        </li>
-
-
-                    </ul>
-                </div>
-
-
-
-
 
 
             </div>

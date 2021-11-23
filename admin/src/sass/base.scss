@@ -85,6 +85,10 @@ button,
     background-color: green;
 }
 
+.text{
+    font-size: 1.6rem;
+}
+
 
 
 @each $color, $val in $colors {

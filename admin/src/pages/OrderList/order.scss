@@ -1,0 +1,39 @@
+.order {
+    width: 100%;
+
+    .detail-order {
+        background: #09bed6;
+        padding: 4px;
+        color: #fff;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+}
+
+.item-pending,
+.item-transport,
+.item-receved,
+.item-cancle {
+    @include btn;
+
+    line-height: 1.5;
+    display: inline-block;
+    padding: 4px;
+    font-size: 14px;
+    color: #fff;
+
+    border-radius: 8px;
+}
+
+.item-pending {
+    background: #ffc318;
+}
+.item-transport {
+    background: #ffc318;
+}
+.item-receved {
+    background: green;
+}
+.item-cancle {
+    background: #d40a25;
+}

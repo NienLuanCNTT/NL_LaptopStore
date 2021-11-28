@@ -2,13 +2,13 @@
 @import "./mixins";
 @import "./variables";
 
-
 @import "../components/TopBar/TopBar.scss";
 @import "../components/SideBar/SideBar.scss";
-
+@import "../components/AddConfig/config.scss";
+@import "../components/OrderDetailModal/ordermodal.scss";
 @import "../pages/Home/Home.scss";
 @import "../pages/UserList/UserList.scss";
+@import "../pages/OrderList/order.scss";
 
 @import "../components/FeaturedInfo/FeaturedInfo.scss";
 @import "../components/Chart/Chart.scss";
-

@@ -1,0 +1,112 @@
+.order__content {
+    padding: 1.5em 1rem;
+
+    .modal__title {
+        position: relative;
+        font-size: 30px;
+        border-bottom: 1px solid $main-color;
+
+        .modal__close {
+            position: absolute;
+            right: 10px;
+            top: -10px;
+            color: #ef0000;
+            font-size: 34px;
+            opacity: 0.6;
+
+            &:hover {
+                cursor: pointer;
+                opacity: 1;
+            }
+        }
+    }
+
+    .order__info {
+        &-title {
+            margin: 12px;
+        }
+
+        &-content {
+            padding: 0 12px;
+            font-size: 15px;
+            border: 1px solid $main-color;
+            border-radius: 8px;
+
+            .item {
+                @include flex(center, flex-start);
+                padding: 6px 10px;
+                line-height: 1.5;
+                border-bottom: 1px solid $main-color;
+                height: 45px;
+
+                .update-status {
+                    flex: 1;
+                    text-align: end;
+
+                    button {
+                        @include btn;
+
+                        background: #425a00;
+                    }
+                }
+
+                p {
+                    font-weight: 600;
+                    width: 150px;
+                }
+            }
+        }
+    }
+
+    .orders__list {
+        margin: 32px 0;
+
+        .orders__list-title {
+            margin: 12px;
+        }
+
+        .orders__list-item {
+            table {
+                width: 100%;
+                text-align: center;
+                border: 1px solid $main-color;
+                border-collapse: collapse;
+
+                tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+
+                td,
+                th {
+                    border: 1px solid $main-color;
+                    padding: 2px;
+
+                    img {
+                        width: 50px;
+                    }
+                }
+            }
+        }
+    }
+    .total {
+        font-size: 18px;
+        margin: 12px;
+        .price {
+            color: #ef0000;
+            padding: 8px;
+        }
+    }
+    .btn-cancle {
+        text-align: right;
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            color: #f2f2f2;
+
+            margin-right: 10px;
+            border-radius: 8px;
+            background-color: #af0606;
+        }
+    }
+}

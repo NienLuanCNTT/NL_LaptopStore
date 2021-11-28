@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ORDER_CREATE_FAIL, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS } from "constants/orderConstants";
+import { ORDER_CREATE_FAIL, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_Detail_FAIL, ORDER_Detail_REQUEST, ORDER_Detail_SUCCESS, ORDER_LIST_FAIL, ORDER_LIST_REQUEST, ORDER_LIST_SUCCESS } from "constants/orderConstants";
 
 
 export const createCheckOut = (order) => async (dispatch, getState) => {
@@ -36,5 +36,29 @@ export const cancleOrder = (order) => async (dispatch, getState) => {
                 ? error.response.data.message
                 : error.message,
         })
+    }
+}
+
+export const listOrders = () => async (dispatch) => {
+    dispatch({
+        type: ORDER_LIST_REQUEST
+    });
+    try {
+        const { data } = await axios.get('/api/orders');
+        dispatch({ type: ORDER_LIST_SUCCESS, payload: data })
+    } catch (error) {
+        dispatch({ type: ORDER_LIST_FAIL, payload: error.message })
+    }
+}
+
+export const DetailOrder = (id) => async (dispatch) => {
+    dispatch({
+        type: ORDER_Detail_REQUEST
+    });
+    try {
+        const { data } = await axios.get(`/api/orders/${id}`);
+        dispatch({ type: ORDER_Detail_SUCCESS, payload: data })
+    } catch (error) {
+        dispatch({ type: ORDER_Detail_FAIL, payload: error.message })
     }
 }

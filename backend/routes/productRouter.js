@@ -2,6 +2,7 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
 import data from '../data.js';
+import Configs from '../models/configModels.js';
 
 const productRouter = express.Router();
 
@@ -33,10 +34,5 @@ productRouter.get('/:id',
         }
     })
 );
-
-
-
-
-
 
 export default productRouter;

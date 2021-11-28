@@ -6,7 +6,6 @@ InputField.propTypes = {
     label: PropTypes.string,
     type: PropTypes.string,
     placeholder: PropTypes.string,
-    defaultValue: PropTypes.string,
     className: PropTypes.string,
     onChange: PropTypes.func,
 };

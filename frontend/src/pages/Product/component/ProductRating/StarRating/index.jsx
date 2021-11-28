@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { addStarRating } from '../StarRatingSlice';
 
 const StarRating = (props) => {
-    const { userInfo, productId, setFeedback } = props;
+    const { userInfo, productId, starRating, setStarRating, dateTime } = props;
     const dispatch = useDispatch();
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
@@ -28,13 +28,25 @@ const StarRating = (props) => {
                         dispatch(addStarRating({ productId, rating, comment, userInfo }));
                         toast.success("Đã thêm đánh giá thành công");
 
+
+                        const newRat = [...starRating];
+                        const newStarRating = {
+                            productId,
+                            userName: userInfo.name,
+                            image: userInfo.image,
+                            rating,
+                            note: comment,
+                            datetime: dateTime
+                        }
+                        newRat.push(newStarRating);
+                        setStarRating(newRat);
                         resolve(true);
-                        setFeedback(prev => !prev);
                         setRating(null);
                         setcmtRating('');
                         setIsRating(false);
+                        clearTimeout();
                     }, 2000);
-                })
+                });
             }
         } else {
             toast.warn('Vui lòng đăng nhập để đánh giá!!', {

@@ -94,7 +94,7 @@ const CheckOut = (props) => {
 
     const { checkList } = useSelector((state) => state.checkList);
     const orderCreate = useSelector((state) => state.orderCreate);
-    const { loadding, success, order } = orderCreate;
+    const { loadding, error, success, order } = orderCreate;
 
     const handleQuantityChange = (id, quantity) => {
         dispatch(selectQuantity({ id, quantity }));
@@ -110,7 +110,7 @@ const CheckOut = (props) => {
 
     const [shipState, setshipState] = useState({
         fullName: userInfo?.name,
-        phone: userOrder?.phone,
+        phone: userInfo?.phone,
         city: 'Thành Phố Cần Thơ',
         district: 'Ninh Kiều',
         commune: 'Hưng Lợi',
@@ -164,7 +164,7 @@ const CheckOut = (props) => {
     });
     const [check, setCheck] = useState({
         fullname: '' || userInfo?.name,
-        phone: '',
+        phone: '' || userInfo?.phone,
         email: '' || userInfo?.email,
         ship: shipOptions,
         city: true,
@@ -180,17 +180,12 @@ const CheckOut = (props) => {
             if (index > 0) {
                 const data = order.data[index - 1].shipingAddress || [];
 
-                setCheck({
-                    ...check,
-                    phone: data.phone,
-                })
                 setUserOrder(data);
             }
-
             return;
         }
         fetchUserOrder();
-    }, [userInfo?._id, check]);
+    }, [userInfo?._id]);
 
 
 
@@ -201,9 +196,9 @@ const CheckOut = (props) => {
 
     const validateInput = (type, checkingText, id) => {
         if (type === "phone") {
-            const regexp = /^\d{10}$/;
+            const regexp = /^\d{9}$/;
             const checkingResult = regexp.exec(checkingText);
-            if (checkingText || checkingResult) {
+            if (checkingResult) {
                 setshipState({ ...shipState, phone: checkingText })
                 setCheckFrom({
                     ...checkFrom,
@@ -218,7 +213,7 @@ const CheckOut = (props) => {
                     ...checkFrom,
                     phone: {
                         isInputValid: false,
-                        errorMessage: 'SĐT gồm 10 chữ số.'
+                        errorMessage: 'SĐT gồm 9 chữ số sau 0...'
                     }
                 })
                 setCheck({ ...check, phone: false });
@@ -348,6 +343,7 @@ const CheckOut = (props) => {
                         status: 'pending',
                         userId: userInfo?._id,
                         dateTime: dateTime,
+                        dateReceived: 'None'
                     }));
 
                     toast.success('Đã đặt hàng thành công 👌👌', {
@@ -356,7 +352,9 @@ const CheckOut = (props) => {
                     setIsPending(false);
                     setcheckOutModal(false);
                     dispatch(cartEmpty());
-                }, 2000)
+
+                    clearTimeout();
+                }, 2000);
             }
         } else {
             toast.warn('Vui lòng đăng nhập để đặt hàng!!', {
@@ -464,7 +462,7 @@ const CheckOut = (props) => {
                                                                     type="text"
                                                                     name="phone"
                                                                     placeholder="Nhập Số điện thoại"
-                                                                    defaultValue={'' || userOrder?.phone}
+                                                                    defaultValue={'' || userInfo?.phone}
                                                                     onChange={(e) => validateInput("phone", e.target.value, "phone")}
                                                                 />
                                                                 <FormError

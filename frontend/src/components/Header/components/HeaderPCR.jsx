@@ -66,7 +66,7 @@ const HeaderPCR = (props) => {
 
                                 <div>
                                     <div className="btn account btn-avatar">
-                                        <Link to="/account">
+                                        <Link to="/userinfo">
                                             <img className="avatar" src={userInfo.isAdmin ? userInfo.image : userInfo.image.split('\\').join('/')} alt="" />
 
                                         </Link>

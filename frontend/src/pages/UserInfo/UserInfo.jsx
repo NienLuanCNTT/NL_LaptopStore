@@ -113,7 +113,7 @@ const UserInfo = (props) => {
                                                 <div className="form-item avatar">
 
 
-                                                    <img className="form-item__img" src={user.isAdmin && typeof (image) === 'string' ? image : image.split('\\').join('/')} alt="" />
+                                                    <img className="form-item__img" src={user?.isAdmin && typeof (image) === 'string' ? image : image.split('\\').join('/')} alt="" />
 
                                                     <div className="choose">
                                                         <input className="form-item__file" type="file" onChange={e => onAvatarChange(e)} />

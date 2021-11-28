@@ -67,7 +67,8 @@ userRouter.post('/signin', expressAsyncHandler(async (req, res) => {
                 email: user.email,
                 isAdmin: user.isAdmin,
                 image: user.image,
-                token: generateToken(user)
+                token: generateToken(user),
+                phone: user.phone
             });
             return;
         }

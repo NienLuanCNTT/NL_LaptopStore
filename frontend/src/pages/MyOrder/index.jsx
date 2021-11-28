@@ -13,20 +13,18 @@ const MyOrder = () => {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const [myOrders, setmyOrders] = useState();
-    const [isCancle, setIsCancle] = useState();
 
     useEffect(() => {
         const fetchUserOrder = async () => {
-            const orders = await axios.get(`http://localhost:5000/api/orders/${userInfo._id}`);
+            const orders = await axios.get(`/api/orders/user/${userInfo._id}`);
             const data = orders.data || [];
 
             setmyOrders(data);
             return;
         }
         fetchUserOrder();
-    }, [isCancle, userInfo._id]);
 
-
+    }, [userInfo._id]);
 
     const dispatch = useDispatch();
     const handleCancleOrder = (id, status) => {
@@ -34,14 +32,19 @@ const MyOrder = () => {
             ...TOAST_OPTIONS,
         });
         setTimeout(() => {
+
             dispatch(cancleOrder({ id, status }));
-            setIsCancle(prev => !prev)
+            const index = myOrders.findIndex(order => order._id === id);
+            const ordersUpdated = [...myOrders];
+            ordersUpdated[index].status = "cancle";
+            setmyOrders(ordersUpdated);
+
             toast.success('Hủy đơn hàng thành công!', {
                 ...TOAST_OPTIONS,
             });
-        }, 2000);
 
-        clearTimeout();
+            clearTimeout();
+        }, 2000);
     }
 
     const [currentTab, setCurrentTab] = useState('all');

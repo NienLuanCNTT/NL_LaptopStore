@@ -29,6 +29,7 @@ const __dirname = path.resolve();
 
 import cors from 'cors';
 import userCommentsRouter from './routes/userCommentsRouter.js';
+import configRouter from './routes/configRouter.js';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -48,6 +49,8 @@ app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/rating', starRatingRouter);
 app.use('/api/usercmts', userCommentsRouter);
+app.use('/api/config', configRouter);
+
 
 app.get('/', (req, res) => {
     res.send('Server is ready');

@@ -6,7 +6,6 @@ SelectField.propTypes = {
     name: PropTypes.string.isRequired,
     options: PropTypes.array,
     className: PropTypes.string,
-    defaultOption: PropTypes.string,
     onChange: PropTypes.func,
 };
 

@@ -48,6 +48,14 @@ const Product = (props) => {
     const [configModal, setConfigModal] = useState(false);
     const [checkOutModal, setcheckOutModal] = useState(false);
 
+    const [starRating, setStarRating] = useState([]);
+    const [userComments, setUserComments] = useState([]);
+
+    const today = new Date();
+    const dateTime = `0${today.getDate()}`.slice(-2) + '/' + `0${today.getMonth() + 1}`.slice(-2) + '/' + today.getFullYear()
+        + ' ' + `0${today.getHours()}`.slice(-2) + ':' + `0${today.getMinutes()}`.slice(-2);
+
+
     const handleAddProduct = (id, product) => {
         dispatch(addToCart({ id, product }));
         toast.success('Đã thêm sản phẩm vào giỏ hàng', {
@@ -83,10 +91,21 @@ const Product = (props) => {
                         dispatch(addComment({ productId, comment, userInfo }))
                         toast.success("Đã thêm bình luận");
 
-                        setFeedback(prev => !prev);
+                        const cmtAdd = [...userComments];
+                        const newUserComment = {
+                            productId,
+                            userName: userInfo.name,
+                            image: userInfo.image,
+                            datetime: dateTime,
+                            comment,
+                        }
+                        cmtAdd.push(newUserComment);
+                        setUserComments(cmtAdd);
                         resolve(true);
                         setComment('');
                         setIsComment(false);
+
+                        clearTimeout();
                     }, 1000);
                 })
             }
@@ -95,9 +114,8 @@ const Product = (props) => {
                 ...TOAST_OPTIONS,
             })
         }
-
-
     }
+
     const [loadingcheckbox, setLoadingcheckbox] = useState(true);
 
     const ModalCheckOpen = (id, product) => {
@@ -108,13 +126,11 @@ const Product = (props) => {
             toast.success('Đã thêm sản phẩm vào giỏ hàng', {
                 ...TOAST_OPTIONS,
             });
+
+            clearTimeout();
         }, 1000);
     }
 
-    const [starRating, setStarRating] = useState([]);
-    const [userComments, setUserComments] = useState([]);
-
-    const [isFeedback, setFeedback] = useState(false);
 
     useEffect(() => {
         const fetchStarRating = async () => {
@@ -124,13 +140,12 @@ const Product = (props) => {
             const usercomments = await axios.get(`http://localhost:5000/api/usercmts/${product?._id}`);
             const datacomment = usercomments.data || [];
 
-            setFeedback(false);
             setUserComments(datacomment);
             setStarRating(data);
         };
 
         fetchStarRating();
-    }, [isFeedback, product?._id])
+    }, [product?._id])
 
     const ratingSum = starRating.reduce(
         (avg, rating) =>
@@ -306,7 +321,7 @@ const Product = (props) => {
                                         <button className="btn btn-vote" onClick={handleOpenRating}>Viết đánh giá</button>
                                     </div>
 
-                                    {rating && <StarRating productId={product._id} setFeedback={setFeedback} userInfo={userInfo} />}
+                                    {rating && <StarRating productId={product._id} userInfo={userInfo} dateTime={dateTime} starRating={starRating} setStarRating={setStarRating} />}
                                     <div className="product__box-vote-list">
                                         <StarRatingList starRating={starRating} />
                                     </div>

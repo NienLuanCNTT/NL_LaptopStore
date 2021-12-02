@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const SideBar = () => {
     return (
@@ -24,8 +25,10 @@ const SideBar = () => {
                         </li>
 
                         <li className="menuList__item">
-                            <i className="fas fa-shopping-cart menuList__item-icon"></i>
-                            <span className="menuList__item-name">Orders</span>
+                            <Link to="/orders">
+                                <i className="fas fa-shopping-cart menuList__item-icon"></i>
+                                <span className="menuList__item-name">Orders</span>
+                            </Link>
                         </li>
 
                         <li className="menuList__item">

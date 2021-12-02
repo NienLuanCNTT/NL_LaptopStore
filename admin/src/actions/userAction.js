@@ -65,25 +65,11 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
 
 export const updateUser = (user) => async (dispatch, getState) => {
     dispatch({ type: USER_UPDATE_REQUEST, payload: user });
-    const { userSignin: { userInfo } } = getState();
-    // const fd = new FormData();
-    // if (typeof (user.image) !== 'string') {
-    //     fd.append('userId', user.userId);
-    //     fd.append('name', user.name);
-    //     fd.append('email', user.email);
-    //     fd.append('currentPassword', user.currentPassword);
-    //     fd.append('newPassword', user.newPassword);
-    //     fd.append('image', user.image, user.image.name);
-    // }
 
     try {
-        const { data } = await Axios.put('/api/users/profile', user, {
-            headers: { Authorization: userInfo.token }
-        });
+        const { data } = await Axios.put('/api/users/AdminUser', user);
         // console.log('data: ', data);
         dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
-        dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-        localStorage.setItem('userInfo', JSON.stringify(data));
     } catch (error) {
         dispatch({
             type: USER_UPDATE_FAIL,

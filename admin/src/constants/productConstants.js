@@ -1,4 +1,4 @@
-// import { Bounce } from "react-toastify";
+import { Bounce } from "react-toastify";
 
 export const PRODUCT_LIST_REQUEST = 'PRODUCT_LIST_REQUEST';
 export const PRODUCT_LIST_SUCCESS = 'PRODUCT_LIST_SUCCESS';
@@ -16,8 +16,8 @@ export const PRICE_REQUEST = 'PRICE_REQUEST';
 export const PRICE_SUCCESS = 'PRICE_SUCCESS';
 export const PRICE_FAIL = 'PRICE_FAIL';
 
-// export const TOAST_OPTIONS = {
-//     autoClose: 3000,
-//     hideProgressBar: true,
-//     transition: Bounce,
-// }
+export const TOAST_OPTIONS = {
+    autoClose: 3000,
+    hideProgressBar: true,
+    transition: Bounce,
+}

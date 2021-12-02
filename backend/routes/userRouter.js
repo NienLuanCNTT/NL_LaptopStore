@@ -150,6 +150,35 @@ userRouter.put('/profile', expressAsyncHandler(async (req, res) => {
 }));
 
 
+userRouter.put('/AdminUser', expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.body.userId);
+
+
+    // console.log('Ley tu user action: ', req.body.currentPassword);
+    // console.log('Mat khau moi: ', req.body.newPassword);
+    // console.log('Hien tai trong user: ', user.password);
+
+
+
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.phone = req.body.phone || user.phone;
+
+    const updatedUser = await user.save();
+    res.send({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        phone: updatedUser.phone,
+        idAdmin: updatedUser.isAdmin,
+        image: updatedUser.image,
+        password: updatedUser.password,
+        token: generateToken(updatedUser),
+    })
+
+}));
+
+
 
 
 export default userRouter;

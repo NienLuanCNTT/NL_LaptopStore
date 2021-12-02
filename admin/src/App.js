@@ -4,6 +4,7 @@ import Home from 'pages/Home/Home';
 import UserList from 'pages/UserList/UserList';
 import './sass/index.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import User from 'pages/User/User';
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
           <Route path="/" element={<Home />} />
 
           <Route path="/users" element={<UserList />} />
+
+          <Route path="/user/:id" element={<User />} />
 
 
         </Routes>

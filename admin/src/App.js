@@ -4,6 +4,8 @@ import Home from 'pages/Home/Home';
 import UserList from 'pages/UserList/UserList';
 import './sass/index.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import User from 'pages/User/User';
+
 import AddConfig from 'components/AddConfig/index';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,6 +27,8 @@ function App() {
           <Route path="/orders" element={<OrderList />} />
 
           <Route path="/configadd" element={<AddConfig />} />
+
+          <Route path="/user/:id" element={<User />} />
 
 
         </Routes>

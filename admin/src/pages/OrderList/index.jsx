@@ -1,27 +1,28 @@
 import { DataGrid } from '@material-ui/data-grid';
-import { listOrders } from 'actions/orderActions';
+import axios from 'axios';
 import LoadingBox from 'components/LoadingBox';
-import MessageBox from 'components/MessageBox';
 import OrderDetailModal from 'components/OrderDetailModal';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 
 OrderList.propTypes = {};
 
 function OrderList(props) {
 
-    const orderList = useSelector((state) => state.orderList);
-    const { loading, error, orders } = orderList;
-    const [data, setData] = useState(orders);
+    const [data, setData] = useState();
     const [detailModal, setdetailModal] = useState(false)
 
-    const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(listOrders());
-    }, [dispatch]);
+        const fetchOrderList = async () => {
+            const orders = await axios.get('/api/orders');
+            const orderList = orders.data || [];
 
-    const [curId, setCurId] = useState('');
+            setData(orderList);
+        }
+        fetchOrderList();
+    }, []);
+
+    const [curId, setCurId] = useState();
 
     const handleDetailOrder = (id) => {
         setdetailModal(true);
@@ -51,9 +52,9 @@ function OrderList(props) {
             }
         },
         {
-            field: 'received_date', headerName: 'Order Received', width: 250, headerClassName: 'text', renderCell: (params) => {
+            field: 'update_date', headerName: 'DATE UPDATE', width: 250, headerClassName: 'text', renderCell: (params) => {
                 return (
-                    <span className="text">{params.row.dateReceived}</span>
+                    <span className="text">{params.row.dateUpdate}</span>
                 )
             }
         },
@@ -96,31 +97,30 @@ function OrderList(props) {
                 <OrderDetailModal
                     setdetailModal={setdetailModal}
                     curId={curId}
+                    orderList={data}
+                    setData={setData}
                 />}
-            {
-                loading ? (<LoadingBox></LoadingBox>) : error ?
-                    (<MessageBox variant="danger">{error}</MessageBox>) :
-                    (<div className="userlist__main">
+            <div className="userlist__main">
+                {data ?
+                    <DataGrid
+                        disableSelectionOnClick
+                        rows={data.map((order, index) => ({
+                            id: order._id,
+                            userId: order.userId,
+                            totalPrice: order.totalPrice,
+                            status: order.status,
+                            dateTime: order.dateTime,
+                            dateUpdate: order.dateUpdate,
+                        }))}
 
-                        <DataGrid
-                            disableSelectionOnClick
-                            rows={data.map((order, index) => ({
-                                id: order._id,
-                                userId: order.userId,
-                                totalPrice: order.totalPrice,
-                                status: order.status,
-                                dateTime: order.dateTime,
-                                dateReceived: order.dateReceived,
-                            }))}
+                        columns={columns}
+                        pageSize={10}
+                        rowsPerPageOptions={[5]}
+                        checkboxSelection
+                    /> : <LoadingBox />
+                }
 
-                            columns={columns}
-                            pageSize={10}
-                            rowsPerPageOptions={[5]}
-                            checkboxSelection
-                        />
-
-                    </div>)
-            }
+            </div>
         </div>
     );
 }

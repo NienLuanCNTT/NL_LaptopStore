@@ -343,7 +343,7 @@ const CheckOut = (props) => {
                         status: 'pending',
                         userId: userInfo?._id,
                         dateTime: dateTime,
-                        dateReceived: 'None'
+                        dateUpdate: 'None'
                     }));
 
                     toast.success('Đã đặt hàng thành công 👌👌', {

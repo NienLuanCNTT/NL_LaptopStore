@@ -44,7 +44,6 @@ function Footer(props) {
             _id: 1,
             title: "Chăm sóc khách hàng",
             list: [
-                { name: "Câu hỏi thường gặp" },
                 { name: "Gửi yêu cầu hổ trợ" },
                 { name: "Hướng dẫn đặt hàng" },
                 { name: "Phương thức vận chuyển" },
@@ -126,6 +125,14 @@ function Footer(props) {
                                     {content.title}
                                 </div>
                                 <div className="footer__content-items-list">
+                                    <Link to="/askquestion" >
+                                        <div
+
+                                            className="footer__content-items-list-item"
+                                        >
+                                            Câu hỏi thường gặp
+                                        </div>
+                                    </Link>
                                     {content.list.map((item, index) => (
                                         <Link to="/" key={index}>
                                             <div

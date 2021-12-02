@@ -9,7 +9,12 @@ const AskQuestion = () => {
             <h1>CÂU HỎI THƯỜNG GẶP</h1>
             <img src={askquest} alt="" />
             <div className="content">
+                <div className="item">
+                    <div className="item-title">
 
+                    </div>
+
+                </div>
             </div>
         </div>
     );

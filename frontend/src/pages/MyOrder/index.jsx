@@ -13,6 +13,11 @@ const MyOrder = () => {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
     const [myOrders, setmyOrders] = useState();
+    const dispatch = useDispatch();
+
+    const today = new Date();
+    const dateTime = `0${today.getDate()}`.slice(-2) + '/' + `0${today.getMonth() + 1}`.slice(-2) + '/' + today.getFullYear()
+        + ' ' + `0${today.getHours()}`.slice(-2) + ':' + `0${today.getMinutes()}`.slice(-2);
 
     useEffect(() => {
         const fetchUserOrder = async () => {
@@ -26,14 +31,13 @@ const MyOrder = () => {
 
     }, [userInfo._id]);
 
-    const dispatch = useDispatch();
-    const handleCancleOrder = (id, status) => {
+    const handleCancleOrder = (id, status, dateTime) => {
         toast.warn('Đang xử lý đơn hàng...', {
             ...TOAST_OPTIONS,
         });
         setTimeout(() => {
 
-            dispatch(cancleOrder({ id, status }));
+            dispatch(cancleOrder({ id, status, dateTime }));
             const index = myOrders.findIndex(order => order._id === id);
             const ordersUpdated = [...myOrders];
             ordersUpdated[index].status = "cancle";
@@ -171,7 +175,7 @@ const MyOrder = () => {
                                         order.status === "pending"
                                         && <div
                                             className="item-cancle btn"
-                                            onClick={() => handleCancleOrder(order._id, 'cancle')}
+                                            onClick={() => handleCancleOrder(order._id, 'cancle', dateTime)}
                                         >
                                             Hủy đặt hàng</div>
                                     }

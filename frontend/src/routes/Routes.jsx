@@ -8,6 +8,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import MyOrder from 'pages/MyOrder';
 import UserInfo from 'pages/UserInfo/UserInfo';
+import AskQuestion from 'pages/AskQuestion';
 
 function Routes() {
     return (
@@ -18,6 +19,7 @@ function Routes() {
             <Route path="/myorder" component={MyOrder} />
             <Route path="/userinfo" component={UserInfo} />
             <Route path="/catalog" component={Catalog} />
+            <Route path="/askquestion" component={AskQuestion} />
         </Switch>
     );
 }

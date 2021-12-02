@@ -1,14 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-
-import { persistStore, persistReducer } from 'redux-persist';
-import { combineReducers } from "redux";
-import storage from 'redux-persist/lib/storage';
-
-import { productDetailsReducer, productListReducer } from 'reducers/productReducers';
-import { orderCreateReducer, orderDetailReducer, orderListReducer } from './../reducers/orderReduces';
-import { userDetailsReducer, userListReducer, userRegisterReducer, userSigninReducer, userUpdateReducer } from "reducers/userReducers";
 import { UpdateConfigReducer } from "reducers/configReducers";
+import { productDetailsReducer, productListReducer } from 'reducers/productReducers';
+import { userDetailsReducer, userListReducer, userRegisterReducer, userSigninReducer, userUpdateReducer } from "reducers/userReducers";
+import { combineReducers } from "redux";
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { orderCreateReducer } from './../reducers/orderReduces';
+
+
+
 
 const persistConfig = {
         key: 'root',
@@ -31,8 +31,6 @@ const rootReducer = combineReducers({
         userUpdate: userUpdateReducer,
 
         userList: userListReducer,
-        orderList: orderListReducer,
-        detailOrder: orderDetailReducer,
         config: UpdateConfigReducer,
 });
 

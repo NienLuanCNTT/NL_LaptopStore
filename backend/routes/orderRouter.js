@@ -44,7 +44,7 @@ orderRouter.post(
                 totalPrice: req.body.totalPrice,
                 status: req.body.status,
                 dateTime: req.body.dateTime,
-                dateReceived: req.body.dateReceived,
+                dateUpdate: req.body.dateUpdate,
                 userId: req.body.userId,
             });
             order.save();
@@ -55,7 +55,12 @@ orderRouter.post(
     '/status',
     expressAsyncHandler(async (req, res) => {
         await Order.updateOne({ _id: req.body.id },
-            { $set: { status: req.body.status } });
+            {
+                $set: {
+                    status: req.body.status,
+                    dateUpdate: req.body.dateUpdate
+                }
+            });
 
     })
 );

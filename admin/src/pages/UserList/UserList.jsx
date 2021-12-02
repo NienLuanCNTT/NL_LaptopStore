@@ -5,14 +5,34 @@ import { DataGrid } from '@material-ui/data-grid';
 import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 const UserList = () => {
     document.title = "Admin - Users"
 
-    const userList = useSelector((state) => state.userList);
-    const { loading, error, users } = userList;
-    const [data, setData] = useState(users);
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        const fetchOrderList = async () => {
+            const users = await axios.get('/api/users');
+            console.log('users ', users);
+            const userList = users.data || [];
+
+            setData(userList);
+        }
+        fetchOrderList();
+    }, []);
+
+    // console.log(data);
+
+
+
+
+
+    // const userList = useSelector((state) => state.userList);
+    // const { loading, error, users } = userList;
+    // const [data, setData] = useState(users);
 
 
     const dispatch = useDispatch();
@@ -75,22 +95,27 @@ const UserList = () => {
 
 
     return (
+
         <div className="userlist">
             {
-                loading ? (<LoadingBox></LoadingBox>) : error ?
-                    (<MessageBox variant="danger">{error}</MessageBox>) :
-                    (<div className="userlist__main">
-
+                // loading ? (<LoadingBox></LoadingBox>) : error ?
+                //     (<MessageBox variant="danger">{error}</MessageBox>) :
+                //     (
+                <div className="userlist__main">
+                    {
+                        data &&
                         <DataGrid
                             disableSelectionOnClick
-                            rows={data.map((user, index) => ({ id: user._id, name: user.name, image: user.image, email: user.email, phone: user.phone, isAdmin: user.isAdmin }))}
+                            rows={data && data.map((user, index) => ({ id: user._id, name: user.name, image: user.image, email: user.email, phone: user.phone, isAdmin: user.isAdmin }))}
                             columns={columns}
                             pageSize={10}
                             rowsPerPageOptions={[5]}
                             checkboxSelection
                         />
+                    }
 
-                    </div>)
+                </div>
+                // )
 
             }
         </div>

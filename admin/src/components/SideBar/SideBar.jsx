@@ -14,9 +14,10 @@ const SideBar = () => {
                         </li>
 
                         <li className="menuList__item">
-
-                            <i className="fas fa-user menuList__item-icon"></i>
-                            <span className="menuList__item-name">Users</span>
+                            <Link to="/users">
+                                <i className="fas fa-user menuList__item-icon"></i>
+                                <span className="menuList__item-name">Users</span>
+                            </Link>
                         </li>
 
                         <li className="menuList__item">

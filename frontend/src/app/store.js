@@ -8,7 +8,7 @@ import storage from 'redux-persist/lib/storage';
 
 import { productDetailsReducer, productListReducer } from 'reducers/productReducers';
 import { orderCreateReducer } from './../reducers/orderReduces';
-import { userDetailsReducer, userRegisterReducer, userSigninReducer, userUpdateReducer } from "reducers/userReducers";
+import { userDetailsReducer, userRegisterReducer, userSigninReducer, userUpdateImageReducer, userUpdateReducer } from "reducers/userReducers";
 
 const persistConfig = {
         key: 'root',
@@ -31,6 +31,7 @@ const rootReducer = combineReducers({
         userRegister: userRegisterReducer,
         userDetails: userDetailsReducer,
         userUpdate: userUpdateReducer,
+        userUpdateImage: userUpdateImageReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

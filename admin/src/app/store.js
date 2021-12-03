@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { UpdateConfigReducer } from "reducers/configReducers";
 import { productDetailsReducer, productListReducer } from 'reducers/productReducers';
-import { userDetailsReducer, userListReducer, userRegisterReducer, userSigninReducer, userUpdateReducer } from "reducers/userReducers";
+import { userDetailsReducer, userListReducer, userRegisterReducer, userSigninReducer, userUpdateImageReducer, userUpdateReducer } from "reducers/userReducers";
 import { combineReducers } from "redux";
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -29,7 +29,7 @@ const rootReducer = combineReducers({
         userRegister: userRegisterReducer,
         userDetails: userDetailsReducer,
         userUpdate: userUpdateReducer,
-
+        userUpdateImage: userUpdateImageReducer,
         userList: userListReducer,
         config: UpdateConfigReducer,
 });

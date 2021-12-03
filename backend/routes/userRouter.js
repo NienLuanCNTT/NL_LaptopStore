@@ -132,7 +132,7 @@ userRouter.put('/profile', expressAsyncHandler(async (req, res) => {
             // console.log('khong doi mat khau');
         }
         const updatedUser = await user.save();
-        // console.log('updated: ', updatedUser);
+        console.log('updated: ', updatedUser);
         res.send({
             _id: updatedUser._id,
             name: updatedUser.name,
@@ -147,22 +147,65 @@ userRouter.put('/profile', expressAsyncHandler(async (req, res) => {
     else {
         res.status(401).send({ message: 'Nhập mật khẩu không chính xác !' });
     }
-}));
+}
+));
+
+userRouter.put('/profileImage', upload.single('image'), expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.body.userId);
+
+    // console.log('Ley tu user action: ', req.body.currentPassword);
+    // console.log('Mat khau moi: ', req.body.newPassword);
+    // console.log('Hien tai trong user: ', user.password);
+    // console.log(req.file.path);
+
+    if (user && bcrypt.compareSync(req.body.currentPassword, user.password)) {
+
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        user.phone = req.body.phone || user.phone;
+        user.image = req.file.path.slice(7);
+        if (req.body.newPassword) {
+            user.password = bcrypt.hashSync(req.body.newPassword, 8);
+            // console.log('doi mat khau thanh: ', user.password);
+        }
+        else {
+            // console.log('khong doi mat khau');
+        }
+        const updatedUser = await user.save();
+        res.send({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            phone: updatedUser.phone,
+            idAdmin: updatedUser.isAdmin,
+            image: updatedUser.image,
+            password: updatedUser.password,
+            token: generateToken(updatedUser),
+        })
+    }
+    else {
+        res.status(401).send({ message: 'Nhập mật khẩu không chính xác !' });
+    }
+}
+));
 
 
 userRouter.put('/AdminUser', expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.body.userId);
 
-
     // console.log('Ley tu user action: ', req.body.currentPassword);
     // console.log('Mat khau moi: ', req.body.newPassword);
     // console.log('Hien tai trong user: ', user.password);
 
-
+    // console.log(user);
+    // console.log(req.body.name, user.name);
+    // console.log(req.body.email, user.email);
+    // console.log(req.body.phone, user.phone);
 
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.phone = req.body.phone || user.phone;
+
 
     const updatedUser = await user.save();
     res.send({
@@ -177,6 +220,39 @@ userRouter.put('/AdminUser', expressAsyncHandler(async (req, res) => {
     })
 
 }));
+
+userRouter.put('/AdminUserImage', upload.single('image'), expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.body.userId);
+
+    console.log(user);
+    console.log(req.file.path.slice(7));
+    console.log(req.body.name, user.name);
+    console.log(req.body.email, user.email);
+    console.log(req.body.phone, user.phone);
+
+    user.name = req.body.name !== 'undefined' ? req.body.name : user.name;
+    user.email = req.body.email !== 'undefined' ? req.body.email : user.email;
+    user.phone = req.body.phone || user.phone;
+    user.image = req.file.path.slice(7);
+
+    console.log('after user ', user);
+    const updatedUser = await user.save();
+    console.log('update, ', updatedUser);
+    res.send({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        phone: updatedUser.phone,
+        idAdmin: updatedUser.isAdmin,
+        image: updatedUser.image,
+        password: updatedUser.password,
+        token: generateToken(updatedUser),
+    })
+
+}
+));
+
+
 
 
 

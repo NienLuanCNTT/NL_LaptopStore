@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Helmet from 'components/Helmet'
-import { detailsUser, updateUser } from 'actions/userAction';
+import { detailsUser, updateUser, updateUserImage } from 'actions/userAction';
 import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
-import { USER_UPDATE_RESET } from 'constants/userConstants';
+import { USER_IMAGE_RESET, USER_UPDATE_RESET } from 'constants/userConstants';
 import { toast } from 'react-toastify';
 import { TOAST_OPTIONS } from 'constants/productConstants';
 
@@ -23,11 +23,15 @@ const UserInfo = (props) => {
     const { success: successUpdate, error: errorUpdate, loading: loadingUpdate } = userUpdate;
     const dispatch = useDispatch();
 
+    const userUpdateImage = useSelector((state) => state.userUpdateImage);
+    const { success: successImage, error: errorImage, loading: loadingImage } = userUpdateImage;
+
 
 
     useEffect(() => {
         // if (!user) {
         dispatch({ type: USER_UPDATE_RESET });
+        dispatch({ type: USER_IMAGE_RESET });
         dispatch(detailsUser(userInfo._id));
         // }
         // else {
@@ -42,7 +46,7 @@ const UserInfo = (props) => {
 
     const [name, setName] = useState(userInfo && userInfo.name);
     const [email, setEmail] = useState(userInfo && userInfo.email);
-    const [image, setImage] = useState(userInfo && userInfo.image);
+    const [image, setImage] = useState('');
     const [phone, setPhone] = useState(userInfo && userInfo.phone);
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -51,13 +55,9 @@ const UserInfo = (props) => {
 
 
     const submitInfo = (e) => {
-
-        console.log('error: ', errorUpdate);
-        console.log('success: ', successUpdate);
-        console.log('user: ', user);
-        console.log('userInfo ', userInfo);
         e.preventDefault();
 
+        console.log(successUpdate);
         if (newPassword !== confirmNewPassword) {
             toast.warn('Nhập lại mật khẩu không chính xác', {
                 ...TOAST_OPTIONS,
@@ -65,8 +65,14 @@ const UserInfo = (props) => {
         }
         else {
 
-
-            dispatch(updateUser({ userId: user._id, name, email, currentPassword, newPassword, phone }));
+            if (image === '') {
+                dispatch(updateUser({ userId: user._id, name, email, currentPassword, newPassword, phone }));
+                console.log('không có image')
+            }
+            else {
+                console.log('có image');
+                dispatch(updateUserImage({ userId: user._id, name, email, currentPassword, newPassword, phone, image }));
+            }
             // toast.success('Cập nhật thành công', {
 
             // });
@@ -79,17 +85,27 @@ const UserInfo = (props) => {
             // }
         }
 
-
-
-
-
     }
 
     const onAvatarChange = (e) => {
         e.preventDefault();
         setImage(e.target.files[0]);
-
     }
+
+    useEffect(() => {
+        if (successUpdate === true || successImage === true) {
+            toast.success('Cập nhật thành công')
+        }
+        else {
+            toast.warn(errorUpdate)
+        }
+    }, [successUpdate, successImage, errorUpdate])
+
+
+
+
+    console.log(successUpdate, errorUpdate);
+
 
 
     return (
@@ -99,9 +115,7 @@ const UserInfo = (props) => {
                     : error ? <MessageBox variant="danger">{error}</MessageBox>
                         : (
                             <>
-                                {loadingUpdate && <LoadingBox></LoadingBox>}
-                                {errorUpdate && (<MessageBox variant="danger">{errorUpdate}</MessageBox>)}
-                                {successUpdate && (<MessageBox variant="success">Cập nhật thành công</MessageBox>)}
+                                {/* {loadingUpdate && <LoadingBox></LoadingBox>} */}
 
                                 <div className="userInfo">
                                     <div className="userInfo__item">
@@ -113,7 +127,7 @@ const UserInfo = (props) => {
                                                 <div className="form-item avatar">
 
 
-                                                    <img className="form-item__img" src={user?.isAdmin && typeof (image) === 'string' ? image : image.split('\\').join('/')} alt="" />
+                                                    <img className="form-item__img" src={user?.isAdmin && typeof (user?.image) === 'string' ? user?.image : user?.image.split('\\').join('/')} alt="" />
 
                                                     <div className="choose">
                                                         <input className="form-item__file" type="file" onChange={e => onAvatarChange(e)} />

@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { USER_DETAIL_FAIL, USER_DETAIL_REQUEST, USER_DETAIL_SUCCESS, USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_UPDATE_FAIL, USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS } from "constants/userConstants"
+import { USER_DETAIL_FAIL, USER_DETAIL_REQUEST, USER_DETAIL_SUCCESS, USER_IMAGE_FAIL, USER_IMAGE_REQUEST, USER_IMAGE_SUCCESS, USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_UPDATE_FAIL, USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS } from "constants/userConstants"
 
 export const signin = (email, password) => async (dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
@@ -63,12 +63,12 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
     }
 }
 
-export const updateUser = (user) => async (dispatch, getState) => {
+export const updateUser = (user) => async (dispatch) => {
     dispatch({ type: USER_UPDATE_REQUEST, payload: user });
-
+    console.log(user);
     try {
         const { data } = await Axios.put('/api/users/AdminUser', user);
-        // console.log('data: ', data);
+        console.log('data: ', data);
         dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
     } catch (error) {
         dispatch({
@@ -80,6 +80,34 @@ export const updateUser = (user) => async (dispatch, getState) => {
         });
     }
 
+}
+
+
+export const updateUserImage = (user) => async (dispatch) => {
+    dispatch({ type: USER_IMAGE_REQUEST, payload: user });
+
+    const fd = new FormData();
+    fd.append('userId', user.userId);
+    fd.append('name', user.name);
+    fd.append('email', user.email);
+    fd.append('phone', user.phone);
+    fd.append('image', user.image, user.image.name);
+
+
+
+    try {
+        const { data } = await Axios.put('/api/users/AdminUserImage', fd);
+        console.log('data: ', data);
+        dispatch({ type: USER_IMAGE_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({
+            type: USER_IMAGE_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        });
+    }
 }
 
 

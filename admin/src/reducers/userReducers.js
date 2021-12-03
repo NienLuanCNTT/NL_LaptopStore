@@ -1,4 +1,4 @@
-import { USER_DETAIL_FAIL, USER_DETAIL_REQUEST, USER_DETAIL_SUCCESS, USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_UPDATE_FAIL, USER_UPDATE_REQUEST, USER_UPDATE_RESET, USER_UPDATE_SUCCESS } from "constants/userConstants";
+import { USER_DETAIL_FAIL, USER_DETAIL_REQUEST, USER_DETAIL_SUCCESS, USER_IMAGE_FAIL, USER_IMAGE_REQUEST, USER_IMAGE_RESET, USER_IMAGE_SUCCESS, USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_UPDATE_FAIL, USER_UPDATE_REQUEST, USER_UPDATE_RESET, USER_UPDATE_SUCCESS } from "constants/userConstants";
 
 
 export const userListReducer = (state = { loading: true, users: [] }, action) => {
@@ -67,6 +67,22 @@ export const userUpdateReducer = (state = {}, action) => {
         case USER_UPDATE_FAIL:
             return { loading: false, error: action.payload };
         case USER_UPDATE_RESET:
+            return {};
+        default:
+            return state;
+    }
+};
+
+
+export const userUpdateImageReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_IMAGE_REQUEST:
+            return { loading: true };
+        case USER_IMAGE_SUCCESS:
+            return { loading: false, success: true };
+        case USER_IMAGE_FAIL:
+            return { loading: false, error: action.payload };
+        case USER_IMAGE_RESET:
             return {};
         default:
             return state;

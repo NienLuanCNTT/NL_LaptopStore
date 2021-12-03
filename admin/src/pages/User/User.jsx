@@ -1,10 +1,10 @@
-import { detailsUser, updateUser } from 'actions/userAction';
+import { detailsUser, updateUser, updateUserImage } from 'actions/userAction';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
-import { USER_UPDATE_RESET } from 'constants/userConstants';
+import { USER_IMAGE_RESET, USER_UPDATE_RESET } from 'constants/userConstants';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
@@ -33,30 +33,43 @@ const User = () => {
         fetchUser();
     }, []);
 
-    console.log('use ', user);
 
     const userUpdate = useSelector((state) => state.userUpdate);
     // rename => error: 
     const { success: successUpdate, error: errorUpdate, loading: loadingUpdate } = userUpdate;
 
+    const userUpdateImage = useSelector((state) => state.userUpdateImage);
+    const { success: successImage, error: errorImage, loading: loadingImage } = userUpdateImage;
+
     const [name, setName] = useState(user?.name);
     const [email, setEmail] = useState(user?.email);
     const [phone, setPhone] = useState(user?.phone);
+    const [image, setImage] = useState('');
 
-    console.log(user);
 
     useEffect(() => {
         dispatch({ type: USER_UPDATE_RESET });
-
+        // dispatch({ type: USER_IMAGE_RESET })
     }, [dispatch]);
 
 
 
+    const onAvatarChange = (e) => {
+        e.preventDefault();
+        setImage(e.target.files[0]);
+    }
 
 
     const submitInfo = (e) => {
         e.preventDefault();
-        dispatch(updateUser({ userId: user._id, name, email, phone }));
+        if (image === '') {
+            dispatch(updateUser({ userId: user._id, name, email, phone }));
+            console.log('Không có hình')
+        } else {
+            dispatch(updateUserImage({ userId: user._id, name, email, phone, image }))
+            console.log('Có hình')
+            setImage('');
+        }
         toast.success('Cập nhật thành công');
     }
 
@@ -138,7 +151,7 @@ const User = () => {
                                         <img className="rightImg" src={user.isAdmin && typeof (user.image) === 'string' ? user.image : user.image.split('\\').join('/')} alt="" />
 
                                         <div className="choose">
-                                            <input className="rightFile" type="file" />
+                                            <input className="rightFile" type="file" onChange={e => onAvatarChange(e)} />
                                             <i className="fas fa-upload"></i>
                                         </div>
 

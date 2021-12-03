@@ -1,4 +1,4 @@
-import { listUsers } from 'actions/userAction';
+import { deleteUser, listUsers } from 'actions/userAction';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid } from '@material-ui/data-grid';
@@ -43,6 +43,8 @@ const UserList = () => {
 
     const handleDelete = (id) => {
         setData(data.filter((item) => item._id !== id))
+        dispatch(deleteUser(id))
+        window.location.reload();
     }
 
     const columns = [

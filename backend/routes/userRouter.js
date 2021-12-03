@@ -253,6 +253,25 @@ userRouter.put('/AdminUserImage', upload.single('image'), expressAsyncHandler(as
 ));
 
 
+userRouter.delete('/deleteUser/:id',
+    expressAsyncHandler(async (req, res) => {
+
+        const id = req.params.id;
+        console.log(id);
+        await User.deleteOne({ _id: id }
+            // ,
+            // (err, result) => {
+            //     if (err) return res.send(500, err)
+            //     console.log('got deleted');
+            //     res.redirect('/');
+            // }
+        );
+    })
+);
+
+
+
+
 
 
 

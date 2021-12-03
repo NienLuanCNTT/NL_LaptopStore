@@ -129,3 +129,20 @@ export const listUsers = () => async (dispatch) => {
         dispatch({ type: USER_LIST_FAIL, payload: error.message })
     }
 }
+
+
+
+export const deleteUser = (id) => async (dispatch) => {
+
+    console.log(id);
+    try {
+        Axios.delete(`/api/users/deleteUser/${id}`);
+    } catch (error) {
+        console.log('Lỗi');
+    }
+
+    // console.log('data: ', data);
+
+
+
+}

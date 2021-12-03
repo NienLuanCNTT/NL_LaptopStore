@@ -232,7 +232,7 @@ userRouter.put('/AdminUserImage', upload.single('image'), expressAsyncHandler(as
 
     user.name = req.body.name !== 'undefined' ? req.body.name : user.name;
     user.email = req.body.email !== 'undefined' ? req.body.email : user.email;
-    user.phone = req.body.phone || user.phone;
+    user.phone = req.body.phone !== 'undefined' ? req.body.phone : user.phone;
     user.image = req.file.path.slice(7);
 
     console.log('after user ', user);

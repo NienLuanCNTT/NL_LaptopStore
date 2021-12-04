@@ -2,10 +2,18 @@ import { deleteUser, listUsers } from 'actions/userAction';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid } from '@material-ui/data-grid';
+import { makeStyles } from '@material-ui/core'
 import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//         MuiTablePagination: '20px',
+//     }
+// }));
 
 
 const UserList = () => {
@@ -24,7 +32,7 @@ const UserList = () => {
         fetchOrderList();
     }, []);
 
-    // console.log(data);
+    console.log(DataGrid);
 
 
 
@@ -45,7 +53,11 @@ const UserList = () => {
         setData(data.filter((item) => item._id !== id))
         dispatch(deleteUser(id))
         window.location.reload();
+
     }
+
+
+    // const classes = useStyles();
 
     const columns = [
         {
@@ -113,6 +125,7 @@ const UserList = () => {
                             pageSize={10}
                             rowsPerPageOptions={[5]}
                             checkboxSelection
+                        // className={classes.root}
                         />
                     }
 

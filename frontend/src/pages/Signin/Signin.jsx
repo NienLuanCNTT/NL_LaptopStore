@@ -5,6 +5,7 @@ import MessageBox from 'components/MessageBox';
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const Signin = (props) => {
 
@@ -18,6 +19,8 @@ const Signin = (props) => {
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo, loading, error } = userSignin;
 
+    console.log(error);
+
     const dispatch = useDispatch();
     const submitHandler = (e) => {
         e.preventDefault();
@@ -28,6 +31,12 @@ const Signin = (props) => {
             props.history.push(redirect);
         }
     }, [props.history, redirect, userInfo]);
+
+    useEffect(() => {
+        if (typeof (error) === 'string') {
+            toast.warn(error);
+        }
+    }, [error])
 
     return (
         <Helmet title="Đăng nhập">
@@ -44,8 +53,8 @@ const Signin = (props) => {
                     <div className="form__item">
                         <h1 className="form__item__title">Đăng Nhập</h1>
                     </div>
+
                     {loading && <LoadingBox></LoadingBox>}
-                    {error && <MessageBox variant="danger">{error}</MessageBox>}
 
                     <div className="form__item">
                         <label htmlFor="email" className="form__item__label">Email</label>

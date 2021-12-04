@@ -10,6 +10,7 @@ import AddConfig from 'components/AddConfig/index';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import OrderList from 'pages/OrderList';
+import Register from 'pages/Register/Register';
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
           <Route path="/configadd" element={<AddConfig />} />
 
           <Route path="/user/:id" element={<User />} />
+
+          <Route path="/register" element={<Register />} />
 
 
         </Routes>

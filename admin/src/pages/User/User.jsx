@@ -1,9 +1,7 @@
 import { detailsUser, updateUser, updateUserImage } from 'actions/userAction';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import LoadingBox from 'components/LoadingBox';
-import MessageBox from 'components/MessageBox';
+import { Link, useParams } from 'react-router-dom';
 import { USER_IMAGE_RESET, USER_UPDATE_RESET } from 'constants/userConstants';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -85,7 +83,9 @@ const User = () => {
 
                     <div className="user__title">
                         <div className="user__title-edit">Edit User</div>
-                        <button className="user__title-create">Create</button>
+                        <Link to='/register' >
+                            <button className="user__title-create">Create</button>
+                        </Link>
                     </div>
 
                     <div className="user__content">

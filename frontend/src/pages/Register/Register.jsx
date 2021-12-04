@@ -5,6 +5,7 @@ import MessageBox from 'components/MessageBox';
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const Register = (props) => {
 
@@ -22,11 +23,13 @@ const Register = (props) => {
     const userRegister = useSelector((state) => state.userRegister);
     const { userInfo, loading, error } = userRegister;
 
+
     const dispatch = useDispatch();
     const submitHandler = (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            alert('Mật khẩu và Nhập lại mật khẩu không đúng');
+            // alert('Mật khẩu và Nhập lại mật khẩu không đúng');
+            toast.warn('Mật khẩu nhập lại không đúng');
         } else {
             dispatch(register(name, email, password, image));
             props.history.push('/');
@@ -60,7 +63,7 @@ const Register = (props) => {
                         <h1 className="form__item__title">Đăng Ký</h1>
                     </div>
                     {loading && <LoadingBox></LoadingBox>}
-                    {error && <MessageBox variant="danger">{error}</MessageBox>}
+                    {/* {error && <MessageBox variant="danger">{error}</MessageBox>} */}
 
                     <div className="form__item">
                         <label htmlFor="name" className="form__item__label">Tên hiển thị</label>

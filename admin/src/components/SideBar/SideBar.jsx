@@ -24,7 +24,7 @@ const SideBar = () => {
                                 <span className="menuList__item-name">Users</span>
                             </li>
                         </Link>
-                        <Link to="/product">
+                        <Link to="/products">
                             <li className={`menuList__item ${active === 'product' ? 'active' : ''}`} onClick={() => setActive('product')}>
                                 <i className="fas fa-store menuList__item-icon"></i>
                                 <span className="menuList__item-name">Products</span>

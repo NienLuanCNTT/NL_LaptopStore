@@ -4,6 +4,39 @@ import Product from '../models/productModel.js';
 import data from '../data.js';
 import Configs from '../models/configModels.js';
 
+/// lay image
+import multer from 'multer';
+// vào images
+// const upload = multer({ dest: 'backend/images/products/' });
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './backend/images/products/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    //reject a file
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+}
+
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter,
+});
+
 const productRouter = express.Router();
 
 productRouter.get('/',
@@ -32,6 +65,83 @@ productRouter.get('/:id',
         else {
             res.status(404).send({ message: 'Product Not Found' });
         }
+    })
+);
+
+
+productRouter.put('/updateProduct', expressAsyncHandler(async (req, res) => {
+    // console.log(req.body.id);
+    const product = await Product.findById(req.body.id);
+
+
+    product.name = req.body.name || product.name;
+    product.category = req.body.category || product.category;
+    product.price = req.body.price || product.price;
+    product.old_price = req.body.oldPrice || product.old_price;
+    product.note = req.body.note || product.note;
+    product.countInStock = req.body.countInStock || product.countInStock;
+
+
+    const updatedProduct = await product.save();
+
+    res.send({
+        _id: updatedProduct._id,
+        name: updatedProduct.name,
+        category: updatedProduct.category,
+        price: updatedProduct.price,
+        old_price: updatedProduct.old_price,
+        note: updatedProduct.note,
+        countInStock: updatedProduct.countInStock,
+        rating: updatedProduct.rating,
+        numReviews: updatedProduct.numReviews,
+        token: generateToken(updatedProduct),
+    })
+}));
+
+
+productRouter.put('/updateProductImage', upload.single('image'), expressAsyncHandler(async (req, res) => {
+    // console.log(req.body.id);
+    const product = await Product.findById(req.body.id);
+
+
+    product.name = req.body.name !== 'undefined' ? req.body.name : product.name;
+    product.category = req.body.category !== 'undefined' ? req.body.category : product.category;
+    product.price = req.body.price !== 'undefined' ? req.body.price : product.price;
+    product.old_price = req.body.oldPrice !== 'undefined' ? req.body.oldPrice : product.old_price;
+    product.note = req.body.note !== 'undefined' ? req.body.note : product.note;
+    product.countInStock = req.body.countInStock !== 'undefined' ? req.body.countInStock : product.countInStock;
+    product.image = req.file.path.slice(7);
+
+    const updatedProduct = await product.save();
+    res.send({
+        _id: updatedProduct._id,
+        image: updatedProduct.image,
+        name: updatedProduct.name,
+        category: updatedProduct.category,
+        price: updatedProduct.price,
+        old_price: updatedProduct.old_price,
+        note: updatedProduct.note,
+        countInStock: updatedProduct.countInStock,
+        rating: updatedProduct.rating,
+        numReviews: updatedProduct.numReviews,
+        token: generateToken(updatedProduct),
+    })
+
+}));
+
+
+productRouter.delete('/deleteProduct/:id',
+    expressAsyncHandler(async (req, res) => {
+
+        const id = req.params.id;
+        await Product.deleteOne({ _id: id }
+            // ,
+            // (err, result) => {
+            //     if (err) return res.send(500, err)
+            //     console.log('got deleted');
+            //     res.redirect('/');
+            // }
+        );
     })
 );
 

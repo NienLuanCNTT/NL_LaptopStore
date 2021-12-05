@@ -224,12 +224,6 @@ userRouter.put('/AdminUser', expressAsyncHandler(async (req, res) => {
 userRouter.put('/AdminUserImage', upload.single('image'), expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.body.userId);
 
-    console.log(user);
-    console.log(req.file.path.slice(7));
-    console.log(req.body.name, user.name);
-    console.log(req.body.email, user.email);
-    console.log(req.body.phone, user.phone);
-
     user.name = req.body.name !== 'undefined' ? req.body.name : user.name;
     user.email = req.body.email !== 'undefined' ? req.body.email : user.email;
     user.phone = req.body.phone !== 'undefined' ? req.body.phone : user.phone;
@@ -237,7 +231,7 @@ userRouter.put('/AdminUserImage', upload.single('image'), expressAsyncHandler(as
 
     console.log('after user ', user);
     const updatedUser = await user.save();
-    console.log('update, ', updatedUser);
+    // console.log('update, ', updatedUser);
     res.send({
         _id: updatedUser._id,
         name: updatedUser.name,

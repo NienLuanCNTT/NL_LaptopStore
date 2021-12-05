@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from 'assets/logo/logo_store.png';
 import avatar from 'assets/images/dog.jpg';
+import { Link } from 'react-router-dom';
 
 
 
@@ -10,7 +11,10 @@ const TopBar = () => {
             <div className="topbar__Wrapper">
                 <div className="topLeft">
                     <div className="topLeft__logo">
-                        <img src={logo} className="topLeft__logo-img" alt="" />
+                        <Link to='/'>
+                            <img src={logo} className="topLeft__logo-img" alt="" />
+                        </Link>
+
                     </div>
                 </div>
                 <div className="topRight">

@@ -57,33 +57,23 @@
             .showbottom{
 
                 margin-top: 20px;
-                &-email{
 
-                    display :flex;
-                    align-items: center;
+                &-content{
 
-                    .eicon{
-                        font-size:  2rem;
-                    }
-                    .econtent{
-                        font-size: 1.6rem;
-                        margin-left: 5px;
-                    }
-                }
-
-                &-phone{
                     display :flex;
                     align-items: center;
                     margin-top: 10px;
-                    .picon{
+                    &-icon{
                         font-size:  2rem;
                     }
-
-                    .pcontent{
+                    &-text{
                         font-size: 1.6rem;
                         margin-left: 5px;
                     }
                 }
+
+
+                
             }
         }
 

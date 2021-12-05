@@ -1,9 +1,7 @@
 import { detailsUser, updateUser, updateUserImage } from 'actions/userAction';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import LoadingBox from 'components/LoadingBox';
-import MessageBox from 'components/MessageBox';
+import { Link, useParams } from 'react-router-dom';
 import { USER_IMAGE_RESET, USER_UPDATE_RESET } from 'constants/userConstants';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -26,8 +24,6 @@ const User = () => {
         const fetchUser = async () => {
             const user = await axios.get(`/api/users/${id}`);
             // console.log(user.data);
-            // const userList = users.data || [];
-
             setUser(user.data);
         }
         fetchUser();
@@ -85,7 +81,9 @@ const User = () => {
 
                     <div className="user__title">
                         <div className="user__title-edit">Edit User</div>
-                        <button className="user__title-create">Create</button>
+                        <Link to='/register' >
+                            <button className="user__title-create">Create</button>
+                        </Link>
                     </div>
 
                     <div className="user__content">
@@ -103,16 +101,24 @@ const User = () => {
 
                             <div className="showbottom">
 
-                                <div className="showbottom-email">
-                                    <i className="far fa-envelope eicon"></i>
-                                    <span className="econtent">
+                                <div className="showbottom-content">
+                                    <i className="fas fa-portrait showbottom-content-icon"></i>
+                                    <span className="showbottom-content-text">
+                                        {user._id}
+                                    </span>
+                                </div>
+
+                                <div className="showbottom-content">
+                                    <i className="far fa-envelope showbottom-content-icon"></i>
+                                    <span className="showbottom-content-text">
                                         {user.email}
                                     </span>
                                 </div>
 
-                                <div className="showbottom-phone">
-                                    <i className="fas fa-phone picon"></i>
-                                    <span className="pcontent">
+
+                                <div className="showbottom-content">
+                                    <i className="fas fa-phone showbottom-content-icon"></i>
+                                    <span className="showbottom-content-text">
                                         {user.phone}
                                     </span>
                                 </div>

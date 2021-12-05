@@ -30,8 +30,8 @@ export const register = (name, email, password, image) => async (dispatch) => {
     try {
         const { data } = await Axios.post('/api/users/register', fd);
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-        dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-        localStorage.setItem('userInfo', JSON.stringify(data));
+        // dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+        // localStorage.setItem('userInfo', JSON.stringify(data));
     } catch (error) {
         dispatch({
             type: USER_REGISTER_FAIL,
@@ -128,4 +128,19 @@ export const listUsers = () => async (dispatch) => {
     } catch (error) {
         dispatch({ type: USER_LIST_FAIL, payload: error.message })
     }
+}
+
+
+
+export const deleteUser = (id) => async (dispatch) => {
+
+    console.log(id);
+    try {
+        Axios.delete(`/api/users/deleteUser/${id}`);
+    } catch (error) {
+        console.log('Lỗi');
+    }
+
+    // console.log('data: ', data);
+
 }

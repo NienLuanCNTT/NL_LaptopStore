@@ -10,6 +10,9 @@ import AddConfig from 'components/AddConfig/index';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import OrderList from 'pages/OrderList';
+import Register from 'pages/Register/Register';
+import ProductList from 'pages/ProductList/ProductList';
+import Product from 'pages/Product/Product';
 
 function App() {
   return (
@@ -30,6 +33,10 @@ function App() {
 
           <Route path="/user/:id" element={<User />} />
 
+          <Route path="/register" element={<Register />} />
+
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/product/:id" element={<Product />} />
 
         </Routes>
 

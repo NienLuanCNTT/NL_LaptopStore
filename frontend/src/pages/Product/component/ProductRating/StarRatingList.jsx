@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductRating from './index';
+import moment from 'moment';
 
 const StarRatingList = (props) => {
     const { starRating } = props;
@@ -17,7 +18,7 @@ const StarRatingList = (props) => {
                             <div className="item-detail">
                                 <p className="item-name">
                                     <b >{item.userName}</b>
-                                    <i>{item.datetime}</i>
+                                    <i>{moment(item.datetime, "DD/MM/YYYY h:mm").fromNow()}</i>
                                 </p>
                                 <div className="item-star-rate">
                                     <ProductRating rating={item.rating} />

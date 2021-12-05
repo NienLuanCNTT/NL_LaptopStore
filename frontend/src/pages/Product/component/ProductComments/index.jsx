@@ -1,5 +1,6 @@
 import React from 'react';
 
+import moment from 'moment';
 const StarRatingList = (props) => {
     const { userComments } = props;
     return (
@@ -15,7 +16,7 @@ const StarRatingList = (props) => {
                             <div className="comment-detail">
                                 <p className="item-name">
                                     <b>{item.userName}</b>
-                                    <i>{item.datetime}</i>
+                                    <i>{moment(item.datetime, "DD/MM/YYYY h:mm").fromNow()}</i>
                                 </p>
                                 <p>{item.comment}</p>
                             </div>

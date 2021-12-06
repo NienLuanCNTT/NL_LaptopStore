@@ -81,7 +81,7 @@ const ProductList = () => {
         },
 
         {
-            field: 'isAdmin', headerName: 'Admin', width: 250, headerClassName: 'text', renderCell: (params) => {
+            field: 'isAdmin', headerName: 'Admin', width: 200, headerClassName: 'text', renderCell: (params) => {
                 return (
                     <div className="behavior">
                         <Link to={`/product/${params.row.id}`}>
@@ -98,6 +98,12 @@ const ProductList = () => {
 
     return (
         <div className="productlist">
+            <div className="productlist__header">
+                <span className="productlist__header-title">Product List</span>
+                <Link to='/createProduct' >
+                    <button className="productlist__header-create">Create Product</button>
+                </Link>
+            </div>
             {
                 data &&
                 <DataGrid

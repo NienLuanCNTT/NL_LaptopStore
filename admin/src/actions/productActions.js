@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { PRODUCT_DETAIL_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS, PRODUCT_IMAGE_FAIL, PRODUCT_IMAGE_REQUEST, PRODUCT_IMAGE_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS } from 'constants/productConstants';
+import { PRODUCT_CREATE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_DETAIL_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS, PRODUCT_IMAGE_FAIL, PRODUCT_IMAGE_REQUEST, PRODUCT_IMAGE_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS } from 'constants/productConstants';
 
 export const listProducts = () => async (dispatch) => {
     dispatch({
@@ -93,6 +93,30 @@ export const deleteProduct = (id) => async (dispatch) => {
     } catch (error) {
         console.log('Error');
     }
+}
 
+
+export const createProduct = (product) => async (dispatch) => {
+    dispatch({ type: PRODUCT_CREATE_REQUEST, payload: product.name });
+    console.log(product);
+    const fd = new FormData();
+    fd.append('name', product.name);
+    fd.append('category', product.category);
+    fd.append('price', product.price);
+    fd.append('note', product.note);
+    fd.append('countInStock', product.countInStock);
+    fd.append('image', product.image, product.image.name);
+    try {
+        const { data } = await Axios.post('/api/products/create', fd);
+        dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_CREATE_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        });
+    }
 }
 

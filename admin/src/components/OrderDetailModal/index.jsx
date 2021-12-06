@@ -83,19 +83,37 @@ function OrderDetailModal(props) {
                                     </div>
                                     <div className="order__info-content">
                                         <div className="item">
-                                            <p>ID Order</p>
+                                            <p>User Name:</p>
+                                            <span>{order.shipingAddress.fullName}</span>
+                                        </div>
+                                        <div className="item">
+                                            <p>Phone: </p>
+                                            <span>{order.shipingAddress.phone}</span>
+                                        </div>
+                                        <div className="item">
+                                            <p>Address: </p>
+                                            <span>{
+                                                order.shipingAddress.address + ', ' +
+                                                order.shipingAddress.city + ', ' +
+                                                order.shipingAddress.district + ', ' +
+                                                order.shipingAddress.commune}</span>
+                                        </div>
+                                    </div>
+                                    <div className="order__info-content">
+                                        <div className="item">
+                                            <p>ID Order:</p>
                                             <span>{order._id}</span>
                                         </div>
                                         <div className="item">
-                                            <p>Order Date</p>
+                                            <p>Order Date:</p>
                                             <span>{order.dateTime}</span>
                                         </div>
                                         <div className="item">
-                                            <p>Received Date</p>
+                                            <p>Date Update:</p>
                                             <span>{order.dateUpdate}</span>
                                         </div>
                                         <div className="item">
-                                            <p>Satus</p>
+                                            <p>Satus:</p>
 
                                             {order.status === "pending" &&
 
@@ -121,6 +139,7 @@ function OrderDetailModal(props) {
 
 
                                         </div>
+
                                     </div>
                                 </div>
                                 <div className="orders__list">

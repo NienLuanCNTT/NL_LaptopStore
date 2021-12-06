@@ -16,7 +16,7 @@ const StarRatingList = (props) => {
                             <div className="comment-detail">
                                 <p className="item-name">
                                     <b>{item.userName}</b>
-                                    <i>{moment(item.datetime, "DD/MM/YYYY h:mm").fromNow()}</i>
+                                    <i>{moment(item.createdAt).fromNow()}</i>
                                 </p>
                                 <p>{item.comment}</p>
                             </div>

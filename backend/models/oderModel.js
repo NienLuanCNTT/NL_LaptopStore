@@ -18,8 +18,6 @@ const orderSchma = new mongoose.Schema({
     },
     totalPrice: { type: Number, required: true },
     status: { type: String, required: true },
-    dateTime: { type: String, required: true },
-    dateUpdate: { type: String, required: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 },
     {

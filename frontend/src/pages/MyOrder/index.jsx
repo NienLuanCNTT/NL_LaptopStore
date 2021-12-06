@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import numberWithCommas from 'utils/numberWithCommas';
-// import MyOrderList from './components/MyOrderList';
+import moment from 'moment';
+
 
 const MyOrder = () => {
     const userSignin = useSelector((state) => state.userSignin);
@@ -16,8 +17,6 @@ const MyOrder = () => {
     const dispatch = useDispatch();
 
     const today = new Date();
-    const dateTime = `0${today.getDate()}`.slice(-2) + '/' + `0${today.getMonth() + 1}`.slice(-2) + '/' + today.getFullYear()
-        + ' ' + `0${today.getHours()}`.slice(-2) + ':' + `0${today.getMinutes()}`.slice(-2);
 
     useEffect(() => {
         const fetchUserOrder = async () => {
@@ -31,13 +30,13 @@ const MyOrder = () => {
 
     }, [userInfo._id]);
 
-    const handleCancleOrder = (id, status, dateTime) => {
+    const handleCancleOrder = (id, status) => {
         toast.warn('Đang xử lý đơn hàng...', {
             ...TOAST_OPTIONS,
         });
         setTimeout(() => {
 
-            dispatch(cancleOrder({ id, status, dateTime }));
+            dispatch(cancleOrder({ id, status }));
             const index = myOrders.findIndex(order => order._id === id);
             const ordersUpdated = [...myOrders];
             ordersUpdated[index].status = "cancle";
@@ -141,7 +140,7 @@ const MyOrder = () => {
                                     <div className="item-top">
                                         <div className="item-top-left">
                                             <i className="far fa-clock"></i>
-                                            <i> Ngày đặt hàng: {order.dateTime}</i>
+                                            <i> Ngày đặt hàng: {moment(order.updatedAt).format("DD/MM/YYYY hh:mm")}</i>
                                         </div>
                                         <div className="item-top-status_right">
                                             {order.status === "pending" && <div className="btn item-pending">Đang xử lý</div>}
@@ -175,7 +174,7 @@ const MyOrder = () => {
                                         order.status === "pending"
                                         && <div
                                             className="item-cancle btn"
-                                            onClick={() => handleCancleOrder(order._id, 'cancle', dateTime)}
+                                            onClick={() => handleCancleOrder(order._id, 'cancle')}
                                         >
                                             Hủy đặt hàng</div>
                                     }

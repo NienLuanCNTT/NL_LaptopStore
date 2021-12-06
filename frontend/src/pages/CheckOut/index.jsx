@@ -304,8 +304,7 @@ const CheckOut = (props) => {
         })
     }
     const today = new Date();
-    const dateTime = `0${today.getDate()}`.slice(-2) + '/' + `0${today.getMonth() + 1}`.slice(-2) + '/' + today.getFullYear()
-        + ' ' + `0${today.getHours()}`.slice(-2) + ':' + `0${today.getMinutes()}`.slice(-2);
+
     const handelFormSubmit = (e) => {
         e.preventDefault();
         if (userInfo) {
@@ -342,7 +341,7 @@ const CheckOut = (props) => {
                         totalPrice: total,
                         status: 'pending',
                         userId: userInfo?._id,
-                        dateTime: dateTime,
+                        dateTime: today,
                         dateUpdate: 'None'
                     }));
 
@@ -352,7 +351,7 @@ const CheckOut = (props) => {
                     setIsPending(false);
                     setcheckOutModal(false);
                     dispatch(cartEmpty());
-
+                    checkKey = 0;
                     clearTimeout();
                 }, 2000);
             }

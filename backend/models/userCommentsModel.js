@@ -5,10 +5,9 @@ const userCommentsSchema = new mongoose.Schema({
     userName: { type: String, required: true },
     image: { type: String, required: true },
     comment: { type: String, required: true },
-    datetime: { type: String, required: true },
 },
     {
-        timestamp: true,
+        timestamps: true,
     }
 );
 

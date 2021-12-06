@@ -52,9 +52,6 @@ const Product = (props) => {
     const [userComments, setUserComments] = useState([]);
 
     const today = new Date();
-    const dateTime = `0${today.getDate()}`.slice(-2) + '/' + `0${today.getMonth() + 1}`.slice(-2) + '/' + today.getFullYear()
-        + ' ' + `0${today.getHours()}`.slice(-2) + ':' + `0${today.getMinutes()}`.slice(-2);
-
 
     const handleAddProduct = (id, product) => {
         dispatch(addToCart({ id, product }));
@@ -96,7 +93,7 @@ const Product = (props) => {
                             productId,
                             userName: userInfo.name,
                             image: userInfo.image,
-                            datetime: dateTime,
+                            datetime: today,
                             comment,
                         }
                         cmtAdd.push(newUserComment);
@@ -321,7 +318,7 @@ const Product = (props) => {
                                         <button className="btn btn-vote" onClick={handleOpenRating}>Viết đánh giá</button>
                                     </div>
 
-                                    {rating && <StarRating productId={product._id} userInfo={userInfo} dateTime={dateTime} starRating={starRating} setStarRating={setStarRating} />}
+                                    {rating && <StarRating productId={product._id} userInfo={userInfo} dateTime={today} starRating={starRating} setStarRating={setStarRating} />}
                                     <div className="product__box-vote-list">
                                         <StarRatingList starRating={starRating} />
                                     </div>

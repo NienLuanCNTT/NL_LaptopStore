@@ -2,9 +2,6 @@ import axios from 'axios';
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {};
-const today = new Date();
-const dateTime = `0${today.getDate()}`.slice(-2) + '/' + `0${today.getMonth() + 1}`.slice(-2) + '/' + today.getFullYear()
-    + ' ' + `0${today.getHours()}`.slice(-2) + ':' + `0${today.getMinutes()}`.slice(-2);
 
 const StarRatingSlice = createSlice({
     name: "starRating",
@@ -18,7 +15,6 @@ const StarRatingSlice = createSlice({
                 image: userInfo.image,
                 rating,
                 note: comment,
-                datetime: dateTime
             }
             axios.post('/api/rating', newStarRating);
         },
@@ -28,7 +24,6 @@ const StarRatingSlice = createSlice({
                 productId,
                 userName: userInfo.name,
                 image: userInfo.image,
-                datetime: dateTime,
                 comment,
             }
             axios.post('/api/usercmts', newUserComment);

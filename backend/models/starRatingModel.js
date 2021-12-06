@@ -6,7 +6,6 @@ const starRatingSchema = new mongoose.Schema({
     image: { type: String, required: true },
     rating: { type: Number, required: true },
     note: { type: String, required: true },
-    datetime: { type: String, required: true },
 },
     {
         timestamps: true,

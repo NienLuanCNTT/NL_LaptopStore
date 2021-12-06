@@ -92,8 +92,6 @@ productRouter.put('/updateProduct', expressAsyncHandler(async (req, res) => {
         old_price: updatedProduct.old_price,
         note: updatedProduct.note,
         countInStock: updatedProduct.countInStock,
-        rating: updatedProduct.rating,
-        numReviews: updatedProduct.numReviews,
         token: generateToken(updatedProduct),
     })
 }));
@@ -122,8 +120,6 @@ productRouter.put('/updateProductImage', upload.single('image'), expressAsyncHan
         old_price: updatedProduct.old_price,
         note: updatedProduct.note,
         countInStock: updatedProduct.countInStock,
-        rating: updatedProduct.rating,
-        numReviews: updatedProduct.numReviews,
         token: generateToken(updatedProduct),
     })
 
@@ -144,5 +140,33 @@ productRouter.delete('/deleteProduct/:id',
         );
     })
 );
+
+
+productRouter.post('/create', upload.single('image'), expressAsyncHandler(async (req, res) => {
+
+    const product = new Product({
+        name: req.body.name,
+        price: req.body.price,
+        old_price: null,
+        category: req.body.category,
+        note: req.body.note === 'undefined' ? '' : req.body.note,
+        countInStock: req.body.countInStock,
+        image: req.file.path.slice(7),
+    });
+
+    const createProduct = await product.save();
+
+    res.send({
+        _id: createProduct._id,
+        name: createProduct.name,
+        category: createProduct.category,
+        price: createProduct.price,
+        old_price: createProduct.old_price,
+        note: createProduct.note,
+        countInStock: createProduct.countInStock,
+        token: generateToken(createProduct),
+    })
+
+}));
 
 export default productRouter;

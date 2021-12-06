@@ -132,7 +132,7 @@ userRouter.put('/profile', expressAsyncHandler(async (req, res) => {
             // console.log('khong doi mat khau');
         }
         const updatedUser = await user.save();
-        console.log('updated: ', updatedUser);
+
         res.send({
             _id: updatedUser._id,
             name: updatedUser.name,
@@ -229,9 +229,9 @@ userRouter.put('/AdminUserImage', upload.single('image'), expressAsyncHandler(as
     user.phone = req.body.phone !== 'undefined' ? req.body.phone : user.phone;
     user.image = req.file.path.slice(7);
 
-    console.log('after user ', user);
+
     const updatedUser = await user.save();
-    // console.log('update, ', updatedUser);
+
     res.send({
         _id: updatedUser._id,
         name: updatedUser.name,
@@ -251,7 +251,7 @@ userRouter.delete('/deleteUser/:id',
     expressAsyncHandler(async (req, res) => {
 
         const id = req.params.id;
-        console.log(id);
+
         await User.deleteOne({ _id: id }
             // ,
             // (err, result) => {

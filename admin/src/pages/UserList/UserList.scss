@@ -1,5 +1,28 @@
 .userlist{
     flex: 4;
+    padding: 20px;
+
+    &__header{
+        margin-bottom: 20px;
+        display : flex;
+        justify-content: space-between;
+        &-title{
+            font-size: 2.6rem;
+            color: #333;
+            font-weight: 600;
+            
+        }
+
+        &-create{
+            border: none;
+            padding: 6px 14px;
+            font-size: 1.6rem;
+            border-radius: 10px;
+            background-color: $main-color;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
 
     &__main{
         height: 100%;

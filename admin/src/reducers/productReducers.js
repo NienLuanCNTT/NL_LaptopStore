@@ -1,4 +1,4 @@
-const { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS, PRODUCT_DETAIL_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_RESET, PRODUCT_IMAGE_REQUEST, PRODUCT_IMAGE_SUCCESS, PRODUCT_IMAGE_FAIL, PRODUCT_IMAGE_RESET } = require("constants/productConstants");
+const { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS, PRODUCT_DETAIL_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_RESET, PRODUCT_IMAGE_REQUEST, PRODUCT_IMAGE_SUCCESS, PRODUCT_IMAGE_FAIL, PRODUCT_IMAGE_RESET, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_CREATE_FAIL } = require("constants/productConstants");
 
 export const productListReducer = (state = { loading: true, products: [] }, action) => {
     switch (action.type) {
@@ -55,3 +55,15 @@ export const productUpdateImageReducer = (state = {}, action) => {
             return state;
     }
 };
+
+export const productCreateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case PRODUCT_CREATE_REQUEST:
+            return { loading: true };
+        case PRODUCT_CREATE_SUCCESS:
+            return { loading: false, product: action.payload };
+        case PRODUCT_CREATE_FAIL:
+            return { loading: false, error: action.payload };
+        default: return state;
+    }
+}

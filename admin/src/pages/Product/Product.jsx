@@ -78,7 +78,7 @@ const Product = () => {
                 <div className="product">
                     <div className="product__title">
                         <div className="product__title-edit">Edit Product</div>
-                        <Link to='/register' >
+                        <Link to='/createProduct' >
                             <button className="product__title-create">Create</button>
                         </Link>
                     </div>
@@ -95,7 +95,9 @@ const Product = () => {
                                 </div>
 
                                 <div className="updateForm__left-item fileImage">
+
                                     <img className="leftImg" src={product.image} alt="" />
+
                                     <div className="choose">
                                         <input className="leftFile" type="file" onChange={e => onImageChange(e)} />
                                         <i className="fas fa-upload"></i>

@@ -13,6 +13,7 @@ import OrderList from 'pages/OrderList';
 import Register from 'pages/Register/Register';
 import ProductList from 'pages/ProductList/ProductList';
 import Product from 'pages/Product/Product';
+import CreateProduct from 'pages/CreateProduct/CreateProduct';
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
 
           <Route path="/products" element={<ProductList />} />
           <Route path="/product/:id" element={<Product />} />
+
+          <Route path="/createProduct" element={<CreateProduct />} />
 
         </Routes>
 

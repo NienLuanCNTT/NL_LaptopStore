@@ -111,28 +111,32 @@ const UserList = () => {
     return (
 
         <div className="userlist">
-            {
-                // loading ? (<LoadingBox></LoadingBox>) : error ?
-                //     (<MessageBox variant="danger">{error}</MessageBox>) :
-                //     (
-                <div className="userlist__main">
-                    {
-                        data &&
-                        <DataGrid
-                            disableSelectionOnClick
-                            rows={data && data.map((user, index) => ({ id: user._id, name: user.name, image: user.image, email: user.email, phone: user.phone, isAdmin: user.isAdmin }))}
-                            columns={columns}
-                            pageSize={10}
-                            rowsPerPageOptions={[5]}
-                            checkboxSelection
-                        // className={classes.root}
-                        />
-                    }
 
-                </div>
-                // )
+            <div className="userlist__header">
+                <span className="userlist__header-title">User List</span>
+                <Link to='/register' >
+                    <button className="userlist__header-create">Create Account</button>
+                </Link>
+            </div>
 
-            }
+            <div className="userlist__main">
+                {
+                    data &&
+                    <DataGrid
+                        disableSelectionOnClick
+                        rows={data && data.map((user, index) => ({ id: user._id, name: user.name, image: user.image, email: user.email, phone: user.phone, isAdmin: user.isAdmin }))}
+                        columns={columns}
+                        pageSize={10}
+                        rowsPerPageOptions={[5]}
+                        checkboxSelection
+                    // className={classes.root}
+                    />
+                }
+
+            </div>
+
+
+
         </div>
     )
 }

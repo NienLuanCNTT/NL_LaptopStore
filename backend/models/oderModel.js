@@ -11,6 +11,7 @@ const orderSchma = new mongoose.Schema({
     shipingAddress: {
         fullName: { type: String, required: true },
         phone: { type: String, required: true },
+        ship: { type: String, required: true },
         city: { type: String, required: true },
         district: { type: String, required: true },
         commune: { type: String, required: true },
@@ -19,10 +20,9 @@ const orderSchma = new mongoose.Schema({
     totalPrice: { type: Number, required: true },
     status: { type: String, required: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-},
-    {
-        timestamps: true,
-    }
+    createdAt: { type: Date, required: true },
+    updatedAt: { type: Date, required: true },
+}
 );
 const Order = mongoose.model('Order', orderSchma);
 export default Order;

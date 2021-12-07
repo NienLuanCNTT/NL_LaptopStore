@@ -30,13 +30,13 @@ const MyOrder = () => {
 
     }, [userInfo._id]);
 
-    const handleCancleOrder = (id, status) => {
+    const handleCancleOrder = (id, status, date) => {
         toast.warn('Đang xử lý đơn hàng...', {
             ...TOAST_OPTIONS,
         });
         setTimeout(() => {
 
-            dispatch(cancleOrder({ id, status }));
+            dispatch(cancleOrder({ id, status, date }));
             const index = myOrders.findIndex(order => order._id === id);
             const ordersUpdated = [...myOrders];
             ordersUpdated[index].status = "cancle";
@@ -174,7 +174,7 @@ const MyOrder = () => {
                                         order.status === "pending"
                                         && <div
                                             className="item-cancle btn"
-                                            onClick={() => handleCancleOrder(order._id, 'cancle')}
+                                            onClick={() => handleCancleOrder(order._id, 'cancle', today)}
                                         >
                                             Hủy đặt hàng</div>
                                     }

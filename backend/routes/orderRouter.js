@@ -20,7 +20,7 @@ orderRouter.get('/',
 
 orderRouter.get('/user/:id',
     expressAsyncHandler(async (req, res) => {
-        const order = await Order.find({ "userId": req.params.id });
+        const order = await Order.find({ "userId": req.params.id, "shipingAddress.ship": "home" });
 
         if (order) {
             res.send(order);
@@ -34,6 +34,7 @@ orderRouter.get('/user/:id',
 orderRouter.post(
     '/add',
     expressAsyncHandler(async (req, res) => {
+        // console.log(req.body);
         if (!req.body.orderItems) {
             res.status(404).send({ message: "Cart is empty!" });
         }
@@ -43,8 +44,8 @@ orderRouter.post(
                 shipingAddress: req.body.shipingAddress,
                 totalPrice: req.body.totalPrice,
                 status: req.body.status,
-                dateTime: req.body.dateTime,
-                dateUpdate: req.body.dateUpdate,
+                createdAt: req.body.createdAt,
+                updatedAt: req.body.updatedAt,
                 userId: req.body.userId,
             });
             order.save();
@@ -58,10 +59,44 @@ orderRouter.post(
             {
                 $set: {
                     status: req.body.status,
-                    dateUpdate: req.body.dateUpdate
+                    updatedAt: req.body.updatedAt,
                 }
             });
 
+    })
+);
+
+orderRouter.post(
+    '/update',
+    expressAsyncHandler(async (req, res) => {
+        // console.log(req.body);
+        const newCreatedAt = new Date(req.body.createdAt)
+        const newUpdatedAt = new Date(req.body.updatedAt)
+        await Order.updateOne({ _id: req.body.id },
+            {
+                $set: {
+                    shipingAddress: {
+                        fullName: req.body.fullName,
+                        phone: req.body.phone,
+                        address: req.body.address,
+                        city: req.body.city,
+                        district: req.body.district,
+                        commune: req.body.commune,
+                    },
+                    createdAt: req.body.createdAt,
+                    updatedAt: req.body.updatedAt,
+                }
+            });
+
+        res.send({ message: 'success' });
+    })
+);
+
+orderRouter.post(
+    '/remove',
+    expressAsyncHandler(async (req, res) => {
+        await Order.deleteOne({ _id: req.body.id });
+        // console.log(req.body);
     })
 );
 

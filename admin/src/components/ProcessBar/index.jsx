@@ -1,4 +1,3 @@
-import react from 'react';
 
 const ProcessBar = ({ bgcolor = '#99ccff', process = '0', height = '30' }) => {
     const Parentdiv = {

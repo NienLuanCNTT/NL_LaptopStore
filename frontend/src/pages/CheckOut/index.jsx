@@ -111,6 +111,7 @@ const CheckOut = (props) => {
     const [shipState, setshipState] = useState({
         fullName: userInfo?.name,
         phone: userInfo?.phone,
+        ship: 'store',
         city: 'Thành Phố Cần Thơ',
         district: 'Ninh Kiều',
         commune: 'Hưng Lợi',
@@ -175,17 +176,18 @@ const CheckOut = (props) => {
 
     useEffect(() => {
         const fetchUserOrder = async () => {
-            const order = await axios.get(`http://localhost:5000/api/orders/${userInfo?._id}`);
-            const index = order.data.length;
-            if (index > 0) {
-                const data = order.data[index - 1].shipingAddress || [];
+            const order = await axios.get(`http://localhost:5000/api/orders/user/${userInfo?._id}`);
+            console.log(order.data);
 
+            const index = order.data.length;
+            if (index) {
+                const data = order.data[index - 1].shipingAddress || [];
                 setUserOrder(data);
             }
-            return;
         }
         fetchUserOrder();
     }, [userInfo?._id]);
+
 
 
 
@@ -279,6 +281,7 @@ const CheckOut = (props) => {
 
         setshipState({
             ...shipState,
+            ship: 'store',
             city: 'Thành Phố Cần Thơ',
             district: 'Ninh Kiều',
             commune: 'Hưng Lợi',
@@ -297,6 +300,7 @@ const CheckOut = (props) => {
         });
         setshipState({
             ...shipState,
+            ship: 'home',
             city: '' || userOrder?.city,
             district: '' || userOrder?.district,
             commune: '' || userOrder?.commune,
@@ -331,18 +335,13 @@ const CheckOut = (props) => {
                     dispatch(createCheckOut({
                         orderItems: checkList,
                         shipingAddress: {
-                            fullName: shipState.fullName,
-                            phone: shipState.phone,
-                            city: shipState.city,
-                            district: shipState.district,
-                            commune: shipState.commune,
-                            address: shipState.address
+                            ...shipState,
                         },
                         totalPrice: total,
                         status: 'pending',
                         userId: userInfo?._id,
-                        dateTime: today,
-                        dateUpdate: 'None'
+                        createdAt: today,
+                        updatedAt: today
                     }));
 
                     toast.success('Đã đặt hàng thành công 👌👌', {

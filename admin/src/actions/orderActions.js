@@ -39,3 +39,36 @@ export const statusUpdate = (status) => async (dispatch, getState) => {
         })
     }
 }
+
+
+export const orderUpdate = (order) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post('/api/orders/update', order)
+        dispatch({ payload: data.order });
+
+    } catch (error) {
+        dispatch({
+            type: ORDER_CREATE_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+}
+
+export const removeOrder = (id) => async (dispatch, getState) => {
+
+    try {
+        const { data } = await axios.post('/api/orders/remove', id)
+        dispatch({ payload: data.id });
+
+    } catch (error) {
+        dispatch({
+            type: ORDER_CREATE_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+}

@@ -23,6 +23,11 @@
 
     .order__info {
         &-title {
+            @include flex(center, space-between);
+            .item-home,
+            .item-store {
+                font-size: 20px;
+            }
             margin: 12px;
         }
 
@@ -32,6 +37,14 @@
             border-radius: 8px;
             margin: 20px;
 
+            .item-city {
+                p {
+                    width: 80px !important;
+                    display: inline-block;
+                    padding: 0 4px;
+                }
+            }
+            .item-city,
             .item {
                 @include flex(center, flex-start);
                 padding: 6px 10px;
@@ -39,20 +52,28 @@
                 border-bottom: 1px solid $main-color;
                 height: 45px;
 
+                input {
+                    flex: 1;
+
+                    padding: 8px 12px;
+                    margin-bottom: 0;
+                }
+
                 .update-status {
                     flex: 1;
                     text-align: end;
 
-                    button {
+                    .btn-nextstatus {
                         @include btn;
 
+                        display: inline-block;
                         background: #425a00;
                     }
                 }
 
                 p {
                     font-weight: 600;
-                    width: 150px;
+                    width: 120px;
                 }
 
                 &:nth-child(even) {
@@ -108,6 +129,14 @@
     .btn-cancle {
         text-align: right;
 
+        .btn-cancle {
+            background-color: #af0606;
+        }
+
+        .btn-update {
+            background-color: #0d35e4;
+        }
+
         button {
             padding: 10px;
             font-size: 16px;
@@ -115,7 +144,6 @@
 
             margin-right: 10px;
             border-radius: 8px;
-            background-color: #af0606;
         }
     }
 }

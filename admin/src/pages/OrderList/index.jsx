@@ -3,7 +3,11 @@ import axios from 'axios';
 import LoadingBox from 'components/LoadingBox';
 import OrderDetailModal from 'components/OrderDetailModal';
 import React, { useEffect, useState } from 'react';
-
+import moment from 'moment';
+import { removeOrder } from 'actions/orderActions';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { TOAST_OPTIONS } from 'constants/productConstants';
 
 OrderList.propTypes = {};
 
@@ -11,6 +15,7 @@ function OrderList(props) {
 
     const [data, setData] = useState();
     const [detailModal, setdetailModal] = useState(false)
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchOrderList = async () => {
@@ -27,6 +32,16 @@ function OrderList(props) {
     const handleDetailOrder = (id) => {
         setdetailModal(true);
         setCurId(id)
+    }
+
+    const handleDelOrder = (id) => {
+        const newData = data.filter(x => x._id !== id)
+        setData(newData);
+        dispatch(removeOrder({ id }));
+
+        toast.success("Delete success", {
+            ...TOAST_OPTIONS,
+        })
     }
 
     const columns = [
@@ -47,14 +62,14 @@ function OrderList(props) {
         {
             field: 'oder_date', headerName: 'Order Date', width: 250, headerClassName: 'text', renderCell: (params) => {
                 return (
-                    <span className="text">{params.row.dateTime}</span>
+                    <span className="text">{moment(params.row.createdAt).format('DD-MM-YYYY hh:mm A')}</span>
                 )
             }
         },
         {
             field: 'update_date', headerName: 'DATE UPDATE', width: 250, headerClassName: 'text', renderCell: (params) => {
                 return (
-                    <span className="text">{params.row.dateUpdate}</span>
+                    <span className="text">{moment(params.row.updatedAt).format('DD-MM-YYYY hh:mm A')}</span>
                 )
             }
         },
@@ -62,6 +77,22 @@ function OrderList(props) {
             field: 'totalPrice', headerName: 'TOTAL PRICE', width: 250, headerClassName: 'text', renderCell: (params) => {
                 return (
                     <span className="text">{params.row.totalPrice}</span>
+
+                )
+            }
+        },
+        {
+            field: 'ship', headerName: 'SHIP', width: 200, headerClassName: 'text', renderCell: (params) => {
+                return (<>
+                    {params.row.shipingAddress.ship === "home" ?
+                        (<div className="btn item-home">
+                            <i className="fas fa-home"></i> Home
+                        </div>) :
+                        (<div className="btn item-store">
+                            <i className="fas fa-store"></i> Store
+                        </div>)
+                    }
+                </>
                 )
             }
         },
@@ -81,12 +112,24 @@ function OrderList(props) {
         {
             field: 'admin', headerName: 'Admin', width: 150, headerClassName: 'text', renderCell: (params) => {
                 return (
-                    <button
-                        className="detail-order"
-                        onClick={() => handleDetailOrder(params.row.id)}
-                    >
-                        <i class="fas fa-info-circle"></i> Detail
-                    </button>
+                    <>
+                        <button
+                            className="detail-order"
+                            onClick={() => handleDetailOrder(params.row.id)}
+                        >
+                            <i class="fas fa-info-circle"></i> Detail
+                        </button>
+                        <div
+                            className="btn del-order"
+                            onClick={() => {
+                                if (window.confirm('Delete the item?')) {
+                                    handleDelOrder(params.row.id)
+                                };
+                            }}
+                        >
+                            <i className="fas fa-trash"></i>
+                        </div>
+                    </>
                 )
             }
         },
@@ -109,8 +152,9 @@ function OrderList(props) {
                             userId: order.userId,
                             totalPrice: order.totalPrice,
                             status: order.status,
-                            dateTime: order.dateTime,
-                            dateUpdate: order.dateUpdate,
+                            shipingAddress: order.shipingAddress,
+                            createdAt: order.createdAt,
+                            updatedAt: order.updatedAt,
                         }))}
 
                         columns={columns}

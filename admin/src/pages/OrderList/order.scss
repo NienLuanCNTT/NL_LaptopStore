@@ -9,9 +9,18 @@
         border-radius: 6px;
         font-size: 15px;
     }
+
+    .del-order {
+        color: #e65c5c;
+        font-size: 18px;
+        padding: 4px;
+        margin-left: 10px;
+    }
 }
 
 .item-pending,
+.item-home,
+.item-store,
 .item-transport,
 .item-receved,
 .item-cancle {
@@ -37,4 +46,10 @@
 }
 .item-cancle {
     background: #d40a25;
+}
+.item-home {
+    background: #0fee0f;
+}
+.item-store {
+    background: #1768ff;
 }

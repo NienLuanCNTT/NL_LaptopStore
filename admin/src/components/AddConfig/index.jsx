@@ -3,11 +3,16 @@ import axios from 'axios';
 import { TOAST_OPTIONS } from 'constants/configConstants';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
 import { toast } from 'react-toastify';
 
 const AddConfig = (props) => {
-    // const { productId } = props;
-    const productId = '61737089dbbefe69882e26cc';
+
+    const { id } = useParams();
+    const productId = id;
+    console.log(productId);
+
+
     const dispatch = useDispatch();
     const [config, setConfig] = useState({
         version: '',

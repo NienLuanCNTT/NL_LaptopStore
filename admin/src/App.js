@@ -14,6 +14,9 @@ import Register from 'pages/Register/Register';
 import ProductList from 'pages/ProductList/ProductList';
 import Product from 'pages/Product/Product';
 import CreateProduct from 'pages/CreateProduct/CreateProduct';
+import Rating from 'pages/Rating/Rating';
+import Comment from 'pages/Comment/Comment';
+
 
 function App() {
   return (
@@ -30,7 +33,7 @@ function App() {
           <Route path="/users" element={<UserList />} />
           <Route path="/orders" element={<OrderList />} />
 
-          <Route path="/configadd" element={<AddConfig />} />
+          <Route path="/configadd/:id" element={<AddConfig />} />
 
           <Route path="/user/:id" element={<User />} />
 
@@ -40,6 +43,11 @@ function App() {
           <Route path="/product/:id" element={<Product />} />
 
           <Route path="/createProduct" element={<CreateProduct />} />
+
+          <Route path="/rating/:id" element={<Rating />} />
+
+          <Route path="/comment/:id" element={<Comment />} />
+
 
         </Routes>
 

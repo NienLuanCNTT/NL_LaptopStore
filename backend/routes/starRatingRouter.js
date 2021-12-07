@@ -6,7 +6,9 @@ const starRatingRouter = express.Router();
 
 starRatingRouter.get('/:id',
     expressAsyncHandler(async (req, res) => {
+
         const rating = await StarRating.find({ "productId": req.params.id });
+
         if (rating) {
             res.send(rating);
         }

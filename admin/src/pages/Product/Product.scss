@@ -132,6 +132,16 @@
                             // margin-top: 2rem;
                         }
 
+                        .config{
+                            margin-top: 20px;
+                            font-size: 1.6rem;
+                            padding: 8px 25px;
+                            border-radius: 10px;
+                            color: #fff;
+                            background-color: $main-color;
+                            margin-bottom: 30px;
+                        }
+
                         .rating{
                             margin-top: 20px;
                             font-size: 1.6rem;
@@ -141,10 +151,15 @@
                             background-color: #ccb012;
                         }
 
-                        .rating:nth-child(2){
+                        .cmt{
                             background-color: #92c100;
                             margin-left: 50px;
-                        } 
+                        }
+
+                        // .rating:nth-child(2){
+                        //     background-color: #92c100;
+                        //     margin-left: 50px;
+                        // } 
                     }
 
 
@@ -152,7 +167,7 @@
                         position: relative;
                         font-size: 1.6rem;
                         padding: 8px 20px;
-                        margin-top : 50%;
+                        margin-top : 30%;
                         // right: 10px;
                         left: -63px;
                         // transform: translateX(-50%);

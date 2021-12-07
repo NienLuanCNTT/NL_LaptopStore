@@ -142,8 +142,22 @@ const Product = () => {
                                 </div>
 
                                 <div className="updateForm__right-item">
-                                    <button className="rating">Rating</button>
-                                    <button className="rating">Comment</button>
+                                    <Link to={`/configadd/${product._id}`}>
+                                        <button className="config">Add Config</button>
+                                    </Link>
+                                </div>
+
+
+
+                                <div className="updateForm__right-item">
+                                    <Link to={`/rating/${product._id}`}>
+                                        <button className="rating">Rating</button>
+                                    </Link>
+
+                                    <Link to={`/comment/${product._id}`}>
+                                        <button className="rating cmt">Comment</button>
+                                    </Link>
+
                                 </div>
 
 

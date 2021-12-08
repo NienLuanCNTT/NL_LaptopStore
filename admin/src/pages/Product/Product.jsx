@@ -1,11 +1,12 @@
+import { updateProduct, updateProductImage } from 'actions/productActions';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import AddConfig from 'components/AddConfig';
+import { PRODUCT_UPDATE_RESET } from 'constants/productConstants';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateProduct, updateProductImage } from 'actions/productActions';
 import { toast } from 'react-toastify';
-import { PRODUCT_UPDATE_RESET } from 'constants/productConstants';
 
 const Product = () => {
     document.title = 'Admin - ProductDetail';
@@ -20,15 +21,13 @@ const Product = () => {
         }
 
         fetchProduct();
-    }, []);
+    }, [id]);
 
     const [name, setName] = useState();
     const [category, setCategory] = useState();
     const [price, setPrice] = useState();
     const [oldPrice, setOldPrice] = useState();
     const [note, setNote] = useState();
-    const [rating, setRating] = useState();
-    const [numReviews, setNumReviews] = useState();
     const [countInStock, setCountInStock] = useState();
     const [image, setImage] = useState('');
 
@@ -37,17 +36,7 @@ const Product = () => {
         // dispatch({ type: USER_IMAGE_RESET })
     }, [dispatch]);
 
-
-
-    const productUpdate = useSelector((state) => state.productUpdate);
-    const { success, error, loading } = productUpdate;
-
-
-    const productUpdateImage = useSelector((state) => state.productUpdateImage);
-    const { success: successImage, error: errorImage, loading: loadingImage } = productUpdateImage;
-
-
-
+    const [modalConfig, setModalConfig] = useState(false);
 
     const submitInfo = (e) => {
         e.preventDefault();
@@ -73,6 +62,7 @@ const Product = () => {
 
     return (
         <>
+            {modalConfig && <AddConfig productId={id} close={setModalConfig} />}
             {
                 product &&
                 <div className="product">
@@ -142,9 +132,12 @@ const Product = () => {
                                 </div>
 
                                 <div className="updateForm__right-item">
-                                    <Link to={`/configadd/${product._id}`}>
-                                        <button className="config">Add Config</button>
-                                    </Link>
+                                    <div
+                                        className="btn config"
+                                        onClick={() => setModalConfig(true)}
+                                    >
+                                        Add Config
+                                    </div>
                                 </div>
 
 

@@ -1,6 +1,6 @@
 import { register } from 'actions/userAction';
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 // import { Redirect } from 'react-router-dom';
 
@@ -14,11 +14,7 @@ const Register = (props) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [image, setImage] = useState(null);
 
-    const userRegister = useSelector((state) => state.userRegister);
-    const { userInfo, loading, error } = userRegister;
-
     const dispatch = useDispatch();
-
 
 
     const submitHandler = (e) => {

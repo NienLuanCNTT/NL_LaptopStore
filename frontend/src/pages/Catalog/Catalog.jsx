@@ -1,20 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import Helmet from 'components/Helmet'
-import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from 'actions/productActions'
+import category from 'assets/fake-data/category'
+import price from 'assets/fake-data/price'
+import CheckBox from 'components/CheckBox'
+import Helmet from 'components/Helmet'
 import LoadingBox from 'components/LoadingBox'
 import MessageBox from 'components/MessageBox'
-import ProductCard from 'components/ProductCard';
-import category from 'assets/fake-data/category';
-import price from 'assets/fake-data/price';
-
-import { useHistory } from 'react-router-dom';
-
-
-
-import CheckBox from 'components/CheckBox';
-
-
+import ProductCard from 'components/ProductCard'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 
@@ -32,13 +25,11 @@ const Catalog = (props) => {
         price: [],
     }
 
-    // let productTemp = products;
-    // console.log(productTemp);
 
     const [productCate, setProductCate] = useState([]);
-    useEffect(() => {
-        setProductCate(products);
-    }, [products]);
+    // useEffect(() => {
+    //     setProductCate(products);
+    // }, [products]);
 
     const [filter, setFilter] = useState(initFilter);
 
@@ -71,58 +62,33 @@ const Catalog = (props) => {
         }
     }
 
-    //không load lại toàn page 
-    const updateProducts = useCallback(
-        () => {
-            let temp = productCate
-            // console.log(temp);
-
-            if (filter.category.length > 0) {
-                //duyệt qua từng phần tử
-                console.log(filter.category)
-                temp = temp.filter(e => filter.category.includes(e.category))
-            }
-            if (filter.price.length === 2 && filter.price[0] > 0 && filter.price[1] > 1) {
-                let start = filter.price[0];
-                let end = filter.price[1];
-                console.log(start, end)
-                temp = temp.filter(e => (e.price > start && e.price <= end))
-                console.log(filter.price.length)
-            }
-            else {
-                filter.price = []
-            }
-
-            if (filter.category.length === 0 && filter.price.length === 0) {
-                temp = products
-            }
-
-
-
-            setProductCate(temp);
-        },
-        [filter, setProductCate],
-    )
 
     useEffect(() => {
-        updateProducts()
-    }, [updateProducts])
+        let temp = products
+        // console.log(temp);
 
+        if (filter.category.length > 0) {
+            //duyệt qua từng phần tử
+            // console.log(filter.category)
+            temp = temp.filter(e => filter.category.includes(e.category))
+        }
+        if (filter.price.length === 2 && filter.price[0] > 0 && filter.price[1] > 1) {
+            let [start, end] = filter.price;
 
-    //
+            // console.log(start, end)
+            temp = temp.filter(e => (e.price > start && e.price <= end))
+            // console.log(filter.price.length)
+        }
+        else {
+            filter.price = []
+        }
 
-    // const { location: { state } } = useHistory();
-    // console.log('brand: ', state.brand);
+        if (filter.category.length === 0 && filter.price.length === 0) {
+            temp = products
+        }
 
-
-
-
-
-
-
-
-
-
+        setProductCate(temp);
+    }, [filter, products])
 
 
     return (

@@ -1,15 +1,11 @@
 import { createProduct } from 'actions/productActions';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 const CreateProduct = () => {
 
-    const productCreate = useSelector((state) => state.productCreate);
-    const { product, loading, error } = productCreate;
     const dispatch = useDispatch();
-
 
     const [name, setName] = useState();
     const [price, setPrice] = useState();

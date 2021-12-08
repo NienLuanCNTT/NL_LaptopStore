@@ -1,7 +1,8 @@
 import { DataGrid } from '@material-ui/data-grid';
 import { deleteProduct } from 'actions/productActions';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import numberWithCommas from 'utils/numberWithCommas';
@@ -87,7 +88,7 @@ const ProductList = () => {
                         <Link to={`/product/${params.row.id}`}>
                             <button className="behavior__edit">Detail</button>
                         </Link>
-                        <button className="behavior__delete" onClick={() => handleDelete(params.row.id)}><i class="fas fa-trash"></i></button>
+                        <button className="behavior__delete" onClick={() => handleDelete(params.row.id)}><i className="fas fa-trash"></i></button>
                     </div>
                 )
             }
@@ -111,7 +112,8 @@ const ProductList = () => {
                     rows={data && data.map((item, index) => ({ id: item._id, name: item.name, image: item.image, category: item.category, price: item.price, note: item.note }))}
                     columns={columns}
                     pageSize={10}
-                    rowsPerPageOptions={[5]}
+                    // rowsPerPageOptions={[5]}
+                    rowsPerPageOptions={[10]}
                     checkboxSelection
                 />
             }

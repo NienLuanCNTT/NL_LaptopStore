@@ -1,19 +1,9 @@
-import { deleteUser, listUsers } from 'actions/userAction';
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid } from '@material-ui/data-grid';
-import { makeStyles } from '@material-ui/core'
-import LoadingBox from 'components/LoadingBox';
-import MessageBox from 'components/MessageBox';
-import { Link } from 'react-router-dom';
+import { deleteUser, listUsers } from 'actions/userAction';
 import axios from 'axios';
-
-
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         MuiTablePagination: '20px',
-//     }
-// }));
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 const UserList = () => {
@@ -24,24 +14,12 @@ const UserList = () => {
     useEffect(() => {
         const fetchOrderList = async () => {
             const users = await axios.get('/api/users');
-            console.log('users ', users);
             const userList = users.data || [];
 
             setData(userList);
         }
         fetchOrderList();
     }, []);
-
-    console.log(DataGrid);
-
-
-
-
-
-    // const userList = useSelector((state) => state.userList);
-    // const { loading, error, users } = userList;
-    // const [data, setData] = useState(users);
-
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -100,7 +78,7 @@ const UserList = () => {
                         <Link to={`/user/${params.row.id}`}>
                             <button className="behavior__edit">Edit</button>
                         </Link>
-                        <button className="behavior__delete" onClick={() => handleDelete(params.row.id)}><i class="fas fa-trash"></i></button>
+                        <button className="behavior__delete" onClick={() => handleDelete(params.row.id)}><i className="fas fa-trash"></i></button>
                     </div>
                 )
             }
@@ -127,7 +105,7 @@ const UserList = () => {
                         rows={data && data.map((user, index) => ({ id: user._id, name: user.name, image: user.image, email: user.email, phone: user.phone, isAdmin: user.isAdmin }))}
                         columns={columns}
                         pageSize={10}
-                        rowsPerPageOptions={[5]}
+                        rowsPerPageOptions={[10]}
                         checkboxSelection
                     // className={classes.root}
                     />

@@ -20,7 +20,7 @@ orderRouter.get('/',
 
 orderRouter.get('/user/:id',
     expressAsyncHandler(async (req, res) => {
-        const order = await Order.find({ "userId": req.params.id, "shipingAddress.ship": "home" });
+        const order = await Order.find({ "userId": req.params.id });
 
         if (order) {
             res.send(order);
@@ -59,7 +59,7 @@ orderRouter.post(
             {
                 $set: {
                     status: req.body.status,
-                    updatedAt: req.body.updatedAt,
+                    updatedAt: req.body.date,
                 }
             });
 

@@ -7,6 +7,7 @@ import { TOAST_OPTIONS } from 'constants/productConstants';
 import InputField from 'custom-field/InputField';
 import RadioField from 'custom-field/RadioField';
 import SelectField from 'custom-field/SelectField';
+import moment from 'moment';
 import CheckoutList from 'pages/CheckOut/CheckoutList';
 import { cartEmpty, removeProduct, selectQuantity } from 'pages/CheckOut/CheckSlice';
 import React, { useEffect, useState } from 'react';
@@ -94,7 +95,7 @@ const CheckOut = (props) => {
 
     const { checkList } = useSelector((state) => state.checkList);
     const orderCreate = useSelector((state) => state.orderCreate);
-    const { loadding, error, success, order } = orderCreate;
+    const { loadding, success, order } = orderCreate;
 
     const handleQuantityChange = (id, quantity) => {
         dispatch(selectQuantity({ id, quantity }));
@@ -177,10 +178,8 @@ const CheckOut = (props) => {
     useEffect(() => {
         const fetchUserOrder = async () => {
             const order = await axios.get(`http://localhost:5000/api/orders/user/${userInfo?._id}`);
-            console.log(order.data);
-
             const index = order.data.length;
-            if (index) {
+            if (order.data[index - 1].shipingAddress.ship === 'home') {
                 const data = order.data[index - 1].shipingAddress || [];
                 setUserOrder(data);
             }
@@ -340,8 +339,8 @@ const CheckOut = (props) => {
                         totalPrice: total,
                         status: 'pending',
                         userId: userInfo?._id,
-                        createdAt: today,
-                        updatedAt: today
+                        createdAt: moment(today).format(),
+                        updatedAt: moment(today).format(),
                     }));
 
                     toast.success('Đã đặt hàng thành công 👌👌', {

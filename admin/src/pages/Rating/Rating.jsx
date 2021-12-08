@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router';
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
 import { DataGrid } from '@material-ui/data-grid';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 
 
 const Rating = () => {
@@ -10,7 +9,6 @@ const Rating = () => {
     document.title = "Admin - rating";
     const { id } = useParams();
     const [rating, setRating] = useState();
-    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchRating = async () => {
@@ -18,10 +16,7 @@ const Rating = () => {
             setRating(rate.data);
         }
         fetchRating();
-    }, []);
-
-
-
+    }, [id]);
 
 
 

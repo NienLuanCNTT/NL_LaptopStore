@@ -5,7 +5,7 @@ export const UpdateConfig = (config) => async (dispatch, getState) => {
     dispatch({ type: CONFIG_UPDATE_REQUEST });
 
     try {
-        const { data } = await axios.post('http://localhost:5000/api/config/update', config);
+        const { data } = await axios.post('/api/config/update', config);
         dispatch({ type: CONFIG_UPDATE_SUCCESS, payload: data.config });
 
     } catch (error) {

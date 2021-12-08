@@ -290,7 +290,7 @@ function OrderDetailModal(props) {
                                             </span>
                                         </b>
                                     </div>
-                                    <div className="btn-cancle">
+                                    <div className="bottom-config">
                                         {order.status !== 'cancle' &&
                                             <button
                                                 type="submit"
@@ -301,12 +301,12 @@ function OrderDetailModal(props) {
                                             </button>
                                         }
 
-                                        <button
+                                        <div
                                             className="btn btn-cancle"
                                             onClick={() => setdetailModal(false)}
                                         >
                                             Cancle
-                                        </button>
+                                        </div>
                                     </div>
                                 </form>
 

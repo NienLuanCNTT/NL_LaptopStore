@@ -27,14 +27,14 @@ const TopBar = () => {
                     </div>
 
                     <div className="topRight__icon">
-                        <i class="fas fa-globe noti"></i>
+                        <i className="fas fa-globe noti"></i>
                         <span className="topRight__icon-amount">
                             2
                         </span>
                     </div>
 
                     <div className="topRight__icon">
-                        <i class="fas fa-cog noti"></i>
+                        <i className="fas fa-cog noti"></i>
                     </div>
 
                     <img src={avatar} alt="" className="topRight__avatar" />

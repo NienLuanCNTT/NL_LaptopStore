@@ -1,14 +1,32 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import storage from 'redux-persist/lib/storage';
+import { combineReducers } from "redux";
+
 import CheckSlice from "pages/CheckOut/CheckSlice";
 import StarRatingSlice from "pages/Product/component/ProductRating/StarRatingSlice";
-
-import { persistStore, persistReducer } from 'redux-persist';
-import { combineReducers } from "redux";
-import storage from 'redux-persist/lib/storage';
-
-import { productDetailsReducer, productListReducer } from 'reducers/productReducers';
 import { orderCreateReducer } from './../reducers/orderReduces';
-import { userDetailsReducer, userRegisterReducer, userSigninReducer, userUpdateImageReducer, userUpdateReducer } from "reducers/userReducers";
+
+import {
+        FLUSH,
+        PAUSE,
+        PERSIST, persistReducer, persistStore, PURGE,
+        REGISTER,
+        REHYDRATE
+} from 'redux-persist';
+
+import {
+        productDetailsReducer,
+        productListReducer
+} from 'reducers/productReducers';
+
+import {
+        userDetailsReducer,
+        userRegisterReducer,
+        userSigninReducer,
+        userUpdateImageReducer,
+        userUpdateReducer
+} from "reducers/userReducers";
+
 
 const persistConfig = {
         key: 'root',
@@ -40,6 +58,11 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 const store = configureStore({
         reducer: persistedReducer,
         initialState,
+        middleware: getDefaultMiddleware({
+                serializableCheck: {
+                        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+                },
+        }),
 });
 
 export const persistor = persistStore(store);

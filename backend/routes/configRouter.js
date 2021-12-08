@@ -7,7 +7,11 @@ const configRouter = express.Router();
 configRouter.get('/:id',
     expressAsyncHandler(async (req, res) => {
         const configs = await Configs.find({ "productId": req.params.id });
-        res.send(configs);
+        if (configs) {
+            res.send(configs);
+        } else {
+            res.send({ message: "Not Found Config" });
+        }
     })
 );
 

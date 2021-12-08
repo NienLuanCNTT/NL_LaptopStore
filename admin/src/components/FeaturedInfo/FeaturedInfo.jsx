@@ -19,7 +19,7 @@ const FeaturedInfo = () => {
 
             <div className="featured__item">
                 <div className="featured__item-icon">
-                    <i class="fas fa-dollar-sign"></i>
+                    <i className="fas fa-dollar-sign"></i>
                 </div>
 
                 <div className="featured__item-content">
@@ -32,7 +32,7 @@ const FeaturedInfo = () => {
 
             <div className="featured__item">
                 <div className="featured__item-icon">
-                    <i class="fas fa-shopping-basket"></i>
+                    <i className="fas fa-shopping-basket"></i>
                 </div>
 
                 <div className="featured__item-content">
@@ -42,10 +42,6 @@ const FeaturedInfo = () => {
                     <span className="featured__item-content-money">$1,715</span>
                 </div>
             </div>
-
-
-
-
 
         </div>
     )

@@ -60,21 +60,21 @@ function OrderList(props) {
             }
         },
         {
-            field: 'oder_date', headerName: 'Order Date', width: 250, headerClassName: 'text', renderCell: (params) => {
+            field: 'oder_date', headerName: 'Order Date', width: 180, headerClassName: 'text', renderCell: (params) => {
                 return (
                     <span className="text">{moment(params.row.createdAt).format('DD-MM-YYYY hh:mm A')}</span>
                 )
             }
         },
         {
-            field: 'update_date', headerName: 'DATE UPDATE', width: 250, headerClassName: 'text', renderCell: (params) => {
+            field: 'update_date', headerName: 'DATE UPDATE', width: 180, headerClassName: 'text', renderCell: (params) => {
                 return (
                     <span className="text">{moment(params.row.updatedAt).format('DD-MM-YYYY hh:mm A')}</span>
                 )
             }
         },
         {
-            field: 'totalPrice', headerName: 'TOTAL PRICE', width: 250, headerClassName: 'text', renderCell: (params) => {
+            field: 'totalPrice', headerName: 'TOTAL PRICE', width: 150, headerClassName: 'text', renderCell: (params) => {
                 return (
                     <span className="text">{params.row.totalPrice}</span>
 
@@ -82,7 +82,7 @@ function OrderList(props) {
             }
         },
         {
-            field: 'ship', headerName: 'SHIP', width: 200, headerClassName: 'text', renderCell: (params) => {
+            field: 'ship', headerName: 'SHIP', width: 110, headerClassName: 'text', renderCell: (params) => {
                 return (<>
                     {params.row.shipingAddress.ship === "home" ?
                         (<div className="btn item-home">
@@ -97,7 +97,7 @@ function OrderList(props) {
             }
         },
         {
-            field: 'status', headerName: 'STATUS', width: 200, headerClassName: 'text', renderCell: (params) => {
+            field: 'status', headerName: 'STATUS', width: 120, headerClassName: 'text', renderCell: (params) => {
                 return (
 
                     <span className="text">
@@ -117,7 +117,7 @@ function OrderList(props) {
                             className="detail-order"
                             onClick={() => handleDetailOrder(params.row.id)}
                         >
-                            <i class="fas fa-info-circle"></i> Detail
+                            <i className="fas fa-info-circle"></i> Detail
                         </button>
                         <div
                             className="btn del-order"
@@ -159,7 +159,7 @@ function OrderList(props) {
 
                         columns={columns}
                         pageSize={10}
-                        rowsPerPageOptions={[5]}
+                        rowsPerPageOptions={[10]}
                         checkboxSelection
                     /> : <LoadingBox />
                 }

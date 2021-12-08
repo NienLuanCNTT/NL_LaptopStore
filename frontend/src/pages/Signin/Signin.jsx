@@ -1,11 +1,11 @@
-import { signin } from 'actions/userAction';
-import Helmet from 'components/Helmet'
-import LoadingBox from 'components/LoadingBox';
-import MessageBox from 'components/MessageBox';
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { signin } from 'actions/userAction';
+import Helmet from 'components/Helmet';
+import LoadingBox from 'components/LoadingBox';
 
 const Signin = (props) => {
 
@@ -18,8 +18,6 @@ const Signin = (props) => {
 
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo, loading, error } = userSignin;
-
-    console.log(error);
 
     const dispatch = useDispatch();
     const submitHandler = (e) => {

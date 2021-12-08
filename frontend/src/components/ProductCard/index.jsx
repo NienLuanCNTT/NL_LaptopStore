@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import 'boxicons'
 import Grid from 'components/Grid'
-
+import PropTypes from 'prop-types'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import numberWithCommas from 'utils/numberWithCommas'
+
 
 const ProductCard = props => {
     const products = props.products;
@@ -52,9 +52,7 @@ const ProductCard = props => {
                                 </div>
                             </Link>
                         </div>
-                    )
-
-                    )
+                    ))
 
                 ) :
                     (

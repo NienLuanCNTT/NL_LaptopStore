@@ -65,10 +65,8 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
 
 export const updateUser = (user) => async (dispatch) => {
     dispatch({ type: USER_UPDATE_REQUEST, payload: user });
-    console.log(user);
     try {
         const { data } = await Axios.put('/api/users/AdminUser', user);
-        console.log('data: ', data);
         dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
     } catch (error) {
         dispatch({
@@ -97,7 +95,6 @@ export const updateUserImage = (user) => async (dispatch) => {
 
     try {
         const { data } = await Axios.put('/api/users/AdminUserImage', fd);
-        console.log('data: ', data);
         dispatch({ type: USER_IMAGE_SUCCESS, payload: data });
     } catch (error) {
         dispatch({
@@ -134,13 +131,10 @@ export const listUsers = () => async (dispatch) => {
 
 export const deleteUser = (id) => async (dispatch) => {
 
-    console.log(id);
     try {
         Axios.delete(`/api/users/deleteUser/${id}`);
     } catch (error) {
         console.log('Lỗi');
     }
-
-    // console.log('data: ', data);
 
 }

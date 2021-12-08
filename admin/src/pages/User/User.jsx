@@ -1,23 +1,18 @@
-import { detailsUser, updateUser, updateUserImage } from 'actions/userAction';
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { USER_IMAGE_RESET, USER_UPDATE_RESET } from 'constants/userConstants';
-import { toast } from 'react-toastify';
+import { updateUser, updateUserImage } from 'actions/userAction';
 import axios from 'axios';
+import { USER_UPDATE_RESET } from 'constants/userConstants';
+import React, { useEffect, useState } from 'react';
+
+import { useDispatch } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const User = () => {
 
     document.title = "Admin - User";
     const { id } = useParams();
-
-
-
     const dispatch = useDispatch();
-    // const userDetails = useSelector((state) => state.userDetails);
-    // const { loading, error, user } = userDetails;
-
     const [user, setUser] = useState();
 
     useEffect(() => {
@@ -27,15 +22,7 @@ const User = () => {
             setUser(user.data);
         }
         fetchUser();
-    }, []);
-
-
-    const userUpdate = useSelector((state) => state.userUpdate);
-    // rename => error: 
-    const { success: successUpdate, error: errorUpdate, loading: loadingUpdate } = userUpdate;
-
-    const userUpdateImage = useSelector((state) => state.userUpdateImage);
-    const { success: successImage, error: errorImage, loading: loadingImage } = userUpdateImage;
+    }, [id]);
 
     const [name, setName] = useState(user?.name);
     const [email, setEmail] = useState(user?.email);
@@ -45,31 +32,25 @@ const User = () => {
 
     useEffect(() => {
         dispatch({ type: USER_UPDATE_RESET });
-        // dispatch({ type: USER_IMAGE_RESET })
     }, [dispatch]);
-
-
 
     const onAvatarChange = (e) => {
         e.preventDefault();
         setImage(e.target.files[0]);
     }
 
-
     const submitInfo = (e) => {
         e.preventDefault();
         if (image === '') {
             dispatch(updateUser({ userId: user._id, name, email, phone }));
-            console.log('Không có hình')
+            // console.log('Không có hình')
         } else {
             dispatch(updateUserImage({ userId: user._id, name, email, phone, image }))
-            console.log('Có hình')
+            // console.log('Có hình')
             setImage('');
         }
         toast.success('Cập nhật thành công');
     }
-
-
 
 
     return (
@@ -115,14 +96,12 @@ const User = () => {
                                     </span>
                                 </div>
 
-
                                 <div className="showbottom-content">
                                     <i className="fas fa-phone showbottom-content-icon"></i>
                                     <span className="showbottom-content-text">
                                         {user.phone}
                                     </span>
                                 </div>
-
 
                             </div>
                         </div>
@@ -168,13 +147,9 @@ const User = () => {
                             </form>
                         </div>
 
-
                     </div>
 
                 </div>
-
-
-
             }
 
         </>

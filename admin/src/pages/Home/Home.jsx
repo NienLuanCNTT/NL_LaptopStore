@@ -35,8 +35,6 @@ const Home = () => {
         fetchCategoryCount();
     }, []);
 
-    console.log(price);
-
     document.title = "Admin - Home"
     return (
 
@@ -50,7 +48,7 @@ const Home = () => {
                 </div>
                 {
                     category && category.result.map((item, index) => (
-                        <div className="total__category-process">
+                        <div key={index} className="total__category-process">
                             <ProcessBar process={(item.value / category.total__category * 100).toFixed(2)} />
                             <p>{item.title}</p>
                         </div>

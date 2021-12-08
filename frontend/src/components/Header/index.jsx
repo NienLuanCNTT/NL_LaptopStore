@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import { signout } from 'actions/userAction';
+import brand from 'assets/fake-data/brand';
+import logo from 'assets/logo/logo_header.png';
+import MessageBox from 'components/MessageBox';
+import { cartEmpty } from 'pages/CheckOut/CheckSlice';
+
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import logo from 'assets/logo/logo_header.png'
-import HeaderPCR from './components/HeaderPCR';
+import numberWithCommas from 'utils/numberWithCommas';
 import HeaderMobileR from './components/HeaderMobileR';
+import HeaderPCR from './components/HeaderPCR';
 
-import brand from 'assets/fake-data/brand';
-import { useDispatch, useSelector } from 'react-redux';
-import { signout } from 'actions/userAction';
-import numberWithCommas from 'utils/numberWithCommas'
-import { listProducts } from 'actions/productActions'
-import LoadingBox from 'components/LoadingBox'
-import MessageBox from 'components/MessageBox'
+
 
 function Header() {
 
@@ -62,6 +63,8 @@ function Header() {
 
     const signoutHandler = () => {
         dispatch(signout());
+        dispatch(cartEmpty());
+
     }
     return (
         <div className="header">
@@ -94,7 +97,7 @@ function Header() {
                                                 key={index}
                                                 className="header__nav-brain-list-items-item"
                                             >
-                                                <Link to="/product/:slug">
+                                                <Link to={`/catalog/${brain.title}`}>
                                                     {list.name}
                                                 </Link>
                                             </li>
@@ -128,8 +131,8 @@ function Header() {
                                     loading ? null : error ?
                                         (<MessageBox variant="danger">{error}</MessageBox>) : (
                                             filterData.map((product, index) => (
-                                                <Link to={`/product/${product._id}`}>
-                                                    <div key={index} className="result" onClick={clearInput}>
+                                                <Link key={index} to={`/product/${product._id}`}>
+                                                    <div className="result" onClick={clearInput}>
 
                                                         <div className="result__image">
                                                             <img src={product.image} alt="" />

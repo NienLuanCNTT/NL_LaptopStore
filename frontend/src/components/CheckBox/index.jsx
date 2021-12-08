@@ -15,7 +15,7 @@ const CheckBox = props => {
         <label className="custom-checkbox">
             <input type="checkbox" ref={inputRef} onChange={onChange} checked={props.checked} />
             <span className="custom-checkbox__checkmark">
-                <i class="fas fa-check"></i>
+                <i className="fas fa-check"></i>
             </span>
             {props.label}
 

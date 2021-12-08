@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Helmet from 'components/Helmet'
 import { detailsUser, updateUser, updateUserImage } from 'actions/userAction';
+import Helmet from 'components/Helmet';
 import LoadingBox from 'components/LoadingBox';
 import MessageBox from 'components/MessageBox';
-import { USER_IMAGE_RESET, USER_UPDATE_RESET } from 'constants/userConstants';
-import { toast } from 'react-toastify';
 import { TOAST_OPTIONS } from 'constants/productConstants';
+
+import { USER_IMAGE_RESET, USER_UPDATE_RESET } from 'constants/userConstants';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 
 
@@ -20,25 +21,19 @@ const UserInfo = (props) => {
     const { loading, error, user } = userDetails;
     const userUpdate = useSelector((state) => state.userUpdate);
     // rename => error: 
-    const { success: successUpdate, error: errorUpdate, loading: loadingUpdate } = userUpdate;
+    const { success: successUpdate, error: errorUpdate } = userUpdate;
     const dispatch = useDispatch();
 
     const userUpdateImage = useSelector((state) => state.userUpdateImage);
-    const { success: successImage, error: errorImage, loading: loadingImage } = userUpdateImage;
+    const { success: successImage } = userUpdateImage;
 
 
 
     useEffect(() => {
-        // if (!user) {
+
         dispatch({ type: USER_UPDATE_RESET });
         dispatch({ type: USER_IMAGE_RESET });
         dispatch(detailsUser(userInfo._id));
-        // }
-        // else {
-        //     setName(user.name);
-        //     setEmail(user.email);
-        //     setImage(user.image);
-        // }
 
     }, [dispatch, userInfo._id]);
 
@@ -57,7 +52,6 @@ const UserInfo = (props) => {
     const submitInfo = (e) => {
         e.preventDefault();
 
-        console.log(successUpdate);
         if (newPassword !== confirmNewPassword) {
             toast.warn('Nhập lại mật khẩu không chính xác', {
                 ...TOAST_OPTIONS,
@@ -67,10 +61,8 @@ const UserInfo = (props) => {
 
             if (image === '') {
                 dispatch(updateUser({ userId: user._id, name, email, currentPassword, newPassword, phone }));
-                console.log('không có image')
             }
             else {
-                console.log('có image');
                 dispatch(updateUserImage({ userId: user._id, name, email, currentPassword, newPassword, phone, image }));
             }
             // toast.success('Cập nhật thành công', {
@@ -104,10 +96,6 @@ const UserInfo = (props) => {
 
 
 
-    console.log(successUpdate, errorUpdate);
-
-
-
     return (
         <Helmet title="Tài Khoản">
             {
@@ -115,7 +103,6 @@ const UserInfo = (props) => {
                     : error ? <MessageBox variant="danger">{error}</MessageBox>
                         : (
                             <>
-                                {/* {loadingUpdate && <LoadingBox></LoadingBox>} */}
 
                                 <div className="userInfo">
                                     <div className="userInfo__item">
@@ -138,17 +125,17 @@ const UserInfo = (props) => {
 
                                                 <div className="form-item">
                                                     <label className="form-item__label" htmlFor="">Số điện thoại</label>
-                                                    <input className="form-item__input" type="text" value={phone} onChange={e => setPhone(e.target.value)} />
+                                                    <input className="form-item__input" type="text" defaultValue={phone} onChange={e => setPhone(e.target.value)} />
                                                 </div>
 
                                                 <div className="form-item">
                                                     <label className="form-item__label" htmlFor="">Tên người dùng</label>
-                                                    <input className="form-item__input" type="text" value={name} onChange={e => setName(e.target.value)} />
+                                                    <input className="form-item__input" type="text" defaultValue={name} onChange={e => setName(e.target.value)} />
                                                 </div>
 
                                                 <div className="form-item">
                                                     <label className="form-item__label" htmlFor="">Email</label>
-                                                    <input className="form-item__input" type="email" value={email} onChange={e => setEmail(e.target.value)} />
+                                                    <input className="form-item__input" type="email" defaultValue={email} onChange={e => setEmail(e.target.value)} />
                                                 </div>
 
                                                 <div className="form-item">

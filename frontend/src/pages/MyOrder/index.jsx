@@ -122,7 +122,6 @@ const MyOrder = () => {
                     </div>
                 </div>
                 <div className="my-order-list">
-                    {/* <MyOrderList orders={myOrders} currentTab={currentTab} /> */}
                     <div>
                         {
                             newOrders?.length > 0 ? newOrders?.map((order, index) => (
@@ -140,7 +139,7 @@ const MyOrder = () => {
                                     <div className="item-top">
                                         <div className="item-top-left">
                                             <i className="far fa-clock"></i>
-                                            <i> Ngày đặt hàng: {moment(order.updatedAt).format("DD/MM/YYYY hh:mm")}</i>
+                                            <i> Ngày đặt hàng: {moment(order.createdAt).format("DD/MM/YYYY hh:mm")}</i>
                                         </div>
                                         <div className="item-top-status_right">
                                             {order.status === "pending" && <div className="btn item-pending">Đang xử lý</div>}
@@ -174,7 +173,7 @@ const MyOrder = () => {
                                         order.status === "pending"
                                         && <div
                                             className="item-cancle btn"
-                                            onClick={() => handleCancleOrder(order._id, 'cancle', today)}
+                                            onClick={() => handleCancleOrder(order._id, 'cancle', moment(today).format())}
                                         >
                                             Hủy đặt hàng</div>
                                     }

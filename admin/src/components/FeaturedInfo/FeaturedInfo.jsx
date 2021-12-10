@@ -1,6 +1,31 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import numberWithCommas from 'utils/numberWithCommas';
 
 const FeaturedInfo = () => {
+    const [totalSales, setTotalSales] = useState();
+    const [totalPrice, setTotalPrice] = useState();
+
+
+    useEffect(() => {
+        const fetchDataHome = async () => {
+            const sales = await axios.get("/api/dashboard/category");
+            const price = await axios.get("/api/dashboard/price");
+
+            const dataSales = sales.data || [];
+            const dataPrice = price.data || [];
+
+            setTotalSales(dataSales)
+            setTotalPrice(dataPrice)
+        };
+
+        fetchDataHome();
+    }, []);
+
+    const totalPriceIncom = totalPrice?.reduce((sum, or) => (
+        sum + or.total
+    ), 0);
+
     return (
         <div className="featured">
 
@@ -13,7 +38,7 @@ const FeaturedInfo = () => {
                     <span className="featured__item-content-title">
                         Total Sales
                     </span>
-                    <span className="featured__item-content-money">$2,415</span>
+                    <span className="featured__item-content-money">{totalSales?.total__category}</span>
                 </div>
             </div>
 
@@ -26,7 +51,9 @@ const FeaturedInfo = () => {
                     <span className="featured__item-content-title">
                         Total Income
                     </span>
-                    <span className="featured__item-content-money">$3,415</span>
+                    <span className="featured__item-content-money">
+                        {numberWithCommas(totalPriceIncom)} VNĐ
+                    </span>
                 </div>
             </div>
 
@@ -39,7 +66,7 @@ const FeaturedInfo = () => {
                     <span className="featured__item-content-title">
                         Total Orders
                     </span>
-                    <span className="featured__item-content-money">$1,715</span>
+                    <span className="featured__item-content-money">{totalSales?.totalOrders}</span>
                 </div>
             </div>
 

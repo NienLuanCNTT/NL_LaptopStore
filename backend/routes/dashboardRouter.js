@@ -30,6 +30,8 @@ dashboardRouter.get('/category',
         const order = await Order.find({ status: 'receved' });
         let categories = [];
 
+        const totalOrders = order.length;
+
         order.forEach(or => {
             or.orderItems.map(orItem => {
                 categories = [...categories, {
@@ -50,7 +52,7 @@ dashboardRouter.get('/category',
         })
         let total__category = categories.reduce((a, b) => a + b.value, 0);
 
-        res.send({ result, total__category });
+        res.send({ result, total__category, totalOrders });
         // console.log("categories ", categories)
         // console.log("KQ ", total__category)
     })

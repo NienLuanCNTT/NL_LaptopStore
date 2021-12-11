@@ -52,7 +52,7 @@ const FeaturedInfo = () => {
                         Total Income
                     </span>
                     <span className="featured__item-content-money">
-                        {numberWithCommas(totalPriceIncom)} VNĐ
+                        {totalPriceIncom ? numberWithCommas(totalPriceIncom) : '0'} VNĐ
                     </span>
                 </div>
             </div>

@@ -18,7 +18,8 @@ configRouter.get('/:id',
 configRouter.post('/update',
     expressAsyncHandler(async (req, res) => {
         const config = await Configs.find({ "productId": req.body.productId });
-        if (config === []) {
+
+        if (config.length === 0) {
             // console.log('add new');
             const configs = new Configs({
                 productId: req.body.productId,
@@ -27,7 +28,8 @@ configRouter.post('/update',
                 Screen: req.body.Screen
             });
             configs.save();
-        } else {
+        }
+        if (config.length > 0) {
             // console.log('update');
             await Configs.updateOne({ productId: req.body.productId },
                 {

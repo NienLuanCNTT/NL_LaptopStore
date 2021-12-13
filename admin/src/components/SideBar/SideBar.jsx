@@ -36,18 +36,6 @@ const SideBar = () => {
                                 <span className="menuList__item-name">Orders</span>
                             </li>
                         </Link>
-                        <Link to="/analytics">
-                            <li className={`menuList__item ${active === 'analytics' ? 'active' : ''}`} onClick={() => setActive('analytics')}>
-                                <i className="far fa-chart-bar menuList__item-icon"></i>
-                                <span className="menuList__item-name">Analytics</span>
-                            </li>
-                        </Link>
-                        <Link to="/sales">
-                            <li className={`menuList__item ${active === 'sales' ? 'active' : ''}`} onClick={() => setActive('sales')}>
-                                <i className="fas fa-chart-line menuList__item-icon"></i>
-                                <span className="menuList__item-name">Sales</span>
-                            </li>
-                        </Link>
                     </ul>
                 </div>
 

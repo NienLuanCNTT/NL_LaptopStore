@@ -179,9 +179,11 @@ const CheckOut = (props) => {
         const fetchUserOrder = async () => {
             const order = await axios.get(`http://localhost:5000/api/orders/user/${userInfo?._id}`);
             const index = order.data.length;
-            if (order.data[index - 1].shipingAddress.ship === 'home') {
-                const data = order.data[index - 1].shipingAddress || [];
-                setUserOrder(data);
+            if (index) {
+                if (order.data[index - 1].shipingAddress.ship === 'home') {
+                    const data = order.data[index - 1].shipingAddress || [];
+                    setUserOrder(data);
+                }
             }
         }
         fetchUserOrder();

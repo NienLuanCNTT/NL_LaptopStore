@@ -47,12 +47,15 @@ const Home = () => {
                     <h1>Category Sales</h1>
                 </div>
                 {
-                    category && category.result.map((item, index) => (
-                        <div key={index} className="total__category-process">
-                            <ProcessBar process={(item.value / category.total__category * 100).toFixed(2)} />
-                            <p>{item.title}</p>
-                        </div>
-                    ))
+                    category &&
+                    [].concat(category.result)
+                        .sort((a, b) => a.value > b.value ? -1 : 1)
+                        .map((item, index) => (
+                            <div key={index} className="total__category-process">
+                                <ProcessBar process={(item.value / category.total__category * 100).toFixed(2)} />
+                                <p>{item.title}</p>
+                            </div>
+                        ))
                 }
             </div>
         </div>

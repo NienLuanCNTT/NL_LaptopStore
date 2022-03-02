@@ -17,7 +17,7 @@ const AddConfig = (props) => {
         if (productId) {
             const fetchConfig = async () => {
                 const config = await axios.get(`/api/config/${productId}`)
-                const data = config.data[0] || [];
+                const data = config.data[0] || null;
 
                 if (data) {
                     setCpu({

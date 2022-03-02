@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from 'assets/logo/logo_store.png';
-import avatar from 'assets/images/dog.jpg';
+import avatar from 'assets/images/admin.png';
 import { Link } from 'react-router-dom';
 
 

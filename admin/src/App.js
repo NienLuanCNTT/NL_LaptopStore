@@ -36,10 +36,6 @@ function App() {
 
           <Route path="/register" element={<Register />} />
 
-          <Route path="/analytics" element={<div style={{ fontSize: '30px' }}>Comming Soon</div>} />
-          <Route path="/sales" element={<div style={{ fontSize: '30px' }}>Comming Soon</div>} />
-
-
           <Route path="/products" element={<ProductList />} />
           <Route path="/product/:id" element={<Product />} />
 

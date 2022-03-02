@@ -36,7 +36,10 @@ const SideBar = () => {
                                 <span className="menuList__item-name">Orders</span>
                             </li>
                         </Link>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 67d7c597ba57932605fb0fbf8caade9895df540b
                     </ul>
                 </div>
 
